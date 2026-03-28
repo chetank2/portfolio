@@ -32,7 +32,7 @@ export default function AnimatedHero({ tagline, subtitle, bio }: Props) {
         variants={wordContainer}
         initial="hidden"
         animate="visible"
-        className="font-display text-2xl sm:text-3xl md:text-[2.5rem] lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-[4.5rem] font-800 tracking-tight leading-[1.12] text-text-primary"
+        className="font-display text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] 2xl:text-[3.5rem] font-800 tracking-tight leading-[1.15] text-text-primary"
       >
         {words.map((word, i) => (
           <motion.span
