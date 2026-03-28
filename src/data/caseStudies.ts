@@ -23,7 +23,7 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "coupontracker",
     title: "CouponTracker",
-    tagline: "From screenshot scraping to a coupon recognition platform",
+    tagline: "From screenshot scraping to a multi-surface coupon recognition platform",
     role: "Builder / Product Designer",
     company: "Independent",
     timeline: "2025 - 2026",
@@ -63,10 +63,10 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "ft-design-system",
     title: "FT Design System",
-    tagline: "Building a production design system that scales with both humans and AI",
-    role: "Senior Product Designer",
+    tagline: "Building a 125+ component design system with AI as a force multiplier",
+    role: "Design System Architect & Sole Developer",
     company: "Freight Tiger",
-    timeline: "2024 - 2025",
+    timeline: "2025 - 2026",
     backHref: "/#work",
     contentFile: "case-study-ft-design-system.md",
   },

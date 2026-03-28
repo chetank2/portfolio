@@ -47,10 +47,10 @@ export const supportingProjects: Project[] = [
   {
     slug: "ft-design-system",
     title: "FT Design System",
-    tagline: "Shared UI foundations for a complex logistics platform",
+    tagline: "125+ components, AI protection, dual-mode docs",
     description:
-      "Built Freight Tiger's shared UI foundation for scale, consistency, accessibility, and AI-assisted implementation.",
-    tags: ["Design System", "Tokens", "Freight Tiger"],
+      "Built a production design system from scratch as a solo builder — 125+ React components, token architecture, AI protection layer, and dual-audience documentation for humans and AI agents.",
+    tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
     type: "supporting",
     liveUrl: "https://ftdesignsystem.netlify.app",
     caseStudyUrl: "/work/ft-design-system",
@@ -83,10 +83,10 @@ export const aiProjects: Project[] = [
   {
     slug: "coupontracker",
     title: "CouponTracker",
-    tagline: "Coupon recognition platform built from a screenshot workflow",
+    tagline: "From screenshots to a full recognition platform",
     description:
-      "Evolved a screenshot-based coupon idea into a broader recognition platform across Android, ML, and offline tooling.",
-    tags: ["Kotlin", "Python", "YOLOv8", "On-device ML"],
+      "Built a multi-surface coupon recognition system — Android app with layered AI extraction, web-based ML training pipeline, offline PWA annotation, and automated model deployment.",
+    tags: ["Kotlin", "Python", "YOLOv8", "On-device ML", "PWA"],
     type: "ai",
     repoUrl: "https://github.com/chetank2/coupontracker",
     caseStudyUrl: "/work/coupontracker",
