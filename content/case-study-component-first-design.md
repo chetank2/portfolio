@@ -1,91 +1,84 @@
-## The Problem Space
+## 1. Where This Came From
 
-In most product teams, there is a persistent disconnect between what designers think exists in code and what developers have actually built. Designers maintain Figma files that drift from implementation. Developers build component variants that designers never see. Neither side has a reliable, shared view of the truth.
+After building DesignQA, tools like Claude, Cursor, and Codex released features that let you paste production screens and edit them directly. That partially solved the design UAT problem I had been working on.
 
-This gap shows up as designers redrawing components that already exist, developers implementing variants the designer never intended, nobody being able to answer "what states does this component actually support?" without reading source code, and design system documentation that is always stale.
+But it exposed a deeper challenge: **SaaS apps are complex. One screen can't show everything.**
 
-Existing tools fall short: Storybook is developer-maintained and often incomplete, Figma has no connection to what is actually implemented, Code Connect links components but doesn't extract real component states, and design tokens sync colors but not component structure or variant logic.
+The same screen has multiple elements, and each element has multiple variants. In production, not all variants are visible — some are configured for specific customers, some are edge cases, some only appear under certain conditions. A demo account won't cover them all.
 
-> The source code already contains the complete truth about every component variant, prop combination, and conditional branch. The problem is that this truth is locked inside TypeScript types, JSX conditionals, and runtime behavior — invisible to anyone who doesn't read code.
+If I paste a production screen into an AI tool and edit it, I can change what's visible on that screen. But I can't edit the other variations. I can't see the full picture of what a component actually supports.
 
-## The Vision
+## 2. How I Actually Work
 
-**Make implemented UI explorable like design.** If we can deterministically extract component metadata from source code and render it as a visual, inspectable surface, we can eliminate the gap between design intent and implementation reality.
+After building DesignQA and thinking about this problem, I realized the answer was already in my own design process.
 
-Not a design tool. Not a documentation tool. A **truth layer** — one that reads the code and presents what actually exists, with honest confidence signals about what it knows for certain versus what it inferred.
+My workflow at Freight Tiger is:
 
-**Design Principles:**
-- Code is the source of truth. Everything flows from parsing real TypeScript/TSX files. No manual annotation required.
-- Honest over impressive. If the system can't confidently extract something, it says so. Confidence badges (exact / inferred / placeholder) are first-class UI.
-- Designer-facing, developer-powered. Surfaces should feel like design tools but be driven entirely by code data.
-- Artifacts over magic. Every intermediate step produces a readable, debuggable file. No black boxes.
+- design all flows and hand them over to the developer
+- after initial implementation, I don't redesign full screens for changes
+- instead, I design **element variations** — all the states and variants of a specific component for that requirement
+- this saves time and gives developers something they can directly map to code by searching for that component
 
-## Architecture Decisions
+Showing all variations of an element in the Figma file helps developers find and change things quickly in the codebase.
 
-### Monorepo with Clear Package Boundaries
+**The idea:** What if I could mimic this process in code? What if the codebase itself could show all component variations the way Figma shows them — and let you edit them visually?
 
-The project was structured as a pnpm monorepo with 6 packages: `scenario-core` (shared types, validators, prompt primitives), `scenario-extractor` (TypeScript AST parsing and metadata extraction), `ui-schema` (UI schema types and design-surface normalization), `scenario-vscode` (VS Code extension with canvases and diagnostics), `scenario-cli` (CLI entry points), and `figma-plugin` (Figma plugin for scenario editing).
+## 3. What I Built
 
-The separation of parsing from rendering was non-negotiable — the extraction pipeline needs to work identically in CLI, extension, and future CI contexts. Packages communicate through generated JSON files, not function calls, making the pipeline inspectable at every stage.
+A VS Code extension (prototype stage) that:
 
-### TypeScript Compiler API for Extraction
+- **scans the entire codebase** and pulls out modules and components automatically
+- **shows them on a canvas** inside the same extension — no context switching
+- **equips the canvas with Figma-like tools** where you can edit variants, add new variants, change colors, fonts, and other properties
+- **generates prompts from your changes** that you can give to AI tools, so they can make the actual code changes
 
-Rather than using regex or requiring manual annotations, the extractor uses the TypeScript compiler API directly. It resolves type aliases, interfaces, and generics. It understands `React.FC`, `memo()`, `forwardRef()`, and HOC patterns. It extracts enum values from union types and classifies props as discriminants, callbacks, nodes, scalars, or collections.
+The key insight: instead of going from design → code, this goes from code → visual surface → edit → back to code. The source of truth stays in the codebase, but the editing experience feels like a design tool.
 
-This means the product can extract prop schemas from any typed React component with zero manual setup — unlike tools that require developers to write metadata.
+## 4. Why This Matters
 
-The challenge: the TypeScript compiler API is powerful but unforgiving. This led to a key design decision — the **extraction confidence system**. Every extracted value carries a confidence level, and downstream consumers display this honestly rather than pretending everything is certain.
+### The variant visibility problem
 
-### Two-Track Architecture
+Most tools assume you're editing what you can see on screen. But in complex SaaS products, the screen only shows one state of many. Component-first design makes all states visible and editable regardless of what's currently rendered in production.
 
-- **Track A: Scenario Authoring + AI Code Generation** — the structured scenario model, validation, and prompt generation pipeline
-- **Track B: Repo Extraction + Design Surface Rendering** — the parser, schema normalization, and visual canvas pipeline
+### Code as the source of truth
 
-These tracks have different maturity curves. Track A could deliver value quickly while Track B required solving harder visual rendering problems. Splitting them allowed shipping Track A features while Track B was still experimental.
+Figma files drift from implementation. This tool reads the actual code — the real types, the real props, the real variants. If the code says a button has 4 variants, the canvas shows 4 variants. No manual documentation needed.
 
-### Artifact-Based Pipeline
+### Honest about what it knows
 
-Instead of parsing source code and rendering a canvas in one pass, the system generates intermediate artifacts at every stage:
+Not every extraction is perfect. The tool uses confidence signals — marking whether a piece of data was extracted with certainty, inferred, or is a placeholder. A rough render with an honest "inferred" badge is more useful than a polished render that might be wrong.
 
-Source Code → ParsedComponent → ComponentRegistry → ScenarioSidecar → RenderSchema → UISchemaDocument → DesignSchemaDocument → Canvas
+## 5. The Design Decisions
 
-Each step produces a file that can be inspected, diffed, and debugged independently. Early prototypes that tried to do everything in-memory were impossible to debug. With artifact files, every stage is independently verifiable.
+### Designer-facing, developer-powered
 
-## The AI Builder Workflow
+The canvas should feel like a design tool but be driven entirely by code data. Technical prop names become semantic labels. Type classifications become visual badges. Enum values become variant options in a visual matrix.
 
-This project was built using AI coding tools not as occasional assistants but as primary implementation partners:
+### Multiple view modes for variants
 
-- **Architecture and data model were designed manually.** Package structure, type definitions, and data flow were human decisions. AI tools are good at implementing structure but unreliable at inventing it.
-- **AI was used for implementation velocity.** Once types and interfaces were defined, AI tools generated validators, parsers, renderers, and UI code that conformed to those types.
-- **AI evaluation was built into the product itself.** A formal scoring system measures whether scenario-driven prompts actually outperform plain-language prompting.
-- **Repo-local AI skills** encode domain knowledge about the project's conventions and constraints.
+A component with 3 status values, 2 sizes, and 4 interaction states has 24 possible variants. The tool offers:
 
-There is a recursive quality to this work: it is an AI-augmented tool for improving AI-augmented development. Using AI tools to build the product revealed gaps in how AI tools understand component structure, which informed the scenario model, which improved the prompts generated for AI tools.
+- **Matrix view** — 2D grid for comparison across variants
+- **Strip view** — horizontal scroll for browsing
+- **Detail view** — single variant with full property panel
 
-## Design Challenges
+### Artifact-based pipeline
 
-### Making Code Data Feel Like Design Data
+Instead of parsing code and rendering in one pass, the system generates intermediate files at every stage. Each step produces something inspectable and debuggable. Early prototypes that tried to do everything in memory were impossible to debug.
 
-The hardest design problem was presenting TypeScript type information as something designers would recognize. The design schema normalization layer translates technical metadata into designer-facing language: technical prop names become semantic labels, type classifications become visual role badges, enum values become variant options in a visual matrix, and nested structures become collapsible layer trees.
+## 6. Current Status
 
-### The Variant Matrix UX
+This is a working prototype. The extraction pipeline works, the canvas renders components, and the prompt generation produces usable output. It is not production-ready — it's a concept that proves the idea works.
 
-A component with 3 status values, 2 sizes, and 4 interaction states has 24 possible variants. Three complementary view modes were designed: Matrix view (2D grid for comparison), Strip view (horizontal scroll for browsing), and Detail view (single variant with full property panel for inspection).
+The thesis is that the most scalable bridge between design and development is not another handoff artifact. It is making what's already implemented visible, inspectable, and editable in a way that feels natural to designers.
 
-### Confidence and Trust as First-Class UX
+## 7. What I Learned
 
-The most important UX decision was making honesty a visible design element. Every piece of data carries metadata about how it was derived — extraction confidence, schema source, fidelity scores, and color-coded badges throughout the UI.
+- **Your own workflow is often the best product spec.** The idea came directly from how I already work — designing element variations instead of full screens.
+- **AI tools solve the editing problem but not the visibility problem.** You can paste a screen and change it, but you can't see what you can't see.
+- **Confidence signals matter more than polish.** A tool that's honest about what it extracted is more trustworthy than one that looks perfect but might be wrong.
+- **Type systems are underused.** TypeScript types already contain the information about what a component supports. Most tools ignore this and ask developers to re-describe their components manually.
 
-A design surface that shows component variants is actively harmful if the variants don't match reality. By making confidence visible at every layer, the system tells users exactly where they can trust it and where they should verify.
+## 8. Takeaway
 
-## Lessons Learned
-
-- **Type systems are underused as metadata.** TypeScript types contain enormous information about component behavior. Most tools ignore this and ask developers to re-describe their components in configuration files.
-- **Confidence signals are more valuable than polish.** A rough render with an honest "inferred" badge is more useful than a polished render that might be wrong. Trust is the product.
-- **AI amplifies architecture decisions.** Good package boundaries make AI-generated code consistent. Bad boundaries let AI create sprawl.
-- **Artifacts beat abstractions for debugging.** Every intermediate JSON file is a debugging tool.
-- **Design for the domain, not the demo.** Logistics-domain example components forced the product to handle real complexity — 20+ variant states, nested conditionals, domain-specific mock data.
-
-## Takeaway
-
-> The most scalable bridge between design and development is not another static handoff artifact. It is a system that makes implemented component behavior visible, inspectable, and honest about what it knows.
+> The most useful design tool for complex products isn't one that helps you draw screens. It's one that makes the implemented reality visible and editable — so you can work with what actually exists, not what you think exists.

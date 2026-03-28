@@ -8,6 +8,7 @@ export interface Project {
   image?: string;
   liveUrl?: string;
   repoUrl?: string;
+  npmUrl?: string;
   caseStudyUrl?: string;
 }
 

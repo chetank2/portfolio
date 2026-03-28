@@ -33,8 +33,10 @@ The deeper challenge was that the design system had to work in an AI-assisted de
 - **125+** production-ready React components
 - **190+** custom icons
 - **466+** commits across 10 months
-- **5** major versions, from v1.0.0 to v5.0.3
+- **124 versions** published to [npm](https://www.npmjs.com/package/ft-design-system), from v1.0.1 to v5.0.3
+- **13,500+ downloads** in the last year, ~1,200/month
 - **Stack:** React, TypeScript, Tailwind CSS v4, Radix UI, Rollup
+- First published June 2025, actively maintained through March 2026
 
 ## 5. Phase 1 — Foundation and Figma Translation
 
@@ -52,7 +54,7 @@ This phase established the principle that fidelity mattered. AI could help scaff
 
 ## 6. How I Used AI
 
-I used AI coding tools like Cursor and Claude as pair programmers. They helped me translate Figma specs into typed React scaffolds, generate Storybook stories, and accelerate repetitive implementation work. But the architecture, validation, token design, and quality standards remained mine.
+I used AI coding tools like Cursor, Claude, and Codex as pair programmers. They helped me translate Figma specs into typed React scaffolds, generate Storybook stories, and accelerate repetitive implementation work. But the architecture, validation, token design, and quality standards remained mine.
 
 AI increased throughput, but it did not replace design-system judgment.
 

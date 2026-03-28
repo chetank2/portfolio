@@ -7,10 +7,11 @@ interface Props {
   description: string;
   tags: string[];
   liveUrl?: string;
+  npmUrl?: string;
   caseStudyUrl?: string;
 }
 
-const { title, tagline, description, tags, liveUrl, caseStudyUrl } = Astro.props;
+const { title, tagline, description, tags, liveUrl, npmUrl, caseStudyUrl } = Astro.props;
 ---
 
 <ProjectCardHover client:visible>
@@ -25,7 +26,7 @@ const { title, tagline, description, tags, liveUrl, caseStudyUrl } = Astro.props
       ))}
     </div>
 
-    {(caseStudyUrl || liveUrl) && (
+    {(caseStudyUrl || liveUrl || npmUrl) && (
       <div class="flex items-center gap-5 mt-5 pt-4 border-t border-border">
         {caseStudyUrl && (
           <a
@@ -43,6 +44,16 @@ const { title, tagline, description, tags, liveUrl, caseStudyUrl } = Astro.props
             class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
           >
             Live &#8599;
+          </a>
+        )}
+        {npmUrl && (
+          <a
+            href={npmUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
+          >
+            npm &#8599;
           </a>
         )}
       </div>

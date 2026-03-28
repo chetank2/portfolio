@@ -13,8 +13,8 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "designqa",
     title: "Design QA",
-    tagline: "Turning visual review into a measurable design-to-code quality system",
-    role: "Builder / Product Designer",
+    tagline: "Automating the pixel-level checks I didn't have time to do manually",
+    role: "Designer & Builder",
     company: "Independent",
     timeline: "2025 - 2026",
     backHref: "/#ai",
@@ -33,9 +33,9 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "component-first-design",
     title: "Component-first Design Concept",
-    tagline: "Making implemented UI explorable like design",
-    role: "Product Designer",
-    company: "Independent Concept",
+    tagline: "Making all component variants visible and editable from code",
+    role: "Designer & Builder",
+    company: "Independent (Prototype)",
     timeline: "2026",
     backHref: "/#ai",
     contentFile: "case-study-component-first-design.md",

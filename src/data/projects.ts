@@ -2,16 +2,6 @@ import type { Project, Experience, Article } from "../types";
 
 export const deepProjects: Project[] = [
   {
-    slug: "freight-invoicing",
-    title: "Freight Invoicing & Reconciliation System",
-    tagline: "Shifting billing validation before invoice creation",
-    description:
-      "Redesigned freight billing by introducing a pre-invoice reconciliation layer that reduced disputes, improved auditability, and made billing decisions clearer for logistics and finance teams.",
-    tags: ["System Design", "B2B SaaS", "Freight Tiger"],
-    type: "deep",
-    caseStudyUrl: "/work/freight-invoicing",
-  },
-  {
     slug: "journey-redesign",
     title: "My Journeys",
     tagline: "Designing a unified operational surface for tracking, decision-making, and closure",
@@ -21,9 +11,6 @@ export const deepProjects: Project[] = [
     type: "deep",
     caseStudyUrl: "/work/journey-redesign",
   },
-];
-
-export const supportingProjects: Project[] = [
   {
     slug: "control-tower",
     title: "Control Tower",
@@ -31,10 +18,23 @@ export const supportingProjects: Project[] = [
     description:
       "Designed a Human–AI control tower that detects, prioritizes, and resolves operational issues — shifting logistics teams from reactive handling to guided action.",
     tags: ["Operations", "Logistics", "Decision Systems"],
-    type: "supporting",
+    type: "deep",
     caseStudyUrl: "/work/control-tower",
   },
-{
+];
+
+export const supportingProjects: Project[] = [
+  {
+    slug: "freight-invoicing",
+    title: "Freight Invoicing & Reconciliation System",
+    tagline: "Shifting billing validation before invoice creation",
+    description:
+      "Redesigned freight billing by introducing a pre-invoice reconciliation layer that reduced disputes, improved auditability, and made billing decisions clearer for logistics and finance teams.",
+    tags: ["System Design", "B2B SaaS", "Freight Tiger"],
+    type: "supporting",
+    caseStudyUrl: "/work/freight-invoicing",
+  },
+  {
     slug: "ptl-module-design",
     title: "PTL Module Design",
     tagline: "Designing for fragmented shipments",
@@ -53,6 +53,7 @@ export const supportingProjects: Project[] = [
     tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
     type: "supporting",
     liveUrl: "https://ftdesignsystem.netlify.app",
+    npmUrl: "https://www.npmjs.com/package/ft-design-system",
     caseStudyUrl: "/work/ft-design-system",
   },
 ];
@@ -61,10 +62,10 @@ export const aiProjects: Project[] = [
   {
     slug: "designqa",
     title: "Design QA",
-    tagline: "Measuring the gap between Figma and shipped UI",
+    tagline: "Automating design-to-code checks across projects",
     description:
-      "Created a measurable design-to-code comparison system across Figma, live UI, and design-system rules.",
-    tags: ["Node.js", "Puppeteer", "MCP Protocol", "Electron"],
+      "Built a cross-platform tool that compares Figma designs against live production pages and exports discrepancies as trackable issues — because pixel-checking manually across multiple projects doesn't scale.",
+    tags: ["Electron", "Cross-platform", "Figma MCP", "AI-built"],
     type: "ai",
     liveUrl: "https://designqa-rho.vercel.app",
     repoUrl: "https://github.com/chetank2/designqa",
@@ -73,10 +74,10 @@ export const aiProjects: Project[] = [
   {
     slug: "component-first-design",
     title: "Component-first Design Concept",
-    tagline: "Reusable component scenarios for design and AI handoff",
+    tagline: "Edit component variants visually, generate code changes",
     description:
-      "Explored a truth layer between design and code by making implemented component behavior visible and reusable.",
-    tags: ["Figma", "Design Ops", "AI Workflows"],
+      "A VS Code extension prototype that scans a codebase, shows all component variants on a canvas, and lets you edit them with Figma-like tools — generating prompts for AI tools to make the code changes.",
+    tags: ["VS Code Extension", "Prototype", "Design-to-Code"],
     type: "ai",
     caseStudyUrl: "/work/component-first-design",
   },
@@ -271,6 +272,7 @@ export const tools = [
   "Figma",
   "Claude Code",
   "Cursor AI",
+  "Codex",
   "Storybook",
   "Adobe Illustrator",
   "Adobe After Effects",
