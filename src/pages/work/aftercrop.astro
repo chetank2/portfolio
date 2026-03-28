@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+---
+
+<BaseLayout title="Aftercrop — Chetan Kummari">
+  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
+        &larr; Back
+      </a>
+
+      <!-- Hero -->
+      <ScrollReveal client:visible>
+        <header class="mt-12 mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            Aftercrop
+          </h1>
+          <p class="text-lg text-text-secondary italic mb-8">
+            Mobile-first warehouse operations software — A Konic Technologies Product
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
+            <span><span class="text-text-tertiary">Role:</span> Product Designer & Co-Founder</span>
+            <span><span class="text-text-tertiary">Type:</span> SaaS Product</span>
+            <span><span class="text-text-tertiary">Timeline:</span> Konic Technologies</span>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <!-- Overview -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Overview</h3>
+          <p class="text-text-secondary leading-relaxed">
+            In India, medium-sized warehouses and cold storage facilities are disorganised but vital for farmers and reducing food waste. Current tracking methods are outdated and overly complex. We created user-friendly, mobile-first software to simplify warehouse operations and bring them into the modern era.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Research -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Research</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Interviews with warehouse operators revealed a consistent lack of emphasis on design and usability. Ethnographic studies showed a significant gap in user-friendly solutions. Competitive analysis confirmed that the market lacked products with true mobile and desktop parity.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Three Key Realisations -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Three Key Realisations</h3>
+          <ol class="list-decimal list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">Design & Usability</strong> — There is scope for a delightful product experience on both mobile and desktop platforms</li>
+            <li><strong class="text-text-primary">Adaptability</strong> — The solution needs to be easy-to-use and fit into existing workflows without disrupting daily operations</li>
+            <li><strong class="text-text-primary">Availability</strong> — There is potential for a modern cloud-based SaaS solution with strong data security</li>
+          </ol>
+        </section>
+      </ScrollReveal>
+
+      <!-- Target Audience -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Target Audience</h3>
+          <ol class="list-decimal list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">Owners / Power Users</strong> — Need dashboards, summaries, and high-level oversight of operations</li>
+            <li><strong class="text-text-primary">Managers</strong> — Mobile-first users transitioning from pen-and-paper workflows</li>
+            <li><strong class="text-text-primary">Staff / Workers</strong> — Require a simple, guided process with minimal learning curve</li>
+          </ol>
+        </section>
+      </ScrollReveal>
+
+      <!-- USP -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">USP</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">Design takes precedence</strong> — Usability and visual clarity are the top priority</li>
+            <li><strong class="text-text-primary">Least disruption</strong> — Workflows mirror current pen-and-paper processes</li>
+            <li><strong class="text-text-primary">Portability</strong> — Mobile-first approach for on-the-go warehouse management</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Solution -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Solution</h3>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Focus 1: Mobile-first Design</h4>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Cards instead of tables for better mobile readability. An app-like feel with minimal typing required. No training needed for staff to get started, and fast loading even on slow networks.
+          </p>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Focus 2: Process Similar to Current Flow</h4>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Incoming shipment processing simplified to 3 sections — taking just a couple of minutes to complete. Outgoing shipment designed as an "Add to Cart" experience that feels familiar and intuitive.
+          </p>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Focus 3: Data Security</h4>
+          <p class="text-text-secondary leading-relaxed">
+            User roles with exact permissions ensure data stays secure. The vehicle logs page is the simplest page in the system — just one input field — demonstrating the commitment to minimal complexity.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Launch -->
+      <ScrollReveal client:visible>
+        <section class="mb-16">
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Launch</h3>
+          <p class="text-text-secondary leading-relaxed">
+            The MVP was shipped in approximately 3 months. Changes were released 2-3 times per week with continuous feedback loops from real warehouse operators, ensuring the product evolved based on actual usage patterns.
+          </p>
+        </section>
+      </ScrollReveal>
+
+    </div>
+  </main>
+</BaseLayout>

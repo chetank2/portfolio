@@ -1,0 +1,58 @@
+---
+import AnimatedHero from "../react/AnimatedHero.tsx";
+---
+
+<section
+  id="hero"
+  class="min-h-screen flex items-center pt-24 max-w-[1200px] mx-auto px-6 md:px-12 relative overflow-hidden"
+>
+  <!-- Ambient gradient blobs -->
+  <div class="hero-gradient"></div>
+  <div class="hero-gradient-2"></div>
+
+  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 w-full relative z-10">
+    <!-- Left: Hero text -->
+    <div class="flex-1">
+      <AnimatedHero
+        client:load
+        tagline="crafting design stories that resonate"
+        subtitle="I am Chetan, a product designer weaving narratives through every pixel."
+        bio="Join me on a journey where usability meets creativity, and where form marries function."
+      />
+
+      <div class="mt-10">
+        <a
+          href="#work"
+          class="inline-flex items-center gap-2 text-text-secondary link-hover transition-colors hover:text-text-primary"
+        >
+          <span>View Selected Work</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="animate-bounce-slow"
+          >
+            <path d="M12 5v14" />
+            <path d="m19 12-7 7-7-7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Profile image with glow (desktop only) -->
+    <div class="hidden md:block flex-shrink-0 profile-glow">
+      <img
+        src="/assets/hero-profile.png"
+        alt="Chetan Kummari"
+        class="w-64 h-64 rounded-full border border-border-subtle object-cover"
+        loading="eager"
+      />
+    </div>
+  </div>
+</section>

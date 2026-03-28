@@ -1,0 +1,167 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+---
+
+<BaseLayout title="Fit X — Chetan Kummari">
+  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
+        &larr; Back
+      </a>
+
+      <!-- Hero -->
+      <ScrollReveal client:visible>
+        <header class="mt-12 mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            Fit X
+          </h1>
+          <p class="text-lg text-text-secondary italic mb-8">
+            A fitness app designed for tracking goals, team collaboration and creating personalized plans
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
+            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
+            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
+            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <!-- The Problem -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Problem</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            People face challenges maintaining consistent physical activity. A lack of motivation often leads to incomplete fitness programs. Existing apps provide non-customizable, one-size-fits-all workout plans that fail to account for individual needs and preferences.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- The Goal -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Goal</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Create a mobile app that enables users to track their daily physical activity and promotes team collaboration. The app should provide customizable workout plans that adapt to individual fitness levels and goals.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- My Approach -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">My Approach</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">User Motivation</strong> — Team collaboration features to keep users engaged and accountable</li>
+            <li><strong class="text-text-primary">Customizable Workouts</strong> — A user-friendly interface for creating personalized workout plans</li>
+            <li><strong class="text-text-primary">Activity Tracking</strong> — Real-time feedback and visualizations to monitor progress</li>
+            <li><strong class="text-text-primary">User Collaboration</strong> — Challenges and group activities to foster a sense of community</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Design Process -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Design Process</h3>
+          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm">
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Empathize</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Define</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Ideate</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Prototype</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Test</span>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <!-- Research Insights -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Research Insights</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            User interviews and affinity mapping revealed key pain points that guided the design direction:
+          </p>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Lack of active tracking and real-time feedback</li>
+            <li>Lack of plan makers for personalized workouts</li>
+            <li>Lack of group coordination for team fitness</li>
+            <li>Too many ads disrupting the experience</li>
+            <li>Frequent and irrelevant notifications</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Persona -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Persona — Ashok</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Ashok is a 30-year-old working professional with a busy schedule. He wants to stay fit but struggles to find the right tools and motivation to maintain a consistent fitness routine.
+          </p>
+          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Goals:</strong></p>
+          <ul class="list-disc list-inside text-text-secondary space-y-2 mb-6">
+            <li>Maintain consistent physical activity despite a demanding work schedule</li>
+            <li>Follow a personalized fitness journey tailored to his needs</li>
+            <li>Build community connection through group fitness</li>
+          </ul>
+          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Challenges:</strong></p>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Motivation hurdles when working out alone</li>
+            <li>Limited customization in existing fitness apps</li>
+            <li>Misses the community feel from group fitness classes</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Competitive Analysis -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Competitive Analysis</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Analyzed Cultfit, Nike Running, and Adidas Running apps to understand the current landscape. This research helped identify key How Might We questions:
+          </p>
+          <blockquote class="border-l-2 border-border-subtle pl-6 italic text-text-secondary my-8">
+            How might we provide active tracking, personalized plans, and group coordination — all in one seamless experience?
+          </blockquote>
+        </section>
+      </ScrollReveal>
+
+      <!-- Solution -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Solution</h3>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            The solution focuses on three core features:
+          </p>
+          <ol class="list-decimal list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">Regular stats and progress tracking</strong> — Visualize activity data with clear, motivating feedback</li>
+            <li><strong class="text-text-primary">Build & customize workouts</strong> — Create personalized workout plans tailored to individual goals</li>
+            <li><strong class="text-text-primary">Create teams with friends</strong> — Form groups for team workouts, challenges, and accountability</li>
+          </ol>
+        </section>
+      </ScrollReveal>
+
+      <!-- Key Screens -->
+      <ScrollReveal client:visible>
+        <section class="mb-16">
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Key Screens</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Splash & Onboarding</li>
+            <li>Stats Screen (Individual & Teams)</li>
+            <li>Workouts Screen</li>
+            <li>Create Workout</li>
+            <li>Team Creation (3-step flow)</li>
+            <li>Workout Recording</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+    </div>
+  </main>
+</BaseLayout>

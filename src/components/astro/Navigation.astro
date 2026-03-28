@@ -1,0 +1,39 @@
+---
+import NavigationMenu from "../react/NavigationMenu.tsx";
+
+const links = [
+  { label: "Work", href: "#work" },
+  { label: "Built with AI", href: "#ai" },
+  { label: "Writing", href: "#writing" },
+  { label: "Resume", href: "#resume" },
+  { label: "Contact", href: "#contact" },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 border-b border-border-subtle/50"
+  style="background: rgba(13, 13, 13, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+>
+  <nav class="max-w-[1200px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
+    <a href="/" class="text-xl font-bold text-text-primary hover:opacity-80 transition-opacity">
+      చే.
+    </a>
+
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      {links.map((link) => (
+        <a
+          href={link.href}
+          class="text-sm text-text-secondary hover:text-text-primary transition-colors link-hover"
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+
+    <!-- Mobile nav (React island) -->
+    <div class="md:hidden">
+      <NavigationMenu client:load links={links} />
+    </div>
+  </nav>
+</header>

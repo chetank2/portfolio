@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+---
+
+<BaseLayout title="Swiggy Meal Subscriptions — Chetan Kummari">
+  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
+        &larr; Back
+      </a>
+
+      <!-- Hero -->
+      <ScrollReveal client:visible>
+        <header class="mt-12 mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            Swiggy Meal Subscriptions
+          </h1>
+          <p class="text-lg text-text-secondary italic mb-8">
+            Designing a scheduling and subscription feature for food delivery
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
+            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
+            <span><span class="text-text-tertiary">Type:</span> Feature Design</span>
+            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <!-- The Task -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Task</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Regular Swiggy users don't have time when they actually want to order food. The challenge was to build a feature that allows users to schedule orders and create weekly or monthly meal subscriptions.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Goal -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Goal</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Allow customers to save time and order food more frequently — aiming for 15-20 orders per month through automated scheduling and subscriptions.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Three User Flows -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Three User Flows</h3>
+
+          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 1: From Box Page</strong></p>
+          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm mb-6">
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Box page</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Tooltip prompt</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Subscription page</span>
+          </div>
+
+          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 2: From Past Orders</strong></p>
+          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm mb-6">
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Past orders</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Select order</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Convert to subscription</span>
+          </div>
+
+          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 3: From Favorites</strong></p>
+          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm">
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Favorites</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Select favorite</span>
+            <span class="text-text-tertiary">&rarr;</span>
+            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Convert to subscription</span>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      <!-- Subscription Design -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Subscription Design — 3 Steps</h3>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 1: Add Food Items</h4>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Same experience as normal ordering — users browse restaurants, select items, and add them to their subscription cart.
+          </p>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 2: Name & Categorize</h4>
+          <p class="text-text-secondary leading-relaxed mb-6">
+            Name the subscription and choose the meal type (breakfast, lunch, dinner) for easy identification and management.
+          </p>
+
+          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 3: Schedule & Plan</h4>
+          <p class="text-text-secondary leading-relaxed">
+            Choose a plan (Weekly or Monthly), select specific days of the week, and set the auto-order time for each delivery.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Key Design Decisions -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Key Design Decisions</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li><strong class="text-text-primary">Only one CTA button</strong> — Following Swiggy's existing design pattern to maintain consistency</li>
+            <li><strong class="text-text-primary">Mimicked existing ordering flow</strong> — Reduced learning curve by building on familiar interactions</li>
+            <li><strong class="text-text-primary">Split into 2 steps</strong> — Broke down the subscription setup to reduce cognitive load</li>
+            <li><strong class="text-text-primary">Minimized input fields</strong> — Used tap gestures instead of typing wherever possible</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Constraints & Edge Cases -->
+      <ScrollReveal client:visible>
+        <section class="mb-16">
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Constraints & Edge Cases</h3>
+          <ul class="list-disc list-inside text-text-secondary space-y-2">
+            <li>Food items can only be from one restaurant per subscription</li>
+            <li>No modifications allowed after a subscription period starts</li>
+            <li>Average delivery charge is built into the subscription fee</li>
+            <li>System notifies users if a restaurant is closed on a scheduled day</li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+    </div>
+  </main>
+</BaseLayout>

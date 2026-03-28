@@ -1,0 +1,42 @@
+---
+import ProjectCardHover from "../react/ProjectCardHover.tsx";
+
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  tags: string[];
+  liveUrl?: string;
+}
+
+const { title, tagline, description, tags, liveUrl } = Astro.props;
+---
+
+<ProjectCardHover client:visible>
+  <div class="p-6 h-full flex flex-col">
+    <h3 class="text-lg font-semibold text-text-primary">{title}</h3>
+    <p class="text-text-secondary text-sm italic mt-1">{tagline}</p>
+    <p class="text-text-secondary text-sm mt-3 flex-1">{description}</p>
+
+    <div class="flex flex-wrap gap-2 mt-4">
+      {tags.map((tag) => (
+        <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    {liveUrl && (
+      <div class="mt-4">
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm text-text-secondary hover:text-text-primary link-hover transition-colors"
+        >
+          View Live &#8599;
+        </a>
+      </div>
+    )}
+  </div>
+</ProjectCardHover>

@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+---
+
+<BaseLayout title="Monastery — Chetan Kummari">
+  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
+        &larr; Back
+      </a>
+
+      <!-- Hero -->
+      <ScrollReveal client:visible>
+        <header class="mt-12 mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            Monastery
+          </h1>
+          <p class="text-lg text-text-secondary italic mb-8">
+            A minimalist finance management app for effortless expense tracking
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
+            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
+            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
+            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <!-- Overview -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Overview</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Designed 'Monastery,' a minimalist finance management app focused on making expense tracking and management effortless. The design prioritizes clean, minimal UI that reduces friction and helps users stay on top of their finances without cognitive overload.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Case Study on Behance -->
+      <ScrollReveal client:visible>
+        <section class="mb-16">
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Case Study on Behance</h3>
+          <a href="https://www.behance.net/gallery/96240671/Monastery-App" target="_blank" rel="noopener noreferrer" class="block bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-text-tertiary transition-colors">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-text-primary font-medium">Monastery App — Full Case Study</p>
+                <p class="text-text-secondary text-sm mt-1">Complete design process and screens on Behance</p>
+              </div>
+              <span class="text-text-tertiary">&nearr;</span>
+            </div>
+          </a>
+        </section>
+      </ScrollReveal>
+
+    </div>
+  </main>
+</BaseLayout>

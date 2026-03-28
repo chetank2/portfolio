@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+---
+
+<BaseLayout title="From Farm — Chetan Kummari">
+  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
+    <div class="max-w-3xl mx-auto">
+
+      <!-- Back Link -->
+      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
+        &larr; Back
+      </a>
+
+      <!-- Hero -->
+      <ScrollReveal client:visible>
+        <header class="mt-12 mb-16">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            From Farm
+          </h1>
+          <p class="text-lg text-text-secondary italic mb-8">
+            An app revolutionizing fresh produce purchasing directly from farmers
+          </p>
+          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
+            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
+            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
+            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          </div>
+        </header>
+      </ScrollReveal>
+
+      <!-- Overview -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Overview</h3>
+          <p class="text-text-secondary leading-relaxed">
+            Designed 'From Farm,' an app that connects consumers directly with farmers for fresh produce. By eliminating middlemen, the platform ensures freshness, fair pricing for farmers, and transparency for buyers.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Case Studies on Behance -->
+      <ScrollReveal client:visible>
+        <section class="mb-16">
+          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Case Studies on Behance</h3>
+          <div class="space-y-4">
+            <a href="https://www.behance.net/gallery/95744555/From-farm-UX" target="_blank" rel="noopener noreferrer" class="block bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-text-tertiary transition-colors">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-text-primary font-medium">UX Case Study</p>
+                  <p class="text-text-secondary text-sm mt-1">Research, user flows, and interaction design on Behance</p>
+                </div>
+                <span class="text-text-tertiary">&nearr;</span>
+              </div>
+            </a>
+            <a href="https://www.behance.net/gallery/95746631/From-farm-UI" target="_blank" rel="noopener noreferrer" class="block bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-text-tertiary transition-colors">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-text-primary font-medium">UI Case Study</p>
+                  <p class="text-text-secondary text-sm mt-1">Visual design and high-fidelity screens on Behance</p>
+                </div>
+                <span class="text-text-tertiary">&nearr;</span>
+              </div>
+            </a>
+          </div>
+        </section>
+      </ScrollReveal>
+
+    </div>
+  </main>
+</BaseLayout>

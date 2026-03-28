@@ -1,0 +1,277 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/astro/Navigation.astro";
+import Hero from "../components/astro/Hero.astro";
+import SectionHeading from "../components/astro/SectionHeading.astro";
+import ProjectCard from "../components/astro/ProjectCard.astro";
+import SupportingProjectCard from "../components/astro/SupportingProjectCard.astro";
+import AIProjectCard from "../components/astro/AIProjectCard.astro";
+import ArticleCard from "../components/astro/ArticleCard.astro";
+import WebsiteCard from "../components/astro/WebsiteCard.astro";
+import TimelineItem from "../components/astro/TimelineItem.astro";
+import Footer from "../components/astro/Footer.astro";
+import ScrollReveal from "../components/react/ScrollReveal.tsx";
+import HorizontalScrollGallery from "../components/react/HorizontalScrollGallery.tsx";
+import ImageLightbox from "../components/react/ImageLightbox.tsx";
+import {
+  deepProjects,
+  supportingProjects,
+  aiProjects,
+  appProjects,
+  websiteProjects,
+  experience,
+  skills,
+  tools,
+  article,
+} from "../data/projects";
+---
+
+<BaseLayout>
+  <Navigation />
+
+  <main id="main">
+    <!-- Hero -->
+    <Hero />
+
+    <!-- Selected Work -->
+    <section class="section-padding" id="work">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Selected Work" title="Deep Case Studies" />
+        </ScrollReveal>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {deepProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <ProjectCard
+                title={project.title}
+                tagline={project.tagline}
+                description={project.description}
+                tags={project.tags}
+                href={project.caseStudyUrl}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <!-- Supporting Projects -->
+        <div class="mt-16">
+          <ScrollReveal client:visible>
+            <h3 class="text-lg font-medium text-text-secondary mb-8">
+              More Work
+            </h3>
+          </ScrollReveal>
+          <div class="grid md:grid-cols-3 gap-6">
+            {supportingProjects.map((project, i) => (
+              <ScrollReveal client:visible delay={i * 0.1}>
+                <SupportingProjectCard
+                  title={project.title}
+                  tagline={project.tagline}
+                  description={project.description}
+                  tags={project.tags}
+                  liveUrl={project.liveUrl}
+                />
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider: Work → AI -->
+    <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+      <hr class="section-divider" />
+    </div>
+
+    <!-- Built with AI -->
+    <section class="section-padding bg-bg-secondary" id="ai">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading
+            label="Builder"
+            title="Built with AI"
+          />
+          <p class="text-text-secondary -mt-8 mb-12 max-w-2xl">
+            Products I designed and shipped using AI-assisted development.
+          </p>
+        </ScrollReveal>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          {aiProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <AIProjectCard
+                title={project.title}
+                tagline={project.tagline}
+                description={project.description}
+                tags={project.tags}
+                liveUrl={project.liveUrl}
+                repoUrl={project.repoUrl}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+      <hr class="section-divider" />
+    </div>
+
+    <!-- Writing -->
+    <section class="section-padding" id="writing">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Writing" title="On Medium" />
+        </ScrollReveal>
+        <ScrollReveal client:visible>
+          <div class="max-w-2xl">
+            <ArticleCard
+              title={article.title}
+              date={article.date}
+              categories={article.categories}
+              summary={article.summary}
+              url={article.url}
+            />
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- App Designs -->
+    <section class="section-padding bg-bg-secondary" id="apps">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Design Work" title="App Designs" />
+        </ScrollReveal>
+
+        <HorizontalScrollGallery client:visible>
+          {appProjects.map((project) => (
+            <div class="snap-start shrink-0 w-64 md:w-80">
+              <a href={project.caseStudyUrl || `#`} class="block no-underline group">
+                <div class="bg-bg-card border border-border-subtle rounded-xl overflow-hidden hover:border-[#3a3a3a] hover:shadow-[0_8px_32px_rgba(255,255,255,0.04)] transition-all duration-300 group-hover:-translate-y-1">
+                  {project.image && (
+                    <div class="aspect-[3/4] overflow-hidden bg-bg-secondary flex items-center justify-center">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        class="w-full h-full object-contain p-4"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div class="p-4">
+                    <h4 class="font-semibold text-text-primary">{project.title}</h4>
+                    <p class="text-sm text-text-secondary mt-1">{project.tagline}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </HorizontalScrollGallery>
+      </div>
+    </section>
+
+    <!-- Websites -->
+    <section class="section-padding" id="websites">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Websites" title="Web Projects" />
+        </ScrollReveal>
+        <div class="grid md:grid-cols-3 gap-6">
+          {websiteProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <WebsiteCard
+                title={project.title}
+                tagline={project.tagline}
+                image={project.image!}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume -->
+    <section class="section-padding bg-bg-secondary" id="resume">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Experience" title="Resume" />
+        </ScrollReveal>
+
+        <div class="space-y-0">
+          {experience.map((exp, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <TimelineItem
+                role={exp.role}
+                company={exp.company}
+                location={exp.location}
+                period={exp.period}
+                highlights={exp.highlights}
+                isFirst={i === 0}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <!-- Skills & Tools -->
+        <div class="mt-16 grid md:grid-cols-2 gap-12">
+          <ScrollReveal client:visible>
+            <h3 class="text-lg font-medium text-text-secondary mb-4">Skills</h3>
+            <div class="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1.5">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal client:visible delay={0.1}>
+            <h3 class="text-lg font-medium text-text-secondary mb-4">Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              {tools.map((tool) => (
+                <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1.5">
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section-padding" id="contact">
+      <div class="max-w-[1200px] mx-auto px-6 md:px-12 text-center">
+        <ScrollReveal client:visible>
+          <h2 class="text-3xl md:text-5xl font-semibold mb-4">Let's Connect</h2>
+          <p class="text-text-secondary mb-12 max-w-md mx-auto">
+            Open to new opportunities and collaborations.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal client:visible delay={0.1}>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:mymailchetan25@gmail.com"
+              class="inline-flex items-center justify-center gap-2 bg-white text-bg-primary font-medium px-8 py-3 rounded-full hover:bg-white/90 transition-colors"
+            >
+              Email Me
+            </a>
+            <a
+              href="https://linkedin.com/in/chetan-kumar25/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 border border-border-subtle text-text-primary font-medium px-8 py-3 rounded-full hover:border-border-hover hover:bg-accent-muted transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

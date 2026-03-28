@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  tagline: string;
+  image: string;
+}
+
+const { title, tagline, image } = Astro.props;
+---
+
+<div class="bg-bg-card border border-border-subtle rounded-xl overflow-hidden group hover:border-border-hover hover:shadow-[0_8px_32px_rgba(255,255,255,0.04)] transition-all duration-300">
+  <div class="aspect-video overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+  </div>
+  <div class="p-4">
+    <h3 class="text-lg font-semibold text-text-primary">{title}</h3>
+    <p class="text-text-secondary text-sm mt-1">{tagline}</p>
+  </div>
+</div>

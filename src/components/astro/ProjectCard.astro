@@ -1,0 +1,40 @@
+---
+import ProjectCardHover from "../react/ProjectCardHover.tsx";
+
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  tags: string[];
+  href?: string;
+}
+
+const { title, tagline, description, tags, href } = Astro.props;
+---
+
+<ProjectCardHover client:visible>
+  <div class="bg-bg-card border border-border-subtle rounded-xl p-8 h-full flex flex-col">
+    <h3 class="text-2xl font-semibold text-text-primary">{title}</h3>
+    <p class="text-text-secondary italic mt-1">{tagline}</p>
+    <p class="text-text-secondary text-sm mt-4 flex-1">{description}</p>
+
+    <div class="flex flex-wrap gap-2 mt-6">
+      {tags.map((tag) => (
+        <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    {href && (
+      <div class="mt-6">
+        <a
+          href={href}
+          class="text-sm text-text-secondary hover:text-text-primary link-hover transition-colors"
+        >
+          Read Case Study &rarr;
+        </a>
+      </div>
+    )}
+  </div>
+</ProjectCardHover>

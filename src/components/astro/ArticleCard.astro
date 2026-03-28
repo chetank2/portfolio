@@ -1,0 +1,49 @@
+---
+interface Props {
+  title: string;
+  date: string;
+  categories: string[];
+  summary: string;
+  url: string;
+}
+
+const { title, date, categories, summary, url } = Astro.props;
+---
+
+<div class="bg-bg-card border border-border-subtle rounded-xl p-6 h-full flex flex-col">
+  <h3 class="text-lg font-semibold text-text-primary">{title}</h3>
+
+  <div class="flex items-center gap-2 mt-2 text-sm text-text-tertiary">
+    <span>{date}</span>
+    {categories.length > 0 && <span>&middot;</span>}
+    <span>{categories.join(", ")}</span>
+  </div>
+
+  <p class="text-text-secondary text-sm mt-3 flex-1">{summary}</p>
+
+  <div class="mt-4">
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-1.5 text-sm text-text-secondary hover:text-text-primary link-hover transition-colors"
+    >
+      <span>Read on Medium</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 3h6v6" />
+        <path d="M10 14 21 3" />
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      </svg>
+    </a>
+  </div>
+</div>
