@@ -255,22 +255,23 @@ export const experience: Experience[] = [
 ];
 
 export const skills = [
-  "User Research",
   "Design Systems",
-  "Prototyping",
-  "Visual Design",
+  "System Design",
   "Interaction Design",
+  "Prototyping",
   "Information Architecture",
-  "User Testing",
-  "Design Thinking",
-  "Wireframing",
-  "User Flows",
+  "Visual Design",
+  "Product Thinking",
+  "AI-Assisted Building",
+  "Design-to-Code",
+  "User Research",
 ];
 
 export const tools = [
   "Figma",
+  "Claude Code",
   "Cursor AI",
-  "Adobe XD",
+  "Storybook",
   "Adobe Illustrator",
   "Adobe After Effects",
 ];
