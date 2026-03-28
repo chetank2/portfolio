@@ -13,24 +13,22 @@ const { title, tagline, description, tags, href } = Astro.props;
 ---
 
 <ProjectCardHover client:visible>
-  <div class="bg-bg-card border border-border-subtle rounded-xl p-8 h-full flex flex-col">
-    <h3 class="text-2xl font-semibold text-text-primary">{title}</h3>
-    <p class="text-text-secondary italic mt-1">{tagline}</p>
-    <p class="text-text-secondary text-sm mt-4 flex-1">{description}</p>
+  <div class="p-8 md:p-10 h-full flex flex-col">
+    <h3 class="text-xl md:text-2xl font-display font-700 text-text-primary">{title}</h3>
+    <p class="text-text-secondary font-body italic mt-2">{tagline}</p>
+    <p class="text-text-secondary font-body text-[0.9375rem] mt-5 flex-1 leading-relaxed">{description}</p>
 
-    <div class="flex flex-wrap gap-2 mt-6">
+    <div class="flex flex-wrap gap-2 mt-7">
       {tags.map((tag) => (
-        <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1">
-          {tag}
-        </span>
+        <span class="tag-pill">{tag}</span>
       ))}
     </div>
 
     {href && (
-      <div class="mt-6">
+      <div class="mt-7 pt-6 border-t border-border">
         <a
           href={href}
-          class="text-sm text-text-secondary hover:text-text-primary link-hover transition-colors"
+          class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
         >
           Read Case Study &rarr;
         </a>

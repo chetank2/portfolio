@@ -7,35 +7,44 @@ interface Props {
   description: string;
   tags: string[];
   liveUrl?: string;
+  caseStudyUrl?: string;
 }
 
-const { title, tagline, description, tags, liveUrl } = Astro.props;
+const { title, tagline, description, tags, liveUrl, caseStudyUrl } = Astro.props;
 ---
 
 <ProjectCardHover client:visible>
   <div class="p-6 h-full flex flex-col">
-    <h3 class="text-lg font-semibold text-text-primary">{title}</h3>
-    <p class="text-text-secondary text-sm italic mt-1">{tagline}</p>
-    <p class="text-text-secondary text-sm mt-3 flex-1">{description}</p>
+    <h3 class="text-lg font-display font-700 text-text-primary">{title}</h3>
+    <p class="text-text-secondary font-body text-sm italic mt-1.5">{tagline}</p>
+    <p class="text-text-secondary font-body text-sm mt-3 flex-1 leading-relaxed">{description}</p>
 
-    <div class="flex flex-wrap gap-2 mt-4">
+    <div class="flex flex-wrap gap-2 mt-5">
       {tags.map((tag) => (
-        <span class="text-xs bg-accent-muted text-text-secondary rounded-full px-3 py-1">
-          {tag}
-        </span>
+        <span class="tag-pill">{tag}</span>
       ))}
     </div>
 
-    {liveUrl && (
-      <div class="mt-4">
-        <a
-          href={liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-sm text-text-secondary hover:text-text-primary link-hover transition-colors"
-        >
-          View Live &#8599;
-        </a>
+    {(caseStudyUrl || liveUrl) && (
+      <div class="flex items-center gap-5 mt-5 pt-4 border-t border-border">
+        {caseStudyUrl && (
+          <a
+            href={caseStudyUrl}
+            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
+          >
+            Case Study &rarr;
+          </a>
+        )}
+        {liveUrl && (
+          <a
+            href={liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
+          >
+            Live &#8599;
+          </a>
+        )}
       </div>
     )}
   </div>

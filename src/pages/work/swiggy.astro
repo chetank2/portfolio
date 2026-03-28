@@ -1,30 +1,34 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
 <BaseLayout title="Swiggy Meal Subscriptions — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+  <Navigation />
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
-        <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
             Swiggy Meal Subscriptions
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
             Designing a scheduling and subscription feature for food delivery
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
-            <span><span class="text-text-tertiary">Type:</span> Feature Design</span>
-            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
+            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Feature Design</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
           </div>
         </header>
       </ScrollReveal>
@@ -32,8 +36,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- The Task -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Task</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">The Task</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Regular Swiggy users don't have time when they actually want to order food. The challenge was to build a feature that allows users to schedule orders and create weekly or monthly meal subscriptions.
           </p>
         </section>
@@ -42,8 +46,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Goal -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Goal</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Goal</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Allow customers to save time and order food more frequently — aiming for 15-20 orders per month through automated scheduling and subscriptions.
           </p>
         </section>
@@ -52,33 +56,33 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Three User Flows -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Three User Flows</h3>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Three User Flows</h3>
 
-          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 1: From Box Page</strong></p>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm mb-6">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Box page</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Tooltip prompt</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Subscription page</span>
+          <p class="text-text-secondary font-body leading-relaxed mb-4"><strong class="text-text-primary font-display">Flow 1: From Box Page</strong></p>
+          <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs mb-6">
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Box page</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Tooltip prompt</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Subscription page</span>
           </div>
 
-          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 2: From Past Orders</strong></p>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm mb-6">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Past orders</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Select order</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Convert to subscription</span>
+          <p class="text-text-secondary font-body leading-relaxed mb-4"><strong class="text-text-primary font-display">Flow 2: From Past Orders</strong></p>
+          <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs mb-6">
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Past orders</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Select order</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Convert to subscription</span>
           </div>
 
-          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Flow 3: From Favorites</strong></p>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Favorites</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Select favorite</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Convert to subscription</span>
+          <p class="text-text-secondary font-body leading-relaxed mb-4"><strong class="text-text-primary font-display">Flow 3: From Favorites</strong></p>
+          <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Favorites</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Select favorite</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Convert to subscription</span>
           </div>
         </section>
       </ScrollReveal>
@@ -86,20 +90,20 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Subscription Design -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Subscription Design — 3 Steps</h3>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Subscription Design — 3 Steps</h3>
 
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 1: Add Food Items</h4>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Step 1: Add Food Items</h4>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             Same experience as normal ordering — users browse restaurants, select items, and add them to their subscription cart.
           </p>
 
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 2: Name & Categorize</h4>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Step 2: Name & Categorize</h4>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             Name the subscription and choose the meal type (breakfast, lunch, dinner) for easy identification and management.
           </p>
 
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Step 3: Schedule & Plan</h4>
-          <p class="text-text-secondary leading-relaxed">
+          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Step 3: Schedule & Plan</h4>
+          <p class="text-text-secondary font-body leading-relaxed">
             Choose a plan (Weekly or Monthly), select specific days of the week, and set the auto-order time for each delivery.
           </p>
         </section>
@@ -108,29 +112,54 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Key Design Decisions -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Key Design Decisions</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">Only one CTA button</strong> — Following Swiggy's existing design pattern to maintain consistency</li>
-            <li><strong class="text-text-primary">Mimicked existing ordering flow</strong> — Reduced learning curve by building on familiar interactions</li>
-            <li><strong class="text-text-primary">Split into 2 steps</strong> — Broke down the subscription setup to reduce cognitive load</li>
-            <li><strong class="text-text-primary">Minimized input fields</strong> — Used tap gestures instead of typing wherever possible</li>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Design Decisions</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Only one CTA button</strong> — Following Swiggy's existing design pattern to maintain consistency</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Mimicked existing ordering flow</strong> — Reduced learning curve by building on familiar interactions</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Split into 2 steps</strong> — Broke down the subscription setup to reduce cognitive load</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Minimized input fields</strong> — Used tap gestures instead of typing wherever possible</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
 
       <!-- Constraints & Edge Cases -->
       <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Constraints & Edge Cases</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Food items can only be from one restaurant per subscription</li>
-            <li>No modifications allowed after a subscription period starts</li>
-            <li>Average delivery charge is built into the subscription fee</li>
-            <li>System notifies users if a restaurant is closed on a scheduled day</li>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Constraints & Edge Cases</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Food items can only be from one restaurant per subscription</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>No modifications allowed after a subscription period starts</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Average delivery charge is built into the subscription fee</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>System notifies users if a restaurant is closed on a scheduled day</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
 
     </div>
   </main>
+  <Footer />
 </BaseLayout>

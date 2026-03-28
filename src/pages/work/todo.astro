@@ -1,30 +1,35 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
 <BaseLayout title="To Do Reimagine — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+  <Navigation />
+
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
         <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
             To Do Reimagine
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
             Reimagining the to-do app for work-from-home employees
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
-            <span><span class="text-text-tertiary">Type:</span> App Redesign</span>
-            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
+            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> App Redesign</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
           </div>
         </header>
       </ScrollReveal>
@@ -32,11 +37,11 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Problem -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Problem</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             People forget tasks. Working from home blurs the boundaries between work and personal life. The question worth asking: do generic to-do lists actually work for the current era?
           </p>
-          <blockquote class="border-l-2 border-border-subtle pl-6 italic text-text-secondary my-8">
+          <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
             Work-from-home has fundamentally changed how we manage time — but our task management tools haven't kept up.
           </blockquote>
         </section>
@@ -45,8 +50,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Target Users -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Target Users</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Target Users</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Employees working from home — where personal and work life are always in conflict. These users juggle meetings, household chores, personal errands, and deep work, all from the same physical space.
           </p>
         </section>
@@ -55,25 +60,25 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- User Research -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">User Research — 8 Pain Points</h3>
-          <ol class="list-decimal list-inside text-text-secondary space-y-2">
-            <li>Fragmented accounts across multiple task apps</li>
-            <li>Cross-platform sync issues between devices</li>
-            <li>Anxiety triggers from overwhelming task counts</li>
-            <li>Limited and uninformative widgets</li>
-            <li>Tedious input with no voice assistant support</li>
-            <li>Annoying recurring task management</li>
-            <li>Poor calendar integration</li>
-            <li>Hard rescheduling of missed or postponed tasks</li>
-          </ol>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">User Research — 8 Pain Points</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">01</span><span>Fragmented accounts across multiple task apps</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">02</span><span>Cross-platform sync issues between devices</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">03</span><span>Anxiety triggers from overwhelming task counts</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">04</span><span>Limited and uninformative widgets</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">05</span><span>Tedious input with no voice assistant support</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">06</span><span>Annoying recurring task management</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">07</span><span>Poor calendar integration</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">08</span><span>Hard rescheduling of missed or postponed tasks</span></li>
+          </ul>
         </section>
       </ScrollReveal>
 
       <!-- Redefined Problem -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Redefined Problem</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Redefined Problem</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Work-from-home employees find it difficult to manage personal and work tasks in one place. This mismanagement causes frustration, anxiety, and ultimately reduces productivity across both domains.
           </p>
         </section>
@@ -81,20 +86,22 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 
       <!-- Reimagined Features -->
       <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Reimagined Features</h3>
-          <ol class="list-decimal list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">Unified view</strong> — All tasks from work and personal life in one place, clearly separated but always accessible</li>
-            <li><strong class="text-text-primary">Voice & NLP</strong> — Reduce time spent adding tasks through natural language processing and voice input</li>
-            <li><strong class="text-text-primary">Cross-device sync</strong> — Seamless synchronization across all devices without account fragmentation</li>
-            <li><strong class="text-text-primary">"Free time" metric</strong> — Show available free time instead of anxiety-inducing task counts</li>
-            <li><strong class="text-text-primary">Smart postponing</strong> — Intelligently postpone low-priority recurring tasks based on workload</li>
-            <li><strong class="text-text-primary">Useful widgets</strong> — "What's next" and "free time for the day" widgets that provide actionable at-a-glance information</li>
-            <li><strong class="text-text-primary">Family sharing</strong> — Share your schedule so family knows when you're busy, reducing interruptions</li>
-          </ol>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Reimagined Features</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">01</span><span><strong class="text-text-primary">Unified view</strong> — All tasks from work and personal life in one place, clearly separated but always accessible</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">02</span><span><strong class="text-text-primary">Voice & NLP</strong> — Reduce time spent adding tasks through natural language processing and voice input</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">03</span><span><strong class="text-text-primary">Cross-device sync</strong> — Seamless synchronization across all devices without account fragmentation</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">04</span><span><strong class="text-text-primary">"Free time" metric</strong> — Show available free time instead of anxiety-inducing task counts</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">05</span><span><strong class="text-text-primary">Smart postponing</strong> — Intelligently postpone low-priority recurring tasks based on workload</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">06</span><span><strong class="text-text-primary">Useful widgets</strong> — "What's next" and "free time for the day" widgets that provide actionable at-a-glance information</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent font-mono text-xs mt-1">07</span><span><strong class="text-text-primary">Family sharing</strong> — Share your schedule so family knows when you're busy, reducing interruptions</span></li>
+          </ul>
         </section>
       </ScrollReveal>
 
     </div>
   </main>
+
+  <Footer />
 </BaseLayout>

@@ -1,30 +1,35 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
 <BaseLayout title="In-flight Food Ordering — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+  <Navigation />
+
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
         <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
             In-flight Food Ordering
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
             An app to help passengers order food inside a plane
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
-            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
-            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
+            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Mobile App</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
           </div>
         </header>
       </ScrollReveal>
@@ -32,8 +37,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Problem Statement -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Problem Statement</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem Statement</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Help flight passengers place in-flight food orders for immediate consumption through a mobile app — making the dining experience seamless at 35,000 feet.
           </p>
         </section>
@@ -42,8 +47,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Why This Matters -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Why This Matters</h3>
-          <blockquote class="border-l-2 border-border-subtle pl-6 italic text-text-secondary my-8">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Why This Matters</h3>
+          <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
             The current in-flight catering global market is valued at $8.5 billion. In 2017 alone, 1.14 million tonnes of food was wasted from in-flight catering — a staggering figure that highlights the need for smarter ordering systems.
           </blockquote>
         </section>
@@ -52,11 +57,11 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Understanding the Goal -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Understanding the Goal</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Understanding the Goal</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             An aeroplane carries people from various cultures, languages, and regions — each with different dietary restrictions and preferences. It is a significant challenge for cabin crew to cater to every passenger individually.
           </p>
-          <p class="text-text-secondary leading-relaxed">
+          <p class="text-text-secondary font-body leading-relaxed">
             A food ordering app reduces aisle congestion, avoids awkward conversations between crew and passengers, and helps airlines analyze eating patterns to optimize their catering operations.
           </p>
         </section>
@@ -65,12 +70,12 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Defining the Audience -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Defining the Audience</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">Geography</strong> — Global audience requiring internationalization and multi-language support</li>
-            <li><strong class="text-text-primary">Culture</strong> — Different faiths and dietary needs (halal, kosher, vegetarian, vegan)</li>
-            <li><strong class="text-text-primary">Medical conditions</strong> — Users with allergies and specific dietary restrictions</li>
-            <li><strong class="text-text-primary">Age</strong> — Passengers ranging from 1 to 80 years old with varying tech comfort levels</li>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Defining the Audience</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span><strong class="text-text-primary">Geography</strong> — Global audience requiring internationalization and multi-language support</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span><strong class="text-text-primary">Culture</strong> — Different faiths and dietary needs (halal, kosher, vegetarian, vegan)</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span><strong class="text-text-primary">Medical conditions</strong> — Users with allergies and specific dietary restrictions</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span><strong class="text-text-primary">Age</strong> — Passengers ranging from 1 to 80 years old with varying tech comfort levels</span></li>
           </ul>
         </section>
       </ScrollReveal>
@@ -78,11 +83,11 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Context & Needs -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Context & Needs</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Context & Needs</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             Passengers are already onboard when they use the app. Currently, ordering food is a hassle — call the crew, wait for them to reach your seat, place the order, then anxiously wait for delivery.
           </p>
-          <p class="text-text-secondary leading-relaxed">
+          <p class="text-text-secondary font-body leading-relaxed">
             The app provides a quick, self-service ordering experience without requiring crew assistance, giving passengers control over their dining experience.
           </p>
         </section>
@@ -91,50 +96,52 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Solution -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Solution — User Story (Ravi)</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Solution — User Story (Ravi)</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             Ravi's 11-step user journey illustrates the complete experience:
           </p>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Download app</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Board flight</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Connect to Wi-Fi</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Open app</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Enter seat number</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Browse menu</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Set preferences</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Select items</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Place order</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Receive food</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Great dining experience</span>
+          <div class="flex flex-wrap items-center gap-2 text-text-secondary font-mono text-xs">
+            <span class="bg-elevated border border-border rounded px-3 py-1">Download app</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Board flight</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Connect to Wi-Fi</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Open app</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Enter seat number</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Browse menu</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Set preferences</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Select items</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Place order</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Receive food</span>
+            <span class="text-accent/50">&rarr;</span>
+            <span class="bg-elevated border border-border rounded px-3 py-1">Great dining experience</span>
           </div>
         </section>
       </ScrollReveal>
 
       <!-- Deliverables -->
       <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Deliverables</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Task flows</li>
-            <li>User flows</li>
-            <li>Information architecture</li>
-            <li>Hi-fidelity wireframes</li>
-            <li>Figma prototype</li>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Deliverables</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span>Task flows</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span>User flows</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span>Information architecture</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span>Hi-fidelity wireframes</span></li>
+            <li class="text-text-secondary font-body flex gap-3"><span class="text-accent/50 flex-shrink-0">—</span><span>Figma prototype</span></li>
           </ul>
         </section>
       </ScrollReveal>
 
     </div>
   </main>
+
+  <Footer />
 </BaseLayout>

@@ -4,55 +4,38 @@ import AnimatedHero from "../react/AnimatedHero.tsx";
 
 <section
   id="hero"
-  class="min-h-screen flex items-center pt-24 max-w-[1200px] mx-auto px-6 md:px-12 relative overflow-hidden"
+  class="min-h-screen flex items-center pt-20 sm:pt-24 pb-12 sm:pb-16 max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 relative overflow-hidden"
 >
-  <!-- Ambient gradient blobs -->
-  <div class="hero-gradient"></div>
-  <div class="hero-gradient-2"></div>
+  <!-- Ambient orbs -->
+  <div class="hero-orb"></div>
+  <div class="hero-orb-2"></div>
 
-  <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16 w-full relative z-10">
-    <!-- Left: Hero text -->
-    <div class="flex-1">
-      <AnimatedHero
-        client:load
-        tagline="crafting design stories that resonate"
-        subtitle="I am Chetan, a product designer weaving narratives through every pixel."
-        bio="Join me on a journey where usability meets creativity, and where form marries function."
-      />
-
-      <div class="mt-10">
-        <a
-          href="#work"
-          class="inline-flex items-center gap-2 text-text-secondary link-hover transition-colors hover:text-text-primary"
-        >
-          <span>View Selected Work</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="animate-bounce-slow"
-          >
-            <path d="M12 5v14" />
-            <path d="m19 12-7 7-7-7" />
-          </svg>
-        </a>
-      </div>
+  <div class="w-full relative z-10">
+    <div class="mb-8">
+      <span class="section-number">Product Designer & Builder</span>
     </div>
 
-    <!-- Right: Profile image with glow (desktop only) -->
-    <div class="hidden md:block flex-shrink-0 profile-glow">
-      <img
-        src="/assets/hero-profile.png"
-        alt="Chetan Kummari"
-        class="w-64 h-64 rounded-full border border-border-subtle object-cover"
-        loading="eager"
-      />
+    <AnimatedHero
+      client:load
+      tagline="Senior Product Designer building clarity in complex systems"
+      subtitle="I design workflows, decision tools, and design systems and build when needed to reduce handoff gaps, validate faster, and bring ideas closer to production."
+      bio=""
+    />
+
+    <div class="mt-12 flex flex-col sm:flex-row gap-4">
+      <a
+        href="#work"
+        class="inline-flex items-center justify-center gap-2 bg-accent text-bg-deep font-display font-700 text-sm px-7 py-3 hover:bg-accent/90 transition-colors duration-300"
+      >
+        View Case Studies
+      </a>
+      <a
+        href="#resume"
+        class="inline-flex items-center gap-3 font-mono text-sm text-text-secondary hover:text-accent transition-colors duration-300"
+      >
+        <span class="w-6 h-px bg-accent/40"></span>
+        Open Resume
+      </a>
     </div>
   </div>
 </section>

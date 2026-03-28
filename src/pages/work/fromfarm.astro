@@ -1,30 +1,35 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
 <BaseLayout title="From Farm — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+  <Navigation />
+
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
         <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
             From Farm
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
             An app revolutionizing fresh produce purchasing directly from farmers
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
-            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
-            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
+            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Mobile App</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
           </div>
         </header>
       </ScrollReveal>
@@ -32,8 +37,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Overview -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Overview</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Overview</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Designed 'From Farm,' an app that connects consumers directly with farmers for fresh produce. By eliminating middlemen, the platform ensures freshness, fair pricing for farmers, and transparency for buyers.
           </p>
         </section>
@@ -41,25 +46,25 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 
       <!-- Case Studies on Behance -->
       <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Case Studies on Behance</h3>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Case Studies on Behance</h3>
           <div class="space-y-4">
-            <a href="https://www.behance.net/gallery/95744555/From-farm-UX" target="_blank" rel="noopener noreferrer" class="block bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-text-tertiary transition-colors">
+            <a href="https://www.behance.net/gallery/95744555/From-farm-UX" target="_blank" rel="noopener noreferrer" class="block bg-elevated border border-border rounded-xl p-6 hover:border-accent-border transition-colors duration-300">
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-text-primary font-medium">UX Case Study</p>
-                  <p class="text-text-secondary text-sm mt-1">Research, user flows, and interaction design on Behance</p>
+                  <p class="text-text-primary font-display font-700">UX Case Study</p>
+                  <p class="text-text-secondary font-body text-sm mt-1">Research, user flows, and interaction design on Behance</p>
                 </div>
-                <span class="text-text-tertiary">&nearr;</span>
+                <span class="text-accent">&nearr;</span>
               </div>
             </a>
-            <a href="https://www.behance.net/gallery/95746631/From-farm-UI" target="_blank" rel="noopener noreferrer" class="block bg-bg-card border border-border-subtle rounded-xl p-6 hover:border-text-tertiary transition-colors">
+            <a href="https://www.behance.net/gallery/95746631/From-farm-UI" target="_blank" rel="noopener noreferrer" class="block bg-elevated border border-border rounded-xl p-6 hover:border-accent-border transition-colors duration-300">
               <div class="flex items-center justify-between">
                 <div>
-                  <p class="text-text-primary font-medium">UI Case Study</p>
-                  <p class="text-text-secondary text-sm mt-1">Visual design and high-fidelity screens on Behance</p>
+                  <p class="text-text-primary font-display font-700">UI Case Study</p>
+                  <p class="text-text-secondary font-body text-sm mt-1">Visual design and high-fidelity screens on Behance</p>
                 </div>
-                <span class="text-text-tertiary">&nearr;</span>
+                <span class="text-accent">&nearr;</span>
               </div>
             </a>
           </div>
@@ -68,4 +73,6 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 
     </div>
   </main>
+
+  <Footer />
 </BaseLayout>

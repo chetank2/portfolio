@@ -1,40 +1,73 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
-<BaseLayout title="Journey Management Redesign — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+<BaseLayout title="My Journeys — Chetan Kummari">
+  <Navigation />
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#work" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#work" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
-        <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
-            Journey Management Redesign
+        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
+            My Journeys
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
-            Turning a data-heavy logistics screen into an actionable system
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+            Designing a unified operational surface for tracking, decision-making, and closure
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Senior Product Designer</span>
-            <span><span class="text-text-tertiary">Company:</span> Freight Tiger</span>
-            <span><span class="text-text-tertiary">Timeline:</span> 2024</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
+            <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
           </div>
         </header>
+      </ScrollReveal>
+
+      <!-- TL;DR -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">TL;DR</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
+            I redesigned My Journeys from a broken table and unreliable lifecycle system into a unified operational surface that models journeys correctly, supports real-world ambiguity, and helps operations teams decide and act faster.
+          </p>
+        </section>
       </ScrollReveal>
 
       <!-- Overview -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Overview</h3>
-          <p class="text-text-secondary leading-relaxed">
-            Journeys are the core unit of execution in logistics. The "My Journeys" screen had become a data dump over time — too many columns, mixed signals, no clear priority. Users could see data but had no way to act on it meaningfully.
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Overview</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            My Journeys was one of the most heavily used parts of the product. It was where operations teams tracked active movements, identified issues, and managed execution. Over time, it had degraded into a mix of a table, a dashboard, and a partially broken lifecycle system.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed">
+            The problem was not just UI clutter. The underlying model of journeys was flawed, and the interface reflected that confusion. I treated this as a system redesign, not a table redesign, and rebuilt both the lifecycle logic and the decision surface together.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- What made this hard -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">What Made This Hard</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            Two layers were broken at the same time.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            At the system level, the journey lifecycle was incorrectly modeled. It assumed linear movement and clean closure, while real operations involved reuse, repeated stops, missing data, and ambiguity.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed">
+            At the interface level, the table had become overloaded with information. It exposed everything but helped with nothing. Fixing only the UI would not solve the problem. Fixing only the lifecycle would not make the product usable. Both had to be redesigned together.
           </p>
         </section>
       </ScrollReveal>
@@ -42,173 +75,168 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Problem -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Problem</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
-            The screen was trying to be four things at once: a tracking dashboard, a reporting table, a notification system, and an action interface. It failed at all four.
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            The lifecycle system treated journeys as linear flows that started and ended cleanly. In reality, routes were reused, stops repeated, and signals arrived inconsistently. This led to overwritten data, incorrect closure states, and unreliable journey tracking.
           </p>
-          <p class="text-text-secondary leading-relaxed mb-4">Key issues:</p>
-          <ol class="list-decimal list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">No clear mental model</strong> — What does "complete" versus "achieved" actually mean?</li>
-            <li><strong class="text-text-primary">High cognitive load</strong> — Too many columns, too much information competing for attention.</li>
-            <li><strong class="text-text-primary">No actionability</strong> — The screen couldn't answer "What needs attention now?"</li>
-            <li><strong class="text-text-primary">Inconsistent states</strong> — Journey states were not aligned across systems.</li>
-          </ol>
-        </section>
-      </ScrollReveal>
-
-      <!-- Insight -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Insight</h3>
-          <blockquote class="border-l-2 border-border-subtle pl-6 italic text-text-secondary">
-            The problem was not "table design." It was this: the system does not know what a journey means. Without clear states, transitions, and priorities, the UI will always become messy.
-          </blockquote>
-        </section>
-      </ScrollReveal>
-
-      <!-- Solution -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Solution — Three Principles</h3>
-
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Principle 1: Define a clear journey lifecycle</h4>
-          <p class="text-text-secondary leading-relaxed mb-4">
-            We standardized journey states into a coherent lifecycle:
-          </p>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm mb-4">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">En route to loading</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">At loading</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">In transit</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">At destination</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Return</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Completed</span>
-          </div>
-          <p class="text-text-secondary leading-relaxed">
-            We also introduced an "Achieved" state — inferred rather than confirmed by data, exposing the system's level of confidence to the user.
-          </p>
-
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Principle 2: Action-first, not data-first</h4>
-          <p class="text-text-secondary leading-relaxed">
-            Instead of showing everything at once, show what matters now. Actionable filters, clear status signals, and reduced noise help users focus on what requires their attention.
-          </p>
-
-          <h4 class="text-lg font-medium text-text-primary mt-8 mb-3">Principle 3: Separate signal from data</h4>
-          <p class="text-text-secondary leading-relaxed">
-            Status is the primary signal. Details are secondary. Visual hierarchy and state-driven indicators ensure users can scan quickly and drill down when needed.
+          <p class="text-text-secondary font-body leading-relaxed">
+            The table interface had accumulated too many columns, statuses, and visual elements. Everything competed for attention. It was slow to scan, hard to prioritize, and not usable under operational pressure. Together, these issues created a system where users had to manually reconstruct reality from unreliable data and noisy interfaces.
           </p>
         </section>
       </ScrollReveal>
 
-      <!-- Key Design Decisions -->
+      <!-- Context -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Key Design Decisions</h3>
-          <ol class="list-decimal list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">"Completed" vs "Achieved"</strong> — Completed means confirmed via data. Achieved means inferred. This distinction exposes system confidence to the user rather than hiding uncertainty.</li>
-            <li><strong class="text-text-primary">Don't overload rows</strong> — Avoid mini dashboards inside table rows. Keep rows scannable and use progressive disclosure for details.</li>
-            <li><strong class="text-text-primary">Filters over columns</strong> — Columns scale badly as information grows. Filters scale well and give users control over what they see.</li>
-            <li><strong class="text-text-primary">Align system and UI</strong> — Geofence events, gate-in/out timestamps, and system signals must map directly to what the UI shows. The UI reflects system truth.</li>
-          </ol>
-        </section>
-      </ScrollReveal>
-
-      <!-- Example Flow -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Example Flow</h3>
-          <p class="text-text-secondary leading-relaxed mb-4">
-            <strong class="text-text-primary">User goal:</strong> Find delayed journeys.
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Context</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            Operations teams used this screen to manage large numbers of active journeys in real time. Their goal was not to read detailed rows. Their goal was to quickly identify what was going wrong and decide what to do next.
           </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-bg-card border border-border-subtle rounded-lg p-5">
-              <p class="text-text-tertiary text-xs uppercase tracking-wider mb-3">Before</p>
-              <p class="text-text-secondary text-sm leading-relaxed">
-                Scan entire table, check columns one by one, no delay indicator present. Manual effort with no clear outcome.
-              </p>
-            </div>
-            <div class="bg-bg-card border border-border-subtle rounded-lg p-5">
-              <p class="text-text-tertiary text-xs uppercase tracking-wider mb-3">After</p>
-              <p class="text-text-secondary text-sm leading-relaxed">
-                Apply "Delayed" filter, view only relevant journeys, take immediate action. Clear path from intent to outcome.
-              </p>
-            </div>
-          </div>
+          <p class="text-text-secondary font-body leading-relaxed">
+            Data came from multiple sources including GPS pings, geofence events, and manual updates. Real-world patterns such as route reuse and repeated locations exposed the limitations of a system that assumed each stop occurred only once.
+          </p>
         </section>
       </ScrollReveal>
 
-      <!-- What Changed -->
+      <!-- Reframing -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">What Changed</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full bg-bg-card rounded border border-border-subtle text-sm">
-              <thead>
-                <tr class="bg-bg-secondary">
-                  <th class="text-left px-4 py-3 text-text-primary font-medium border-b border-border-subtle">Before</th>
-                  <th class="text-left px-4 py-3 text-text-primary font-medium border-b border-border-subtle">After</th>
-                </tr>
-              </thead>
-              <tbody class="text-text-secondary">
-                <tr class="border-b border-border-subtle">
-                  <td class="px-4 py-3">Data-heavy</td>
-                  <td class="px-4 py-3">Actionable</td>
-                </tr>
-                <tr class="border-b border-border-subtle">
-                  <td class="px-4 py-3">Reactive</td>
-                  <td class="px-4 py-3">Prioritized</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3">Confusing states</td>
-                  <td class="px-4 py-3">Clear lifecycle</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <!-- Impact -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Impact</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Expected reduction in time to identify delayed journeys</li>
-            <li>Increase in actions taken per session</li>
-            <li>Reduced dependency on manual tracking workflows</li>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Reframing the Problem</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            I reframed My Journeys from a data table into an operational decision system. The key shift was moving from showing journey data to:
+          </p>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Helping users understand journey state</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Helping users identify risk</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Helping users decide what action to take</span>
+            </li>
           </ul>
+          <p class="text-text-secondary font-body leading-relaxed mt-5">
+            This required fixing both the underlying model and the way it was presented.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- System Redesign -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">System Redesign: Lifecycle Model</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            The first step was correcting how journeys were modeled. I moved away from treating journeys as simple sequences of stops and instead introduced a state-driven model.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            A critical concept was separating a stop from a visit. The same physical location could appear multiple times in a journey, but each occurrence needed to be tracked as a separate visit. This allowed patterns like A → B → A to be handled without corrupting data.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            Instead of overwriting journey state, I leaned toward preserving event history. Each signal contributed to an evolving state rather than replacing previous information.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed">
+            Closure was redesigned to be event-driven. A journey did not close because a user followed a fixed flow. It closed when the correct combination of events occurred.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Interface Redesign -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Interface Redesign: Table as Decision Surface</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            Once the model was corrected, I redesigned the table to reflect how users actually think. The table was no longer treated as a container of columns. It was treated as a surface for decision-making.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed">
+            I reorganized information around intent. Status, exceptions, and action-relevant signals were prioritized. Secondary information was reduced or removed. Hierarchy became the main tool — important states stood out clearly while non-critical information moved into the background.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Edge Cases -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Edge Cases Handled</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
+            The redesign accounted for route reuse such as A → B → A, missing or delayed tracking signals, manual overrides, ambiguous states, and large datasets with multiple filters applied simultaneously.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Key Decisions -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Design Decisions</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Treated the table as a decision surface rather than a data grid</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Grouped information by operational intent instead of letting columns compete equally</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Removed visual noise aggressively — many accumulated elements were not helping decision-making</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Aligned the interface with the lifecycle model so the UI reflected corrected system state</span>
+            </li>
+          </ul>
+        </section>
+      </ScrollReveal>
+
+      <!-- Outcome -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Outcome</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-5">
+            The result was a system where users could trust what they saw and act on it quickly.
+          </p>
+          <p class="text-text-secondary font-body leading-relaxed">
+            Journey tracking became more accurate because the lifecycle model reflected real-world behavior. Closure became more reliable because it was tied to events rather than assumptions. The interface became easier to scan because it emphasized what mattered.
+          </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Why this project matters -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Why This Project Matters</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
+            This project represents how I approach complex product problems. I do not treat UI issues in isolation. I look at the underlying system, fix the model, and then design the interface to reflect that model. My Journeys is not just a table redesign. It is a case study in turning a broken operational surface into a reliable decision system.
+          </p>
         </section>
       </ScrollReveal>
 
       <!-- Learnings -->
       <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Learnings</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Tables are decision systems, not just data displays.</li>
-            <li>Without a clear mental model, UI complexity grows uncontrollably and the interface degrades over time.</li>
-            <li>B2B users want clarity and control, not more data.</li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- What's Next -->
-      <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">What's Next</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Build an alerting system for proactive delay notifications</li>
-            <li>Predict delays from historical data patterns</li>
-            <li>Personalize journey views by user role and priorities</li>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Operational products break when their internal models do not match reality. Fixing the model often has more impact than adding features.</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Interfaces should reflect how decisions are made, not how data is stored.</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Simplicity in UI often comes from deeper complexity in system design, not from removing features blindly.</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
 
     </div>
   </main>
+  <Footer />
 </BaseLayout>

@@ -3,21 +3,21 @@ import type { Project, Experience, Article } from "../types";
 export const deepProjects: Project[] = [
   {
     slug: "freight-invoicing",
-    title: "Freight Invoicing & Reconciliation",
-    tagline: "Fixing broken billing logic in logistics systems",
+    title: "Freight Invoicing & Reconciliation System",
+    tagline: "Shifting billing validation before invoice creation",
     description:
-      "Redesigned the freight billing system by introducing a pre-invoice reconciliation layer. Split into three modules — Bills, Invoicing, and Disputes — with charge-level approval and ePOD-based validation.",
+      "Redesigned freight billing by introducing a pre-invoice reconciliation layer that reduced disputes, improved auditability, and made billing decisions clearer for logistics and finance teams.",
     tags: ["System Design", "B2B SaaS", "Freight Tiger"],
     type: "deep",
     caseStudyUrl: "/work/freight-invoicing",
   },
   {
     slug: "journey-redesign",
-    title: "Journey Management Redesign",
-    tagline: "Turning a data-heavy logistics screen into an actionable system",
+    title: "My Journeys",
+    tagline: "Designing a unified operational surface for tracking, decision-making, and closure",
     description:
-      "Redesigned the journey tracking experience from a data dump into an action-first system. Defined clear journey lifecycle states and shifted from data-first to action-first design.",
-    tags: ["UX Redesign", "Logistics", "Freight Tiger"],
+      "Redesigned a broken table and lifecycle system into a unified operational surface that models journeys correctly and helps teams decide and act faster.",
+    tags: ["System Design", "UX Redesign", "Freight Tiger"],
     type: "deep",
     caseStudyUrl: "/work/journey-redesign",
   },
@@ -25,56 +25,71 @@ export const deepProjects: Project[] = [
 
 export const supportingProjects: Project[] = [
   {
+    slug: "control-tower",
+    title: "Control Tower",
+    tagline: "From visibility to exception orchestration",
+    description:
+      "Designed a Human–AI control tower that detects, prioritizes, and resolves operational issues — shifting logistics teams from reactive handling to guided action.",
+    tags: ["Operations", "Logistics", "Decision Systems"],
+    type: "supporting",
+    caseStudyUrl: "/work/control-tower",
+  },
+{
+    slug: "ptl-module-design",
+    title: "PTL Module Design",
+    tagline: "Designing for fragmented shipments",
+    description:
+      "Created a PTL workflow for grouped shipments, split deliveries, and multi-point coordination without forcing FTL assumptions.",
+    tags: ["PTL", "Logistics", "Workflow Design"],
+    type: "supporting",
+    caseStudyUrl: "/work/ptl-module-design",
+  },
+  {
     slug: "ft-design-system",
     title: "FT Design System",
-    tagline: "80+ components, 300+ tokens, 3 themes",
+    tagline: "Shared UI foundations for a complex logistics platform",
     description:
-      "Production-grade React component library built with Radix UI and Tailwind CSS. Includes 187 icons, 16 chart types, and AI-readable documentation.",
-    tags: ["Design System", "React", "v4.21.0"],
+      "Built Freight Tiger's shared UI foundation for scale, consistency, accessibility, and AI-assisted implementation.",
+    tags: ["Design System", "Tokens", "Freight Tiger"],
     type: "supporting",
     liveUrl: "https://ftdesignsystem.netlify.app",
-  },
-  {
-    slug: "gatekeeper",
-    title: "Gatekeeper App",
-    tagline: "Journey closure logic for plant operations",
-    description:
-      "Fixed incorrect journey closure by introducing stop-visit instances and event-based tracking with geofence and gate-in/gate-out methods.",
-    tags: ["Mobile", "Logistics", "System Design"],
-    type: "supporting",
-  },
-  {
-    slug: "billing-flexibility",
-    title: "Billing Flexibility",
-    tagline: "Designing for real-world transporter behavior",
-    description:
-      "Designed dual billing flows for cycle-based and non-cycle transporters. System supports both without forcing user behavior into system constraints.",
-    tags: ["B2B", "Billing", "System Design"],
-    type: "supporting",
+    caseStudyUrl: "/work/ft-design-system",
   },
 ];
 
 export const aiProjects: Project[] = [
   {
     slug: "designqa",
-    title: "DesignQA",
-    tagline: "Figma-to-Web comparison tool",
+    title: "Design QA",
+    tagline: "Measuring the gap between Figma and shipped UI",
     description:
-      "Extracts design data from Figma and compares against live web implementations. Identifies deviations in colors, typography, spacing, and layout. Generates detailed HTML reports.",
+      "Created a measurable design-to-code comparison system across Figma, live UI, and design-system rules.",
     tags: ["Node.js", "Puppeteer", "MCP Protocol", "Electron"],
     type: "ai",
     liveUrl: "https://designqa-rho.vercel.app",
     repoUrl: "https://github.com/chetank2/designqa",
+    caseStudyUrl: "/work/designqa",
+  },
+  {
+    slug: "component-first-design",
+    title: "Component-first Design Concept",
+    tagline: "Reusable component scenarios for design and AI handoff",
+    description:
+      "Explored a truth layer between design and code by making implemented component behavior visible and reusable.",
+    tags: ["Figma", "Design Ops", "AI Workflows"],
+    type: "ai",
+    caseStudyUrl: "/work/component-first-design",
   },
   {
     slug: "coupontracker",
     title: "CouponTracker",
-    tagline: "On-device ML coupon recognition system",
+    tagline: "Coupon recognition platform built from a screenshot workflow",
     description:
-      "Full-stack coupon recognition with on-device LLM, YOLO detection, and smart OCR fallback chain. Includes training pipeline with MLflow and offline-first architecture.",
+      "Evolved a screenshot-based coupon idea into a broader recognition platform across Android, ML, and offline tooling.",
     tags: ["Kotlin", "Python", "YOLOv8", "On-device ML"],
     type: "ai",
     repoUrl: "https://github.com/chetank2/coupontracker",
+    caseStudyUrl: "/work/coupontracker",
   },
 ];
 

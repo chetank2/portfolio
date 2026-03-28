@@ -2,20 +2,20 @@
 import NavigationMenu from "../react/NavigationMenu.tsx";
 
 const links = [
-  { label: "Work", href: "#work" },
-  { label: "Built with AI", href: "#ai" },
-  { label: "Writing", href: "#writing" },
-  { label: "Resume", href: "#resume" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work", href: "#work", number: "01" },
+  { label: "Built with AI", href: "#ai", number: "02" },
+  { label: "Writing", href: "#writing", number: "03" },
+  { label: "Resume", href: "#resume", number: "04" },
+  { label: "Contact", href: "#contact", number: "05" },
 ];
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 border-b border-border-subtle/50"
-  style="background: rgba(13, 13, 13, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-border/60"
+  style="background: rgba(11, 10, 8, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
 >
-  <nav class="max-w-[1200px] mx-auto px-6 md:px-12 h-16 flex items-center justify-between">
-    <a href="/" class="text-xl font-bold text-text-primary hover:opacity-80 transition-opacity">
+  <nav class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 h-14 sm:h-16 2xl:h-20 flex items-center justify-between">
+    <a href="/" class="font-display text-lg font-700 text-text-primary hover:text-accent transition-colors duration-300">
       చే.
     </a>
 
@@ -24,14 +24,15 @@ const links = [
       {links.map((link) => (
         <a
           href={link.href}
-          class="text-sm text-text-secondary hover:text-text-primary transition-colors link-hover"
+          class="flex items-baseline gap-1.5 text-text-secondary hover:text-accent transition-colors duration-300 link-hover"
         >
-          {link.label}
+          <span class="font-mono text-[10px] text-accent/60">{link.number}</span>
+          <span class="font-mono text-xs">{link.label}</span>
         </a>
       ))}
     </div>
 
-    <!-- Mobile nav (React island) -->
+    <!-- Mobile nav -->
     <div class="md:hidden">
       <NavigationMenu client:load links={links} />
     </div>

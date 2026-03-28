@@ -1,30 +1,34 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 ---
 
 <BaseLayout title="Fit X — Chetan Kummari">
-  <main id="main" class="bg-bg-primary min-h-screen py-16 px-6">
-    <div class="max-w-3xl mx-auto">
+  <Navigation />
+  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
 
       <!-- Back Link -->
-      <a href="/#apps" class="text-text-secondary hover:text-text-primary transition-colors text-sm">
-        &larr; Back
+      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+        <span class="w-4 h-px bg-text-tertiary"></span>
+        Back
       </a>
 
       <!-- Hero -->
       <ScrollReveal client:visible>
-        <header class="mt-12 mb-16">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
             Fit X
           </h1>
-          <p class="text-lg text-text-secondary italic mb-8">
+          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
             A fitness app designed for tracking goals, team collaboration and creating personalized plans
           </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-text-secondary">
-            <span><span class="text-text-tertiary">Role:</span> Product Designer</span>
-            <span><span class="text-text-tertiary">Type:</span> Mobile App</span>
-            <span><span class="text-text-tertiary">Timeline:</span> Case Study</span>
+          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
+            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Mobile App</span>
+            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
           </div>
         </header>
       </ScrollReveal>
@@ -32,8 +36,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- The Problem -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Problem</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">The Problem</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             People face challenges maintaining consistent physical activity. A lack of motivation often leads to incomplete fitness programs. Existing apps provide non-customizable, one-size-fits-all workout plans that fail to account for individual needs and preferences.
           </p>
         </section>
@@ -42,8 +46,8 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- The Goal -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">The Goal</h3>
-          <p class="text-text-secondary leading-relaxed">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">The Goal</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Create a mobile app that enables users to track their daily physical activity and promotes team collaboration. The app should provide customizable workout plans that adapt to individual fitness levels and goals.
           </p>
         </section>
@@ -52,12 +56,24 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- My Approach -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">My Approach</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">User Motivation</strong> — Team collaboration features to keep users engaged and accountable</li>
-            <li><strong class="text-text-primary">Customizable Workouts</strong> — A user-friendly interface for creating personalized workout plans</li>
-            <li><strong class="text-text-primary">Activity Tracking</strong> — Real-time feedback and visualizations to monitor progress</li>
-            <li><strong class="text-text-primary">User Collaboration</strong> — Challenges and group activities to foster a sense of community</li>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">My Approach</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">User Motivation</strong> — Team collaboration features to keep users engaged and accountable</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Customizable Workouts</strong> — A user-friendly interface for creating personalized workout plans</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">Activity Tracking</strong> — Real-time feedback and visualizations to monitor progress</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span><strong class="text-text-primary font-display">User Collaboration</strong> — Challenges and group activities to foster a sense of community</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
@@ -65,17 +81,17 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Design Process -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Design Process</h3>
-          <div class="flex flex-wrap items-center gap-2 text-text-secondary text-sm">
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Empathize</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Define</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Ideate</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Prototype</span>
-            <span class="text-text-tertiary">&rarr;</span>
-            <span class="bg-bg-card border border-border-subtle rounded px-3 py-1">Test</span>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Design Process</h3>
+          <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Empathize</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Define</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Ideate</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Prototype</span>
+            <span class="text-accent/40">&rarr;</span>
+            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Test</span>
           </div>
         </section>
       </ScrollReveal>
@@ -83,16 +99,31 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Research Insights -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Research Insights</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Research Insights</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             User interviews and affinity mapping revealed key pain points that guided the design direction:
           </p>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Lack of active tracking and real-time feedback</li>
-            <li>Lack of plan makers for personalized workouts</li>
-            <li>Lack of group coordination for team fitness</li>
-            <li>Too many ads disrupting the experience</li>
-            <li>Frequent and irrelevant notifications</li>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Lack of active tracking and real-time feedback</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Lack of plan makers for personalized workouts</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Lack of group coordination for team fitness</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Too many ads disrupting the experience</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Frequent and irrelevant notifications</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
@@ -100,21 +131,39 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Persona -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Persona — Ashok</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Persona — Ashok</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             Ashok is a 30-year-old working professional with a busy schedule. He wants to stay fit but struggles to find the right tools and motivation to maintain a consistent fitness routine.
           </p>
-          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Goals:</strong></p>
-          <ul class="list-disc list-inside text-text-secondary space-y-2 mb-6">
-            <li>Maintain consistent physical activity despite a demanding work schedule</li>
-            <li>Follow a personalized fitness journey tailored to his needs</li>
-            <li>Build community connection through group fitness</li>
+          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Goals</h4>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Maintain consistent physical activity despite a demanding work schedule</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Follow a personalized fitness journey tailored to his needs</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Build community connection through group fitness</span>
+            </li>
           </ul>
-          <p class="text-text-secondary leading-relaxed mb-4"><strong class="text-text-primary">Challenges:</strong></p>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Motivation hurdles when working out alone</li>
-            <li>Limited customization in existing fitness apps</li>
-            <li>Misses the community feel from group fitness classes</li>
+          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Challenges</h4>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Motivation hurdles when working out alone</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Limited customization in existing fitness apps</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Misses the community feel from group fitness classes</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
@@ -122,11 +171,11 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Competitive Analysis -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Competitive Analysis</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Competitive Analysis</h3>
+          <p class="text-text-secondary font-body leading-relaxed">
             Analyzed Cultfit, Nike Running, and Adidas Running apps to understand the current landscape. This research helped identify key How Might We questions:
           </p>
-          <blockquote class="border-l-2 border-border-subtle pl-6 italic text-text-secondary my-8">
+          <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
             How might we provide active tracking, personalized plans, and group coordination — all in one seamless experience?
           </blockquote>
         </section>
@@ -135,33 +184,61 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       <!-- Solution -->
       <ScrollReveal client:visible>
         <section>
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Solution</h3>
-          <p class="text-text-secondary leading-relaxed mb-6">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Solution</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-6">
             The solution focuses on three core features:
           </p>
-          <ol class="list-decimal list-inside text-text-secondary space-y-2">
-            <li><strong class="text-text-primary">Regular stats and progress tracking</strong> — Visualize activity data with clear, motivating feedback</li>
-            <li><strong class="text-text-primary">Build & customize workouts</strong> — Create personalized workout plans tailored to individual goals</li>
-            <li><strong class="text-text-primary">Create teams with friends</strong> — Form groups for team workouts, challenges, and accountability</li>
+          <ol class="space-y-3 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent font-mono text-xs mt-1">01</span>
+              <span><strong class="text-text-primary font-display">Regular stats and progress tracking</strong> — Visualize activity data with clear, motivating feedback</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent font-mono text-xs mt-1">02</span>
+              <span><strong class="text-text-primary font-display">Build & customize workouts</strong> — Create personalized workout plans tailored to individual goals</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent font-mono text-xs mt-1">03</span>
+              <span><strong class="text-text-primary font-display">Create teams with friends</strong> — Form groups for team workouts, challenges, and accountability</span>
+            </li>
           </ol>
         </section>
       </ScrollReveal>
 
       <!-- Key Screens -->
       <ScrollReveal client:visible>
-        <section class="mb-16">
-          <h3 class="text-2xl font-semibold text-text-primary mt-16 mb-6">Key Screens</h3>
-          <ul class="list-disc list-inside text-text-secondary space-y-2">
-            <li>Splash & Onboarding</li>
-            <li>Stats Screen (Individual & Teams)</li>
-            <li>Workouts Screen</li>
-            <li>Create Workout</li>
-            <li>Team Creation (3-step flow)</li>
-            <li>Workout Recording</li>
+        <section class="mb-20">
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Screens</h3>
+          <ul class="space-y-2.5 mt-4">
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Splash & Onboarding</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Stats Screen (Individual & Teams)</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Workouts Screen</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Create Workout</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Team Creation (3-step flow)</span>
+            </li>
+            <li class="text-text-secondary font-body flex gap-3">
+              <span class="text-accent/50 flex-shrink-0">—</span>
+              <span>Workout Recording</span>
+            </li>
           </ul>
         </section>
       </ScrollReveal>
 
     </div>
   </main>
+  <Footer />
 </BaseLayout>

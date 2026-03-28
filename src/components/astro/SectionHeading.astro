@@ -2,19 +2,23 @@
 interface Props {
   label?: string;
   title: string;
+  number?: string;
   id?: string;
 }
 
-const { label, title, id } = Astro.props;
+const { label, title, number, id } = Astro.props;
 ---
 
-<div class="mb-12" id={id}>
-  {label && (
-    <span class="text-xs font-medium uppercase tracking-[0.1em] text-text-tertiary mb-3 block">
-      {label}
-    </span>
-  )}
-  <h2 class="text-3xl md:text-4xl font-semibold text-text-primary">
+<div class="mb-14" id={id}>
+  <div class="flex items-center gap-3 mb-4">
+    {number && (
+      <span class="section-number">{number} /</span>
+    )}
+    {label && (
+      <span class="font-mono text-xs tracking-wide text-text-tertiary uppercase">{label}</span>
+    )}
+  </div>
+  <h2 class="text-2xl sm:text-3xl md:text-[2.75rem] 2xl:text-5xl font-display font-700 text-text-primary leading-tight">
     {title}
   </h2>
 </div>

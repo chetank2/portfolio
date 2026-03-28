@@ -41,15 +41,12 @@ export default function HorizontalScrollGallery({ children }: Props) {
       onMouseMove={onMouseMove}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseUp}
-      className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+      className="flex gap-5 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
       style={{
         cursor: isDragging ? "grabbing" : "grab",
-        scrollbarWidth: "none",
-        msOverflowStyle: "none",
         WebkitOverflowScrolling: "touch",
       }}
     >
-      <style>{`.scrollbar-hide::-webkit-scrollbar { display: none; }`}</style>
       {children}
     </div>
   );

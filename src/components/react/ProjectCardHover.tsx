@@ -10,18 +10,18 @@ export default function ProjectCardHover({ children, className = "", href }: Pro
   const [hovered, setHovered] = useState(false);
 
   const style: React.CSSProperties = {
-    transform: hovered ? "translateY(-4px) scale(1.01)" : "translateY(0) scale(1)",
-    borderColor: hovered ? "#3a3a3a" : "#2a2a2a",
-    backgroundColor: hovered ? "#1e1e1e" : "#1a1a1a",
+    transform: hovered ? "translateY(-3px)" : "translateY(0)",
+    borderColor: hovered ? "#353225" : "#252318",
+    backgroundColor: hovered ? "#1B1A14" : "#13120E",
     boxShadow: hovered
-      ? "0 8px 32px rgba(255,255,255,0.04), 0 2px 8px rgba(0,0,0,0.3)"
+      ? "0 12px 40px rgba(200, 165, 85, 0.04), 0 2px 8px rgba(0,0,0,0.4)"
       : "0 0 0 rgba(0,0,0,0)",
-    transition: "all 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+    transition: "all 400ms cubic-bezier(0.22, 1, 0.36, 1)",
   };
 
   const content = (
     <div
-      className={`border rounded-xl h-full ${className}`}
+      className={`border card-accent h-full ${className}`}
       style={style}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
