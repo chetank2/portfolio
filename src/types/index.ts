@@ -5,6 +5,7 @@ export interface Project {
   description: string;
   tags: string[];
   type: "deep" | "supporting" | "ai" | "app" | "website";
+  protected?: boolean;
   image?: string;
   liveUrl?: string;
   repoUrl?: string;

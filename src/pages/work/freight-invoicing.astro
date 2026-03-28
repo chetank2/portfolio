@@ -3,6 +3,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
+import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
 ---
 
 <BaseLayout title="Freight Invoicing & Reconciliation System — Chetan Kummari">
@@ -15,23 +17,28 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
         <span class="w-4 h-px bg-text-tertiary"></span>
         Back
       </a>
-
-      <!-- Hero -->
-      <ScrollReveal client:visible>
-        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-            Freight Invoicing & Reconciliation System
-          </h1>
-          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-            Shifting billing validation before invoice creation
-          </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
-            <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
-            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
-          </div>
-        </header>
-      </ScrollReveal>
+      <ProtectedCaseStudy
+        client:load
+        password={SHARED_CASE_STUDY_PASSWORD}
+        storageKey="case-study:freight-invoicing"
+        title="Freight Invoicing & Reconciliation System"
+      >
+        <!-- Hero -->
+        <ScrollReveal client:visible>
+          <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
+              Freight Invoicing & Reconciliation System
+            </h1>
+            <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+              Shifting billing validation before invoice creation
+            </p>
+            <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+              <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
+              <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
+              <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
+            </div>
+          </header>
+        </ScrollReveal>
 
       <!-- Overview -->
       <ScrollReveal client:visible>
@@ -235,29 +242,30 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       </ScrollReveal>
 
       <!-- Learnings -->
-      <ScrollReveal client:visible>
-        <section class="mb-20">
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Validation timing matters as much as validation logic</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Enterprise workflows fail when products encode the wrong moment of truth</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Real trust comes from balancing structure and flexibility</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Financial UX is not about making screens simple, but about making decisions safer and clearer</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
+        <ScrollReveal client:visible>
+          <section class="mb-20">
+            <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
+            <ul class="space-y-2.5 mt-4">
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Validation timing matters as much as validation logic</span>
+              </li>
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Enterprise workflows fail when products encode the wrong moment of truth</span>
+              </li>
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Real trust comes from balancing structure and flexibility</span>
+              </li>
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Financial UX is not about making screens simple, but about making decisions safer and clearer</span>
+              </li>
+            </ul>
+          </section>
+        </ScrollReveal>
+      </ProtectedCaseStudy>
 
     </div>
   </main>

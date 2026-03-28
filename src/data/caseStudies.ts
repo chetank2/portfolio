@@ -7,6 +7,7 @@ export interface CaseStudyPage {
   timeline: string;
   backHref: string;
   contentFile: string;
+  protected?: boolean;
 }
 
 export const caseStudies: CaseStudyPage[] = [
@@ -49,8 +50,20 @@ export const caseStudies: CaseStudyPage[] = [
     timeline: "2024 - 2025",
     backHref: "/#work",
     contentFile: "case-study-control-tower.md",
+    protected: true,
   },
-{
+  {
+    slug: "tigersight",
+    title: "TigerSight",
+    tagline: "Designing an AI-powered logistics control tower for real-time operations",
+    role: "Senior Product Designer",
+    company: "Freight Tiger",
+    timeline: "2025 - 2026",
+    backHref: "/#work",
+    contentFile: "case-study-tigersight.md",
+    protected: true,
+  },
+  {
     slug: "ptl-module-design",
     title: "PTL Module Design",
     tagline: "Designing for fragmented shipments instead of forcing FTL assumptions",
@@ -59,6 +72,7 @@ export const caseStudies: CaseStudyPage[] = [
     timeline: "2024 - 2025",
     backHref: "/#work",
     contentFile: "case-study-ptl-module.md",
+    protected: true,
   },
   {
     slug: "ft-design-system",

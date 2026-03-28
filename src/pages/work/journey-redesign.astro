@@ -3,6 +3,54 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import ImageLightbox from "../../components/react/ImageLightbox.tsx";
+import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
+import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
+
+const galleryImages = [
+  {
+    src: "/assets/my-journeys/in-transit.png",
+    title: "In Transit",
+    description: "The primary operational surface for understanding live journey state, blockers, and next actions.",
+    cardClass: "md:col-span-2",
+    imageClass: "h-64 sm:h-72 md:h-80",
+  },
+  {
+    src: "/assets/my-journeys/map-view.png",
+    title: "Map View",
+    description: "A spatial layer from the in-transit experience for understanding route context and operational status visually.",
+    cardClass: "md:col-span-1",
+    imageClass: "h-56 sm:h-60 md:h-72",
+  },
+  {
+    src: "/assets/my-journeys/in-transit-alt.png",
+    title: "Journey Details",
+    description: "The actual journey details page, combining map context, timeline signals, and operational status in one view.",
+    cardClass: "md:col-span-1",
+    imageClass: "h-56 sm:h-60 md:h-72",
+  },
+  {
+    src: "/assets/my-journeys/loads.png",
+    title: "Loads",
+    description: "The loads surface for scanning active movements, spotting exceptions, and switching into the right operational context.",
+    cardClass: "md:col-span-2",
+    imageClass: "h-60 sm:h-64 md:h-72",
+  },
+  {
+    src: "/assets/my-journeys/in-transit-summary.png",
+    title: "Journey Summary",
+    description: "A condensed status layer for reading progress, key state changes, and closure-related signals at a glance.",
+    cardClass: "md:col-span-1",
+    imageClass: "h-52 sm:h-56 md:h-64",
+  },
+  {
+    src: "/assets/my-journeys/loads-alt.png",
+    title: "Loads Alternate State",
+    description: "Another loads state demonstrating the same hierarchy and actionability at operational scale.",
+    cardClass: "md:col-span-1",
+    imageClass: "h-52 sm:h-56 md:h-64",
+  },
+];
 ---
 
 <BaseLayout title="My Journeys — Chetan Kummari">
@@ -15,23 +63,28 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
         <span class="w-4 h-px bg-text-tertiary"></span>
         Back
       </a>
-
-      <!-- Hero -->
-      <ScrollReveal client:visible>
-        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-            My Journeys
-          </h1>
-          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-            Designing a unified operational surface for tracking, decision-making, and closure
-          </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
-            <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
-            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
-          </div>
-        </header>
-      </ScrollReveal>
+      <ProtectedCaseStudy
+        client:load
+        password={SHARED_CASE_STUDY_PASSWORD}
+        storageKey="case-study:journey-redesign"
+        title="My Journeys"
+      >
+        <!-- Hero -->
+        <ScrollReveal client:visible>
+          <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
+              My Journeys
+            </h1>
+            <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+              Designing a unified operational surface for tracking, decision-making, and closure
+            </p>
+            <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+              <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
+              <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
+              <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
+            </div>
+          </header>
+        </ScrollReveal>
 
       <!-- TL;DR -->
       <ScrollReveal client:visible>
@@ -53,6 +106,50 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
           <p class="text-text-secondary font-body leading-relaxed">
             The problem was not just UI clutter. The underlying model of journeys was flawed, and the interface reflected that confusion. I treated this as a system redesign, not a table redesign, and rebuilt both the lifecycle logic and the decision surface together.
           </p>
+        </section>
+      </ScrollReveal>
+
+      <!-- Gallery -->
+      <ScrollReveal client:visible>
+        <section>
+          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-4">Product Gallery</h3>
+          <p class="text-text-secondary font-body leading-relaxed mb-8">
+            Developed screens from My Journeys showing the final operational flow from the main in-transit surface into map context, journey details, and loads management.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+            {galleryImages.map((image) => (
+              <ImageLightbox
+                client:visible
+                image={image.src}
+                title={image.title}
+                description={image.description}
+              >
+                <figure class:list={["group overflow-hidden rounded-2xl border border-border bg-bg-elevated/60", image.cardClass]}>
+                  <div class="overflow-hidden bg-bg-surface/60">
+                    <img
+                      src={image.src}
+                      alt={image.title}
+                      loading="lazy"
+                      class:list={["w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]", image.imageClass]}
+                    />
+                  </div>
+                  <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                      <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">
+                        {image.title}
+                      </h4>
+                      <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">
+                        Tap to expand
+                      </span>
+                    </div>
+                    <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">
+                      {image.description}
+                    </p>
+                  </figcaption>
+                </figure>
+              </ImageLightbox>
+            ))}
+          </div>
         </section>
       </ScrollReveal>
 
@@ -216,25 +313,26 @@ import ScrollReveal from "../../components/react/ScrollReveal.tsx";
       </ScrollReveal>
 
       <!-- Learnings -->
-      <ScrollReveal client:visible>
-        <section class="mb-20">
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Operational products break when their internal models do not match reality. Fixing the model often has more impact than adding features.</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Interfaces should reflect how decisions are made, not how data is stored.</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Simplicity in UI often comes from deeper complexity in system design, not from removing features blindly.</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
+        <ScrollReveal client:visible>
+          <section class="mb-20">
+            <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
+            <ul class="space-y-2.5 mt-4">
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Operational products break when their internal models do not match reality. Fixing the model often has more impact than adding features.</span>
+              </li>
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Interfaces should reflect how decisions are made, not how data is stored.</span>
+              </li>
+              <li class="text-text-secondary font-body flex gap-3">
+                <span class="text-accent/50 flex-shrink-0">—</span>
+                <span>Simplicity in UI often comes from deeper complexity in system design, not from removing features blindly.</span>
+              </li>
+            </ul>
+          </section>
+        </ScrollReveal>
+      </ProtectedCaseStudy>
 
     </div>
   </main>

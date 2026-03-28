@@ -9,6 +9,7 @@ export const deepProjects: Project[] = [
       "Redesigned a broken table and lifecycle system into a unified operational surface that models journeys correctly and helps teams decide and act faster.",
     tags: ["System Design", "UX Redesign", "Freight Tiger"],
     type: "deep",
+    protected: true,
     caseStudyUrl: "/work/journey-redesign",
   },
   {
@@ -19,7 +20,19 @@ export const deepProjects: Project[] = [
       "Designed a Human–AI control tower that detects, prioritizes, and resolves operational issues — shifting logistics teams from reactive handling to guided action.",
     tags: ["Operations", "Logistics", "Decision Systems"],
     type: "deep",
+    protected: true,
     caseStudyUrl: "/work/control-tower",
+  },
+  {
+    slug: "tigersight",
+    title: "TigerSight",
+    tagline: "AI-assisted logistics control tower for real-time decisions",
+    description:
+      "Designed a command-center product that turns fragmented transport signals into live operational awareness, exception triage, network intelligence, and AI-assisted action.",
+    tags: ["Control Tower", "AI", "Operations Design"],
+    type: "deep",
+    protected: true,
+    caseStudyUrl: "/work/tigersight",
   },
 ];
 
@@ -32,6 +45,7 @@ export const supportingProjects: Project[] = [
       "Redesigned freight billing by introducing a pre-invoice reconciliation layer that reduced disputes, improved auditability, and made billing decisions clearer for logistics and finance teams.",
     tags: ["System Design", "B2B SaaS", "Freight Tiger"],
     type: "supporting",
+    protected: true,
     caseStudyUrl: "/work/freight-invoicing",
   },
   {
@@ -42,6 +56,7 @@ export const supportingProjects: Project[] = [
       "Created a PTL workflow for grouped shipments, split deliveries, and multi-point coordination without forcing FTL assumptions.",
     tags: ["PTL", "Logistics", "Workflow Design"],
     type: "supporting",
+    protected: true,
     caseStudyUrl: "/work/ptl-module-design",
   },
   {
