@@ -2,243 +2,34 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import CaseStudyView from "../../components/astro/CaseStudyView.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import { standaloneCaseStudies, standaloneCaseStudyMachineText } from "../../data/standaloneCaseStudies";
+
+const study = standaloneCaseStudies["fitx"];
 ---
 
-<BaseLayout title="Fit X — Chetan Kummari">
-  <Navigation />
-  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
-    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-
-      <!-- Back Link -->
-      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
-        <span class="w-4 h-px bg-text-tertiary"></span>
-        Back
-      </a>
-
-      <!-- Hero -->
-      <ScrollReveal client:visible>
-        <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-            Fit X
-          </h1>
-          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-            A fitness app designed for tracking goals, team collaboration and creating personalized plans
-          </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
-            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Mobile App</span>
-            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
-          </div>
-        </header>
-      </ScrollReveal>
-
-      <!-- The Problem -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">The Problem</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            People face challenges maintaining consistent physical activity. A lack of motivation often leads to incomplete fitness programs. Existing apps provide non-customizable, one-size-fits-all workout plans that fail to account for individual needs and preferences.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- The Goal -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">The Goal</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Create a mobile app that enables users to track their daily physical activity and promotes team collaboration. The app should provide customizable workout plans that adapt to individual fitness levels and goals.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- My Approach -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">My Approach</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">User Motivation</strong> — Team collaboration features to keep users engaged and accountable</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">Customizable Workouts</strong> — A user-friendly interface for creating personalized workout plans</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">Activity Tracking</strong> — Real-time feedback and visualizations to monitor progress</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">User Collaboration</strong> — Challenges and group activities to foster a sense of community</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Design Process -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Design Process</h3>
-          <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
-            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Empathize</span>
-            <span class="text-accent/40">&rarr;</span>
-            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Define</span>
-            <span class="text-accent/40">&rarr;</span>
-            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Ideate</span>
-            <span class="text-accent/40">&rarr;</span>
-            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Prototype</span>
-            <span class="text-accent/40">&rarr;</span>
-            <span class="bg-bg-elevated border border-border px-3.5 py-1.5">Test</span>
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <!-- Research Insights -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Research Insights</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            User interviews and affinity mapping revealed key pain points that guided the design direction:
-          </p>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Lack of active tracking and real-time feedback</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Lack of plan makers for personalized workouts</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Lack of group coordination for team fitness</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Too many ads disrupting the experience</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Frequent and irrelevant notifications</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Persona -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Persona — Ashok</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Ashok is a 30-year-old working professional with a busy schedule. He wants to stay fit but struggles to find the right tools and motivation to maintain a consistent fitness routine.
-          </p>
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Goals</h4>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Maintain consistent physical activity despite a demanding work schedule</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Follow a personalized fitness journey tailored to his needs</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Build community connection through group fitness</span>
-            </li>
-          </ul>
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Challenges</h4>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Motivation hurdles when working out alone</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Limited customization in existing fitness apps</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Misses the community feel from group fitness classes</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Competitive Analysis -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Competitive Analysis</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Analyzed Cultfit, Nike Running, and Adidas Running apps to understand the current landscape. This research helped identify key How Might We questions:
-          </p>
-          <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
-            How might we provide active tracking, personalized plans, and group coordination — all in one seamless experience?
-          </blockquote>
-        </section>
-      </ScrollReveal>
-
-      <!-- Solution -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Solution</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            The solution focuses on three core features:
-          </p>
-          <ol class="space-y-3 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent font-mono text-xs mt-1">01</span>
-              <span><strong class="text-text-primary font-display">Regular stats and progress tracking</strong> — Visualize activity data with clear, motivating feedback</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent font-mono text-xs mt-1">02</span>
-              <span><strong class="text-text-primary font-display">Build & customize workouts</strong> — Create personalized workout plans tailored to individual goals</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent font-mono text-xs mt-1">03</span>
-              <span><strong class="text-text-primary font-display">Create teams with friends</strong> — Form groups for team workouts, challenges, and accountability</span>
-            </li>
-          </ol>
-        </section>
-      </ScrollReveal>
-
-      <!-- Key Screens -->
-      <ScrollReveal client:visible>
-        <section class="mb-20">
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Screens</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Splash & Onboarding</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Stats Screen (Individual & Teams)</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Workouts Screen</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Create Workout</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Team Creation (3-step flow)</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Workout Recording</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
+<BaseLayout title={`${study.title} — Chetan Kummari`}>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a href={study.backHref} class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        <CaseStudyView study={study} />
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
     </div>
   </main>
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

@@ -2,6 +2,8 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
@@ -9,6 +11,8 @@ import {
   SHARED_CASE_STUDY_PASSWORD,
   isProtectedCaseStudy,
 } from "../../lib/caseStudyProtection";
+import { loadMachineCaseStudyContent } from "../../lib/machine/content.js";
+import { serializeMachineCaseStudy } from "../../lib/machine/serialize.js";
 
 const contentModules = import.meta.glob("../../../content/case-study-*.md");
 
@@ -22,28 +26,92 @@ export function getStaticPaths() {
 const { caseStudy } = Astro.props;
 const modulePath = `../../../content/${caseStudy.contentFile}`;
 const contentLoader = contentModules[modulePath];
+const requiresProtection =
+  caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug);
+const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) =>
+  serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
+);
 
+let Content;
 if (!contentLoader) {
   throw new Error(`Missing case study content for ${caseStudy.slug}`);
 }
 
 const contentModule = await contentLoader();
-const Content = contentModule.default;
-const requiresProtection =
-  caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug);
+Content = contentModule.default;
 ---
 
 <BaseLayout title={`${caseStudy.title} — Chetan Kummari`}>
-  <Navigation />
-  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
-    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-      <a
-        href={caseStudy.backHref}
-        class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
-      >
-        <span class="w-4 h-px bg-text-tertiary"></span>
-        Back
-      </a>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a
+          href={caseStudy.backHref}
+          class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
+        >
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        {requiresProtection ? (
+          <ProtectedCaseStudy
+            client:load
+            password={SHARED_CASE_STUDY_PASSWORD}
+            storageKey={`case-study:${caseStudy.slug}`}
+            title={caseStudy.title}
+          >
+            <ScrollReveal client:visible>
+              <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
+                  {caseStudy.title}
+                </h1>
+                <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+                  {caseStudy.tagline}
+                </p>
+                <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+                  <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
+                  <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
+                  <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
+                </div>
+              </header>
+            </ScrollReveal>
+
+            <ScrollReveal client:visible>
+              <article class="case-study-content mb-20">
+                <Content />
+              </article>
+            </ScrollReveal>
+          </ProtectedCaseStudy>
+        ) : (
+          <>
+            <ScrollReveal client:visible>
+              <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+                <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
+                  {caseStudy.title}
+                </h1>
+                <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+                  {caseStudy.tagline}
+                </p>
+                <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+                  <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
+                  <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
+                  <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
+                </div>
+              </header>
+            </ScrollReveal>
+
+            <ScrollReveal client:visible>
+              <article class="case-study-content mb-20">
+                <Content />
+              </article>
+            </ScrollReveal>
+          </>
+        )}
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
       {requiresProtection ? (
         <ProtectedCaseStudy
           client:load
@@ -51,54 +119,15 @@ const requiresProtection =
           storageKey={`case-study:${caseStudy.slug}`}
           title={caseStudy.title}
         >
-          <ScrollReveal client:visible>
-            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-              <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
-                {caseStudy.title}
-              </h1>
-              <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-                {caseStudy.tagline}
-              </p>
-              <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-                <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
-                <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
-                <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
-              </div>
-            </header>
-          </ScrollReveal>
-
-          <ScrollReveal client:visible>
-            <article class="case-study-content mb-20">
-              <Content />
-            </article>
-          </ScrollReveal>
+          <MachineTextBlock text={machineText} />
         </ProtectedCaseStudy>
       ) : (
-        <>
-          <ScrollReveal client:visible>
-            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-              <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
-                {caseStudy.title}
-              </h1>
-              <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-                {caseStudy.tagline}
-              </p>
-              <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-                <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
-                <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
-                <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
-              </div>
-            </header>
-          </ScrollReveal>
-
-          <ScrollReveal client:visible>
-            <article class="case-study-content mb-20">
-              <Content />
-            </article>
-          </ScrollReveal>
-        </>
+        <MachineTextBlock text={machineText} />
       )}
     </div>
   </main>
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

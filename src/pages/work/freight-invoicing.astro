@@ -2,272 +2,53 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
+import CaseStudyView from "../../components/astro/CaseStudyView.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import {
+  standaloneCaseStudies,
+  standaloneCaseStudyMachineText,
+} from "../../data/standaloneCaseStudies";
 import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
+
+const study = standaloneCaseStudies["freight-invoicing"];
 ---
 
-<BaseLayout title="Freight Invoicing & Reconciliation System — Chetan Kummari">
-  <Navigation />
-  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
-    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-
-      <!-- Back Link -->
-      <a href="/#work" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
-        <span class="w-4 h-px bg-text-tertiary"></span>
-        Back
-      </a>
+<BaseLayout title={`${study.title} — Chetan Kummari`}>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a href={study.backHref} class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        <ProtectedCaseStudy
+          client:load
+          password={SHARED_CASE_STUDY_PASSWORD}
+          storageKey={`case-study:${study.slug}`}
+          title={study.title}
+        >
+          <CaseStudyView study={study} />
+        </ProtectedCaseStudy>
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
       <ProtectedCaseStudy
         client:load
         password={SHARED_CASE_STUDY_PASSWORD}
-        storageKey="case-study:freight-invoicing"
-        title="Freight Invoicing & Reconciliation System"
+        storageKey={`case-study:${study.slug}`}
+        title={study.title}
       >
-        <!-- Hero -->
-        <ScrollReveal client:visible>
-          <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-              Freight Invoicing & Reconciliation System
-            </h1>
-            <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-              Shifting billing validation before invoice creation
-            </p>
-            <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-              <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
-              <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
-              <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
-            </div>
-          </header>
-        </ScrollReveal>
-
-      <!-- Overview -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Overview</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            Freight billing in logistics usually looks like a finance workflow on the surface, but the real problem sits deeper in the operational model. In the existing flow, invoices were often generated first and validated later. That meant the system treated invoicing as the start of truth instead of the outcome of validation.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            This caused a predictable cycle: invoice generation, mismatch discovery, dispute creation, manual correction, delay, and frustration. My role was to redesign that workflow so billing became more reliable, operationally grounded, and easier to trust.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- What Made This Hard -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">What Made This Hard</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            This was not a simple invoicing UI problem. The complexity came from the fact that billing relied on multiple upstream inputs that were not always synchronized or equally reliable. Rate cards, vehicle types, route data, additional charges, and ePOD status all influenced whether a bill was actually correct.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            The hard part was designing a system that supported real-world exceptions without making the workflow so flexible that it became financially unsafe.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Problem -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The earlier flow generated invoices before teams had a chance to validate the underlying freight logic. As a result:
-          </p>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Invoices became the place where problems were discovered</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Finance and operations were forced into reactive correction loops</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Disputes increased because the system had no trusted pre-check stage</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Users had to reverse-engineer why a number was wrong instead of reviewing it before the document existed</span>
-            </li>
-          </ul>
-          <p class="text-text-secondary font-body leading-relaxed mt-5">
-            From a product perspective, the system was encouraging users to make errors expensive.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Users -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Users and Their Needs</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">Operations teams</strong> needed clarity on whether a journey was financially ready for billing and where mismatches existed</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">Finance teams</strong> needed a workflow that reduced downstream disputes and produced a more defensible invoice trail</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span><strong class="text-text-primary font-display">Transport partners</strong> needed transparency into what was accepted, under review, and being challenged</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Approach -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Approach</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            I started by mapping the current billing lifecycle end to end. Rather than focusing only on screens, I focused on where truth was established, where ambiguity entered the process, and where users were forced into reactive behavior.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The design direction became clear: billing needed a reconciliation stage before invoice creation.
-          </p>
-          <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
-            An invoice should be the output of agreement, not the place where disagreement begins.
-          </blockquote>
-          <p class="text-text-secondary font-body leading-relaxed">
-            That meant the product needed to separate these moments: operational completion, commercial validation, invoice generation, and dispute adjustment if exceptions still remained.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Key Decisions -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Decisions</h3>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">1. Move validation before invoice generation</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Instead of allowing invoice creation to happen first, I introduced a structured review layer where charges and billing conditions could be validated before formal billing documents were generated. This reduced the cost of mistakes, shifted the workflow from reactive to preventive, and gave users a clear stage for agreement.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">2. Review at the charge level, not only the invoice level</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Users did not reason about billing as abstract invoice lines. They reasoned in terms of freight charges, accessorials, and specific financial components. The system needed to surface validation at the level users actually understood — aligning the product model with user mental models and making partial disagreements easier to handle.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">3. Support controlled reversals</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Many enterprise systems become fragile because they assume upstream events are permanent. In reality, delivery confirmation and supporting documents can change, be corrected, or be challenged. Supporting controlled reversals preserved operational realism and prevented brittle logic.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">4. Preserve traceability</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Any financial correction needed a clear trail. Even when the system supported exceptions, it had to do so without collapsing trust. This made decisions defensible, reduced ambiguity between teams, and created a stronger basis for accountability.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Solution -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Solution</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            I designed a pre-invoice reconciliation workflow that sat between operational completion and invoice generation. The solution included:
-          </p>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>A reconciliation stage before invoice creation</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Visibility into mismatched charges and validation status</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Charge-level review and approval behavior</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Structured support for exceptions and financial adjustments</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>A clearer decision path for when billing could proceed</span>
-            </li>
-          </ul>
-          <p class="text-text-secondary font-body leading-relaxed mt-5">
-            This changed the product from a dispute-triggering system into a validation-first system.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Edge Cases -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Edge Cases</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The strongest systems are usually defined by how they handle exceptions, not happy paths. Important edge cases included:
-          </p>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>ePOD approved and later reversed</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Transporter submission before all required billing inputs were finalized</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Partial mismatch affecting only one charge category</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Contracted freight differing from actual operational reality</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Situations where the invoice should be blocked without stopping the whole operational lifecycle</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Outcome -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Outcome</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            The redesigned workflow improved the quality of billing decisions before invoice creation. Fewer preventable disputes entered formal billing, collaboration between operations and finance became clearer, the audit trail became more reliable, and user confidence in billing status and readiness improved.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Learnings -->
-        <ScrollReveal client:visible>
-          <section class="mb-20">
-            <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
-            <ul class="space-y-2.5 mt-4">
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Validation timing matters as much as validation logic</span>
-              </li>
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Enterprise workflows fail when products encode the wrong moment of truth</span>
-              </li>
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Real trust comes from balancing structure and flexibility</span>
-              </li>
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Financial UX is not about making screens simple, but about making decisions safer and clearer</span>
-              </li>
-            </ul>
-          </section>
-        </ScrollReveal>
+        <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
       </ProtectedCaseStudy>
-
     </div>
   </main>
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

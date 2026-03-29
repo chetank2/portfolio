@@ -1,0 +1,77 @@
+# Chetan Kummari Portfolio
+
+Description: Portfolio of product design, AI-assisted builds, logistics workflows, and case studies.
+Stack: Astro, React, Tailwind CSS
+Repo: https://github.com/chetank2/portfolio
+
+Human pages:
+- /work/designqa
+- /work/coupontracker
+- /work/component-first-design
+- /work/ft-design-system
+- /work/aftercrop
+- /work/fitx
+- /work/swiggy
+- /work/inflight
+- /work/todo
+- /work/wewrk
+- /work/fromfarm
+- /work/monastery
+
+Machine pages:
+- /machine/work/designqa
+- /machine/work/coupontracker
+- /machine/work/component-first-design
+- /machine/work/ft-design-system
+- /machine/work/aftercrop
+- /machine/work/fitx
+- /machine/work/swiggy
+- /machine/work/inflight
+- /machine/work/todo
+- /machine/work/wewrk
+- /machine/work/fromfarm
+- /machine/work/monastery
+
+Rules:
+- Human pages are the visual portfolio experience.
+- Machine pages are plain-text, deterministic versions for LLMs and crawlers.
+- Protected case studies are excluded from this file and from dedicated /machine routes.
+- Use `?view=machine` on supported human routes for in-browser preview.
+
+Resume:
+### Senior Product Designer — Freight Tiger
+- Location: Bangalore
+- Period: Dec 2023 – Present
+- Revamped FTL tracking end-to-end. Platform scale: ~1.6L shipments/month.
+- Tracking quality improved from 84% → 96–97%.
+- Built Design System from scratch — tokens, components, Storybook, npm package.
+- Designed full PTL flows, Control Tower, Gatekeeper app, and Planning module.
+
+### Product Designer, Co-Founder — Konic Technologies
+- Location: Hyderabad
+- Period: Jan 2021 – Dec 2023
+- Co-founded and designed AfterCrop (WMS) for small-medium warehouses.
+- Mobile-first design supporting varied literacy and tech levels.
+- Shipped working prototype with cloud SaaS access patterns.
+
+### UX/UI Designer — Versatile Mobitech
+- Location: Hyderabad
+- Period: Sep 2020 – Nov 2020
+- Led the design team. Collaborated with foreign clients from Dubai, Nigeria, and America.
+- Designed QPL, Wrkman, and a warehouse management app.
+
+### Freelance Designer — Independent
+- Location: Hyderabad
+- Period: Aug 2017 – Dec 2020
+- Designed and launched Learn Hadiya web app.
+
+Skills:
+- Design Systems, System Design, Interaction Design, Prototyping, Information Architecture, Visual Design, Product Thinking, AI-Assisted Building, Design-to-Code, User Research
+
+Tools:
+- Figma, Claude Code, Cursor AI, Codex, Storybook, Adobe Illustrator, Adobe After Effects
+
+Contact:
+- Email: mailto:mymailchetan25@gmail.com
+- LinkedIn: https://linkedin.com/in/chetan-kumar25/
+- GitHub: https://github.com/chetank2

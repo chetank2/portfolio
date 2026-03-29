@@ -2,339 +2,53 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
-import ImageLightbox from "../../components/react/ImageLightbox.tsx";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
+import CaseStudyView from "../../components/astro/CaseStudyView.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import {
+  standaloneCaseStudies,
+  standaloneCaseStudyMachineText,
+} from "../../data/standaloneCaseStudies";
 import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
 
-const galleryImages = [
-  {
-    src: "/assets/my-journeys/in-transit.png",
-    title: "In Transit",
-    description: "The primary operational surface for understanding live journey state, blockers, and next actions.",
-    cardClass: "md:col-span-2",
-    imageClass: "h-64 sm:h-72 md:h-80",
-  },
-  {
-    src: "/assets/my-journeys/map-view.png",
-    title: "Map View",
-    description: "A spatial layer from the in-transit experience for understanding route context and operational status visually.",
-    cardClass: "md:col-span-1",
-    imageClass: "h-56 sm:h-60 md:h-72",
-  },
-  {
-    src: "/assets/my-journeys/in-transit-alt.png",
-    title: "Journey Details",
-    description: "The actual journey details page, combining map context, timeline signals, and operational status in one view.",
-    cardClass: "md:col-span-1",
-    imageClass: "h-56 sm:h-60 md:h-72",
-  },
-  {
-    src: "/assets/my-journeys/loads.png",
-    title: "Loads",
-    description: "The loads surface for scanning active movements, spotting exceptions, and switching into the right operational context.",
-    cardClass: "md:col-span-2",
-    imageClass: "h-60 sm:h-64 md:h-72",
-  },
-  {
-    src: "/assets/my-journeys/in-transit-summary.png",
-    title: "Journey Summary",
-    description: "A condensed status layer for reading progress, key state changes, and closure-related signals at a glance.",
-    cardClass: "md:col-span-1",
-    imageClass: "h-52 sm:h-56 md:h-64",
-  },
-  {
-    src: "/assets/my-journeys/loads-alt.png",
-    title: "Loads Alternate State",
-    description: "Another loads state demonstrating the same hierarchy and actionability at operational scale.",
-    cardClass: "md:col-span-1",
-    imageClass: "h-52 sm:h-56 md:h-64",
-  },
-];
+const study = standaloneCaseStudies["journey-redesign"];
 ---
 
-<BaseLayout title="My Journeys — Chetan Kummari">
-  <Navigation />
-  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
-    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-
-      <!-- Back Link -->
-      <a href="/#work" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
-        <span class="w-4 h-px bg-text-tertiary"></span>
-        Back
-      </a>
+<BaseLayout title={`${study.title} — Chetan Kummari`}>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a href={study.backHref} class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        <ProtectedCaseStudy
+          client:load
+          password={SHARED_CASE_STUDY_PASSWORD}
+          storageKey={`case-study:${study.slug}`}
+          title={study.title}
+        >
+          <CaseStudyView study={study} />
+        </ProtectedCaseStudy>
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
       <ProtectedCaseStudy
         client:load
         password={SHARED_CASE_STUDY_PASSWORD}
-        storageKey="case-study:journey-redesign"
-        title="My Journeys"
+        storageKey={`case-study:${study.slug}`}
+        title={study.title}
       >
-        <!-- Hero -->
-        <ScrollReveal client:visible>
-          <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-            <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-              My Journeys
-            </h1>
-            <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-              Designing a unified operational surface for tracking, decision-making, and closure
-            </p>
-            <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-              <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Senior Product Designer</span>
-              <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> Freight Tiger</span>
-              <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> 2024</span>
-            </div>
-          </header>
-        </ScrollReveal>
-
-      <!-- TL;DR -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">TL;DR</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            I redesigned My Journeys from a broken table and unreliable lifecycle system into a unified operational surface that models journeys correctly, supports real-world ambiguity, and helps operations teams decide and act faster.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Overview -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Overview</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            My Journeys was one of the most heavily used parts of the product. It was where operations teams tracked active movements, identified issues, and managed execution. Over time, it had degraded into a mix of a table, a dashboard, and a partially broken lifecycle system.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            The problem was not just UI clutter. The underlying model of journeys was flawed, and the interface reflected that confusion. I treated this as a system redesign, not a table redesign, and rebuilt both the lifecycle logic and the decision surface together.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Gallery -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-4">Product Gallery</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-8">
-            Developed screens from My Journeys showing the final operational flow from the main in-transit surface into map context, journey details, and loads management.
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-            {galleryImages.map((image) => (
-              <ImageLightbox
-                client:visible
-                image={image.src}
-                title={image.title}
-                description={image.description}
-              >
-                <figure class:list={["group overflow-hidden rounded-2xl border border-border bg-bg-elevated/60", image.cardClass]}>
-                  <div class="overflow-hidden bg-bg-surface/60">
-                    <img
-                      src={image.src}
-                      alt={image.title}
-                      loading="lazy"
-                      class:list={["w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]", image.imageClass]}
-                    />
-                  </div>
-                  <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
-                    <div class="flex items-center justify-between gap-4 mb-2">
-                      <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">
-                        {image.title}
-                      </h4>
-                      <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">
-                        Tap to expand
-                      </span>
-                    </div>
-                    <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">
-                      {image.description}
-                    </p>
-                  </figcaption>
-                </figure>
-              </ImageLightbox>
-            ))}
-          </div>
-        </section>
-      </ScrollReveal>
-
-      <!-- What made this hard -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">What Made This Hard</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            Two layers were broken at the same time.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            At the system level, the journey lifecycle was incorrectly modeled. It assumed linear movement and clean closure, while real operations involved reuse, repeated stops, missing data, and ambiguity.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            At the interface level, the table had become overloaded with information. It exposed everything but helped with nothing. Fixing only the UI would not solve the problem. Fixing only the lifecycle would not make the product usable. Both had to be redesigned together.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Problem -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The lifecycle system treated journeys as linear flows that started and ended cleanly. In reality, routes were reused, stops repeated, and signals arrived inconsistently. This led to overwritten data, incorrect closure states, and unreliable journey tracking.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            The table interface had accumulated too many columns, statuses, and visual elements. Everything competed for attention. It was slow to scan, hard to prioritize, and not usable under operational pressure. Together, these issues created a system where users had to manually reconstruct reality from unreliable data and noisy interfaces.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Context -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Context</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            Operations teams used this screen to manage large numbers of active journeys in real time. Their goal was not to read detailed rows. Their goal was to quickly identify what was going wrong and decide what to do next.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Data came from multiple sources including GPS pings, geofence events, and manual updates. Real-world patterns such as route reuse and repeated locations exposed the limitations of a system that assumed each stop occurred only once.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Reframing -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Reframing the Problem</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            I reframed My Journeys from a data table into an operational decision system. The key shift was moving from showing journey data to:
-          </p>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Helping users understand journey state</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Helping users identify risk</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Helping users decide what action to take</span>
-            </li>
-          </ul>
-          <p class="text-text-secondary font-body leading-relaxed mt-5">
-            This required fixing both the underlying model and the way it was presented.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- System Redesign -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">System Redesign: Lifecycle Model</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The first step was correcting how journeys were modeled. I moved away from treating journeys as simple sequences of stops and instead introduced a state-driven model.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            A critical concept was separating a stop from a visit. The same physical location could appear multiple times in a journey, but each occurrence needed to be tracked as a separate visit. This allowed patterns like A → B → A to be handled without corrupting data.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            Instead of overwriting journey state, I leaned toward preserving event history. Each signal contributed to an evolving state rather than replacing previous information.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Closure was redesigned to be event-driven. A journey did not close because a user followed a fixed flow. It closed when the correct combination of events occurred.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Interface Redesign -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Interface Redesign: Table as Decision Surface</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            Once the model was corrected, I redesigned the table to reflect how users actually think. The table was no longer treated as a container of columns. It was treated as a surface for decision-making.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            I reorganized information around intent. Status, exceptions, and action-relevant signals were prioritized. Secondary information was reduced or removed. Hierarchy became the main tool — important states stood out clearly while non-critical information moved into the background.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Edge Cases -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Edge Cases Handled</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            The redesign accounted for route reuse such as A → B → A, missing or delayed tracking signals, manual overrides, ambiguous states, and large datasets with multiple filters applied simultaneously.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Key Decisions -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Key Design Decisions</h3>
-          <ul class="space-y-2.5 mt-4">
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Treated the table as a decision surface rather than a data grid</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Grouped information by operational intent instead of letting columns compete equally</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Removed visual noise aggressively — many accumulated elements were not helping decision-making</span>
-            </li>
-            <li class="text-text-secondary font-body flex gap-3">
-              <span class="text-accent/50 flex-shrink-0">—</span>
-              <span>Aligned the interface with the lifecycle model so the UI reflected corrected system state</span>
-            </li>
-          </ul>
-        </section>
-      </ScrollReveal>
-
-      <!-- Outcome -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Outcome</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-5">
-            The result was a system where users could trust what they saw and act on it quickly.
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Journey tracking became more accurate because the lifecycle model reflected real-world behavior. Closure became more reliable because it was tied to events rather than assumptions. The interface became easier to scan because it emphasized what mattered.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Why this project matters -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Why This Project Matters</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            This project represents how I approach complex product problems. I do not treat UI issues in isolation. I look at the underlying system, fix the model, and then design the interface to reflect that model. My Journeys is not just a table redesign. It is a case study in turning a broken operational surface into a reliable decision system.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Learnings -->
-        <ScrollReveal client:visible>
-          <section class="mb-20">
-            <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Learnings</h3>
-            <ul class="space-y-2.5 mt-4">
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Operational products break when their internal models do not match reality. Fixing the model often has more impact than adding features.</span>
-              </li>
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Interfaces should reflect how decisions are made, not how data is stored.</span>
-              </li>
-              <li class="text-text-secondary font-body flex gap-3">
-                <span class="text-accent/50 flex-shrink-0">—</span>
-                <span>Simplicity in UI often comes from deeper complexity in system design, not from removing features blindly.</span>
-              </li>
-            </ul>
-          </section>
-        </ScrollReveal>
+        <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
       </ProtectedCaseStudy>
-
     </div>
   </main>
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

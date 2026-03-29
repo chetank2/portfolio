@@ -21,9 +21,30 @@ export default function ProtectedCaseStudy({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (window.sessionStorage.getItem(storageKey) === "unlocked") {
-      setUnlocked(true);
-    }
+    const syncUnlockedState = () => {
+      setUnlocked(window.sessionStorage.getItem(storageKey) === "unlocked");
+    };
+
+    syncUnlockedState();
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key && event.key !== storageKey) return;
+      syncUnlockedState();
+    };
+
+    const handleProtectedStateChange = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key && detail.key !== storageKey) return;
+      syncUnlockedState();
+    };
+
+    window.addEventListener("storage", handleStorage);
+    window.addEventListener("case-study-protection-change", handleProtectedStateChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("case-study-protection-change", handleProtectedStateChange);
+    };
   }, [storageKey]);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -31,6 +52,11 @@ export default function ProtectedCaseStudy({
 
     if (value === password) {
       window.sessionStorage.setItem(storageKey, "unlocked");
+      window.dispatchEvent(
+        new CustomEvent("case-study-protection-change", {
+          detail: { key: storageKey, state: "unlocked" },
+        }),
+      );
       setUnlocked(true);
       setError("");
       setValue("");
@@ -43,6 +69,11 @@ export default function ProtectedCaseStudy({
   function handleLockAgain() {
     if (typeof window !== "undefined") {
       window.sessionStorage.removeItem(storageKey);
+      window.dispatchEvent(
+        new CustomEvent("case-study-protection-change", {
+          detail: { key: storageKey, state: "locked" },
+        }),
+      );
     }
 
     setUnlocked(false);

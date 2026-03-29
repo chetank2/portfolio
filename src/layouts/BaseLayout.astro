@@ -4,16 +4,18 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  machineMode?: boolean;
 }
 
 const {
   title = "Chetan Kummari — Product Designer",
   description = "Senior Product Designer specializing in complex B2B systems, design systems, and building products with AI. Currently at Freight Tiger.",
+  machineMode = false,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class:list={[machineMode && "machine-mode"]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +43,7 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class:list={[machineMode && "machine-mode"]}>
     <a href="#main" class="skip-link">Skip to content</a>
     <slot />
   </body>

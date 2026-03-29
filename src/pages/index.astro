@@ -9,6 +9,8 @@ import AIProjectCard from "../components/astro/AIProjectCard.astro";
 import ArticleCard from "../components/astro/ArticleCard.astro";
 import WebsiteCard from "../components/astro/WebsiteCard.astro";
 import TimelineItem from "../components/astro/TimelineItem.astro";
+import MachineTextBlock from "../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../components/astro/ViewModeToggle.astro";
 import Footer from "../components/astro/Footer.astro";
 import ScrollReveal from "../components/react/ScrollReveal.tsx";
 import HorizontalScrollGallery from "../components/react/HorizontalScrollGallery.tsx";
@@ -24,12 +26,69 @@ import {
   tools,
   article,
 } from "../data/projects";
+
+function formatProjectLine(project: (typeof deepProjects)[number] | (typeof supportingProjects)[number] | (typeof aiProjects)[number] | (typeof appProjects)[number]) {
+  const href = project.caseStudyUrl ?? "#";
+  if (project.protected) {
+    return `- ${project.title} — ${project.tagline} (${href}, protected)`;
+  }
+
+  if (project.caseStudyUrl?.startsWith("/work/")) {
+    return `- ${project.title} — ${project.tagline} (${project.caseStudyUrl}, /machine${project.caseStudyUrl})`;
+  }
+
+  return `- ${project.title} — ${project.tagline} (${href})`;
+}
+
+const homeMachineText = [
+  "# Chetan Kummari",
+  "> Senior Product Designer focused on complex B2B systems, design systems, and AI-assisted product building.",
+  "",
+  "## Work",
+  ...deepProjects.map(formatProjectLine),
+  ...supportingProjects.map(formatProjectLine),
+  "",
+  "## Built with AI",
+  ...aiProjects.map(formatProjectLine),
+  "",
+  "## App Designs",
+  ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),
+  "",
+  "## Resume",
+  ...experience.flatMap((exp) => [
+    `### ${exp.role} — ${exp.company}`,
+    `- Location: ${exp.location}`,
+    `- Period: ${exp.period}`,
+    ...exp.highlights.map((highlight) => `- ${highlight}`),
+    "",
+  ]),
+  "## Skills",
+  `- ${skills.join(", ")}`,
+  "",
+  "## Tools",
+  `- ${tools.join(", ")}`,
+  "",
+  "## Writing",
+  `- ${article.title} — ${article.summary} (${article.url})`,
+  "",
+  "## Contact",
+  "- Email: mailto:mymailchetan25@gmail.com",
+  "- LinkedIn: https://linkedin.com/in/chetan-kumar25/",
+  "- GitHub: https://github.com/chetank2",
+].join("\n");
 ---
 
 <BaseLayout>
-  <Navigation />
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
 
   <main id="main">
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachineTextBlock text={homeMachineText} />
+    </div>
+
+    <div data-view-panel="human">
     <!-- Hero -->
     <Hero />
 
@@ -290,7 +349,11 @@ import {
         </ScrollReveal>
       </div>
     </section>
+    </div>
   </main>
 
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

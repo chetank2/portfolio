@@ -2,112 +2,34 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import CaseStudyView from "../../components/astro/CaseStudyView.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import { standaloneCaseStudies, standaloneCaseStudyMachineText } from "../../data/standaloneCaseStudies";
+
+const study = standaloneCaseStudies["wewrk"];
 ---
 
-<BaseLayout title="We Wrk — Chetan Kummari">
-  <Navigation />
-
-  <main id="main" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
-    <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-
-      <!-- Back Link -->
-      <a href="/#apps" class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
-        <span class="w-4 h-px bg-text-tertiary"></span>
-        Back
-      </a>
-
-      <!-- Hero -->
-      <ScrollReveal client:visible>
-        <header class="mt-12 mb-16">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
-            We Wrk
-          </h1>
-          <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
-            Connecting people with artisans for home repairs
-          </p>
-          <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
-            <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> Product Designer</span>
-            <span><span class="text-accent/60">Type</span> <span class="mx-1 text-text-tertiary">/</span> Mobile App</span>
-            <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> Case Study</span>
-          </div>
-        </header>
-      </ScrollReveal>
-
-      <!-- Problem -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Problem</h3>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            People are busy, and finding reliable artisans for home repairs is difficult. How do you find a good artisan? How much do they charge? How do you contact them?
-          </p>
-          <p class="text-text-secondary font-body leading-relaxed">
-            On the other side, artisans also struggle to find consistent work unless they are personally recommended. Both sides of the marketplace face friction.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Solution -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Solution</h3>
-          <p class="text-text-secondary font-body leading-relaxed">
-            An app connecting people and artisans to get home repairs done efficiently. A dual-sided platform that serves both customers looking for reliable help and artisans looking for steady work.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Customer Side -->
-      <ScrollReveal client:visible>
-        <section>
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Customer Side</h3>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Explore Screen</h4>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Find artisans by location and type of work. Browse profiles, view ratings, and chat directly with artisans before booking.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Work Screens</h4>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Track ongoing, completed, and scheduled works in one organized view. Stay on top of all your home repair projects.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Cancelling Work</h4>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Cancel a booking with inline feedback — helping improve the platform by understanding why cancellations happen.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Profile & Notifications</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Manage personal details and stay updated on booking confirmations, artisan arrivals, and work completions.
-          </p>
-        </section>
-      </ScrollReveal>
-
-      <!-- Artisan Side -->
-      <ScrollReveal client:visible>
-        <section class="mb-20">
-          <h3 class="text-2xl font-display font-700 text-text-primary mt-20 mb-6">Artisan Side</h3>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Sign Up</h4>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Simple onboarding with phone number, security card verification, and job snaps to showcase their work and build trust.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">Explore</h4>
-          <p class="text-text-secondary font-body leading-relaxed mb-6">
-            Map-based work discovery with distance filter and chat. Artisans can browse available jobs in their area and connect with customers directly.
-          </p>
-
-          <h4 class="text-base font-display font-700 text-text-primary mt-10 mb-3">My Jobs</h4>
-          <p class="text-text-secondary font-body leading-relaxed">
-            Requested, ongoing, and completed jobs — all in one place. A clear overview of their work pipeline and history.
-          </p>
-        </section>
-      </ScrollReveal>
-
+<BaseLayout title={`${study.title} — Chetan Kummari`}>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a href={study.backHref} class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        <CaseStudyView study={study} />
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
     </div>
   </main>
-
-  <Footer />
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
 </BaseLayout>

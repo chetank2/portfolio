@@ -1,0 +1,78 @@
+<div
+  class="view-mode-toggle"
+  data-view-mode-toggle
+  data-mode="human"
+  aria-label="View mode toggle"
+>
+  <button
+    type="button"
+    class="view-mode-toggle__option is-active"
+    data-view-mode-button="human"
+  >
+    Human
+  </button>
+  <button
+    type="button"
+    class="view-mode-toggle__option"
+    data-view-mode-button="machine"
+  >
+    Machine
+  </button>
+</div>
+
+<script is:inline>
+  (() => {
+    const root = document.querySelector("[data-view-mode-toggle]");
+    if (!root) return;
+
+    const buttons = Array.from(
+      root.querySelectorAll("[data-view-mode-button]"),
+    );
+
+    const getModeFromUrl = () =>
+      new URL(window.location.href).searchParams.get("view") === "machine"
+        ? "machine"
+        : "human";
+
+    const applyMode = (mode) => {
+      root.dataset.mode = mode;
+
+      document.documentElement.classList.toggle("machine-mode", mode === "machine");
+      document.body.classList.toggle("machine-mode", mode === "machine");
+
+      buttons.forEach((button) => {
+        const isActive = button.dataset.viewModeButton === mode;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      document.querySelectorAll("[data-view-panel]").forEach((panel) => {
+        panel.hidden = panel.dataset.viewPanel !== mode;
+      });
+    };
+
+    const setMode = (mode) => {
+      const url = new URL(window.location.href);
+      if (mode === "machine") {
+        url.searchParams.set("view", "machine");
+      } else {
+        url.searchParams.delete("view");
+      }
+      window.history.replaceState({}, "", url);
+      applyMode(mode);
+    };
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const mode = button.dataset.viewModeButton === "machine" ? "machine" : "human";
+        setMode(mode);
+      });
+    });
+
+    window.addEventListener("popstate", () => {
+      applyMode(getModeFromUrl());
+    });
+
+    applyMode(getModeFromUrl());
+  })();
+</script>

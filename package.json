@@ -7,7 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "generate:llms": "node --experimental-strip-types scripts/generate-llms-txt.mjs",
+    "build": "npm run generate:llms && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -21,6 +22,7 @@
     "lucide-react": "^0.577.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tailwindcss": "^4.2.2"
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3"
   }
 }
