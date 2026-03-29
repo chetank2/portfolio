@@ -478,6 +478,21 @@
     font-weight: 600;
   }
 
+  .case-study-content hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-border), transparent);
+    margin: 48px 0;
+  }
+
+  .case-study-content img {
+    width: 100%;
+    height: auto;
+    margin: 24px 0;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+  }
+
   /* Case study — tablet+ */
   @media (min-width: 768px) {
     .case-study-content h2 {

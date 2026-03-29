@@ -1,51 +1,16 @@
-# Designing a Human-AI Control Tower for Logistics Operations
+## 1. The Orchestration Gap
 
-From Visibility to Exception Orchestration at Freight Tiger
+Freight Tiger's TMS manages thousands of shipments daily across multiple modules — journey tracking, invoicing, planning, PTL workflows. Each module generates its own exceptions: delayed journeys, route deviations, long stoppages, detained trucks, SLA breaches.
 
-## 1. Context
+We had alerts everywhere. No one knew which one mattered.
 
-Freight Tiger operates in a high-volume, high-risk logistics environment where thousands of shipments run daily, multiple stakeholders are involved, and real-time execution is fragmented across systems.
+An operations team member had to check multiple surfaces, make manual calls, maintain spreadsheets, and hold context in their head. A delayed truck might sit unnoticed for hours because the alert was in one system and the person who could act on it was watching another.
 
-The operational reality includes:
+Operations teams spent most of their time discovering problems instead of solving them.
 
-- shippers tracking SLA performance and service quality
-- transporters managing vehicle movement and execution dependencies
-- drivers acting as the last-mile source of many real-world signals
-- operations teams coordinating action when something breaks
-
-The key problem was that operations teams spent most of their time reacting to issues instead of preventing them.
-
-## 2. Problem
-
-Before Control Tower, operations struggled with both visibility and execution.
-
-### Operational gaps
-
-- no unified view of journey health
-- alerts existed, but there was no prioritization or orchestration layer
-- teams relied on manual calls, spreadsheets, and multiple dashboards to understand what was happening
-
-### Execution issues
-
-- high alert noise and low signal clarity
-- no clear ownership of issues
-- delayed escalations
-- no strong audit trail of actions taken
-
-### Business impact
-
-- SLA breaches
-- delayed resolution cycles
-- high operational workload
-- low visibility for managers and clients
-
-This meant the organization had signals, but not a reliable system for turning signals into coordinated action.
-
-## 3. Foundation: What Was Already Shipped
+## 2. Foundation: What Was Already Shipped
 
 Before building Control Tower, we solved the visibility layer first through the Reporting Module.
-
-### Reporting Module (Shipped)
 
 What we built:
 
@@ -54,257 +19,156 @@ What we built:
 - standardized templates
 - audit-ready logs
 
-### Impact of the reporting foundation
+Impact:
 
 - less than 2 minutes report generation
 - 90%+ reduction in turnaround time
 - 138+ hours saved per month
-- elimination of manual reporting workflows
 
-### Critical insight
+You cannot build intelligent systems on unreliable data. The reporting layer gave us a reliable foundation. Once visibility worked, the next question was obvious: how do we move from visibility to action?
 
-You cannot build intelligent systems on unreliable data.
+## 3. Where Control Tower Sits
 
-The reporting layer gave us a stronger operational foundation. Once visibility became reliable, the next product question became obvious: how do we move from visibility to action?
+Control Tower is not inside the TMS. It sits above it as an orchestration layer.
 
-## 4. Opportunity
+It pulls exceptions from all modules — My Journeys, invoicing, planning, PTL — and presents them in two forms:
 
-Once reporting solved access to visibility, the next opportunity was not to create yet another dashboard. It was to build a system that could detect, prioritize, and resolve operational issues.
+- **Tickets** for managed service teams who resolve issues on behalf of clients
+- **Alerts** for consignors who need visibility into what's happening with their shipments
 
-The key product questions became:
+Same exceptions, different presentation based on the user's role. This distinction matters: managed service operators need a workflow-driven ticket system. Consignors need awareness and the ability to escalate.
 
-- can the system detect meaningful issues instead of surfacing raw noise?
-- can it prioritize based on impact and urgency?
-- can AI reduce manual intervention?
-- can humans be guided only when judgment is actually needed?
+![Control Tower — Alert list with priority cards, SLA tracking, and AI/human agent assignment](/assets/control-tower/alert-list.png)
 
-This shifted the problem from analytics to execution orchestration.
+The alert list shows all active exceptions with priority summary cards at the top (Critical, High, Medium, Low, On Hold, Expired), a resolution progress ring, and a table showing each alert's type, vehicle, driver, transporter, assigned agent (AI or human), SLA countdown with visual progress bars, and alert duration.
 
-## 5. Vision
+## 4. Human–AI Collaboration
 
-### Control Tower = System of Action
+The core principle: **AI assists. Humans control.**
 
-The vision for Control Tower was not a passive dashboard. It was a system that:
+AI handles:
 
-- converts fragmented signals into real-time decisions
-- prioritizes alerts based on impact and urgency
-- automates resolution where possible
-- escalates intelligently when needed
-
-This was a major conceptual shift:
-
-- dashboard -> execution system
-- data visibility -> decision orchestration
-- manual actions -> AI-assisted workflows
-- reactive operations -> proactive control
-
-## 6. Core Design Shift
-
-The most important design change was redefining what a control tower means.
-
-A traditional dashboard centers around visibility. This control tower needed to center around intervention.
-
-That meant the product had to answer:
-
-1. what is going wrong?
-2. how severe is it?
-3. what should happen next?
-4. can the system handle it without human effort?
-5. if not, who should take over and when?
-
-This turned the control tower from a monitoring layer into an orchestration layer.
-
-## 7. Key Concept: Human-AI Collaboration
-
-We designed the system so AI and humans each handled the part of operations they are best suited for.
-
-### AI handles
-
-- alert detection
-- prioritization (P0-P3)
+- alert detection and classification
+- prioritization (P0 to P3)
+- automated outreach to drivers and transporters via IVR
 - monitoring and validation
-- driver and transporter outreach through automation
 - escalation logic
 
-### Humans handle
+Humans handle:
 
-- ambiguity
-- exceptions AI cannot resolve
+- ambiguity and edge cases
 - final decisions
 - compliance and penalties
+- exceptions AI cannot resolve
 
-### Design principle
+Users can take over from AI at any point, or assign back when appropriate. Every action — whether by AI or human — is logged in a full audit trail.
 
-**AI assists. Humans control.**
+## 5. A Real Scenario — Long Stoppage at a Loading Plant
 
-This principle influenced everything from ownership states to escalation design and auditability.
+A truck reaches a loading plant. Expected loading time: 1 hour. Three hours pass. The truck hasn't moved.
 
-## 8. Alert Lifecycle Example: Long Stoppage
+![Alert Details — Long stoppage timeline with AI actions, map, risk score, and human takeover controls](/assets/control-tower/alert-details.png)
 
-To make the system concrete, one example workflow was long stoppage handling.
+The alert detail view shows the full progressive story on the right — stoppage detected, AI agent assigned, monitoring in progress, driver unreachable. The left side shows the vehicle's position on the map with the stoppage location. Risk score, confidence, and impact are visible at the top. At the bottom: "Stop AI Agent" and "Take over from AI Agent" buttons — the controlled autonomy in action.
 
-### Timeline flow
+**Detection.** The system sees no movement within the geofence. AI classifies it as a long stoppage. Initial priority: P2.
 
-1. **Detected**  
-Vehicle remains stationary beyond the configured threshold.
+**Automated handling.** AI calls the driver via IVR and asks for a reason. Possible outcomes: "waiting for loading," "documentation delay," or no response.
 
-2. **AI assigned**  
-Monitoring begins and the system classifies the issue.
+**Escalation.** No response from the driver. Delay exceeds the threshold. Priority escalates from P2 to P1. AI contacts the transporter.
 
-3. **Automated handling**  
-Movement is tracked and initial outreach begins.
+**Human handoff.** Still unresolved. A ticket is assigned to an ops executive. They see the full timeline — who was contacted, when, what was said, what failed. They don't start from zero.
 
-4. **Escalation**  
-If there is no useful change or response, the system raises priority.
+**Resolution.** The ops executive calls the plant, identifies a loading queue bottleneck, gets the truck prioritized.
 
-5. **Advanced attempts**  
-Transporter outreach and deeper intervention logic are triggered.
+**Closure.** The system records the resolution reason, all timestamps, every action by AI and human. Full audit trail.
 
-6. **Human handoff**  
-An operations executive takes over when automation is insufficient.
+Without Control Tower, this delay gets discovered late, escalation is informal, and there's no record of what happened. With Control Tower, the issue becomes a managed workflow from the moment it's detected.
 
-7. **Resolution**  
-The issue is verified, documented, and closed.
+### What the user sees
 
-This lifecycle showed that the product was not just displaying an alert. It was managing the alert as an evolving operational story.
+Not just an alert. They see:
 
-## 9. Key UX Decisions
+- a timeline showing the full story of the issue
+- who acted at each step (AI agent / human agent / system / transporter)
+- current state and what needs to happen next
+- suggested actions and resolution workflows
 
-### 1. Timeline-based interface
+Every alert is treated as a progressive story, not a static record.
 
-Every alert was treated as a progressive story instead of a static record.
+## 6. Key Design Decisions
 
-The timeline showed:
+### Timeline-based interface
 
-- what happened
-- who acted
-- what changed
-- what the current state meant
+Every alert is an evolving operational story — what happened, who acted, what changed, what the current state means. This made the system understandable under live operational pressure.
 
-This made the system much more understandable under live operational pressure.
+### Ownership clarity at every step
 
-### 2. Ownership clarity
+Each step clearly identifies the acting entity — AI agent, human agent, system, or transporter. This is critical for enterprise trust and accountability.
 
-Each step clearly identified whether the acting entity was:
+### Controlled autonomy
 
-- AI agent
-- human agent
-- system
-- transporter
+Users can take over from AI or assign back when appropriate. This creates a practical balance between automation and operational control.
 
-This was critical for enterprise trust and accountability.
+### Triage-inspired priority model
 
-### 3. Controlled autonomy
+- P0 = critical, P1 = high, P2 = medium, P3 = low
+- Escalations follow layered severity progression (L1 to L3)
 
-Users could:
+This encodes urgency in a consistent and operationally meaningful way.
 
-- take over from AI
-- assign back to AI when appropriate
+### Actionable UI
 
-This created a practical balance between automation and operational control.
+Instead of exposing data, the interface surfaces suggested actions, next best steps, and resolution workflows. The product is useful for execution, not only observation.
 
-### 4. Priority and escalation model
+## 7. What Was Hard
 
-We introduced a triage-inspired structure:
+**Calibrating AI autonomy.** Too aggressive and the system creates noise — every minor delay becomes an alert. Too conservative and issues slip through. Finding the right thresholds was ongoing work, not a one-time design decision.
 
-- P0 = critical
-- P1 = high
-- P2 = medium
-- P3 = low
+**Enterprise trust is earned slowly.** Operations teams don't switch from spreadsheets and phone calls to an automated system overnight. The full audit trail, clear ownership labels, and the ability to override AI at any step — these were trust-building design decisions, not features. Automation must always be inspectable and controllable.
 
-Escalations also followed layered severity progression such as L1 to L3. This helped the system encode urgency in a consistent and operationally meaningful way.
+**Ticket vs alert distinction.** Managed service teams and consignors need fundamentally different interfaces for the same underlying data. Getting this right meant understanding two different mental models and serving both without building two separate products.
 
-### 5. Actionable UI
+## 8. System Design for Scalability
 
-Instead of just exposing data, the interface surfaced:
+The system was designed as a state-driven model. Each step in the alert lifecycle is driven by structured fields — event type, actor (AI / Human / System), status, and context.
 
-- suggested actions
-- next best steps
-- resolution workflows
-
-This made the product useful for execution, not only observation.
-
-## 10. System Design for Scalability
-
-The system was designed as a state-driven model.
-
-### Event model
-
-Each step in the alert lifecycle was driven by structured fields such as:
-
-- event_type
-- actor (AI / Human / System)
-- status
-- context
-
-### UI rendering structure
-
-The interface rendered each state using consistent layers:
+The UI renders each state using consistent layers:
 
 - header
 - action summary
 - why this happened / what next
 - supporting evidence
 
-This allowed:
+This allows consistency across alert types, scalability across workflows, and easier extension to future agents and automations.
 
-- consistency across alert types
-- scalability across workflows
-- easier extension to future agents and automations
+## 9. How This Connects
 
-## 11. Trust and Enterprise Readiness
+Control Tower is the orchestration layer in a broader redesign of Freight Tiger's TMS:
 
-Enterprise users do not trust automation because it exists. They trust automation when they can inspect it, control it, and understand why it acted.
+- **TigerSight** gives the bird's-eye operational view and routes users to where attention is needed
+- **My Journeys** is where deep journey-level analysis and action happens
+- **Control Tower** sits above everything, pulling exceptions from all modules and coordinating resolution through AI agents and human operators
 
-To build that trust, the experience supported:
+While TigerSight and My Journeys are surfaces within the TMS, Control Tower operates above it — watching everything and intervening when something breaks.
 
-- full audit trail
-- clear escalation logic
-- confidence indicators
-- visibility into AI decisions
-- reversible automation
+## 10. Outcome
 
-### Core principle
+- Structured alert system replacing scattered manual tracking
+- AI-assisted resolution reducing human workload for routine exceptions
+- Clear escalation logic so critical issues reach the right person faster
+- Full audit trail for every exception — who acted, when, why
+- Foundation for scaling automation across all TMS modules
 
-**Automation must always be inspectable and controllable.**
-
-This was important not only from a UX standpoint, but from an operational accountability standpoint.
-
-## 12. Outcomes
-
-### Delivered today
-
-- strong visibility layer through the Reporting Module
-- foundation for Control Tower workflows
-- structured alert system
-- improved operational clarity
-
-### Designed for the next phase
-
-- reduced manual monitoring
-- faster resolution time
-- intelligent escalation
-- better SLA adherence
-- scalable AI-assisted operations
-
-The value of the project was not just in showing data, but in designing how operations could shift from reactive handling to guided exception orchestration.
-
-## 13. What I Learned
-
-- AI systems require strong operational foundations
-- trust comes from transparency, not automation alone
-- enterprise UX must encode ownership, accountability, and decision flow
-- visibility becomes useful only when it leads to better intervention
-
-## 14. What I Would Improve Next
+## 11. What I Would Improve Next
 
 If this evolved further, I would explore:
 
-- a stronger explainability layer for why AI acted
-- cost and risk impact visualization
-- multi-alert orchestration views
-- policy simulation and what-if scenarios
+- a stronger explainability layer for why AI acted the way it did
+- cost and risk impact visualization tied to each exception
+- multi-alert orchestration views for handling related issues together
+- policy simulation and what-if scenarios for threshold tuning
 
-## 15. Closing
+## 12. Takeaway
 
-This project is about designing how humans and intelligent systems work together in operational environments. It is not just a dashboard project or an AI project in isolation. It is a case study in turning fragmented operational visibility into structured, trustworthy, and scalable action.
+> Enterprise users don't trust automation because it exists. They trust it when they can inspect it, control it, and understand why it acted.

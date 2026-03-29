@@ -32,6 +32,11 @@ const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) 
   serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
 );
 
+// Compute prev/next case studies
+const currentIndex = caseStudies.findIndex((cs) => cs.slug === caseStudy.slug);
+const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+
 let Content;
 if (!contentLoader) {
   throw new Error(`Missing case study content for ${caseStudy.slug}`);
@@ -83,6 +88,23 @@ Content = contentModule.default;
                 <Content />
               </article>
             </ScrollReveal>
+
+            {(prevStudy || nextStudy) && (
+              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+                {prevStudy ? (
+                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
+                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                  </a>
+                ) : <div />}
+                {nextStudy ? (
+                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
+                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                  </a>
+                ) : <div />}
+              </nav>
+            )}
           </ProtectedCaseStudy>
         ) : (
           <>
@@ -107,6 +129,23 @@ Content = contentModule.default;
                 <Content />
               </article>
             </ScrollReveal>
+
+            {(prevStudy || nextStudy) && (
+              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+                {prevStudy ? (
+                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
+                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                  </a>
+                ) : <div />}
+                {nextStudy ? (
+                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
+                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                  </a>
+                ) : <div />}
+              </nav>
+            )}
           </>
         )}
       </div>
@@ -120,9 +159,27 @@ Content = contentModule.default;
           title={caseStudy.title}
         >
           <MachineTextBlock text={machineText} />
+          {(prevStudy || nextStudy) && (
+            <MachineTextBlock text={[
+              "",
+              "## Navigation",
+              prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
+              nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
+            ].filter(Boolean).join("\n")} />
+          )}
         </ProtectedCaseStudy>
       ) : (
-        <MachineTextBlock text={machineText} />
+        <>
+          <MachineTextBlock text={machineText} />
+          {(prevStudy || nextStudy) && (
+            <MachineTextBlock text={[
+              "",
+              "## Navigation",
+              prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
+              nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
+            ].filter(Boolean).join("\n")} />
+          )}
+        </>
       )}
     </div>
   </main>

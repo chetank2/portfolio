@@ -42,6 +42,17 @@ export const caseStudies: CaseStudyPage[] = [
     contentFile: "case-study-component-first-design.md",
   },
   {
+    slug: "ft-tms-redesign",
+    title: "Redesigning Freight Tiger's TMS",
+    tagline: "From a broken trip list to TigerSight + My Journeys — awareness and execution redesigned together",
+    role: "Senior Product Designer",
+    company: "Freight Tiger",
+    timeline: "2024 - 2026",
+    backHref: "/#work",
+    contentFile: "case-study-ft-tms-redesign.md",
+    protected: true,
+  },
+  {
     slug: "control-tower",
     title: "Control Tower",
     tagline: "Designing a Human–AI control tower for logistics operations",

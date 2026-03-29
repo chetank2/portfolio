@@ -2,6 +2,17 @@ import type { Project, Experience, Article } from "../types";
 
 export const deepProjects: Project[] = [
   {
+    slug: "ft-tms-redesign",
+    title: "Redesigning Freight Tiger's TMS",
+    tagline: "From a broken trip list to an operational system that changed how users work",
+    description:
+      "Designed TigerSight (awareness) and My Journeys (execution) as one connected system — fixing broken architecture, changing user behavior, and influencing how the backend was built.",
+    tags: ["System Design", "Architecture", "UX Redesign", "Freight Tiger"],
+    type: "deep",
+    protected: true,
+    caseStudyUrl: "/work/ft-tms-redesign",
+  },
+  {
     slug: "journey-redesign",
     title: "My Journeys",
     tagline: "Designing a unified operational surface for tracking, decision-making, and closure",
