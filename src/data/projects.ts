@@ -45,6 +45,16 @@ export const deepProjects: Project[] = [
     protected: true,
     caseStudyUrl: "/work/tigersight",
   },
+  {
+    slug: "aftercrop",
+    title: "Aftercrop",
+    tagline: "Mobile-first warehouse operations",
+    description:
+      "A mobile-first software solution designed to simplify warehouse operations. With a keen focus on design, adaptability, and user-friendliness.",
+    tags: ["Mobile App", "Warehouse Ops", "UX Design"],
+    type: "deep",
+    caseStudyUrl: "/work/aftercrop",
+  },
 ];
 
 export const supportingProjects: Project[] = [
@@ -130,16 +140,6 @@ export const appProjects: Project[] = [
     tags: [],
     type: "app",
     caseStudyUrl: "/work/fitx",
-  },
-  {
-    slug: "aftercrop",
-    title: "Aftercrop",
-    tagline: "Mobile-first warehouse operations",
-    image: "/assets/app-case-studies/aftercrop.svg",
-    description: "A mobile-first software solution designed to simplify warehouse operations. With a keen focus on design, adaptability, and user-friendliness.",
-    tags: [],
-    type: "app",
-    caseStudyUrl: "/work/aftercrop",
   },
   {
     slug: "swiggy",

@@ -528,11 +528,11 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
     slug: "aftercrop",
     title: "Aftercrop",
     tagline: "Mobile-first warehouse operations software — A Konic Technologies Product",
-    backHref: "/#apps",
+    backHref: "/#work",
     meta: [
       { label: "Role", value: "Product Designer & Co-Founder" },
-      { label: "Type", value: "SaaS Product" },
-      { label: "Timeline", value: "Konic Technologies" },
+      { label: "Company", value: "Konic Technologies" },
+      { label: "Timeline", value: "2021 - 2023" },
     ],
     media: mediaImage("/assets/app-case-studies/aftercrop.svg", "Aftercrop case study preview"),
     sections: [
@@ -540,34 +540,55 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         title: "Overview",
         blocks: [
           paragraphs(
-            "In India, medium-sized warehouses and cold storage facilities are disorganised but vital for farmers and reducing food waste. Current tracking methods are outdated and overly complex. We created user-friendly, mobile-first software to simplify warehouse operations and bring them into the modern era.",
+            "In India, medium-sized warehouses and cold storage are disorganised but vital for farmers and reducing food waste. Current tracking methods are outdated and complex. Our goal was to create user-friendly, mobile-first software to simplify warehouse operations.",
           ),
         ],
       },
       {
-        title: "Research",
+        title: "User Research",
         blocks: [
-          paragraphs(
-            "Interviews with warehouse operators revealed a consistent lack of emphasis on design and usability. Ethnographic studies showed a significant gap in user-friendly solutions. Competitive analysis confirmed that the market lacked products with true mobile and desktop parity.",
+          subsections(
+            {
+              title: "Interviews",
+              paragraphs: [
+                "Through user interviews, we delved into the experiences and frustrations of warehouse stakeholders. A common thread emerged: existing solutions lacked emphasis on design and ease of use, especially on mobile devices.",
+              ],
+            },
+            {
+              title: "Ethnographic Studies",
+              paragraphs: [
+                "By conducting ethnographic studies, we dissected the cluttered interfaces of current warehouse management systems. The findings highlighted a gap: a delightful, user-friendly solution was missing, both on mobile phones and desktops.",
+              ],
+            },
+            {
+              title: "Competitive Analysis",
+              paragraphs: [
+                "Thoroughly examining existing products revealed a pattern of complex interfaces designed for desktop use. The market lacked a product that caters to both mobile and desktop users with equal proficiency.",
+              ],
+            },
           ),
         ],
       },
       {
-        title: "Three Key Realisations",
+        title: "Key Findings",
         blocks: [
           bullets(
             [
               {
                 title: "Design & Usability",
-                text: "There is scope for a delightful product experience on both mobile and desktop platforms",
+                text: "Several products attempt to solve warehouse management, but almost all lack emphasis on design and ease of use. The software looks like it was designed for desktops by older generations — lots of functionality packed into clunky interfaces. None works well on a phone.",
               },
               {
                 title: "Adaptability",
-                text: "The solution needs to be easy-to-use and fit into existing workflows without disrupting daily operations",
+                text: "Every product tried to introduce new workflows that warehouses are not familiar with, causing too much disruption. We interviewed customers who built in-house solutions only to end up with staff unable to adapt because of interface complexity. There's a strong need for a solution that even unskilled staff can pick up quickly because it fits their existing workflow.",
               },
               {
-                title: "Availability",
-                text: "There is potential for a modern cloud-based SaaS solution with strong data security",
+                title: "Affordability",
+                text: "Large warehouses use enterprise products like SAP because they can afford a team to set it up. But mid to small-sized businesses can't afford expensive customisable products and a team to configure them. There's scope for an off-the-shelf product that just works for 90% of use cases.",
+              },
+              {
+                title: "Availability & Security",
+                text: "Some products are only available as on-premise installations. Cloud-based solutions existed but were poorly implemented. Customers had strong concerns about data security, and downloading data offline for spreadsheet-based reporting was an important unmet need.",
               },
             ],
             true,
@@ -577,19 +598,22 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
       {
         title: "Target Audience",
         blocks: [
+          paragraphs(
+            "There are several groups of target audiences with varying literacy levels. Staff in some rural warehouses might have never used a computer. Some warehouse owners are power users. To cater to the lower denominator, we kept the app extremely simple — while also providing powerful features for advanced users.",
+          ),
           bullets(
             [
               {
                 title: "Owners / Power Users",
-                text: "Need dashboards, summaries, and high-level oversight of operations",
+                text: "Comfortable with phones and computers. Need dashboard-like pages with summaries and reports across different time intervals. When owners aren't experts, they usually hire an accountant who passes along the summary.",
               },
               {
                 title: "Managers",
-                text: "Mobile-first users transitioning from pen-and-paper workflows",
+                text: "Take care of day-to-day activities, usually carry a phone and are good at tracking with pen and paper. Shifting to digital can be disruptive unless the process is extremely easy and takes the same time as physical records. Some were very receptive; some showed resistance.",
               },
               {
                 title: "Staff / Workers",
-                text: "Require a simple, guided process with minimal learning curve",
+                text: "Own a phone but can't do more than input minimal information. Pages for them have to be very simple and extremely easy to use. Usually not disruptive if built with the required simplicity.",
               },
             ],
             true,
@@ -597,55 +621,78 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         ],
       },
       {
-        title: "USP",
+        title: "Defining the USP",
         blocks: [
+          paragraphs(
+            "After conducting several interviews with different target audiences, visiting warehouses and cold storages, and observing day-to-day operations, we arrived at three key selling points.",
+          ),
           bullets([
             {
               title: "Design takes precedence",
-              text: "Usability and visual clarity are the top priority",
+              text: "We identified design and usability as the one thing that can make a mark — the biggest USP that none of the other products focuses on.",
             },
             {
               title: "Least disruption",
-              text: "Workflows mirror current pen-and-paper processes",
+              text: "We kept the process similar to the current pen-and-paper workflow so users could be onboarded and get familiar as soon as possible.",
             },
             {
               title: "Portability",
-              text: "Mobile-first approach for on-the-go warehouse management",
+              text: "Mobile interfaces are a must. Managers spend significant time on the app and are usually only comfortable using a phone. They move around the warehouse a lot — having a mobile interface to quickly review information has a huge impact.",
             },
           ]),
         ],
       },
       {
-        title: "Solution",
+        title: "The Solution",
         blocks: [
           subsections(
             {
-              title: "Focus 1: Mobile-first Design",
+              title: "Focus 1: Easy-to-use Mobile-first Design",
               paragraphs: [
-                "Cards instead of tables for better mobile readability. An app-like feel with minimal typing required. No training needed for staff to get started, and fast loading even on slow networks.",
+                "Tables are the most prominent way of displaying information — but terrible on mobile. We replaced all tables with cards and lists, carefully designing each card with just the right amount of information.",
+                "We kept elements similar to a native mobile app so users who've never used websites don't find it disruptive. We used switches and selection inputs so users can skip typing wherever possible — taps and swipes instead of keyboard input.",
+                "The app being as easy as it is meant no separate training was necessary. Most users felt comfortable within a day or two. Our developers ensured the site loads fast so users aren't waiting around looking at loading screens.",
               ],
             },
             {
               title: "Focus 2: Process Similar to Current Flow",
               paragraphs: [
-                "Incoming shipment processing simplified to 3 sections — taking just a couple of minutes to complete. Outgoing shipment designed as an \"Add to Cart\" experience that feels familiar and intuitive.",
+                "The 'Creating an Incoming Shipment' page is the most important page in the application. After observing the unloading process and interviewing managers, we noticed the main pain point — managers have to keep track of many hand-written receipts and ledger entries. We simplified it into three sections. For a minimal submission, a manager could add an entire incoming shipment in a couple of minutes.",
+                "For outgoing shipments, we visualised the process as an 'Add to Cart' experience from e-commerce. The manager can just pick stock from the list and add it to the truck. This avoids tedious forms and leverages powerful filtering on the stock page.",
               ],
             },
             {
               title: "Focus 3: Data Security",
               paragraphs: [
-                "User roles with exact permissions ensure data stays secure. The vehicle logs page is the simplest page in the system — just one input field — demonstrating the commitment to minimal complexity.",
+                "We introduced user roles with exact permissions — an owner could let a manager only create records while restricting edits or deletes. 'A warehouse manager should not have access to edit a record unless an admin approves it' was one of the most popular requirements.",
+                "The vehicle logs page is the simplest page we made — just one input field to track the vehicle number. When a vehicle leaves, a 'vehicle left' button is all the security guard presses. Built for staff who may be uneducated but can repeat a simple guided process.",
               ],
             },
           ),
         ],
       },
       {
-        title: "Launch",
+        title: "Launch & Iteration",
         blocks: [
           paragraphs(
-            "The MVP was shipped in approximately 3 months. Changes were released 2-3 times per week with continuous feedback loops from real warehouse operators, ensuring the product evolved based on actual usage patterns.",
+            "We launched the MVP in around 3 months and kept our ears wide open for feedback. We proactively initiated conversations with customers and kept them in the loop.",
+            "We released changes 2-3 times per week. Continuous customer conversations and feedback loops allowed us to fix usability issues quickly while understanding more about how the application was being used every day.",
           ),
+        ],
+      },
+      {
+        title: "The Future",
+        blocks: [
+          bullets([
+            {
+              title: "Customisation",
+              text: "Several customers have specific terminology and inputs unique to their warehouses. Customising terminology and fields across the application for each customer was the next priority.",
+            },
+            {
+              title: "Billing & Invoices",
+              text: "Interviews revealed that several billing models need to be supported — per-day billing, lease model billing — all while being easy to use. This was one of the biggest planned features.",
+            },
+          ]),
         ],
       },
     ],
@@ -706,70 +753,36 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         blocks: [chips(["Empathize", "Define", "Ideate", "Prototype", "Test"])],
       },
       {
-        title: "Research Insights",
-        blocks: [
-          paragraphs("User interviews and affinity mapping revealed key pain points that guided the design direction:"),
-          bullets([
-            "Lack of active tracking and real-time feedback",
-            "Lack of plan makers for personalized workouts",
-            "Lack of group coordination for team fitness",
-            "Too many ads disrupting the experience",
-            "Frequent and irrelevant notifications",
-          ]),
-        ],
-      },
-      {
-        title: "Persona — Ashok",
+        title: "Research Insights — Affinity Mapping",
         blocks: [
           paragraphs(
-            "Ashok is a 30-year-old working professional with a busy schedule. He wants to stay fit but struggles to find the right tools and motivation to maintain a consistent fitness routine.",
+            "User interviews and surveys helped us understand the problems users face. We used affinity mapping to structure the data and find patterns across categories:",
           ),
-          subsections(
-            {
-              title: "Goals",
-              bullets: [
-                "Maintain consistent physical activity despite a demanding work schedule",
-                "Follow a personalized fitness journey tailored to his needs",
-                "Build community connection through group fitness",
-              ],
-            },
-            {
-              title: "Challenges",
-              bullets: [
-                "Motivation hurdles when working out alone",
-                "Limited customization in existing fitness apps",
-                "Misses the community feel from group fitness classes",
-              ],
-            },
-          ),
-        ],
-      },
-      {
-        title: "Competitive Analysis",
-        blocks: [
-          paragraphs(
-            "Analyzed Cultfit, Nike Running, and Adidas Running apps to understand the current landscape. This research helped identify key How Might We questions:",
-          ),
-          quote("How might we provide active tracking, personalized plans, and group coordination — all in one seamless experience?"),
-        ],
-      },
-      {
-        title: "Solution",
-        blocks: [
-          paragraphs("The solution focuses on three core features:"),
           bullets(
             [
               {
-                title: "Regular stats and progress tracking",
-                text: "Visualize activity data with clear, motivating feedback",
+                title: "Current activity tracking",
+                text: "Users tracked with apps like Cultfit, smart watches, or not at all. Key pain: no accuracy in tracking, lack of active feedback.",
               },
               {
-                title: "Build & customize workouts",
-                text: "Create personalized workout plans tailored to individual goals",
+                title: "Motivation",
+                text: "Users wanted partners, fitness groups, daily reminders, goal tracking, and incremental plans. Self-improvement and productivity were top drivers.",
               },
               {
-                title: "Create teams with friends",
-                text: "Form groups for team workouts, challenges, and accountability",
+                title: "App expectations",
+                text: "Simple, precise, informative. Key features: step tracking, heart rate, food intake, improvement graphs, daily planners. Easy to navigate with clean design.",
+              },
+              {
+                title: "Past app frustrations",
+                text: "Lack of active tracking, no plan makers, no group coordination. Too many ads and frequent irrelevant notifications.",
+              },
+              {
+                title: "Payment willingness",
+                text: "Most users willing to pay ₹200/month. Free for basic features, paid for advanced programs. Pay extra for better features.",
+              },
+              {
+                title: "Social support",
+                text: "Mixed — some valued community and competition, others were not interested. Grouped sessions and easy interaction were popular.",
               },
             ],
             true,
@@ -777,15 +790,131 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         ],
       },
       {
+        title: "Persona — Ashok",
+        blocks: [
+          paragraphs(
+            "Ashok is a 30-year-old professional with a busy schedule, making it challenging to consistently attend gym sessions. Despite his initial enthusiasm for fitness programs, he often lacks the motivation to complete them. He values community and accountability from collaborative fitness experiences.",
+          ),
+          subsections(
+            {
+              title: "Goals",
+              bullets: [
+                "Consistent physical activity — incorporate daily exercise into his routine",
+                "Personalized fitness journey — customize workout plans based on preferences",
+                "Community connection — support from a fitness community to enhance motivation",
+              ],
+            },
+            {
+              title: "Challenges",
+              bullets: [
+                "Motivation hurdles when working out alone",
+                "Limited customization in existing fitness apps",
+                "Misses the community feel from group fitness activities",
+              ],
+            },
+          ),
+        ],
+      },
+      {
+        title: "User Stories",
+        blocks: [
+          bullets(
+            [
+              {
+                title: "Track daily activity",
+                text: "As a fitness enthusiast, I want to track my daily activity so I can monitor my progress and stay accountable. Log running, cycling, gym sessions. Set daily/weekly goals. See visual history and achievements.",
+              },
+              {
+                title: "Create custom activities",
+                text: "As a user, I want to create customized activities so I can tailor workouts to my personal preferences and fitness level. Select exercises, set reps, define intensity. Include indoor and outdoor exercises.",
+              },
+              {
+                title: "Collaborate with friends",
+                text: "As a social fitness enthusiast, I want to perform workouts collaboratively with friends so we can motivate each other. Create or join challenges. Sync activities in real-time. Share achievements on a social feed.",
+              },
+            ],
+            true,
+          ),
+        ],
+      },
+      {
+        title: "Competitive Analysis",
+        blocks: [
+          paragraphs(
+            "Analyzed three leading fitness apps to understand the landscape:",
+          ),
+          bullets(
+            [
+              {
+                title: "Cultfit",
+                text: "Wide range of fitness options (group classes, at-home workouts, nutrition, wellness). Strong community. Affordable pricing. Holistic approach.",
+              },
+              {
+                title: "Nike Running",
+                text: "Simple, user-friendly interface. Variety of running programs for different levels. Gamified trophies and badges. Large active community.",
+              },
+              {
+                title: "Adidas Running",
+                text: "Detailed customizable dashboard with metrics. Smart coach that adapts to performance. Fun features with music, stories, podcasts. Global community.",
+              },
+            ],
+            true,
+          ),
+        ],
+      },
+      {
+        title: "How Might We",
+        blocks: [
+          bullets([
+            "How might we design a feature that encourages users to actively track their physical activity throughout the day?",
+            "How might we enable users to create personalized workout plans aligned with their goals?",
+            "How might we design features that promote friendly competition and collaboration among users?",
+          ]),
+        ],
+      },
+      {
+        title: "Solution",
+        blocks: [
+          paragraphs("Based on the HMW questions, the solution focuses on three core features:"),
+          bullets(
+            [
+              {
+                title: "Regular stats and progress tracking",
+                text: "Showing workout stats, calories, weight, and tonnage lifted with clear visualizations and motivating feedback",
+              },
+              {
+                title: "Build & customize workouts",
+                text: "Create personalized workout plans — select exercises, set reps, define intensity for both indoor and outdoor activities",
+              },
+              {
+                title: "Create teams with friends",
+                text: "Form groups for team workouts, challenges, and accountability. Sync activities in real-time and share on a social feed.",
+              },
+            ],
+            true,
+          ),
+        ],
+      },
+      {
+        title: "Style Guide",
+        blocks: [
+          paragraphs(
+            "Colors: #002A4B (primary), #6F7A82, #777D81, #F1F6FA, #D6D9DC, #E4E6E7. Typography: Gilroy — Semi bold 48px, 24px, 20px, 16px, 14px; Regular 14px; Medium 12px; Semi bold 12px, 10px.",
+          ),
+        ],
+      },
+      {
         title: "Key Screens",
         blocks: [
           bullets([
-            "Splash & Onboarding",
-            "Stats Screen (Individual & Teams)",
-            "Workouts Screen",
-            "Create Workout",
-            "Team Creation (3-step flow)",
-            "Workout Recording",
+            "Splash & Onboarding — shows the app solves workout tracking and team creation",
+            "Goal Setting — personalized fitness goal configuration",
+            "Stats Screen (Individual) — activities, calories, weight, tonnage lifted",
+            "Stats Screen (Teams) — team progress and shared goals",
+            "Workouts Screen — individual and team workout views",
+            "Create Workout — step-by-step workout builder",
+            "Team Creation — 3-step flow for creating fitness teams",
+            "Workout Recording — easy entry of set details during workout",
           ]),
         ],
       },
@@ -816,6 +945,14 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         blocks: [
           paragraphs(
             "Allow customers to save time and order food more frequently — aiming for 15-20 orders per month through automated scheduling and subscriptions.",
+          ),
+        ],
+      },
+      {
+        title: "Audience",
+        blocks: [
+          paragraphs(
+            "The primary audience is corporate employees, fitness enthusiasts, entrepreneurs, and anyone busy during the day who needs to save time on food ordering. Food is delivered to offices during lunch hours and to homes for dinner.",
           ),
         ],
       },
@@ -864,24 +1001,39 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         ],
       },
       {
-        title: "Key Design Decisions",
+        title: "Order Notifications",
+        blocks: [
+          paragraphs(
+            "After adding a subscription, food is ordered automatically at the selected time. Notifications keep users updated at each stage:",
+          ),
+          chips([
+            "15 min before — Upcoming order reminder (Cancel option)",
+            "Order received — Agent will pick up",
+            "Agent picked up — Delivery in 20 min",
+            "Agent reached — Please pick your order (Call Agent)",
+            "Delivered — Rate experience",
+          ]),
+        ],
+      },
+      {
+        title: "Design Approach",
         blocks: [
           bullets([
             {
               title: "Only one CTA button",
-              text: "Following Swiggy's existing design pattern to maintain consistency",
+              text: "Following Swiggy's existing pattern — no deviations when performing a task",
             },
             {
               title: "Mimicked existing ordering flow",
-              text: "Reduced learning curve by building on familiar interactions",
+              text: "Adding food to a subscription feels identical to normal food ordering — reduced learning curve",
             },
             {
-              title: "Split into 2 steps",
-              text: "Broke down the subscription setup to reduce cognitive load",
+              title: "Split into 2 clear steps",
+              text: "Step 1: Add food items to cart (familiar). Step 2: Create subscription with schedule and payment.",
             },
             {
-              title: "Minimized input fields",
-              text: "Used tap gestures instead of typing wherever possible",
+              title: "Input optimization",
+              text: "Minimized input fields and used tap gestures wherever possible. Day selection uses tappable S M T W F buttons instead of dropdowns.",
             },
           ]),
         ],
@@ -890,10 +1042,11 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         title: "Constraints & Edge Cases",
         blocks: [
           bullets([
-            "Food items can only be from one restaurant per subscription",
-            "No modifications allowed after a subscription period starts",
-            "Average delivery charge is built into the subscription fee",
-            "System notifies users if a restaurant is closed on a scheduled day",
+            "Food items can only be from one restaurant per subscription — Swiggy's system prohibits multi-restaurant orders",
+            "No modifications allowed after a subscription period starts — avoids billing complications and user confusion",
+            "Average delivery charge based on past orders is built into the subscription fee — Swiggy may incur losses with this approach",
+            "System notifies users if a restaurant is closed on a scheduled day and cancels that order",
+            "Users cannot add extra food items once a subscription period has begun — prevents billing calculation issues",
           ]),
         ],
       },
@@ -990,7 +1143,7 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
       {
         title: "Deliverables",
         blocks: [
-          bullets(["Task flows", "User flows", "Information architecture", "Hi-fidelity wireframes", "Figma prototype"]),
+          bullets(["Task flows", "User flows", "Information architecture", "Hi-fidelity wireframes", "[Figma prototype](https://www.figma.com/proto/218341FDZu0xg8SkEkbVfr/In-flight-food-ordering-app?page-id=0%3A1&node-id=1-1980&viewport=780%2C737%2C0.16&scaling=scale-down&starting-point-node-id=1%3A1974)"]),
         ],
       },
     ],
@@ -1116,6 +1269,14 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         blocks: [
           paragraphs(
             "An app connecting people and artisans to get home repairs done efficiently. A dual-sided platform that serves both customers looking for reliable help and artisans looking for steady work.",
+          ),
+        ],
+      },
+      {
+        title: "Style Guide",
+        blocks: [
+          paragraphs(
+            "Colors: #0077FF (primary), #F7F7F7 (background), #001833 (text), #7E7F81 (secondary text), #D4D4D4 (borders). Font: Poppins — 32px, 24px, 16px, 14px, 12px.",
           ),
         ],
       },
