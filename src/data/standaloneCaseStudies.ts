@@ -504,6 +504,58 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         ],
       },
       {
+        title: "Product Gallery",
+        blocks: [
+          paragraphs(
+            "Key screens from the freight invoicing and reconciliation system showing the billing workflow from consignor journey listing through charge-level validation and approval.",
+          ),
+          gallery(
+            {
+              src: "/assets/freight-invoicing/consignor-billing.png",
+              title: "Consignor Journey Billing",
+              description: "The transporter-facing journey listing with delivery, pending approval, approved, and disputed amounts — the starting point for billing submission.",
+              cardClass: "md:col-span-2",
+              imageClass: "h-64 sm:h-72 md:h-80",
+            },
+            {
+              src: "/assets/freight-invoicing/consignor-pending-approval.png",
+              title: "Pending Approval View",
+              description: "The consignor billing view filtered to pending approvals, showing ePOD status, charges, transporter amounts, and variance at the journey level.",
+              cardClass: "md:col-span-1",
+              imageClass: "h-56 sm:h-60 md:h-72",
+            },
+            {
+              src: "/assets/freight-invoicing/bill-details.png",
+              title: "Bill Details — Ready to Submit",
+              description: "Journey-level bill details showing freight cost breakdown, charge checks (route, distance, vehicle type, weight, ePOD), and pro-forma status.",
+              cardClass: "md:col-span-1",
+              imageClass: "h-56 sm:h-60 md:h-72",
+            },
+            {
+              src: "/assets/freight-invoicing/bill-details-edit.png",
+              title: "Bill Details — Charge Editing",
+              description: "Charge-level editing view with contracted vs. actual charges, variance indicators, and inline save actions for granular billing adjustments.",
+              cardClass: "md:col-span-1",
+              imageClass: "h-56 sm:h-60 md:h-72",
+            },
+            {
+              src: "/assets/freight-invoicing/bill-review.png",
+              title: "Bill Review — Approval Flow",
+              description: "The review stage showing contracted vs. transporter amounts with charge-level reject and approve actions for pre-invoice validation.",
+              cardClass: "md:col-span-1",
+              imageClass: "h-56 sm:h-60 md:h-72",
+            },
+            {
+              src: "/assets/freight-invoicing/bill-review-actions.png",
+              title: "Bill Review — Partial Approval",
+              description: "Demonstrating partial approval state where some charges are approved and others rejected, with variance highlighting and undo capability.",
+              cardClass: "md:col-span-2",
+              imageClass: "h-60 sm:h-64 md:h-72",
+            },
+          ),
+        ],
+      },
+      {
         title: "Outcome",
         blocks: [
           paragraphs(
