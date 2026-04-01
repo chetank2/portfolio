@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
+import CaseStudyView from "../../components/astro/CaseStudyView.astro";
+import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import { standaloneCaseStudies, standaloneCaseStudyMachineText } from "../../data/standaloneCaseStudies";
+
+const study = standaloneCaseStudies["todo"];
+---
+
+<BaseLayout title={`${study.title} — Chetan Kummari`}>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+  <main id="main">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+      <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
+        <a href={study.backHref} class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300">
+          <span class="w-4 h-px bg-text-tertiary"></span>
+          Back
+        </a>
+        <CaseStudyView study={study} />
+      </div>
+    </div>
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
+    </div>
+  </main>
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
+</BaseLayout>

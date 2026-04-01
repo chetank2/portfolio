@@ -1,0 +1,359 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/astro/Navigation.astro";
+import Hero from "../components/astro/Hero.astro";
+import SectionHeading from "../components/astro/SectionHeading.astro";
+import ProjectCard from "../components/astro/ProjectCard.astro";
+import SupportingProjectCard from "../components/astro/SupportingProjectCard.astro";
+import AIProjectCard from "../components/astro/AIProjectCard.astro";
+import ArticleCard from "../components/astro/ArticleCard.astro";
+import WebsiteCard from "../components/astro/WebsiteCard.astro";
+import TimelineItem from "../components/astro/TimelineItem.astro";
+import MachineTextBlock from "../components/astro/MachineTextBlock.astro";
+import ViewModeToggle from "../components/astro/ViewModeToggle.astro";
+import Footer from "../components/astro/Footer.astro";
+import ScrollReveal from "../components/react/ScrollReveal.tsx";
+import HorizontalScrollGallery from "../components/react/HorizontalScrollGallery.tsx";
+import ImageLightbox from "../components/react/ImageLightbox.tsx";
+import {
+  deepProjects,
+  supportingProjects,
+  aiProjects,
+  appProjects,
+  websiteProjects,
+  experience,
+  skills,
+  tools,
+  article,
+} from "../data/projects";
+
+function formatProjectLine(project: (typeof deepProjects)[number] | (typeof supportingProjects)[number] | (typeof aiProjects)[number] | (typeof appProjects)[number]) {
+  const href = project.caseStudyUrl ?? "#";
+  if (project.protected) {
+    return `- ${project.title} — ${project.tagline} (${href}, protected)`;
+  }
+
+  if (project.caseStudyUrl?.startsWith("/work/")) {
+    return `- ${project.title} — ${project.tagline} (${project.caseStudyUrl}, /machine${project.caseStudyUrl})`;
+  }
+
+  return `- ${project.title} — ${project.tagline} (${href})`;
+}
+
+const homeMachineText = [
+  "# Chetan Kummari",
+  "> Senior Product Designer focused on complex B2B systems, design systems, and AI-assisted product building.",
+  "",
+  "## Work",
+  ...deepProjects.map(formatProjectLine),
+  ...supportingProjects.map(formatProjectLine),
+  "",
+  "## Built with AI",
+  ...aiProjects.map(formatProjectLine),
+  "",
+  "## App Designs",
+  ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),
+  "",
+  "## Resume",
+  ...experience.flatMap((exp) => [
+    `### ${exp.role} — ${exp.company}`,
+    `- Location: ${exp.location}`,
+    `- Period: ${exp.period}`,
+    ...exp.highlights.map((highlight) => `- ${highlight}`),
+    "",
+  ]),
+  "## Skills",
+  `- ${skills.join(", ")}`,
+  "",
+  "## Tools",
+  `- ${tools.join(", ")}`,
+  "",
+  "## Writing",
+  `- ${article.title} — ${article.summary} (${article.url})`,
+  "",
+  "## Contact",
+  "- Email: mailto:mymailchetan25@gmail.com",
+  "- LinkedIn: https://linkedin.com/in/chetan-kumar25/",
+  "- GitHub: https://github.com/chetank2",
+].join("\n");
+---
+
+<BaseLayout>
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+
+  <main id="main">
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachineTextBlock text={homeMachineText} />
+    </div>
+
+    <div data-view-panel="human">
+    <!-- Hero -->
+    <Hero />
+
+    <!-- Selected Work -->
+    <section class="section-padding" id="work">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading number="01" label="Selected Work" title="Deep Case Studies" />
+          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+            My strongest work is in high-complexity product environments where design has to improve decisions, reduce friction, and make systems easier to trust.
+          </p>
+        </ScrollReveal>
+
+        <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
+          {deepProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.12}>
+              <ProjectCard
+                title={project.title}
+                tagline={project.tagline}
+                description={project.description}
+                tags={project.tags}
+                protected={project.protected}
+                href={project.caseStudyUrl}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <!-- Supporting Projects -->
+        <div class="mt-20">
+          <ScrollReveal client:visible>
+            <div class="flex items-center gap-3 mb-10">
+              <span class="w-8 h-px bg-border"></span>
+              <h3 class="font-mono text-xs text-text-tertiary uppercase tracking-wide">
+                Systems, Design Systems & Builder Work
+              </h3>
+            </div>
+          </ScrollReveal>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
+            {supportingProjects.map((project, i) => (
+              <ScrollReveal client:visible delay={i * 0.08}>
+                <SupportingProjectCard
+                  title={project.title}
+                  tagline={project.tagline}
+                  description={project.description}
+                  tags={project.tags}
+                  protected={project.protected}
+                  liveUrl={project.liveUrl}
+                  npmUrl={project.npmUrl}
+                  caseStudyUrl={project.caseStudyUrl}
+                />
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+      <hr class="section-divider" />
+    </div>
+
+    <!-- Built with AI -->
+    <section class="section-padding bg-bg-surface" id="ai">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading number="02" label="Builder" title="Built with AI" />
+          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+            Products I designed and shipped using AI-assisted development.
+          </p>
+        </ScrollReveal>
+
+        <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
+          {aiProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.12}>
+              <AIProjectCard
+                title={project.title}
+                tagline={project.tagline}
+                description={project.description}
+                tags={project.tags}
+                liveUrl={project.liveUrl}
+                repoUrl={project.repoUrl}
+                caseStudyUrl={project.caseStudyUrl}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+      <hr class="section-divider" />
+    </div>
+
+    <!-- Writing -->
+    <section class="section-padding" id="writing">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading number="03" label="Writing" title="Writing" />
+          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+            Notes on product thinking, design systems, and designing for complexity.
+          </p>
+        </ScrollReveal>
+        <ScrollReveal client:visible>
+          <div class="max-w-2xl">
+            <ArticleCard
+              title={article.title}
+              date={article.date}
+              categories={article.categories}
+              summary={article.summary}
+              url={article.url}
+            />
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+
+    <!-- App Designs -->
+    <section class="section-padding bg-bg-surface" id="apps">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Design Work" title="App Designs" />
+        </ScrollReveal>
+
+        <HorizontalScrollGallery client:visible>
+          {appProjects.map((project) => (
+            <div class="snap-start shrink-0 w-56 sm:w-64 md:w-72 lg:w-80 2xl:w-96">
+              <a href={project.caseStudyUrl || `#`} class="block no-underline group">
+                <div class="bg-bg-elevated border border-border overflow-hidden card-accent hover:border-border-hover transition-all duration-400 group-hover:-translate-y-1">
+                  {project.image && (
+                    <div class="aspect-[3/4] overflow-hidden bg-bg-surface flex items-center justify-center">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        class="w-full h-full object-contain p-4"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div class="p-4">
+                    <h4 class="font-display font-700 text-text-primary text-sm">{project.title}</h4>
+                    <p class="text-xs text-text-secondary font-body mt-1">{project.tagline}</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          ))}
+        </HorizontalScrollGallery>
+      </div>
+    </section>
+
+    <!-- Websites -->
+    <section class="section-padding" id="websites">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading label="Websites" title="Web Projects" />
+        </ScrollReveal>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
+          {websiteProjects.map((project, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <WebsiteCard
+                title={project.title}
+                tagline={project.tagline}
+                image={project.image!}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume -->
+    <section class="section-padding bg-bg-surface" id="resume">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:visible>
+          <SectionHeading number="04" label="Experience" title="Experience" />
+          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+            I've worked across logistics, warehouse operations, and product platforms, mostly on systems where the challenge is less about visual polish and more about clarity under complexity.
+          </p>
+        </ScrollReveal>
+
+        <div class="space-y-0">
+          {experience.map((exp, i) => (
+            <ScrollReveal client:visible delay={i * 0.1}>
+              <TimelineItem
+                role={exp.role}
+                company={exp.company}
+                location={exp.location}
+                period={exp.period}
+                highlights={exp.highlights}
+                isFirst={i === 0}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+
+        <!-- Skills & Tools -->
+        <div class="mt-16 sm:mt-20 grid sm:grid-cols-2 gap-10 sm:gap-16">
+          <ScrollReveal client:visible>
+            <h3 class="font-display font-700 text-text-secondary mb-5">Skills</h3>
+            <div class="flex flex-wrap gap-2">
+              {skills.map((skill) => (
+                <span class="tag-pill">{skill}</span>
+              ))}
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal client:visible delay={0.1}>
+            <h3 class="font-display font-700 text-text-secondary mb-5">Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              {tools.map((tool) => (
+                <span class="tag-pill">{tool}</span>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section-padding" id="contact">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 text-center">
+        <ScrollReveal client:visible>
+          <span class="section-number block mb-4">05 / Contact</span>
+          <h2 class="text-2xl sm:text-3xl md:text-5xl 2xl:text-6xl font-display font-700 mb-5">Let's Build Better Systems</h2>
+          <p class="text-text-secondary font-body mb-14 max-w-lg mx-auto leading-relaxed">
+            I'm interested in product design roles where workflow design, systems thinking, and design-to-implementation quality actually matter.
+          </p>
+        </ScrollReveal>
+
+        <ScrollReveal client:visible delay={0.15}>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:mymailchetan25@gmail.com"
+              class="inline-flex items-center justify-center gap-2 bg-accent text-bg-deep font-display font-700 text-sm px-8 py-3.5 hover:bg-accent/90 transition-colors duration-300"
+            >
+              Get in Touch
+            </a>
+            <a
+              href="https://linkedin.com/in/chetan-kumar25/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 border border-border text-text-primary font-display font-700 text-sm px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/chetank2"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 border border-border text-text-primary font-display font-700 text-sm px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
+            >
+              GitHub
+            </a>
+          </div>
+        </ScrollReveal>
+      </div>
+    </section>
+    </div>
+  </main>
+
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
+</BaseLayout>

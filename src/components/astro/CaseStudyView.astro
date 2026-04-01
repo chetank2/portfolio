@@ -1,0 +1,272 @@
+---
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import ImageLightbox from "../../components/react/ImageLightbox.tsx";
+import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
+import { getProjectLinksBySlug } from "../../data/projects";
+import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
+
+interface Props {
+  study: StandaloneCaseStudy;
+}
+
+const { study } = Astro.props as Props;
+const relatedLinks = getProjectLinksBySlug(study.slug);
+---
+
+<ScrollReveal client:visible>
+  <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+    <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
+      {study.title}
+    </h1>
+    <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+      {study.tagline}
+    </p>
+    <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+      {study.meta.map((meta) => (
+        <span>
+          <span class="text-accent/60">{meta.label}</span> <span class="mx-1 text-text-tertiary">/</span> {meta.value}
+        </span>
+      ))}
+    </div>
+  </header>
+</ScrollReveal>
+
+{study.media ? (
+  <ScrollReveal client:visible>
+    <figure class="overflow-hidden rounded-2xl border border-border bg-bg-elevated/60">
+      <img
+        src={study.media.src}
+        alt={study.media.alt}
+        class:list={["block max-w-full h-auto bg-bg-surface", study.media.className]}
+        loading="lazy"
+      />
+    </figure>
+  </ScrollReveal>
+) : null}
+
+{study.sections.map((section, sectionIndex) => (
+  <ScrollReveal client:visible>
+    <section class:list={["mt-20 sm:mt-24", sectionIndex === study.sections.length - 1 && "mb-20"]}>
+      <h3 class="text-2xl font-display font-700 text-text-primary mb-6">{section.title}</h3>
+
+      {section.blocks.map((block) => (
+        <>
+          {block.type === "paragraphs" ? (
+            block.paragraphs.map((paragraph, paragraphIndex) => (
+              <p class:list={["text-text-secondary font-body leading-relaxed", paragraphIndex < block.paragraphs.length - 1 ? "mb-5" : ""]}>
+                {paragraph}
+              </p>
+            ))
+          ) : null}
+
+          {block.type === "quote" ? (
+            <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
+              {block.text}
+            </blockquote>
+          ) : null}
+
+          {block.type === "bullets" ? (
+            <ul class="space-y-2.5 mt-4">
+              {block.items.map((item, itemIndex) => (
+                <li class="text-text-secondary font-body flex gap-3">
+                  {block.ordered ? (
+                    <span class="text-accent font-mono text-xs mt-1">{String(itemIndex + 1).padStart(2, "0")}</span>
+                  ) : (
+                    <span class="text-accent/50 flex-shrink-0">—</span>
+                  )}
+                  <span>
+                    {typeof item === "string" ? (
+                      item
+                    ) : (
+                      <>
+                        {item.title ? <strong class="text-text-primary font-display">{item.title}</strong> : null}
+                        {item.title ? " — " : ""}
+                        {item.text}
+                      </>
+                    )}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {block.type === "chips" ? (
+            <div class="space-y-3 mt-4">
+              {block.rows.map((row) => (
+                <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+                  {row.map((chip, chipIndex) => (
+                    <>
+                      <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
+                      {chipIndex < row.length - 1 ? <span class="text-accent/40">&rarr;</span> : null}
+                    </>
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : null}
+
+          {block.type === "subsections" ? (
+            <>
+              {block.items.map((item) => (
+                <div class="mt-10 first:mt-0">
+                  <h4 class="text-base font-display font-700 text-text-primary mb-3">{item.title}</h4>
+                  {item.paragraphs?.map((paragraph, paragraphIndex) => (
+                    <p class:list={["text-text-secondary font-body leading-relaxed", paragraphIndex < (item.paragraphs?.length ?? 0) - 1 ? "mb-5" : ""]}>
+                      {paragraph}
+                    </p>
+                  ))}
+                  {item.chips ? (
+                    <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+                      {item.chips.map((chip, chipIndex) => (
+                        <>
+                          <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
+                          {chipIndex < item.chips.length - 1 ? <span class="text-accent/40">&rarr;</span> : null}
+                        </>
+                      ))}
+                    </div>
+                  ) : null}
+                  {item.bullets ? (
+                    <ul class="space-y-2.5 mt-4">
+                      {item.bullets.map((bullet, bulletIndex) => (
+                        <li class="text-text-secondary font-body flex gap-3">
+                          {item.ordered ? (
+                            <span class="text-accent font-mono text-xs mt-1">{String(bulletIndex + 1).padStart(2, "0")}</span>
+                          ) : (
+                            <span class="text-accent/50 flex-shrink-0">—</span>
+                          )}
+                          <span>
+                            {typeof bullet === "string" ? (
+                              bullet
+                            ) : (
+                              <>
+                                {bullet.title ? <strong class="text-text-primary font-display">{bullet.title}</strong> : null}
+                                {bullet.title ? " — " : ""}
+                                {bullet.text}
+                              </>
+                            )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
+              ))}
+            </>
+          ) : null}
+
+          {block.type === "cards" ? (
+            <div class="space-y-4">
+              {block.items.map((card) => (
+                <a
+                  href={card.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block bg-elevated border border-border rounded-xl p-6 hover:border-accent-border transition-colors duration-300"
+                >
+                  <div class="flex items-center justify-between gap-4">
+                    <div>
+                      <p class="text-text-primary font-display font-700">{card.title}</p>
+                      <p class="text-text-secondary font-body text-sm mt-1">{card.description}</p>
+                    </div>
+                    <span class="text-accent">&nearr;</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          ) : null}
+
+          {block.type === "figure" ? (
+            <ImageLightbox
+              client:visible
+              image={block.image.src}
+              title={block.image.title ?? block.image.alt}
+              description={block.image.description ?? ""}
+            >
+              <figure class:list={["mt-8", block.image.figureClass]}>
+                <img
+                  src={block.image.src}
+                  alt={block.image.alt}
+                  loading="lazy"
+                  class:list={["block max-w-full h-auto", block.image.imageClass]}
+                />
+                {block.image.title || block.image.description ? (
+                  <figcaption class="px-5 py-4 sm:px-6 sm:py-5 bg-bg-elevated/40 border-t border-border">
+                    {block.image.title ? (
+                      <div class="flex items-center justify-between gap-4 mb-2">
+                        <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">{block.image.title}</h4>
+                        <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">Tap to expand</span>
+                      </div>
+                    ) : null}
+                    {block.image.description ? (
+                      <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">{block.image.description}</p>
+                    ) : null}
+                  </figcaption>
+                ) : null}
+              </figure>
+            </ImageLightbox>
+          ) : null}
+
+          {block.type === "gallery" ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+              {block.images.map((image) => (
+                <ImageLightbox client:visible image={image.src} title={image.title} description={image.description}>
+                  <figure class:list={["group overflow-hidden rounded-2xl border border-border bg-bg-elevated/60", image.cardClass]}>
+                    <div class="overflow-hidden bg-bg-surface/60">
+                      <img
+                        src={image.src}
+                        alt={image.title}
+                        loading="lazy"
+                        class:list={["w-full object-contain object-top transition-transform duration-500 group-hover:scale-[1.015]", image.imageClass]}
+                      />
+                    </div>
+                    <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
+                      <div class="flex items-center justify-between gap-4 mb-2">
+                        <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">{image.title}</h4>
+                        <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">Tap to expand</span>
+                      </div>
+                      <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">{image.description}</p>
+                    </figcaption>
+                  </figure>
+                </ImageLightbox>
+              ))}
+            </div>
+          ) : null}
+
+          {block.type === "spotlights" ? (
+            <div class="mt-10 sm:mt-14 md:mt-16 space-y-12 sm:space-y-16 md:space-y-20">
+              {block.items.map((item) => (
+                <div class:list={[
+                  "grid grid-cols-1 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] gap-8 md:gap-12 items-start",
+                  item.imagePosition === "right" && "md:grid-cols-[minmax(0,1fr)_minmax(0,320px)]",
+                ]}>
+                  <div class:list={[item.imagePosition === "right" && "md:order-2"]}>
+                    <figure>
+                      <img
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        loading="lazy"
+                        class:list={["w-full", item.image.className]}
+                      />
+                    </figure>
+                  </div>
+
+                  <div class:list={["space-y-4", item.imagePosition === "right" && "md:order-1"]}>
+                    {item.eyebrow ? (
+                      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/80">{item.eyebrow}</p>
+                    ) : null}
+                    <h4 class="text-xl sm:text-2xl font-display font-700 text-text-primary">{item.title}</h4>
+                    {item.paragraphs.map((paragraph) => (
+                      <p class="text-text-secondary font-body leading-relaxed">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </>
+      ))}
+    </section>
+  </ScrollReveal>
+))}
+
+<CaseStudyRelatedLinks links={relatedLinks} />

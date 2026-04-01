@@ -1,0 +1,57 @@
+---
+import AnimatedHero from "../react/AnimatedHero.tsx";
+---
+
+<section
+  id="hero"
+  class="min-h-screen flex items-center pt-20 sm:pt-24 pb-12 sm:pb-16 relative overflow-hidden"
+>
+  <!-- Background image — right half -->
+  <div class="absolute inset-y-0 right-0 w-full md:w-1/2 z-0">
+    <img
+      src="/assets/hero-bg.jpg"
+      alt=""
+      class="w-full h-full object-cover opacity-60"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-bg-deep via-bg-deep/80 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-bg-deep/30 via-transparent to-bg-deep"></div>
+  </div>
+
+  <!-- Ambient orbs -->
+  <div class="hero-orb"></div>
+  <div class="hero-orb-2"></div>
+
+  <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 w-full relative z-10">
+    <div class="md:w-1/2">
+      <div class="mb-8">
+        <span class="section-number">Product Designer & Builder</span>
+      </div>
+
+      <AnimatedHero
+        client:load
+        tagline="I'm Chetan, building clarity in complex systems."
+        subtitle="Designer who ships. I use AI tools to build what I design — because the bottleneck isn't code, it's knowing what to build and why."
+        bio=""
+      />
+
+      <div class="mt-12 flex flex-col sm:flex-row gap-4">
+        <a
+          href="#work"
+          class="inline-flex items-center justify-center gap-2 bg-accent text-bg-deep font-display font-700 text-sm px-7 py-3 hover:bg-accent/90 transition-colors duration-300"
+        >
+          View Case Studies
+        </a>
+        <a
+          href="https://drive.google.com/file/d/1KQSSWbCDAwvKiQgXSI1ssj7m3p-vtZmD/view"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-3 font-mono text-sm text-text-secondary hover:text-accent transition-colors duration-300"
+        >
+          <span class="w-6 h-px bg-accent/40"></span>
+          Open Resume
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
