@@ -15,53 +15,22 @@ const { title, tagline, description, tags, liveUrl, repoUrl, caseStudyUrl } = As
 ---
 
 <ProjectCardHover client:visible>
-  <div class="p-6 h-full flex flex-col">
-    <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider mb-4 px-2.5 py-1 w-fit border"
-      style="background: rgba(200, 165, 85, 0.06); color: #C8A555; border-color: rgba(200, 165, 85, 0.15);">
-      Built with AI
-    </span>
+  <a href={caseStudyUrl ?? liveUrl ?? repoUrl ?? "#"} class="block h-full no-underline">
+    <div class="p-6 h-full flex flex-col">
+      <span class="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider mb-4 px-2.5 py-1 w-fit border"
+        style="background: rgba(200, 165, 85, 0.06); color: #C8A555; border-color: rgba(200, 165, 85, 0.15);">
+        Built with AI
+      </span>
 
-    <h3 class="text-lg font-display font-700 text-text-primary">{title}</h3>
-    <p class="text-text-secondary font-body text-sm italic mt-1.5">{tagline}</p>
-    <p class="text-text-secondary font-body text-sm mt-3 flex-1 leading-relaxed">{description}</p>
+      <h3 class="text-lg font-display font-700 text-text-primary">{title}</h3>
+      <p class="text-text-secondary font-body text-sm italic mt-1.5">{tagline}</p>
+      <p class="text-text-secondary font-body text-sm mt-3 flex-1 leading-relaxed">{description}</p>
 
-    <div class="flex flex-wrap gap-2 mt-5">
-      {tags.map((tag) => (
-        <span class="tag-pill">{tag}</span>
-      ))}
-    </div>
-
-    {(caseStudyUrl || liveUrl || repoUrl) && (
-      <div class="flex items-center gap-5 mt-5 pt-4 border-t border-border">
-        {caseStudyUrl && (
-          <a
-            href={caseStudyUrl}
-            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
-          >
-            Case Study &rarr;
-          </a>
-        )}
-        {liveUrl && (
-          <a
-            href={liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
-          >
-            Live &#8599;
-          </a>
-        )}
-        {repoUrl && (
-          <a
-            href={repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-mono text-xs text-text-secondary hover:text-accent link-hover transition-colors duration-300"
-          >
-            GitHub &#8599;
-          </a>
-        )}
+      <div class="flex flex-wrap gap-2 mt-5">
+        {tags.map((tag) => (
+          <span class="tag-pill">{tag}</span>
+        ))}
       </div>
-    )}
-  </div>
+    </div>
+  </a>
 </ProjectCardHover>

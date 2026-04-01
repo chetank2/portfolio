@@ -2,12 +2,15 @@
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ImageLightbox from "../../components/react/ImageLightbox.tsx";
 import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
+import { getProjectLinksBySlug } from "../../data/projects";
+import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
 
 interface Props {
   study: StandaloneCaseStudy;
 }
 
 const { study } = Astro.props as Props;
+const relatedLinks = getProjectLinksBySlug(study.slug);
 ---
 
 <ScrollReveal client:visible>
@@ -203,3 +206,4 @@ const { study } = Astro.props as Props;
   </ScrollReveal>
 ))}
 
+<CaseStudyRelatedLinks links={relatedLinks} />

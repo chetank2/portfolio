@@ -1,5 +1,11 @@
 import type { Project, Experience, Article } from "../types";
 
+export interface ProjectLink {
+  title: string;
+  description: string;
+  href: string;
+}
+
 export const deepProjects: Project[] = [
   {
     slug: "ft-tms-redesign",
@@ -301,3 +307,51 @@ export const article: Article = {
     "Examines table design in complex logistics products. A complete redesign of data tables across six logistics products with a five-part design framework.",
   url: "https://medium.com/@chetank19/designing-tables-in-complex-logistics-products-fa003ebaca56",
 };
+
+const allProjects: Project[] = [
+  ...deepProjects,
+  ...supportingProjects,
+  ...aiProjects,
+  ...appProjects,
+  ...websiteProjects,
+];
+
+export function findProjectBySlug(slug: string): Project | undefined {
+  return allProjects.find((project) => project.slug === slug);
+}
+
+export function getProjectLinksBySlug(slug: string): ProjectLink[] {
+  const project = findProjectBySlug(slug);
+
+  if (!project) {
+    return [];
+  }
+
+  const links: ProjectLink[] = [];
+
+  if (project.liveUrl) {
+    links.push({
+      title: "Live Product",
+      description: "Open the shipped product or live demo.",
+      href: project.liveUrl,
+    });
+  }
+
+  if (project.repoUrl) {
+    links.push({
+      title: "GitHub Repository",
+      description: "View the project code and build details.",
+      href: project.repoUrl,
+    });
+  }
+
+  if (project.npmUrl) {
+    links.push({
+      title: "npm Package",
+      description: "Browse the published package and install details.",
+      href: project.npmUrl,
+    });
+  }
+
+  return links;
+}
