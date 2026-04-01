@@ -200,6 +200,38 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
               ))}
             </div>
           ) : null}
+
+          {block.type === "spotlights" ? (
+            <div class="mt-10 sm:mt-14 md:mt-16 space-y-12 sm:space-y-16 md:space-y-20">
+              {block.items.map((item) => (
+                <div class:list={[
+                  "grid grid-cols-1 md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] gap-8 md:gap-12 items-start",
+                  item.imagePosition === "right" && "md:grid-cols-[minmax(0,1fr)_minmax(0,320px)]",
+                ]}>
+                  <div class:list={[item.imagePosition === "right" && "md:order-2"]}>
+                    <figure>
+                      <img
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        loading="lazy"
+                        class:list={["w-full", item.image.className]}
+                      />
+                    </figure>
+                  </div>
+
+                  <div class:list={["space-y-4", item.imagePosition === "right" && "md:order-1"]}>
+                    {item.eyebrow ? (
+                      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/80">{item.eyebrow}</p>
+                    ) : null}
+                    <h4 class="text-xl sm:text-2xl font-display font-700 text-text-primary">{item.title}</h4>
+                    {item.paragraphs.map((paragraph) => (
+                      <p class="text-text-secondary font-body leading-relaxed">{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </>
       ))}
     </section>

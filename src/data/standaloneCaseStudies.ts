@@ -17,6 +17,12 @@ export interface StandaloneGalleryImage {
   imageClass?: string;
 }
 
+export interface StandaloneSpotlightImage {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
 export interface StandaloneCardLink {
   title: string;
   description: string;
@@ -36,6 +42,14 @@ export interface StandaloneSubsection {
   ordered?: boolean;
 }
 
+export interface StandaloneSpotlightItem {
+  eyebrow?: string;
+  title: string;
+  paragraphs: string[];
+  image: StandaloneSpotlightImage;
+  imagePosition?: "left" | "right";
+}
+
 export type StandaloneContentBlock =
   | { type: "paragraphs"; paragraphs: string[] }
   | { type: "quote"; text: string }
@@ -43,7 +57,8 @@ export type StandaloneContentBlock =
   | { type: "chips"; rows: string[][] }
   | { type: "subsections"; items: StandaloneSubsection[] }
   | { type: "cards"; items: StandaloneCardLink[] }
-  | { type: "gallery"; images: StandaloneGalleryImage[] };
+  | { type: "gallery"; images: StandaloneGalleryImage[] }
+  | { type: "spotlights"; items: StandaloneSpotlightItem[] };
 
 export interface StandaloneCaseStudySection {
   title: string;
@@ -98,6 +113,11 @@ const cards = (...items: StandaloneCardLink[]): StandaloneContentBlock => ({
 const gallery = (...images: StandaloneGalleryImage[]): StandaloneContentBlock => ({
   type: "gallery",
   images,
+});
+
+const spotlights = (...items: StandaloneSpotlightItem[]): StandaloneContentBlock => ({
+  type: "spotlights",
+  items,
 });
 
 const mediaImage = (src: string, alt: string, className?: string): StandaloneImageMedia => ({
@@ -156,6 +176,13 @@ function serializeBlock(block: StandaloneContentBlock): string[] {
         ...block.images.map((image) => `- ${image.title}: ${image.description}`),
         "",
       ];
+    case "spotlights":
+      return block.items.flatMap((item) => [
+        `### ${item.title}`,
+        "",
+        ...(item.eyebrow ? [`- ${item.eyebrow}`, ""] : []),
+        ...item.paragraphs.flatMap((paragraph) => [paragraph, ""]),
+      ]);
   }
 }
 
@@ -586,7 +613,7 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
       { label: "Company", value: "Konic Technologies" },
       { label: "Timeline", value: "2021 - 2023" },
     ],
-    media: mediaImage("/assets/app-case-studies/aftercrop.svg", "Aftercrop case study preview"),
+    media: mediaImage("/assets/aftercrop/hero.avif", "Aftercrop warehouse operations across desktop and mobile", "w-full h-auto object-cover"),
     sections: [
       {
         title: "Overview",
@@ -697,76 +724,93 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
       {
         title: "The Solution",
         blocks: [
-          subsections(
-            {
-              title: "Focus 1: Easy-to-use Mobile-first Design",
-              paragraphs: [
-                "Tables are the most prominent way of displaying information — but terrible on mobile. We replaced all tables with cards and lists, carefully designing each card with just the right amount of information.",
-                "We kept elements similar to a native mobile app so users who've never used websites don't find it disruptive. We used switches and selection inputs so users can skip typing wherever possible — taps and swipes instead of keyboard input.",
-                "The app being as easy as it is meant no separate training was necessary. Most users felt comfortable within a day or two. Our developers ensured the site loads fast so users aren't waiting around looking at loading screens.",
-              ],
-            },
-            {
-              title: "Focus 2: Process Similar to Current Flow",
-              paragraphs: [
-                "The 'Creating an Incoming Shipment' page is the most important page in the application. After observing the unloading process and interviewing managers, we noticed the main pain point — managers have to keep track of many hand-written receipts and ledger entries. We simplified it into three sections. For a minimal submission, a manager could add an entire incoming shipment in a couple of minutes.",
-                "For outgoing shipments, we visualised the process as an 'Add to Cart' experience from e-commerce. The manager can just pick stock from the list and add it to the truck. This avoids tedious forms and leverages powerful filtering on the stock page.",
-              ],
-            },
-            {
-              title: "Focus 3: Data Security",
-              paragraphs: [
-                "We introduced user roles with exact permissions — an owner could let a manager only create records while restricting edits or deletes. 'A warehouse manager should not have access to edit a record unless an admin approves it' was one of the most popular requirements.",
-                "The vehicle logs page is the simplest page we made — just one input field to track the vehicle number. When a vehicle leaves, a 'vehicle left' button is all the security guard presses. Built for staff who may be uneducated but can repeat a simple guided process.",
-              ],
-            },
-          ),
           paragraphs(
-            "The shipped product was not a generic dashboard. It was a mobile-first operations system for the people actually running the warehouse floor: managers receiving stock, staff tracking movement, guards logging vehicles, and owners reviewing what changed.",
-            "These production screens show how the experience was structured around the real operational loop: receive incoming shipments, capture product-level details, maintain traceability, monitor live stock, log vehicle activity, and control who can do what.",
+            "We started with three focus areas for the initial prototype: mobile-first usability, keeping the process as close as possible to how warehouses already work, and building enough control into the system so owners could trust the data.",
           ),
-          gallery(
+          spotlights(
             {
-              src: "/assets/aftercrop/incoming-shipments.webp",
-              title: "Incoming Shipments",
-              description: "The operational inbox for newly arrived loads. Managers can scan what has come in, open the right shipment quickly, and move straight into intake without navigating a desktop-style table.",
-              cardClass: "md:col-span-1",
-              imageClass: "h-[32rem] sm:h-[36rem] md:h-[40rem]",
+              eyebrow: "Focus 1: Easy to use mobile-first design",
+              title: "Tables vs Lists and Cards",
+              imagePosition: "left",
+              image: {
+                src: "/assets/aftercrop/incoming-shipments.webp",
+                alt: "Aftercrop incoming shipments mobile screen",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "Tables are the most prominent way of displaying information, but they are terrible interfaces for small screens like mobile phones. We replaced report-style tables with cards and lists, carefully choosing just the right amount of information for each view.",
+                "We kept some of the interaction language similar to native mobile apps so users who had never used web software before would not find it disruptive. The goal was a continuous flow of information from the first list to the most detailed record.",
+              ],
             },
             {
-              src: "/assets/aftercrop/new-shipment.webp",
-              title: "New Shipment",
-              description: "The core intake workflow broken into simple steps: shipment, products, and documents. It keeps data entry lightweight while still capturing the details warehouses need at receiving time.",
-              cardClass: "md:col-span-1",
-              imageClass: "h-[32rem] sm:h-[36rem] md:h-[40rem]",
+              eyebrow: "As little typing as possible",
+              title: "Selection inputs over keyboard-heavy forms",
+              imagePosition: "right",
+              image: {
+                src: "/assets/aftercrop/new-shipment.webp",
+                alt: "Aftercrop new shipment mobile form",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "We used intuitive UI elements like switches and selection inputs so users could skip typing whenever possible. Taps, swipes, and right-place actions mattered more than forcing long form filling on a phone.",
+                "Because the app was easy to use, there was no separate training phase needed for adaptation. Most users felt comfortable within a day or two, and the product was fast enough that they were not waiting around on loading screens.",
+              ],
             },
             {
-              src: "/assets/aftercrop/shipment-details.webp",
-              title: "Shipment Details",
-              description: "A lot-level record with bags, weights, invoice weight, lot number, farmer mark, packing type, chamber location, and documents. This is the traceability layer that turns a shipment into an auditable warehouse record.",
-              cardClass: "md:col-span-2",
-              imageClass: "h-[34rem] sm:h-[38rem] md:h-[42rem]",
+              eyebrow: "Focus 2: Process as similar as possible to the current flow",
+              title: "Simplifying the most used screen",
+              imagePosition: "left",
+              image: {
+                src: "/assets/aftercrop/shipment-details.webp",
+                alt: "Aftercrop shipment details mobile screen",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "The incoming shipment flow was the most important page in the application. After repeatedly observing unloading operations and interviewing managers, we saw the same pain point: too many handwritten receipts and ledger entries to track while stock was being received.",
+                "We reduced the flow into three clear sections and optimized for one metric: the time it takes a manager to complete the form. For a minimal submission, a manager could add an entire incoming shipment in a couple of minutes.",
+              ],
             },
             {
-              src: "/assets/aftercrop/stock.webp",
-              title: "Stock",
-              description: "A live inventory view designed for phones. Instead of heavy tables, stock is surfaced as scannable cards showing customer, contract, quantity, weight, and whether goods are in truck flow or bonded storage.",
-              cardClass: "md:col-span-1",
-              imageClass: "h-[32rem] sm:h-[36rem] md:h-[40rem]",
+              eyebrow: "A familiar add-to-cart like experience",
+              title: "Stock turned into a picking workflow",
+              imagePosition: "right",
+              image: {
+                src: "/assets/aftercrop/stock.webp",
+                alt: "Aftercrop stock mobile screen",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "The next most important workflow was outgoing shipment creation. Managers needed to select the right stock locations, update balances, and move items into a truck without spending time in tedious forms.",
+                "We visualized the outgoing flow as something closer to an add-to-cart experience from e-commerce. A manager could pick stock directly from the list and add it to the truck, leaning on powerful filtering instead of filling repeated forms.",
+              ],
             },
             {
-              src: "/assets/aftercrop/vehicle-logs.webp",
-              title: "Vehicle Logs",
-              description: "A deliberately simple gate workflow for yard movement. Staff can record vehicle entries and mark exit with minimal input, which keeps security and movement tracking usable even for low-literacy roles.",
-              cardClass: "md:col-span-1",
-              imageClass: "h-[32rem] sm:h-[36rem] md:h-[40rem]",
+              eyebrow: "Focus 3: Data security",
+              title: "User roles and permissions",
+              imagePosition: "left",
+              image: {
+                src: "/assets/aftercrop/users.webp",
+                alt: "Aftercrop users and roles screen",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "One of the most common customer requirements was simple: a warehouse manager should not be able to edit a record unless an admin approves it. Owners needed control without turning the product into an enterprise setup project.",
+                "We introduced role-based access so each user reflected a real warehouse responsibility. Owners could allow creation while restricting edits or deletes, which made the system safer without making it harder to use.",
+              ],
             },
             {
-              src: "/assets/aftercrop/users.webp",
-              title: "Users & Roles",
-              description: "The access-control layer for warehouse teams. Admins can segment staff, clients, and managers so the system stays simple for frontline workers while still giving owners tighter control over permissions.",
-              cardClass: "md:col-span-2",
-              imageClass: "h-[32rem] sm:h-[36rem] md:h-[40rem]",
+              eyebrow: "Even the security guard can use it",
+              title: "Vehicle logs with minimal input",
+              imagePosition: "right",
+              image: {
+                src: "/assets/aftercrop/vehicle-logs.webp",
+                alt: "Aftercrop vehicle logs screen",
+                className: "h-[30rem] sm:h-[34rem] object-contain",
+              },
+              paragraphs: [
+                "A full audit of vehicles entering and leaving the warehouse becomes critical during emergencies, but the people working at the gate are often not comfortable with complex software.",
+                "The vehicle logs page became one of the simplest screens we built. It focused on one primary field, the vehicle number, and a single clear action: mark when the vehicle left. That kept the workflow usable for the people who actually needed to perform it.",
+              ],
             },
           ),
         ],
