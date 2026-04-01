@@ -2,7 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
-import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import MachinePageShell from "../../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import CaseStudyRelatedLinks from "../../components/astro/CaseStudyRelatedLinks.astro";
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
@@ -46,6 +46,18 @@ const machineRelatedLinksText = relatedLinks.length
 const currentIndex = caseStudies.findIndex((cs) => cs.slug === caseStudy.slug);
 const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
 const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+const machineNavigationText =
+  prevStudy || nextStudy
+    ? [
+        "",
+        "## Navigation",
+        prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
+        nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : "";
+const machinePageText = `${machineText}${machineRelatedLinksText}${machineNavigationText}`;
 
 let Content;
 if (!contentLoader) {
@@ -172,28 +184,18 @@ Content = contentModule.default;
           storageKey={`case-study:${caseStudy.slug}`}
           title={caseStudy.title}
         >
-          <MachineTextBlock text={`${machineText}${machineRelatedLinksText}`} />
-          {(prevStudy || nextStudy) && (
-            <MachineTextBlock text={[
-              "",
-              "## Navigation",
-              prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
-              nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
-            ].filter(Boolean).join("\n")} />
-          )}
+          <MachinePageShell
+            title={caseStudy.title}
+            pageHref={`/work/${caseStudy.slug}`}
+            text={machinePageText}
+          />
         </ProtectedCaseStudy>
       ) : (
-        <>
-          <MachineTextBlock text={`${machineText}${machineRelatedLinksText}`} />
-          {(prevStudy || nextStudy) && (
-            <MachineTextBlock text={[
-              "",
-              "## Navigation",
-              prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
-              nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
-            ].filter(Boolean).join("\n")} />
-          )}
-        </>
+        <MachinePageShell
+          title={caseStudy.title}
+          pageHref={`/work/${caseStudy.slug}`}
+          text={machinePageText}
+        />
       )}
     </div>
   </main>

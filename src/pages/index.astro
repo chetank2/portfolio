@@ -9,7 +9,7 @@ import AIProjectCard from "../components/astro/AIProjectCard.astro";
 import ArticleCard from "../components/astro/ArticleCard.astro";
 import WebsiteCard from "../components/astro/WebsiteCard.astro";
 import TimelineItem from "../components/astro/TimelineItem.astro";
-import MachineTextBlock from "../components/astro/MachineTextBlock.astro";
+import MachinePageShell from "../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../components/astro/ViewModeToggle.astro";
 import Footer from "../components/astro/Footer.astro";
 import ScrollReveal from "../components/react/ScrollReveal.tsx";
@@ -85,7 +85,12 @@ const homeMachineText = [
 
   <main id="main">
     <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
-      <MachineTextBlock text={homeMachineText} />
+      <MachinePageShell
+        title="Chetan Kummari"
+        pageHref="/"
+        pageLabel="portfolio page"
+        text={homeMachineText}
+      />
     </div>
 
     <div data-view-panel="human">

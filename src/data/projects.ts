@@ -6,6 +6,12 @@ export interface ProjectLink {
   href: string;
 }
 
+export const portfolioMachineLinks = {
+  resumeHref: "/#resume",
+  emailHref: "mailto:mymailchetan25@gmail.com",
+  linkedInHref: "https://linkedin.com/in/chetan-kumar25/",
+};
+
 export const deepProjects: Project[] = [
   {
     slug: "ft-tms-redesign",

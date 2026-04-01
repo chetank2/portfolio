@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/astro/Navigation.astro";
 import Footer from "../../components/astro/Footer.astro";
 import CaseStudyView from "../../components/astro/CaseStudyView.astro";
-import MachineTextBlock from "../../components/astro/MachineTextBlock.astro";
+import MachinePageShell from "../../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import { standaloneCaseStudies, standaloneCaseStudyMachineText } from "../../data/standaloneCaseStudies";
 
@@ -25,7 +25,7 @@ const study = standaloneCaseStudies["inflight"];
       </div>
     </div>
     <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
-      <MachineTextBlock text={standaloneCaseStudyMachineText[study.slug]} />
+      <MachinePageShell title={study.title} pageHref={`/work/${study.slug}`} text={standaloneCaseStudyMachineText[study.slug]} />
     </div>
   </main>
   <ViewModeToggle />

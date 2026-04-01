@@ -1,0 +1,107 @@
+---
+import MachineTextBlock from "./MachineTextBlock.astro";
+import { portfolioMachineLinks } from "../../data/projects";
+
+interface MachineLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  text: string;
+  pageHref: string;
+  pageLabel?: string;
+  extraLinks?: MachineLink[];
+}
+
+const {
+  title,
+  text,
+  pageHref,
+  pageLabel = "case study page",
+  extraLinks = [],
+} = Astro.props as Props;
+
+const links: MachineLink[] = [
+  { label: pageLabel, href: pageHref },
+  { label: "resume", href: portfolioMachineLinks.resumeHref },
+  { label: "email", href: portfolioMachineLinks.emailHref },
+  { label: "linkedin", href: portfolioMachineLinks.linkedInHref },
+  ...extraLinks,
+];
+---
+
+<section class="machine-page-shell" data-machine-shell>
+  <div class="machine-page-shell__layout">
+    <aside class="machine-page-shell__sidebar">
+      <div class="machine-page-shell__sidebar-inner">
+        <p class="machine-page-shell__eyebrow">machine</p>
+        <h1 class="machine-page-shell__title">{title}</h1>
+        <nav class="machine-page-shell__nav" aria-label="Machine mode links">
+          {links.map((link) => (
+            <a class="machine-page-shell__nav-link" href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </aside>
+
+    <section class="machine-page-shell__content">
+      <div class="machine-page-shell__toolbar">
+        <button
+          type="button"
+          class="machine-page-shell__copy"
+          data-machine-copy
+          aria-label="Copy machine content"
+          title="Copy machine content"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="machine-page-shell__copy-icon">
+            <path
+              d="M9 9h9v9H9zM6 6h9v2H8v7H6z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div data-machine-copy-target>
+        <MachineTextBlock text={text} />
+      </div>
+    </section>
+  </div>
+</section>
+
+<script is:inline>
+  (() => {
+    const roots = document.querySelectorAll("[data-machine-shell]");
+    roots.forEach((root) => {
+      const button = root.querySelector("[data-machine-copy]");
+      const target = root.querySelector("[data-machine-copy-target]");
+      if (!(button instanceof HTMLButtonElement) || !(target instanceof HTMLElement)) return;
+
+      button.addEventListener("click", async () => {
+        const content = target.innerText.trim();
+        if (!content) return;
+
+        try {
+          await navigator.clipboard.writeText(content);
+          button.dataset.copied = "true";
+          window.setTimeout(() => {
+            delete button.dataset.copied;
+          }, 1200);
+        } catch (_error) {
+          button.dataset.copied = "false";
+          window.setTimeout(() => {
+            delete button.dataset.copied;
+          }, 1200);
+        }
+      });
+    });
+  })();
+</script>
