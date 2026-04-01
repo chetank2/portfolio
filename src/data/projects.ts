@@ -13,17 +13,6 @@ export const deepProjects: Project[] = [
     caseStudyUrl: "/work/ft-tms-redesign",
   },
   {
-    slug: "journey-redesign",
-    title: "My Journeys",
-    tagline: "Designing a unified operational surface for tracking, decision-making, and closure",
-    description:
-      "Redesigned a broken table and lifecycle system into a unified operational surface that models journeys correctly and helps teams decide and act faster.",
-    tags: ["System Design", "UX Redesign", "Freight Tiger"],
-    type: "deep",
-    protected: true,
-    caseStudyUrl: "/work/journey-redesign",
-  },
-  {
     slug: "control-tower",
     title: "Control Tower",
     tagline: "From visibility to exception orchestration",
