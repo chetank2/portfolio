@@ -7,24 +7,23 @@ interface MachineLink {
   href: string;
 }
 
+const formatMachineLink = (link: MachineLink) => `[${link.label}](${link.href})`;
+
 interface Props {
   title: string;
   text: string;
   pageHref: string;
-  pageLabel?: string;
   extraLinks?: MachineLink[];
 }
 
 const {
-  title,
   text,
   pageHref,
-  pageLabel = "case study page",
   extraLinks = [],
 } = Astro.props as Props;
 
 const links: MachineLink[] = [
-  { label: pageLabel, href: pageHref },
+  { label: "page", href: pageHref },
   { label: "resume", href: portfolioMachineLinks.resumeHref },
   { label: "email", href: portfolioMachineLinks.emailHref },
   { label: "linkedin", href: portfolioMachineLinks.linkedInHref },
@@ -34,22 +33,15 @@ const links: MachineLink[] = [
 
 <section class="machine-page-shell" data-machine-shell>
   <div class="machine-page-shell__layout">
-    <aside class="machine-page-shell__sidebar">
-      <div class="machine-page-shell__sidebar-inner">
-        <p class="machine-page-shell__eyebrow">machine</p>
-        <h1 class="machine-page-shell__title">{title}</h1>
+    <section class="machine-page-shell__content">
+      <div class="machine-page-shell__toolbar">
         <nav class="machine-page-shell__nav" aria-label="Machine mode links">
           {links.map((link) => (
             <a class="machine-page-shell__nav-link" href={link.href}>
-              {link.label}
+              {formatMachineLink(link)}
             </a>
           ))}
         </nav>
-      </div>
-    </aside>
-
-    <section class="machine-page-shell__content">
-      <div class="machine-page-shell__toolbar">
         <button
           type="button"
           class="machine-page-shell__copy"
