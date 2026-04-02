@@ -32,8 +32,7 @@ export default function NavigationMenu({ links }: Props) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex flex-col items-start justify-center px-8"
-            style={{ background: "rgba(11, 10, 8, 0.97)" }}
+            className="mobile-menu-backdrop fixed inset-0 z-50 flex flex-col items-start justify-center px-8"
           >
             <button
               onClick={() => setOpen(false)}

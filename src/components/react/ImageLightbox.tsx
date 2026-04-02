@@ -47,9 +47,8 @@ export default function ImageLightbox({ image, title, description, children }: P
           onClick={() => setOpen(false)}
         >
           <div
-            className="absolute inset-0 backdrop-blur-sm"
+            className="modal-backdrop absolute inset-0 backdrop-blur-sm"
             style={{
-              background: "rgba(11, 10, 8, 0.90)",
               animation: "fadeIn 200ms ease-out",
             }}
           />

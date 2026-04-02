@@ -1,5 +1,6 @@
 ---
 import NavigationMenu from "../react/NavigationMenu.tsx";
+import ThemeToggle from "../react/ThemeToggle.tsx";
 
 const links = [
   { label: "Work", href: "/#work", number: "01" },
@@ -11,8 +12,7 @@ const links = [
 ---
 
 <header
-  class="fixed top-0 left-0 right-0 z-50 border-b border-border/60"
-  style="background: rgba(11, 10, 8, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);"
+  class="site-header fixed top-0 left-0 right-0 z-50 border-b"
 >
   <nav class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 h-14 sm:h-16 2xl:h-20 flex items-center justify-between">
     <a href="/" class="inline-flex items-center text-text-primary hover:opacity-80 transition-opacity duration-300" aria-label="Chetan Kummari home">
@@ -21,26 +21,30 @@ const links = [
         alt="చే."
         width="36"
         height="44"
-        class="h-7 sm:h-8 w-auto"
+        class="site-logo h-7 sm:h-8 w-auto"
         loading="eager"
       />
     </a>
 
     <!-- Desktop nav -->
-    <div class="hidden md:flex items-center gap-8">
-      {links.map((link) => (
-        <a
-          href={link.href}
-          class="flex items-baseline gap-1.5 text-text-secondary hover:text-accent transition-colors duration-300 link-hover"
-        >
-          <span class="font-mono text-[10px] text-accent/60">{link.number}</span>
-          <span class="font-mono text-xs">{link.label}</span>
-        </a>
-      ))}
+    <div class="hidden md:flex items-center gap-4 lg:gap-8">
+      <div class="flex items-center gap-8">
+        {links.map((link) => (
+          <a
+            href={link.href}
+            class="flex items-baseline gap-1.5 text-text-secondary hover:text-accent transition-colors duration-300 link-hover"
+          >
+            <span class="font-mono text-[10px] text-accent/60">{link.number}</span>
+            <span class="font-mono text-xs">{link.label}</span>
+          </a>
+        ))}
+      </div>
+      <ThemeToggle client:load />
     </div>
 
     <!-- Mobile nav -->
-    <div class="md:hidden">
+    <div class="md:hidden flex items-center gap-2">
+      <ThemeToggle client:load />
       <NavigationMenu client:load links={links} />
     </div>
   </nav>

@@ -280,6 +280,12 @@ But it also revealed a deeper problem that DesignQA wasn't designed to solve, an
 
 # CouponTracker
 
+## Links
+
+- [Live View](https://ftdesignsystem.netlify.app)
+- [npm Package](https://www.npmjs.com/package/ft-design-system)
+- [GitHub Repo](https://github.com/chetanft/components)
+
 ## 1. Overview
 
 CouponTracker began as a practical attempt to solve a messy everyday problem: coupon details were trapped inside screenshots, difficult to compare, and easy to forget once they expired. What started as a screenshot-based coupon extraction idea has now evolved into a much broader system — a production-oriented coupon recognition platform with an Android app, web-based ML training interfaces, a mobile PWA for offline annotation, and a full model training and deployment pipeline.
@@ -1077,13 +1083,13 @@ The deeper challenge was that the design system had to work in an AI-assisted de
 
 ## 4. Scale
 
-- **125+** production-ready React components
-- **190+** custom icons
-- **466+** commits across 10 months
-- **124 versions** published to npm, from v1.0.1 to v5.0.3
-- **13,500+ downloads** in the last year, ~1,200/month
+- **134+** production-ready React components
+- **194** custom icons
+- **476+** commits to date
+- **126 versions** published to npm, from v1.0.1 to v5.0.5
+- **13,880 downloads** in the last year, ~1,157/month
 - **Stack:** React, TypeScript, Tailwind CSS v4, Radix UI, Rollup
-- First published June 2025, actively maintained through March 2026
+- First published June 6, 2025, actively maintained through April 1, 2026
 
 ## 5. Phase 1 — Foundation and Figma Translation
 

@@ -15,7 +15,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class:list={[machineMode && "machine-mode"]}>
+<html lang="en" class:list={["theme-light", machineMode && "machine-mode"]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,6 +41,46 @@ const {
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      (() => {
+        const storageKey = "portfolio-theme";
+        const root = document.documentElement;
+
+        const applyTheme = (theme) => {
+          const nextTheme = theme === "dark" ? "dark" : "light";
+          root.classList.toggle("theme-dark", nextTheme === "dark");
+          root.classList.toggle("theme-light", nextTheme === "light");
+          root.dataset.theme = nextTheme;
+          window.dispatchEvent(
+            new CustomEvent("portfolio-themechange", {
+              detail: { theme: nextTheme },
+            }),
+          );
+        };
+
+        const getTheme = () => {
+          try {
+            const storedTheme = window.localStorage.getItem(storageKey);
+            return storedTheme === "dark" ? "dark" : "light";
+          } catch {
+            return "light";
+          }
+        };
+
+        window.__portfolioTheme = {
+          getTheme: () => (root.classList.contains("theme-dark") ? "dark" : "light"),
+          setTheme: (theme) => {
+            const nextTheme = theme === "dark" ? "dark" : "light";
+            try {
+              window.localStorage.setItem(storageKey, nextTheme);
+            } catch {}
+            applyTheme(nextTheme);
+          },
+        };
+
+        applyTheme(getTheme());
+      })();
+    </script>
     <title>{title}</title>
   </head>
   <body class:list={[machineMode && "machine-mode"]}>

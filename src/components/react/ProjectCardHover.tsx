@@ -11,10 +11,10 @@ export default function ProjectCardHover({ children, className = "", href }: Pro
 
   const style: React.CSSProperties = {
     transform: hovered ? "translateY(-3px)" : "translateY(0)",
-    borderColor: hovered ? "#353225" : "#252318",
-    backgroundColor: hovered ? "#1B1A14" : "#13120E",
+    borderColor: hovered ? "var(--color-border-hover)" : "var(--color-border)",
+    backgroundColor: hovered ? "var(--color-bg-hover)" : "var(--color-bg-surface)",
     boxShadow: hovered
-      ? "0 12px 40px rgba(200, 165, 85, 0.04), 0 2px 8px rgba(0,0,0,0.4)"
+      ? "var(--theme-card-shadow-hover)"
       : "0 0 0 rgba(0,0,0,0)",
     transition: "all 400ms cubic-bezier(0.22, 1, 0.36, 1)",
   };

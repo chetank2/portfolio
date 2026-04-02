@@ -1,3 +1,53 @@
+## Links
+
+<div class="case-study-link-list">
+  <a class="case-study-link-list__item" href="https://ftdesignsystem.netlify.app" target="_blank" rel="noopener noreferrer">
+    <span class="case-study-link-list__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M3 12h18"></path>
+        <path d="M12 3a14.5 14.5 0 0 1 0 18"></path>
+        <path d="M12 3a14.5 14.5 0 0 0 0 18"></path>
+      </svg>
+    </span>
+    <span>Live View</span>
+    <span class="case-study-link-list__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </span>
+  </a>
+  <a class="case-study-link-list__item" href="https://www.npmjs.com/package/ft-design-system" target="_blank" rel="noopener noreferrer">
+    <span class="case-study-link-list__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 7.5h18v9H12v-6H9v6H3z"></path>
+      </svg>
+    </span>
+    <span>npm Package</span>
+    <span class="case-study-link-list__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </span>
+  </a>
+  <a class="case-study-link-list__item" href="https://github.com/chetanft/components" target="_blank" rel="noopener noreferrer">
+    <span class="case-study-link-list__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.58 2 12.22c0 4.5 2.87 8.3 6.84 9.64.5.1.68-.22.68-.49 0-.24-.01-1.03-.01-1.87-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.67.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.09 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05A9.3 9.3 0 0 1 12 6.91c.85 0 1.7.12 2.5.35 1.9-1.33 2.74-1.05 2.74-1.05.56 1.42.21 2.47.11 2.73.64.72 1.03 1.63 1.03 2.75 0 3.96-2.33 4.82-4.56 5.08.36.32.68.95.68 1.92 0 1.39-.01 2.5-.01 2.84 0 .27.18.59.69.49A10.22 10.22 0 0 0 22 12.22C22 6.58 17.52 2 12 2z"></path>
+      </svg>
+    </span>
+    <span>GitHub Repo</span>
+    <span class="case-study-link-list__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </span>
+  </a>
+</div>
+
 ## 1. Overview
 
 As Freight Tiger expanded across dashboards, tables, upload flows, navigation, and charting surfaces, the lack of a unified component library started slowing both design and development. Designers worked in Figma, developers copied UI code between features, and every new workflow introduced more visual and implementation drift.
@@ -30,13 +80,13 @@ The deeper challenge was that the design system had to work in an AI-assisted de
 
 ## 4. Scale
 
-- **125+** production-ready React components
-- **190+** custom icons
-- **466+** commits across 10 months
-- **124 versions** published to [npm](https://www.npmjs.com/package/ft-design-system), from v1.0.1 to v5.0.3
-- **13,500+ downloads** in the last year, ~1,200/month
+- **134+** production-ready React components
+- **194** custom icons
+- **476+** commits to date
+- **126 versions** published to [npm](https://www.npmjs.com/package/ft-design-system), from v1.0.1 to v5.0.5
+- **13,880 downloads** in the last year, ~1,157/month
 - **Stack:** React, TypeScript, Tailwind CSS v4, Radix UI, Rollup
-- First published June 2025, actively maintained through March 2026
+- First published June 6, 2025, actively maintained through April 1, 2026
 
 ## 5. Phase 1 — Foundation and Figma Translation
 
