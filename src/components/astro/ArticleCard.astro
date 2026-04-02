@@ -10,7 +10,7 @@ interface Props {
 const { title, date, categories, summary, url } = Astro.props;
 ---
 
-<div class="border border-border bg-bg-surface p-6 md:p-8 card-accent h-full flex flex-col transition-all duration-400 hover:border-border-hover hover:bg-bg-elevated">
+<div class="border border-border bg-bg-surface radius-xl p-6 md:p-8 card-accent h-full flex flex-col transition-all duration-400 hover:border-border-hover hover:bg-bg-elevated">
   <div class="flex items-center gap-3 font-mono text-xs text-text-tertiary mb-4">
     <span>{date}</span>
     {categories.length > 0 && <span class="text-accent/40">/</span>}

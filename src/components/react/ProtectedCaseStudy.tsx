@@ -89,7 +89,7 @@ export default function ProtectedCaseStudy({
           <button
             type="button"
             onClick={handleLockAgain}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-elevated/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
+            className="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
           >
             <svg
               aria-hidden="true"
@@ -113,7 +113,7 @@ export default function ProtectedCaseStudy({
   }
 
   return (
-    <section className="mt-10 rounded-3xl border border-border bg-bg-elevated/60 p-6 sm:mt-12 sm:p-8">
+    <section className="mt-10 radius-xl border border-border bg-bg-elevated/60 p-6 sm:mt-12 sm:p-8">
       <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent/70">
         Protected Case Study
       </p>
@@ -130,7 +130,7 @@ export default function ProtectedCaseStudy({
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder="Enter password"
-            className="w-full rounded-2xl border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-accent"
+            className="w-full radius-lg border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-accent"
           />
           <button
             type="button"
@@ -176,7 +176,7 @@ export default function ProtectedCaseStudy({
         ) : null}
         <button
           type="submit"
-          className="inline-flex w-fit items-center justify-center rounded-2xl bg-text-primary px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bg-deep transition-opacity hover:opacity-90"
+          className="inline-flex w-fit items-center justify-center radius-lg bg-text-primary px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bg-deep transition-opacity hover:opacity-90"
         >
           Unlock
         </button>

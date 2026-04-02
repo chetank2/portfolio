@@ -31,7 +31,7 @@ export default function NavigationMenu({ links }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
             className="mobile-menu-backdrop fixed inset-0 z-50 flex flex-col items-start justify-center px-8"
           >
             <button
@@ -48,9 +48,9 @@ export default function NavigationMenu({ links }: Props) {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.06 + i * 0.04, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-baseline gap-4 group"
                 >
                   <span className="font-mono text-sm text-accent">{link.number}</span>

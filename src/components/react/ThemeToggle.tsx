@@ -48,7 +48,7 @@ export default function ThemeToggle() {
   return (
     <button
       type="button"
-      className="theme-toggle-button"
+      className="theme-toggle-button radius-lg"
       aria-label={`Switch to ${nextTheme} theme`}
       onClick={() => {
         window.__portfolioTheme?.setTheme(nextTheme);
