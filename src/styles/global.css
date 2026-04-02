@@ -830,57 +830,116 @@ html.dark {
     opacity: 1;
   }
 
-  /* ---- Case study content — responsive ---- */
+  /* ---- Long-form content ---- */
+  .longform-content > :first-child,
   .case-study-content > :first-child {
     margin-top: 0;
   }
 
-  .case-study-content h2 {
-    margin-top: 48px;
-    margin-bottom: 20px;
-    color: var(--color-text-primary);
-    font-family: var(--font-display);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.2;
+  .longform-content > :last-child,
+  .case-study-content > :last-child {
+    margin-bottom: 0;
   }
 
+  .longform-content h2,
+  .case-study-content h2 {
+    margin-top: 56px;
+    margin-bottom: 18px;
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+
+  .longform-content h3,
   .case-study-content h3 {
-    margin-top: 32px;
+    margin-top: 40px;
+    margin-bottom: 14px;
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 650;
+    line-height: 1.28;
+    letter-spacing: -0.015em;
+  }
+
+  .longform-content h4,
+  .case-study-content h4 {
+    margin-top: 28px;
     margin-bottom: 12px;
     color: var(--color-text-primary);
     font-family: var(--font-display);
-    font-size: 1.0625rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
   }
 
+  .longform-content p,
+  .longform-content li,
   .case-study-content p,
   .case-study-content li {
     color: var(--color-text-secondary);
     font-family: var(--font-body);
     font-size: 1rem;
-    line-height: 1.8;
+    line-height: 1.82;
   }
 
+  .longform-content p + p,
   .case-study-content p + p {
-    margin-top: 16px;
+    margin-top: 18px;
   }
 
+  .longform-content :is(h2, h3, h4) + p,
+  .longform-content :is(h2, h3, h4) + ul,
+  .longform-content :is(h2, h3, h4) + ol,
+  .longform-content :is(h2, h3, h4) + blockquote,
+  .longform-content :is(h2, h3, h4) + .case-study-link-list,
+  .case-study-content :is(h2, h3, h4) + p,
+  .case-study-content :is(h2, h3, h4) + ul,
+  .case-study-content :is(h2, h3, h4) + ol,
+  .case-study-content :is(h2, h3, h4) + blockquote,
+  .case-study-content :is(h2, h3, h4) + .case-study-link-list {
+    margin-top: 0;
+  }
+
+  .longform-content p:has(> img:only-child),
+  .case-study-content p:has(> img:only-child) {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+
+  .longform-content p:has(> img:only-child) + p,
+  .longform-content p:has(> img:only-child) + ul,
+  .longform-content p:has(> img:only-child) + ol,
+  .longform-content p:has(> img:only-child) + blockquote,
+  .case-study-content p:has(> img:only-child) + p,
+  .case-study-content p:has(> img:only-child) + ul,
+  .case-study-content p:has(> img:only-child) + ol,
+  .case-study-content p:has(> img:only-child) + blockquote {
+    margin-top: 0;
+  }
+
+  .longform-content ul,
   .case-study-content ul {
-    margin: 16px 0 0 0;
+    margin: 18px 0 0 0;
     padding-left: 20px;
     display: grid;
     gap: 10px;
     list-style-type: disc;
   }
 
+  .longform-content .case-study-link-list,
   .case-study-content .case-study-link-list {
-    margin-top: 12px;
+    margin-top: 18px;
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
   }
 
+  .longform-content .case-study-link-list__item,
   .case-study-content .case-study-link-list__item {
     display: inline-flex;
     align-items: center;
@@ -895,11 +954,13 @@ html.dark {
     transition: color 0.25s ease, transform 0.25s ease;
   }
 
+  .longform-content .case-study-link-list__item:hover,
   .case-study-content .case-study-link-list__item:hover {
     color: var(--color-text-primary);
     transform: translateX(2px);
   }
 
+  .longform-content .case-study-link-list__icon,
   .case-study-content .case-study-link-list__icon {
     display: inline-flex;
     align-items: center;
@@ -910,11 +971,13 @@ html.dark {
     color: var(--color-accent);
   }
 
+  .longform-content .case-study-link-list__icon svg,
   .case-study-content .case-study-link-list__icon svg {
     width: 100%;
     height: 100%;
   }
 
+  .longform-content .case-study-link-list__arrow,
   .case-study-content .case-study-link-list__arrow {
     display: inline-flex;
     align-items: center;
@@ -924,22 +987,25 @@ html.dark {
     color: currentColor;
   }
 
+  .longform-content .case-study-link-list__arrow svg,
   .case-study-content .case-study-link-list__arrow svg {
     width: 100%;
     height: 100%;
   }
 
+  .longform-content ol,
   .case-study-content ol {
-    margin: 16px 0 0 0;
+    margin: 18px 0 0 0;
     padding-left: 20px;
     display: grid;
     gap: 10px;
     list-style-type: decimal;
   }
 
+  .longform-content blockquote,
   .case-study-content blockquote {
-    margin-top: 24px;
-    margin-bottom: 24px;
+    margin-top: 28px;
+    margin-bottom: 28px;
     padding: 20px 24px;
     border-left: 3px solid var(--color-accent);
     background: var(--color-accent-soft);
@@ -949,6 +1015,7 @@ html.dark {
     line-height: 1.7;
   }
 
+  .longform-content code,
   .case-study-content code {
     font-family: var(--font-mono);
     font-size: 0.9em;
@@ -957,11 +1024,13 @@ html.dark {
     padding: 2px 6px;
   }
 
+  .longform-content strong,
   .case-study-content strong {
     color: var(--color-text-primary);
     font-weight: 600;
   }
 
+  .longform-content hr,
   .case-study-content hr {
     border: none;
     height: 1px;
@@ -969,56 +1038,89 @@ html.dark {
     margin: 48px 0;
   }
 
+  .longform-content img,
   .case-study-content img {
     width: 100%;
     height: auto;
-    margin: 24px 0;
+    margin: 0;
     border: 1px solid var(--color-border);
     border-radius: 4px;
   }
 
-  /* Case study — tablet+ */
+  .longform-content :is(h2, h3, h4) + p:has(> img:only-child),
+  .case-study-content :is(h2, h3, h4) + p:has(> img:only-child) {
+    margin-top: 0;
+    margin-bottom: 22px;
+  }
+
+  /* Long-form content — tablet+ */
   @media (min-width: 768px) {
+    .longform-content h2,
     .case-study-content h2 {
       margin-top: 72px;
       margin-bottom: 24px;
-      font-size: 1.5rem;
+      font-size: 1.625rem;
     }
+    .longform-content h3,
     .case-study-content h3 {
-      margin-top: 40px;
+      margin-top: 44px;
       margin-bottom: 16px;
-      font-size: 1.125rem;
+      font-size: 1.1875rem;
     }
+    .longform-content h4,
+    .case-study-content h4 {
+      margin-top: 32px;
+      margin-bottom: 14px;
+      font-size: 1.0625rem;
+    }
+    .longform-content p,
+    .longform-content li,
     .case-study-content p,
     .case-study-content li {
       font-size: 1.0625rem;
       line-height: 1.85;
     }
+    .longform-content p + p,
     .case-study-content p + p {
       margin-top: 20px;
     }
+    .longform-content ul,
+    .longform-content ol,
     .case-study-content ul,
     .case-study-content ol {
       padding-left: 24px;
       gap: 12px;
     }
+    .longform-content blockquote,
     .case-study-content blockquote {
       margin-top: 32px;
       margin-bottom: 32px;
       padding: 24px 28px;
       font-size: 1.0625rem;
     }
+    .longform-content p:has(> img:only-child),
+    .case-study-content p:has(> img:only-child) {
+      margin-bottom: 28px;
+    }
   }
 
-  /* Case study — TV */
+  /* Long-form content — TV */
   @media (min-width: 1536px) {
+    .longform-content h2,
     .case-study-content h2 {
       font-size: 1.75rem;
     }
+    .longform-content h3,
+    .case-study-content h3 {
+      font-size: 1.25rem;
+    }
+    .longform-content p,
+    .longform-content li,
     .case-study-content p,
     .case-study-content li {
       font-size: 1.125rem;
     }
+    .longform-content blockquote,
     .case-study-content blockquote {
       font-size: 1.125rem;
     }

@@ -1,171 +1,207 @@
-## 1. What I Walked Into
+![Hero visual for My Journeys and the redesigned TMS experience](/assets/ft-tms-redesign/New%20images/Hero-My%20Journeys.png)
 
-When I joined Freight Tiger, every user — CXO, manager, executive — landed on the same page: My Trips. It was the most-used surface in the entire TMS. And it was broken in ways that went deeper than UI.
+## 1. Overview
 
-Master trips and child trips showed as separate rows in the same table. If a shipment had multiple drops (SPMD), child trips were created for each drop. Return journeys also generated child trips. The count above the table said 1,867 trips — but that included child trips that weren't visible as separate entries. Users saw one number, the table showed another. Nobody trusted the data.
+When I joined Freight Tiger, the core operational surface of the TMS was `My Trips`. Every user, from executives to operations teams, landed on the same page. It was the most-used part of the product, but it was failing in ways that went deeper than UI.
 
-Trip details opened in a tiny inline frame below each row, packed with tabs — tracking, shipments, documents, alerts. On a 1366x720 screen (the most common in logistics operations), this was unusable. You couldn't compare trips. You couldn't see details properly.
+The interface was cluttered, the counts were unreliable, trip details opened in cramped inline panels, and the product gave users data without helping them decide what mattered. What looked like a screen redesign problem was actually a product systems problem.
 
-And the architecture couldn't support what Freight Tiger needed next: MPMD (multi-pick multi-drop), multimodal, and cross-border journeys.
+I redesigned the TMS around two connected layers:
 
-Beyond My Trips, there was no summary, no overview, no way to understand what was happening across operations without manually filtering through hundreds of rows. Managers depended on phone calls, WhatsApp messages, and daily reports to understand status.
+- `TigerSight` for operational awareness
+- `My Journeys` for journey-level execution
 
-We had alerts everywhere. No one knew which one mattered.
+Together, they shifted the product from passive monitoring to active operational decision-making.
 
-## 2. What Users Actually Said
+## 2. Problem
 
-- "I have 100s of trips running daily, and we are just two managers. We cannot handle 50 alerts a day."
-- "I need to know what is burning."
-- "My dispatch manager was pissed at me because he had to pay the contracted labourers, and the truck was delayed by a day."
-- "I don't know where to start and what to look for."
-- "When my customer complains about a delay, I check the ETA to inform them of the arrival time."
+![Problem view showing the broken legacy trip experience](/assets/ft-tms-redesign/New%20images/problem1.png)
 
-They couldn't prioritize because the interface treated every trip equally. Exceptions were buried. The system gave them data but never told them what mattered.
+![Additional problem-state view highlighting issues in the old TMS flow](/assets/ft-tms-redesign/New%20images/Problem2.png)
 
-## 3. The Redesign — Two Connected Layers
+The old experience was centered on a flat trip list called `My Trips`, but the structure underneath it was broken.
 
-Version 10 was not a UI refresh. It was a complete rethinking of how logistics operations work inside Freight Tiger's TMS. I designed two connected layers, each solving a different part of the problem:
+Master trips and child trips appeared inconsistently. In cases like single-pick multi-drop and return flows, the system created child trips that distorted counts and hierarchy. Users saw one number above the table and a different reality inside it. Trust broke down.
 
-- **TigerSight** — the new landing experience that replaced the old trip list. Shows operational health at a glance and routes users to where attention is needed.
-- **My Journeys** — the deep operational layer where journey-level analysis and action happens. Replaces My Trips with a correct hierarchy and dedicated detail pages.
+The details experience was also weak. Trip information opened in a tiny inline frame below each row, packed with tabs and hard to use on the low-resolution screens common in logistics operations. Users could not compare properly, could not understand state quickly, and could not scale their workflow across large numbers of active movements.
 
-A third layer — **Control Tower** — sits above the TMS as an orchestration layer, pulling exceptions from all modules and coordinating resolution through AI agents and human operators. That is covered in a separate case study.
+At a broader level, the TMS had no strong operational overview. Managers depended on calls, WhatsApp messages, and daily reports to understand what was happening. Alerts existed everywhere, but the system did not help users prioritize.
 
-The flow: user lands on TigerSight → sees what needs attention → clicks through to My Journeys with pre-filtered context.
+## 3. Users And Context
 
-## TigerSight — From Blind List to Operational Awareness
+This product was used by logistics operations teams managing large numbers of active trips every day. Their job was not to read tables in detail. Their job was to quickly answer:
 
-### What changed
+- What is going wrong?
+- Which journeys need attention first?
+- What action should I take next?
 
-TigerSight replaced the trip list as the landing page. Instead of a flat list, users see KPI cards — delayed shipments, long stoppages, route deviations, detained trucks, SLA status. When a user clicks "Delayed Shipments," they navigate directly to My Journeys with that filter already applied.
+Research showed recurring needs:
 
-No manual filtering. No losing context. The dashboard does the cognitive work that ops teams were doing in their heads.
+- help prioritizing trips and alerts
+- visibility from pickup to drop
+- explicit delay and status understanding
+- better use of identifiers people actually search by
+- less noise, more operational clarity
 
-### How behavior actually changed
+The product also had to work across varied customer needs. Some users cared about invoice IDs or SAP IDs, others needed container IDs, temperature, or different operational metadata.
 
-**Starting point shifted.** Users stopped landing on a list and scrolling. They scanned KPIs first, then clicked into issues. Behavior moved from search to recognition.
+## 4. Approach
 
-**Manual filtering dropped.** Before: filter by delay, then by region, then by alert type. After: click one KPI card, already filtered.
+The work started as a usability and actionability effort, initially focused on pin-able filters and making the trip list easier to use. But direct research, support-call observation, and workflow analysis made it clear that the issue was not just filtering. The product's model and the interface were both wrong.
 
-**Manager dependency reduced.** Managers stopped needing constant status updates from ops teams. The dashboard showed live status. Daily "what's happening?" calls became less necessary.
+I reframed the design problem around a core principle: operational products should be organized around decisions, not raw records.
 
-**Conversations changed.** Before TigerSight, people asked "What's happening?" After, they asked "Why is this delayed?" The shift was from discovery to diagnosis.
+That led to a two-layer redesign:
 
-### Organized around intent, not entities
+- `TigerSight` became the awareness layer, surfacing operational health and routing users into the right context
+- `My Journeys` became the execution layer, where users analyze and act on journey-level problems
 
-TigerSight is structured around operational modes — execute, overview, plan, agents — not database tables. Most enterprise tools organize around entities (orders, shipments, vehicles). TigerSight organizes around jobs: monitor live conditions, handle disruptions, understand network effects, automate intervention.
+This was not a UI refresh. It was a redesign of product structure, decision flow, and system logic together.
 
-### What didn't land perfectly
+## 5. Key Decisions
 
-**Map adoption split users.** Some loved the map view — it matched how they think spatially. Others ignored it because they're list-driven operators. Not all users think spatially, and designing for both without cluttering either took iteration.
+### 1. Replace the landing trip list with an awareness layer
 
-**"Dashboard" perception.** Early stakeholder reactions sometimes reduced TigerSight to "a nice dashboard." The design had to prove it was a decision surface, not a reporting surface. The mission-critical visual framing — closer to an operations theater than an admin tool — was intentional to counter this.
+![TigerSight awareness layer replacing the old landing trip list](/assets/ft-tms-redesign/New%20images/Replace%20the%20landing%20trip%20list%20with%20an%20awareness%20layer.png)
 
-## My Journeys — Fixing the Architecture and the Interface
+Instead of sending every user into a flat list, I designed `TigerSight` as the new landing experience. It surfaces delayed shipments, long stoppages, route deviations, detained trucks, SLA health, and other exception-led signals.
 
-### The hierarchy fix
+This changed the user's starting point from scrolling and filtering to recognition. Users could see what mattered first, then move into execution with the right context already narrowed.
 
-One journey shows as one row. Loads (previously child trips) are nested inside the journey where they belong. The count now matches reality.
+### 2. Redesign My Trips into My Journeys
 
-### The new journey list
+![My Trips redesigned into My Journeys with journey-level structure](/assets/ft-tms-redesign/New%20images/Redesign%20My%20Trips%20into%20My%20Journeys__.png)
 
-![My Journeys — In Transit view with status tabs, exception badges, and journey table](/assets/my-journeys/in-transit.png)
+`My Journeys` became the deep operational surface for journey-level analysis and action. One journey became one row. Loads were nested under the journey where they belonged instead of appearing as disconnected child trips.
 
-The list view became the operational control surface. Status tabs across the top — Planned, En Route to Loading, At Loading, In Transit, At Unloading, In Return, Delivered — let users segment by journey state instantly. Exception badges (Long Stoppage, Route Deviation, Delayed) and delay buckets (0–6 hrs, 6–12 hrs, 12+ hrs) surface problems before users have to search.
+This fixed both trust and structure. Counts matched reality, and the interface began reflecting the actual operational object users were working with.
 
-Each row shows the essentials: consignee, route, vehicle, status, SLA, and alerts. On-time journeys are quiet. Delayed or problematic journeys are visually loud — with colored badges like "Driver Change," "Wrong GPS ID," or "Transit Delay" that draw the eye.
+### 3. Treat the table as a decision surface, not a data grid
 
-### Dedicated journey details page
+The list was redesigned around operational intent. Status tabs, exception badges, delay buckets, and action-relevant signals became the primary structure. On-time journeys stayed visually quiet. Delayed or risky journeys became visually prominent.
 
-Clicking a journey opens a full page with clear tabs — Tracking, Loads, Escalations, Yard Ops.
+The goal was not to show everything. The goal was to help users decide.
 
-![Journey Details — Tracking tab with map, delivery status, and milestone timeline](/assets/my-journeys/in-transit-alt.png)
+### 4. Move from inline details to dedicated journey pages
 
-The Tracking tab shows a delivery status banner at the top (delivering in X days, on-time or delayed, driver SIM status, vehicle details), a full-screen map with the route and current position, and a milestone summary on the right showing stops completed, distance travelled, and time spent.
+![Transition from inline details to dedicated journey pages](/assets/ft-tms-redesign/New%20images/Move%20from%20inline%20details%20to%20dedicated%20journey%20pages__.png)
 
-![Journey Details — Timeline view with planned route and journey progress](/assets/my-journeys/in-transit-summary.png)
+The old inline detail frame was fast for one-off use but fundamentally limited. It could not scale to richer journey structures or more complex workflows.
+
+I introduced dedicated journey detail pages with tracking, loads, escalations, maps, milestone summaries, and timeline views. This was a deliberate tradeoff: I sacrificed some micro-speed in favor of clarity, scalability, and architectural correctness.
+
+### 5. Correct the journey model itself
+
+The earlier lifecycle model assumed journeys were linear and cleanly closed. Real operations were not.
+
+I redesigned the model around state and event logic:
+
+- separated `stop` from `visit`
+- supported repeated locations like `A -> B -> A`
+- preserved event history instead of overwriting state
+- made journey closure event-driven
+
+This made the interface more trustworthy because the system beneath it became more accurate.
+
+### 6. Support customization where logistics reality demands it
+
+The product needed a shared structure, but not a rigid one. Different customers relied on different identifiers and data points, so the info bar and visible metadata became configurable.
+
+This made the product feel operationally relevant across customer contexts without breaking the overall system.
+
+## 6. Solution
+
+My Journeys fixed both the architecture and the interface by turning the list into a clearer decision surface and giving each journey a scalable detail model.
+
+### The Hierarchy Fix
+
+One journey shows as one row. Loads, previously child trips, are nested inside the journey where they belong. The count now matches reality.
+
+### The New Journey List
+
+![My Journeys list view with status tabs, exception badges, and journey table](/assets/ft-tms-redesign/New%20images/The%20new%20journey%20list.png)
+
+The list view became the operational control surface. Status tabs across the top, `Planned`, `En Route to Loading`, `At Loading`, `In Transit`, `At Unloading`, `In Return`, `Delivered`, let users segment by journey state instantly. Exception badges like `Long Stoppage`, `Route Deviation`, and `Delayed`, along with delay buckets such as `0-6 hrs`, `6-12 hrs`, and `12+ hrs`, surface problems before users have to search.
+
+Each row shows the essentials: consignee, route, vehicle, status, SLA, and alerts. On-time journeys are quiet. Delayed or problematic journeys are visually loud, with colored badges like `Driver Change`, `Wrong GPS ID`, or `Transit Delay` that draw the eye.
+
+### Dedicated Journey Details Page
+
+Clicking a journey opens a full page with clear tabs: `Tracking`, `Loads`, `Escalations`, `Yard Ops`.
+
+The `Tracking` tab shows a delivery status banner at the top, delivering in X days, on-time or delayed, driver SIM status, vehicle details, a full-screen map with the route and current position, and a milestone summary on the right showing stops completed, distance travelled, and time spent.
+
+![Journey details tracking view with map, delivery status, and milestone summary](/assets/ft-tms-redesign/New%20images/Dedicated%20journey%20details%20page1.png)
 
 A second view shows a Gantt-style timeline bar for journey progress, the planned route with all stops and waypoints, journey metadata, and a comments section. This gives users the full picture of where a journey has been and what happened along the way.
 
-### The Loads tab — the architecture fix made visible
+![Journey details timeline view with planned route and journey progress](/assets/ft-tms-redesign/New%20images/Dedicated%20journey%20details%20page2.png)
 
-![Loads tab — load list on left, load details with tracking and map on right](/assets/my-journeys/loads-alt.png)
+### The Loads Tab
 
-This is where the master/child trip fix becomes real. All loads for a journey are listed on the left. Selecting a load shows its tracking details, current location, STA, and a map with the route — all in the same view without leaving the journey context.
+![Loads tab with load list on the left and selected load tracking details on the right](/assets/ft-tms-redesign/New%20images/The%20Loads%20tab.png)
 
-![Loads tab — load details with LRN, invoices, and item details](/assets/my-journeys/loads.png)
+This is where the master/child trip fix becomes real. All loads for a journey are listed on the left. Selecting a load shows its tracking details, current location, STA, and a map with the route, all in the same view without leaving the journey context.
 
-Each load also has a details view showing LRN numbers, invoice information, item details with material codes and quantities, and delivery/pickup addresses. Previously, this information was scattered across child trip rows and cramped inline frames. Now it's organized under one journey with clean navigation between loads.
+Each load also has a details view showing LRN numbers, invoice information, item details with material codes and quantities, and delivery and pickup addresses. Previously, this information was scattered across child trip rows and cramped inline frames. Now it is organized under one journey with clean navigation between loads.
 
-### Map view
+### Map View
 
-![Map view — vehicle list on left, full-screen map showing all routes and positions](/assets/my-journeys/map-view.png)
+![Map view showing all vehicles, routes, and the journey list panel](/assets/ft-tms-redesign/New%20images/Map%20view.png)
 
-The map view shows all vehicles with their routes on a full-screen map, with a journey list panel on the left. Users can select any vehicle to see its route, current position, and journey details. This view serves the spatial thinkers — ops managers who need to see where everything is geographically.
+The map view shows all vehicles with their routes on a full-screen map, with a journey list panel on the left. Users can select any vehicle to see its route, current position, and journey details. This view serves the spatial thinkers, ops managers who need to see where everything is geographically.
 
-### Exception-first design
+## 7. What Made It Hard
 
-Badges on each journey row show on-time, delayed, long stoppage, route deviation, detained. Problems surface themselves instead of hiding in a flat list.
+Two layers were broken at once:
 
-### Customizable info bar
+- the system model did not match real logistics behavior
+- the interface did not support operational decision-making
 
-Every customer had different needs. A cement company wanted temperature data. A shipping company needed container IDs. A manufacturer used SAP IDs. The table columns became configurable because one-size-fits-all doesn't work in logistics.
+There were also real tradeoffs:
 
-### What pushed back
+- some users preferred the familiarity of inline expansion
+- exception-first UI could become overwhelming without calibration
+- a more correct journey model was harder to explain than a simpler but inaccurate one
+- map-based views worked well for some users and poorly for others
 
-**Users resisted the dedicated page.** Some ops users said: "Now I have to click and go to another page. Earlier I could quickly expand."
+The work required not just better screens, but better judgment about where to simplify, where to expose complexity, and where to redesign product structure altogether.
 
-They were optimized for speed and familiarity. I was optimizing for clarity and scalability.
+## 8. Outcome
 
-I solved this by keeping the row-level summary strong enough that most decisions could be made without clicking in, ensuring fast back navigation, and carrying pre-filtered context so users didn't lose their place. The tradeoff was deliberate: **I sacrificed micro-speed for macro clarity.** The inline frame couldn't support MPMD, multimodal, or cross-border journeys. The new architecture could.
+The redesign changed the product from a broken monitoring surface into a more coherent operational system.
 
-**Exception badges overwhelmed some users initially.** With badges for every alert type visible at once, some users felt "everything looks like a problem." The system had shifted from neutral to opinionated — and opinionated systems need calibration. We tuned thresholds, reduced noise, and grouped related alerts instead of showing each one individually.
+Key outcomes described in the repo:
 
-**Journey model created conceptual complexity.** Backend discussions got tangled: what's a journey vs a load vs a leg? How do we map legacy data? What happens to existing reports? The new model was more correct, but harder to explain. Accurate and easy-to-understand pulled in opposite directions.
+- journey counts matched reality instead of mixing master and child confusion
+- users reached details through a dedicated structure rather than cramped inline frames
+- manual filtering reduced through pre-filtered navigation from TigerSight
+- the architecture could support more complex journey structures, including MPMD and multimodal scenarios
+- managers shifted from asking `what's happening?` to asking `why is this delayed?`
+- the design prototypes influenced the backend Journey Model, not just the front end
 
-### Design leading architecture
+At a product level, the system became more trustworthy, more actionable, and better aligned with how logistics teams actually work.
 
-When my PM and I showed the new UI prototypes to the architecture team, the designs exposed missing relationships in the existing data model. The visual separation of journeys from loads, the milestone timeline, the way we showed legs and stops — these became the blueprint for how the backend Journey Model was structured.
+## 9. Learnings
 
-Instead of UI following architecture, the design led it. The interface became the specification for API structures and data mapping.
+Operational products break when their internal models do not match reality.
 
-### What I had to cut
+Better UI alone does not fix decision problems. In systems like this, the interface and the product model have to be redesigned together.
 
-Some things I wanted but couldn't ship in v10:
+I also learned that:
 
-- Cross-journey comparison view — valuable for spotting patterns across shipments
-- Bulk action handling across multiple journeys
-- Predictive alerts for future delays
-- SLA simulation tools
+- users often optimize for familiarity before they recognize the value of clarity
+- opinionated systems need tuning, especially around alerts and exceptions
+- simplicity in UI often comes from deeper system design, not fewer features
+- design can and should shape architecture when the current model is blocking product progress
 
-Scope decisions are design decisions. Saying what you cut shows you understand priority.
+## 10. Takeaway
 
-## 4. Key Design Decisions
+This project shows how I approach complex B2B product design: not by polishing screens in isolation, but by aligning system structure, user mental models, and interface behavior.
 
-**Organize around operational intent, not database entities.** TigerSight uses execute/overview/plan/agents — not orders/shipments/vehicles. Users think in jobs, not tables.
+At Freight Tiger, that meant turning a broken trip list into a two-layer operational system:
 
-**Exception-first everything.** Across both layers, the design principle was the same: surface problems before users have to search for them. But this required constant calibration — opinionated systems need tuning.
+- `TigerSight` for awareness
+- `My Journeys` for execution
 
-**Sacrifice micro-speed for macro clarity.** The dedicated journey page was slower than inline expansion for one trip. But it scaled for complex journeys, enabled proper load hierarchy, and supported the architecture that MPMD and multimodal required.
-
-**Design as architecture blueprint.** The UI prototypes shaped how the backend Journey Model was structured. This flipped the traditional process — design led architecture instead of following it.
-
-## 5. Outcome
-
-- Journey counts match reality — no more master/child confusion
-- Users reach journey details in one click instead of expanding cramped inline frames
-- Architecture supports SPSD, SPMD, MPMD, multimodal, and cross-border trips
-- Managers shifted from asking "what's happening?" to "why is this delayed?"
-- Manual filtering reduced through pre-filtered navigation from TigerSight
-- Design prototypes directly influenced the Journey Model backend architecture
-- v10 design patterns scaled across other TMS modules
-
-## 6. What I Learned
-
-- **Correct and easy-to-understand pull in opposite directions.** The new journey model was architecturally right but harder to explain. Design had to bridge that gap.
-- **Opinionated systems need calibration.** Exception-first design is powerful but initially overwhelming. Thresholds, grouping, and noise reduction are ongoing design work.
-- **Users optimize for familiarity, not clarity.** Pushback on the dedicated page taught me that better doesn't automatically mean preferred. You have to earn the transition.
-
-## 7. Takeaway
-
-> The strongest product redesigns don't just fix interfaces. They fix mental models, influence system architecture, and change how people work — not just what they see.
+The result was not just a cleaner product. It was a more truthful and more useful one.
