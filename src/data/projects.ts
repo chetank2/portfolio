@@ -37,15 +37,16 @@ export const deepProjects: Project[] = [
     caseStudyUrl: "/work/control-tower",
   },
   {
-    slug: "tigersight",
-    title: "TigerSight",
-    tagline: "AI-powered logistics control tower for real-time operations",
+    slug: "ft-design-system",
+    title: "FT Design System",
+    tagline: "125+ components, AI protection, dual-mode docs",
     description:
-      "Designed an AI-powered control tower that turns fragmented transport signals into live operational awareness, exception triage, network intelligence, and AI-assisted decision support.",
-    tags: ["Control Tower", "AI", "Operations Design"],
+      "Built a production design system from scratch as a solo builder — 125+ React components, token architecture, AI protection layer, and dual-audience documentation for humans and AI agents.",
+    tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
     type: "deep",
-    protected: true,
-    caseStudyUrl: "/work/tigersight",
+    liveUrl: "https://ftdesignsystem.netlify.app",
+    npmUrl: "https://www.npmjs.com/package/ft-design-system",
+    caseStudyUrl: "/work/ft-design-system",
   },
   {
     slug: "aftercrop",
@@ -60,6 +61,17 @@ export const deepProjects: Project[] = [
 ];
 
 export const supportingProjects: Project[] = [
+  {
+    slug: "tigersight",
+    title: "TigerSight",
+    tagline: "AI-powered logistics control tower for real-time operations",
+    description:
+      "Designed an AI-powered control tower that turns fragmented transport signals into live operational awareness, exception triage, network intelligence, and AI-assisted decision support.",
+    tags: ["Control Tower", "AI", "Operations Design"],
+    type: "supporting",
+    protected: true,
+    caseStudyUrl: "/work/tigersight",
+  },
   {
     slug: "freight-invoicing",
     title: "Freight Invoicing & Reconciliation System",
@@ -82,21 +94,20 @@ export const supportingProjects: Project[] = [
     protected: true,
     caseStudyUrl: "/work/ptl-module-design",
   },
-  {
-    slug: "ft-design-system",
-    title: "FT Design System",
-    tagline: "125+ components, AI protection, dual-mode docs",
-    description:
-      "Built a production design system from scratch as a solo builder — 125+ React components, token architecture, AI protection layer, and dual-audience documentation for humans and AI agents.",
-    tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
-    type: "supporting",
-    liveUrl: "https://ftdesignsystem.netlify.app",
-    npmUrl: "https://www.npmjs.com/package/ft-design-system",
-    caseStudyUrl: "/work/ft-design-system",
-  },
 ];
 
 export const aiProjects: Project[] = [
+  {
+    slug: "coupontracker",
+    title: "CouponTracker",
+    tagline: "From screenshots to a full recognition platform",
+    description:
+      "Built a multi-surface coupon recognition system — Android app with layered AI extraction, web-based ML training pipeline, offline PWA annotation, and automated model deployment.",
+    tags: ["Kotlin", "Python", "YOLOv8", "On-device ML", "PWA"],
+    type: "ai",
+    repoUrl: "https://github.com/chetank2/coupontracker",
+    caseStudyUrl: "/work/coupontracker",
+  },
   {
     slug: "designqa",
     title: "Design QA",
@@ -118,17 +129,6 @@ export const aiProjects: Project[] = [
     tags: ["VS Code Extension", "Prototype", "Design-to-Code"],
     type: "ai",
     caseStudyUrl: "/work/component-first-design",
-  },
-  {
-    slug: "coupontracker",
-    title: "CouponTracker",
-    tagline: "From screenshots to a full recognition platform",
-    description:
-      "Built a multi-surface coupon recognition system — Android app with layered AI extraction, web-based ML training pipeline, offline PWA annotation, and automated model deployment.",
-    tags: ["Kotlin", "Python", "YOLOv8", "On-device ML", "PWA"],
-    type: "ai",
-    repoUrl: "https://github.com/chetank2/coupontracker",
-    caseStudyUrl: "/work/coupontracker",
   },
 ];
 

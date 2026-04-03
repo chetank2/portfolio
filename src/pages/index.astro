@@ -102,9 +102,6 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
           <SectionHeading number="01" label="Selected Work" title="Deep Case Studies" />
-          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
-            My strongest work is in high-complexity product environments where design has to improve decisions, reduce friction, and make systems easier to trust.
-          </p>
         </ScrollReveal>
 
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
@@ -122,16 +119,7 @@ const homeMachineText = [
           ))}
         </div>
 
-        <!-- Supporting Projects -->
         <div class="mt-20">
-          <ScrollReveal client:load>
-            <div class="flex items-center gap-3 mb-10">
-              <span class="w-8 h-px bg-border"></span>
-              <h3 class="type-ui-label text-text-tertiary">
-                Systems, Design Systems & Builder Work
-              </h3>
-            </div>
-          </ScrollReveal>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
             {supportingProjects.map((project, i) => (
               <ScrollReveal client:load delay={i * 0.08}>
@@ -162,12 +150,9 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
           <SectionHeading number="02" label="Builder" title="Built with AI" />
-          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
-            Products I designed and shipped using AI-assisted development.
-          </p>
         </ScrollReveal>
 
-        <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
           {aiProjects.map((project, i) => (
             <ScrollReveal client:load delay={i * 0.12}>
               <AIProjectCard
@@ -195,9 +180,6 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
           <SectionHeading number="03" label="Writing" title="Writing" />
-          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
-            Notes on product thinking, design systems, and designing for complexity.
-          </p>
         </ScrollReveal>
         <ScrollReveal client:load>
           <div class="max-w-2xl">
