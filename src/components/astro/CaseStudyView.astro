@@ -13,7 +13,7 @@ const { study } = Astro.props as Props;
 const relatedLinks = getProjectLinksBySlug(study.slug);
 ---
 
-<ScrollReveal client:visible>
+<ScrollReveal client:load>
   <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
     <h1 class="type-page-title text-text-primary mb-5">
       {study.title}
@@ -32,7 +32,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 </ScrollReveal>
 
 {study.media ? (
-  <ScrollReveal client:visible>
+  <ScrollReveal client:load>
     <figure class="overflow-hidden rounded-2xl border border-border bg-bg-elevated/60">
       <img
         src={study.media.src}
@@ -45,7 +45,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 ) : null}
 
 {study.sections.map((section, sectionIndex) => (
-  <ScrollReveal client:visible>
+  <ScrollReveal client:load>
     <section class:list={["mt-20 sm:mt-24", sectionIndex === study.sections.length - 1 && "mb-20"]}>
       <h3 class="case-study-section-title mb-6">{section.title}</h3>
 

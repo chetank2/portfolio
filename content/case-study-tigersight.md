@@ -1,220 +1,332 @@
 ## 1. Overview
 
-TigerSight was designed as an AI-powered logistics control tower layered on top of Freight Tiger's TMS. The opportunity was not to create another reporting dashboard, but to build a system that helps operations teams understand what matters now, why it matters, and what should happen next.
+TigerSight is Freight Tiger's AI-powered logistics control tower, designed to help operations teams monitor live movement, detect disruptions early, understand network impact, and act faster.
 
-From a product design perspective, TigerSight sits between the system of record and the system of action. The TMS stores transport events. TigerSight is the layer that turns those signals into operational awareness, decision support, and eventually automation.
+It was not conceived as another reporting dashboard. It was designed as an operational layer above the TMS that turns fragmented transport signals into actionable awareness.
 
-That shift defined the project. I was not designing a dashboard for passive visibility. I was designing a control surface for live operations.
+At Freight Tiger, the TMS remains the system of record. TigerSight is the layer that helps users answer:
+
+- what needs attention right now
+- what is likely to go wrong next
+- where risk is concentrated
+- what action should follow
+
+Over time, TigerSight evolved into a structured execution environment with four operational surfaces inside **Execute**:
+
+- **Live View**
+- **Exceptions**
+- **Network**
+- **Summary Dashboard**
+
+That shift mattered. The product moved from showing transport data to supporting operational decision-making.
 
 ## 2. Product Context
 
-Logistics operations teams usually work across fragmented tools and fragmented mental models. Journey status may live in one place, exception alerts in another, branch or lane patterns somewhere else, and escalation decisions in people's heads, calls, or spreadsheets.
+Logistics operations rarely happen in one clean workflow. Journey states, delays, branch health, alerts, transporter issues, and escalation decisions are usually scattered across multiple systems, calls, spreadsheets, and WhatsApp groups.
 
-That fragmentation creates three recurring issues:
+That fragmentation creates recurring operational problems:
 
-- teams can see data, but still struggle to understand operational risk
-- identifying the right issue often takes too long
-- users move from monitoring to diagnosis to action through multiple disconnected surfaces
+- teams can access data but still struggle to identify real risk
+- issue prioritization takes too long
+- monitoring, diagnosis, and response happen across disconnected surfaces
+- users become the integration layer between systems
 
-TigerSight was designed to compress that workflow into one product ecosystem where live visibility, exception handling, network understanding, and AI-assisted intervention come together.
+TigerSight was designed to reduce that fragmentation by bringing together fleet monitoring, exception triage, network intelligence, AI-assisted reasoning, and operational summaries in one ecosystem.
+
+The platform is still strongest in FTL-style, journey-led operations, but the direction increasingly includes PTL contexts as well, especially in operational summaries and broader execution visibility.
 
 ## 3. Problem
 
-The product problem was not a lack of data. It was a lack of decision support.
+The problem was never lack of data. It was lack of decision support.
 
-Traditional dashboards answer questions like:
+Traditional logistics dashboards answer questions like:
 
-- what happened
+- where are the vehicles
 - how many journeys are delayed
-- where the vehicles are
+- what happened
 
-But operations teams need a different layer of support:
+Operations teams need a different layer:
 
-- what needs attention right now
-- where the risk is concentrated
-- whether the issue is isolated or systemic
-- what action should follow
+- what needs attention now
+- what is already delayed vs likely to become delayed
+- which branch, transporter, route, or consignee is driving the issue
+- whether a problem is isolated or systemic
+- what the next action should be
 
-Without that layer, the operator becomes the integration point between multiple systems. That increases cognitive load, slows response, and makes decision quality depend too much on individual effort.
+Without that layer, even a data-rich product becomes operationally weak. Users spend too much time manually stitching together signals instead of deciding.
+
+TigerSight was designed to close that gap between visibility and action.
 
 ## 4. Users
 
-TigerSight implied multiple user groups, each with a different operational lens.
+TigerSight serves multiple operational roles, each with a different lens.
 
 ### Primary users
 
-- control tower operators managing live disruptions and exception triage
-- operations managers reviewing fleet and network health
-- logistics leaders tracking systemic issues across branches, lanes, and partners
+- control tower operators managing active journeys and exception triage
+- operations managers reviewing delay concentration and branch-level issues
+- logistics leaders tracking systemic performance across transporters, routes, and facilities
 
 ### Secondary users
 
-- planning and network teams studying route or shipment patterns
-- innovation stakeholders evaluating AI-driven intervention and automation workflows
+- planning and network teams studying recurring disruption patterns
+- innovation and automation stakeholders evaluating AI- and agent-led workflows
+- teams gradually moving from FTL-led monitoring into broader PTL-aware execution visibility
 
-This mattered because the product could not be shaped around one generic dashboard. It needed to support multiple modes of operational thinking without collapsing into noise.
+This mattered because the product could not be optimized around one generic dashboard. It had to support multiple modes of operational thinking while keeping each mode legible.
 
 ## 5. Core Product Thesis
 
-The strongest product thesis behind TigerSight was this:
+**Logistics operations should be managed as a live command problem, not a reporting problem.**
 
-> Logistics operations should be managed as a live command problem, not a reporting problem.
+That led to one of the most important product decisions in the work: organize the experience around **operating intent**, not just backend entities.
 
-That led to one of the most important product decisions in the project: the app was organized around operating modes rather than only around backend entities.
+Instead of structuring the product only around objects like orders, loads, or journeys, TigerSight was organized around jobs:
 
-Instead of centering the experience on tables like orders, shipments, or journeys, the product moved users into intent-led zones such as:
-
-- execute
-- overview
-- plan
-- agents
-
-This was a strong product decision because users in operational environments think in terms of jobs:
-
-- monitor live conditions
+- understand what is happening
+- monitor live movement
 - handle disruptions
 - understand network effects
-- improve future flow
-- automate repetitive intervention
+- support future action and automation
 
-Designing around those jobs created a more meaningful product architecture than a standard enterprise navigation tree.
+That thinking shaped the architecture:
+
+- **Overview** for high-level health and context
+- **Execute** for live operational work
+- **Plan** for future-facing decision support
+- **Audit** for review, confidence, and traceability
+- **Agents** for structured AI and automation direction
+
+Within **Execute**, the workflow becomes even more explicit:
+
+- **Live View** for monitoring
+- **Exceptions** for triage
+- **Network** for structural intelligence
+- **Summary Dashboard** for compact execution summaries
+
+That hierarchy reflects how users actually work.
 
 ## 6. My Design Perspective
 
-### 6.1 Designing for perceived seriousness
+### 6.1 Designing for operational seriousness
 
-TigerSight did not present itself like a clerical enterprise tool. The welcome and app framing positioned it as an AI-powered control tower with a mission-critical identity.
+TigerSight was intentionally framed as a premium control-tower product, not a clerical admin interface.
 
-That was an intentional design move. In logistics, user adoption is influenced not only by utility but also by whether the product feels trustworthy, premium, and worthy of operational attention. The experience needed to feel closer to an operations theater than a static admin interface.
+In logistics, perceived seriousness affects trust and adoption. The product needed to feel worthy of operational attention.
 
 ### 6.2 Designing for awareness before detail
 
-Maps, panels, overlays, and segmented status blocks were not just stylistic choices. They reflected the fact that logistics is spatial, time-sensitive, and interruption-heavy. A map-first interface helps users orient quickly. Layered panels help them move from broad awareness into focused inspection.
+The core interaction model was built around moving from broad awareness into focused inspection:
 
-The visual system was intentionally dense, but the goal was not density for its own sake. The goal was to support faster operational understanding.
+- map-first visibility
+- left-rail summaries and filters
+- right-panel inspection
+- progressive drilldowns
+- AI-assisted overlays for interpretation
+
+The goal was not density for its own sake. The goal was to reduce ambiguity quickly.
 
 ## 7. Key Product Decisions
 
-### 1. Organize around operational intent
+### 1. Make Execute the operational home
 
-One of the strongest product decisions was to separate the experience into operational modes rather than flatten everything into one dashboard. This made the system more aligned with what users were trying to do in the moment.
+One of the clearest product decisions was to make **Execute** the place where live work happens, rather than letting execution logic blur into Overview or static reporting.
 
-### 2. Make exception handling the product core
+### 2. Separate operational modes inside Execute
 
-The exception console emerged as the most important wedge because that is where operational urgency and business value are highest. Visibility alone is easy to commoditize. Faster detection, prioritization, and response to real disruptions is much more defensible.
+Instead of forcing all operational questions into one overloaded screen, Execute was split into four focused views:
 
-### 3. Expand from trip-level visibility to network intelligence
+- Live View
+- Exceptions
+- Network
+- Summary Dashboard
 
-The network view mattered strategically because it extended the product beyond firefighting. It created a path from immediate issue response into structural understanding, which opens up longer-term value in planning, procurement, and performance improvement.
+This created a better match between user intent and surface design.
 
-### 4. Treat AI as workflow support, not novelty
+### 3. Make exception handling the strongest wedge
 
-TigerSight's AI direction was strongest when it focused on specific operational jobs such as briefings, alert triage, diversion detection, voice intervention, and optimization. That was a better product decision than exposing a generic assistant because enterprise users trust structured outputs and narrow job-specific helpers more than open-ended AI.
+TigerSight's strongest near-term value comes from helping teams detect, classify, prioritize, and respond to disruptions faster.
+
+### 4. Expand from journey-level visibility to network intelligence
+
+The Network view extends the product beyond firefighting and creates a path into structural understanding.
+
+### 5. Treat AI as workflow support, not novelty
+
+TigerSight's AI direction is strongest when embedded into operational tasks such as trip interpretation, alert reasoning, and next-step recommendations.
 
 ## 8. Key Design Decisions
 
-### 1. Build the product around a command loop
+### 1. Build around a command loop
 
-The core UX pattern across the strongest surfaces followed a clear loop:
+The strongest TigerSight surfaces follow a simple loop:
 
-detect -> understand -> prioritize -> act
+**detect -> understand -> prioritize -> act**
 
-That loop gave the product coherence and prevented it from stopping at passive reporting.
+That loop created coherence across views and kept the product from becoming passive reporting software.
 
-### 2. Use map-led interaction for operational contexts
+### 2. Use the map as a workflow surface
 
-The map was treated as a workflow surface, not just a visualization. This helped users connect journey state, route movement, delay patterns, and local context in one place.
+The map is not decoration. In TigerSight it becomes the orientation layer for movement, disruption, route context, and investigation.
 
 ### 3. Support drilldown from macro to micro
 
-A strong control tower product cannot trap users at the KPI level. I leaned toward interfaces that start broad, then let users filter by severity, category, delay bucket, branch, transporter, or specific journey until ambiguity narrows.
+A control tower cannot stop at the KPI level. The product needed to let users move from:
 
-### 4. Design AI outputs as operational artifacts
+- fleet-level states
+- exception types and reasons
+- branch, transporter, route, and consignee views
+- individual journeys
+- AI-supported interpretation
 
-The AI layer was strongest when it produced something users already understand, such as a control-tower briefing or a recommended next action. That design choice matters because it turns AI from a novelty layer into something operationally legible.
+### 4. Distinguish operational issue types clearly
 
-### 5. Create premium emotional framing without losing utility
+The Exception Console became significantly stronger once different issue states were separated instead of collapsed under one generic "delay" concept.
 
-The immersive entry experience and war-room tone were useful because they elevated perceived value. But the product still needed to earn trust through clarity and usefulness once the user entered the operational surfaces.
+This included:
 
-## 9. The Exception Console
+- **Delayed**
+- **Going to be delayed**
+- **Detained**
+- **Compliance**
+- **Driving Issues**
 
-The exception console felt like the real product core.
+That made the product model more truthful and operationally useful.
 
-It brought together:
+### 5. Design AI outputs as operational artifacts
 
-- live fleet visibility
-- exception counts
-- severity and category filters
-- delay buckets
-- journey state segmentation
-- detail overlays
-- contextual right-rail information
-- AI-assisted interpretation
+The AI layer works best when it produces outputs users can immediately act on:
 
-From a designer's perspective, this was the most coherent workflow in the product because it narrowed ambiguity instead of simply exposing information. The user could start with a fleet-level signal, isolate what mattered, inspect the affected journey, and get help interpreting what to do next.
+- trip intelligence
+- what's happening
+- what's next
+- actions required
 
-This is where the product most clearly moved from dashboard thinking to decision-support thinking.
+## 9. Live View
 
-## 10. The Network View
+Live View acts as the active operational radar for the fleet.
 
-The network dashboard extended the product into a different but equally important layer of value.
+It brings together:
 
-Instead of focusing on one disrupted journey, it allowed users to study:
+- journey-state segmentation
+- live vehicle map
+- branch, transporter, route, and consignee breakdowns
+- journey selection and right-panel context
+- quick transitions into deeper inspection
+
+From a design perspective, Live View is where users orient themselves before deciding whether an issue requires intervention.
+
+It is intentionally map-first and state-led, because in logistics the first question is often spatial and temporal: where is the movement, and what state is it in?
+
+## 10. The Exception Console
+
+The Exception Console is the strongest operational core of TigerSight.
+
+It brings together:
+
+- delayed and predicted-delay monitoring
+- detained vehicles as a separate operational state
+- compliance and driving-issue modes
+- reason-level charts and drilldowns
+- branch, transporter, route, and consignee analysis
+- map-linked journey inspection
+- AI-assisted trip interpretation
+
+This is where the product most clearly moves from dashboard thinking to decision-support thinking.
+
+Users can start from a fleet-level signal, isolate the issue type, narrow it by reason or dimension, inspect the affected journey, and move into action with more context.
+
+## 11. The Network View
+
+The Network dashboard extends the product from journey-level problem-solving into structural intelligence.
+
+It allows users to inspect:
 
 - branches
 - places
 - consignees
-- lane and trip patterns
-- inbound and outbound journey health
-- node-level network relationships
+- inbound and outbound movement
+- lane and trip flow
+- facility-level health
+- network patterns
 
-That changed the product from a tool for handling what is broken right now into a tool for understanding what keeps breaking repeatedly. Strategically, this is what gives TigerSight room to become a logistics intelligence platform rather than only an exception console.
+This changes TigerSight from a tool for handling what is broken right now into a tool for understanding what repeatedly breaks and where the network is fragile.
 
-## 11. AI and Agentic Direction
+That is important strategically because it gives the product a path from exception management into logistics intelligence.
 
-TigerSight's AI layer was the clearest sign that the product ambition was broader than visibility.
+## 12. Summary Dashboard Inside Execute
 
-The most valuable direction was not "AI insights" in the abstract. It was AI embedded into operational jobs:
+Placing the **Summary Dashboard** inside **Execute** instead of a generic overview surface was a meaningful product refinement.
 
-- create control-tower briefings
-- triage alert streams
-- detect diversion and route risk
-- call drivers or transporters for follow-up
-- recommend optimization actions
+These summaries still belong to execution work. They are not only leadership reporting. They act as compact operational summaries for users who need a quick read on current execution health.
 
-This was strong product thinking because enterprise AI adoption usually comes from narrow, high-utility jobs. The more the system can convert fragmented operations into structured decisions and repeatable interventions, the more credible the product becomes.
+This also opens a cleaner path for PTL-aware operational visibility. While TigerSight remains strongest in journey-led FTL workflows, Summary Dashboard is one of the places where broader execution summaries can begin to support both FTL and PTL contexts without forcing the entire product into one model prematurely.
 
-## 12. Strengths
+## 13. AI and Agentic Direction
 
-- intent-led information architecture instead of entity-led navigation
-- a strong wedge in live exception handling
-- map-first operational design that fits logistics workflows
-- believable expansion from visibility into intelligence and automation
-- AI positioned as workflow augmentation rather than a generic layer
-- strong emotional framing that increases perceived product value
+TigerSight's AI direction matters because it moves the product beyond visibility.
 
-## 13. Weaknesses and Risks
+The most valuable direction is not generic "AI insights." It is structured operational support:
 
-TigerSight also showed signs of a product still consolidating.
+- trip intelligence summaries
+- key findings from live conditions
+- likely causes of disruption
+- recommended next steps
+- action-oriented outputs for operators
+
+The dedicated **Agents** direction reinforces the idea that TigerSight is evolving from a monitoring layer into a more active operational platform.
+
+## 14. Relationship to My Journeys
+
+TigerSight and My Journeys are connected, but they solve different layers of the operational workflow.
+
+- **TigerSight** is the awareness and triage layer
+- **My Journeys** is the deeper execution layer for journey-level work
+
+That relationship is important because it explains Freight Tiger's broader product strategy:
+
+- first orient the operator
+- then route them into execution with context already narrowed
+
+TigerSight is not a replacement for journey-level execution. It is the control tower that makes that execution more informed.
+
+## 15. Strengths
+
+- intent-led product architecture instead of entity-led navigation
+- strong wedge in exception-driven operations
+- map-first interaction model that fits logistics workflows
+- clearer separation between monitoring, triage, network analysis, and summary
+- believable path from visibility into intelligence and automation
+- AI framed as workflow support rather than novelty
+- stronger product hierarchy after placing Summary Dashboard under Execute
+
+## 16. Weaknesses and Risks
 
 ### Mixed surface maturity
 
-Some modules felt decision-grade, while others appeared closer to exploratory or showcase surfaces. That creates trust risk if users cannot easily distinguish what is operationally authoritative.
+Some parts of the product feel closer to decision-grade operational tools, while others still feel more exploratory.
 
-### Product hierarchy drift
+### Product hierarchy pressure
 
-Concepts such as liveview, exceptions, summary, war-room, and cockpit risk overlapping unless each one is tied to a very crisp job-to-be-done.
+Concepts such as Overview, Execute, Summary Dashboard, War Room, and Agents can overlap unless each is tied to a clear job-to-be-done.
 
-### Role clarity and enterprise hardening
+### Dependability requirements
 
-For an enterprise control tower, permissions, trust signals, and role-sensitive complexity matter as much as feature richness. Without those layers, the product can feel ambitious but not fully dependable.
+A true enterprise control tower still depends on strong permissions, auditability, trust signals, and role-aware complexity.
 
-## 14. Outcome
+### Geographic correctness and compliance
 
-TigerSight represents a meaningful shift in product direction: from reporting and monitoring toward command-center decision support.
+Because the product is map-heavy and used in an Indian context, political map correctness is not cosmetic. It directly affects trust and product credibility.
 
-Its most important contribution is not just the visual style or the AI positioning. It is the effort to unify fragmented logistics operations into one navigable decision loop:
+### PTL expansion complexity
+
+Supporting PTL meaningfully is not just a toggle problem. It changes how monitoring, summarization, and execution should be modeled. That expansion needs deliberate product framing, not superficial parity.
+
+## 17. Outcome
+
+TigerSight represents a meaningful shift in Freight Tiger's product direction: from reporting and monitoring toward command-center decision support.
+
+Its most important contribution is the effort to unify fragmented logistics work into one operational loop:
 
 - monitor
 - detect
@@ -222,12 +334,10 @@ Its most important contribution is not just the visual style or the AI positioni
 - prioritize
 - respond
 
-That is a strong and defensible product direction for a logistics platform.
+That is a strong and defensible direction for a logistics platform.
 
-## 15. My Takeaway
+## 18. My Takeaway
 
-TigerSight taught me that high-ambition B2B products create the most value when they are designed around operational intent rather than around system entities.
+TigerSight reinforced that high-ambition B2B products create more value when they are organized around **operational intent** rather than around raw system entities.
 
-It also reinforced a harder lesson: in ambitious products, the next step is rarely more surface area. The next step is sharper hierarchy, stronger trust, and clearer definition of what the product wants to be primary.
-
-TigerSight already showed the ambition of a differentiated control tower. The design challenge going forward is to consolidate that ambition into one clearer operational home.
+It also reinforced a harder product lesson: the next step in a complex control tower is not simply more surface area. It is better hierarchy, stronger trust, and clearer definition of what each mode is responsible for.

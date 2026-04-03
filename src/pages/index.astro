@@ -100,7 +100,7 @@ const homeMachineText = [
     <!-- Selected Work -->
     <section class="section-padding" id="work">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="01" label="Selected Work" title="Deep Case Studies" />
           <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             My strongest work is in high-complexity product environments where design has to improve decisions, reduce friction, and make systems easier to trust.
@@ -109,7 +109,7 @@ const homeMachineText = [
 
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
           {deepProjects.map((project, i) => (
-            <ScrollReveal client:visible delay={i * 0.12}>
+            <ScrollReveal client:load delay={i * 0.12}>
               <ProjectCard
                 title={project.title}
                 tagline={project.tagline}
@@ -124,7 +124,7 @@ const homeMachineText = [
 
         <!-- Supporting Projects -->
         <div class="mt-20">
-          <ScrollReveal client:visible>
+          <ScrollReveal client:load>
             <div class="flex items-center gap-3 mb-10">
               <span class="w-8 h-px bg-border"></span>
               <h3 class="type-ui-label text-text-tertiary">
@@ -134,7 +134,7 @@ const homeMachineText = [
           </ScrollReveal>
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
             {supportingProjects.map((project, i) => (
-              <ScrollReveal client:visible delay={i * 0.08}>
+              <ScrollReveal client:load delay={i * 0.08}>
                 <SupportingProjectCard
                   title={project.title}
                   tagline={project.tagline}
@@ -160,7 +160,7 @@ const homeMachineText = [
     <!-- Built with AI -->
     <section class="section-padding bg-bg-surface" id="ai">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="02" label="Builder" title="Built with AI" />
           <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             Products I designed and shipped using AI-assisted development.
@@ -169,7 +169,7 @@ const homeMachineText = [
 
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
           {aiProjects.map((project, i) => (
-            <ScrollReveal client:visible delay={i * 0.12}>
+            <ScrollReveal client:load delay={i * 0.12}>
               <AIProjectCard
                 title={project.title}
                 tagline={project.tagline}
@@ -193,13 +193,13 @@ const homeMachineText = [
     <!-- Writing -->
     <section class="section-padding" id="writing">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="03" label="Writing" title="Writing" />
           <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             Notes on product thinking, design systems, and designing for complexity.
           </p>
         </ScrollReveal>
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <div class="max-w-2xl">
             <ArticleCard
               title={article.title}
@@ -216,7 +216,7 @@ const homeMachineText = [
     <!-- App Designs -->
     <section class="section-padding bg-bg-surface" id="apps">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="04" label="Design Work" title="App Designs" />
         </ScrollReveal>
 
@@ -250,12 +250,12 @@ const homeMachineText = [
     <!-- Websites -->
     <section class="section-padding" id="websites">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="05" label="Websites" title="Web Projects" />
         </ScrollReveal>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
           {websiteProjects.map((project, i) => (
-            <ScrollReveal client:visible delay={i * 0.1}>
+            <ScrollReveal client:load delay={i * 0.1}>
               <WebsiteCard
                 title={project.title}
                 tagline={project.tagline}
@@ -270,7 +270,7 @@ const homeMachineText = [
     <!-- Resume -->
     <section class="section-padding bg-bg-surface" id="resume">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:visible>
+        <ScrollReveal client:load>
           <SectionHeading number="06" label="Experience" title="Experience" />
           <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             I've worked across logistics, warehouse operations, and product platforms, mostly on systems where the challenge is less about visual polish and more about clarity under complexity.
@@ -279,7 +279,7 @@ const homeMachineText = [
 
         <div class="space-y-0">
           {experience.map((exp, i) => (
-            <ScrollReveal client:visible delay={i * 0.1}>
+            <ScrollReveal client:load delay={i * 0.1}>
               <TimelineItem
                 role={exp.role}
                 company={exp.company}
@@ -294,7 +294,7 @@ const homeMachineText = [
 
         <!-- Skills & Tools -->
         <div class="mt-16 sm:mt-20 grid sm:grid-cols-2 gap-10 sm:gap-16">
-          <ScrollReveal client:visible>
+          <ScrollReveal client:load>
             <h3 class="type-card-title-md text-text-secondary mb-5">Skills</h3>
             <div class="flex flex-wrap gap-2">
               {skills.map((skill) => (
@@ -303,7 +303,7 @@ const homeMachineText = [
             </div>
           </ScrollReveal>
 
-          <ScrollReveal client:visible delay={0.1}>
+          <ScrollReveal client:load delay={0.1}>
             <h3 class="type-card-title-md text-text-secondary mb-5">Tools</h3>
             <div class="flex flex-wrap gap-2">
               {tools.map((tool) => (
@@ -317,16 +317,16 @@ const homeMachineText = [
 
     <!-- Contact -->
     <section class="section-padding" id="contact">
-      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 text-center">
-        <ScrollReveal client:visible>
-          <SectionHeading number="07" label="Contact" title="Let's Build Better Systems" centered />
-          <p class="type-section-intro text-text-secondary mb-14 max-w-2xl mx-auto -mt-8">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:load>
+          <SectionHeading number="07" label="Contact" title="Let's Build Better Systems" />
+          <p class="type-section-intro text-text-secondary mb-14 max-w-2xl -mt-8">
             I'm interested in product design roles where workflow design, systems thinking, and design-to-implementation quality actually matter.
           </p>
         </ScrollReveal>
 
-        <ScrollReveal client:visible delay={0.15}>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <ScrollReveal client:load delay={0.15}>
+          <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="mailto:mymailchetan25@gmail.com"
               class="type-button inline-flex items-center justify-center gap-2 radius-lg bg-accent text-bg-deep px-8 py-3.5 hover:bg-accent/90 transition-colors duration-300"

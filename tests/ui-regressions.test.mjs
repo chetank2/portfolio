@@ -29,3 +29,19 @@ test("hero resume link uses the bordered secondary button style", async () => {
   assert.match(hero, /border border-border/);
   assert.match(hero, /Open Resume/);
 });
+
+test("scroll reveal hydrates on load and does not use a delayed negative in-view margin", async () => {
+  const [homePage, caseStudyPage, caseStudyView, scrollReveal] = await Promise.all([
+    read("/src/pages/index.astro"),
+    read("/src/pages/work/[slug].astro"),
+    read("/src/components/astro/CaseStudyView.astro"),
+    read("/src/components/react/ScrollReveal.tsx"),
+  ]);
+
+  for (const source of [homePage, caseStudyPage, caseStudyView]) {
+    assert.doesNotMatch(source, /<ScrollReveal client:visible\b/);
+  }
+
+  assert.match(scrollReveal, /client:load|useInView/);
+  assert.doesNotMatch(scrollReveal, /margin:\s*"-80px"/);
+});

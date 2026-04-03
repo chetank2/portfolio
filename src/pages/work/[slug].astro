@@ -127,7 +127,7 @@ Content = contentModule.default;
             storageKey={`case-study:${caseStudy.slug}`}
             title={caseStudy.title}
           >
-            <ScrollReveal client:visible>
+            <ScrollReveal client:load>
               <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
                 <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
@@ -143,7 +143,7 @@ Content = contentModule.default;
               </header>
             </ScrollReveal>
 
-            <ScrollReveal client:visible>
+            <ScrollReveal client:load>
               <article class="longform-content case-study-content mb-20">
                 <Content />
               </article>
@@ -170,7 +170,7 @@ Content = contentModule.default;
           </ProtectedCaseStudy>
         ) : (
           <>
-            <ScrollReveal client:visible>
+            <ScrollReveal client:load>
               <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
                 <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
@@ -186,7 +186,7 @@ Content = contentModule.default;
               </header>
             </ScrollReveal>
 
-            <ScrollReveal client:visible>
+            <ScrollReveal client:load>
               <article class="longform-content case-study-content mb-20">
                 <Content />
               </article>
