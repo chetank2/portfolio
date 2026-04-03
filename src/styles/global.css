@@ -1002,6 +1002,15 @@ html.dark {
     list-style-type: decimal;
   }
 
+  .longform-content :is(ul, ol) + p,
+  .longform-content :is(ul, ol) + blockquote,
+  .longform-content :is(ul, ol) + .case-study-link-list,
+  .case-study-content :is(ul, ol) + p,
+  .case-study-content :is(ul, ol) + blockquote,
+  .case-study-content :is(ul, ol) + .case-study-link-list {
+    margin-top: 24px;
+  }
+
   .longform-content blockquote,
   .case-study-content blockquote {
     margin-top: 28px;
@@ -1028,6 +1037,21 @@ html.dark {
   .case-study-content strong {
     color: var(--color-text-primary);
     font-weight: 600;
+  }
+
+  .longform-content a,
+  .case-study-content a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  }
+
+  .longform-content a:hover,
+  .case-study-content a:hover {
+    color: var(--color-text-primary);
+    text-decoration-color: currentColor;
   }
 
   .longform-content hr,
@@ -1090,6 +1114,14 @@ html.dark {
     .case-study-content ol {
       padding-left: 24px;
       gap: 12px;
+    }
+    .longform-content :is(ul, ol) + p,
+    .longform-content :is(ul, ol) + blockquote,
+    .longform-content :is(ul, ol) + .case-study-link-list,
+    .case-study-content :is(ul, ol) + p,
+    .case-study-content :is(ul, ol) + blockquote,
+    .case-study-content :is(ul, ol) + .case-study-link-list {
+      margin-top: 28px;
     }
     .longform-content blockquote,
     .case-study-content blockquote {
