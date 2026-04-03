@@ -8,7 +8,7 @@ import CaseStudyRelatedLinks from "../../components/astro/CaseStudyRelatedLinks.
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
-import { getProjectLinksBySlug } from "../../data/projects";
+import { getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
 import {
   SHARED_CASE_STUDY_PASSWORD,
   isProtectedCaseStudy,
@@ -46,13 +46,14 @@ const machineRelatedLinksText = relatedLinks.length
 const currentIndex = caseStudies.findIndex((cs) => cs.slug === caseStudy.slug);
 const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
 const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
 const machineNavigationText =
   prevStudy || nextStudy
     ? [
         "",
         "## Navigation",
-        prevStudy ? `- Previous: ${prevStudy.title} (/work/${prevStudy.slug})` : "",
-        nextStudy ? `- Next: ${nextStudy.title} (/work/${nextStudy.slug})` : "",
+        prevStudy ? `- Previous: ${prevStudy.title} (${siteHref}/work/${prevStudy.slug})` : "",
+        nextStudy ? `- Next: ${nextStudy.title} (${siteHref}/work/${nextStudy.slug})` : "",
       ]
         .filter(Boolean)
         .join("\n")
@@ -75,13 +76,50 @@ Content = contentModule.default;
   <main id="main">
     <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
       <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
-        <a
-          href={caseStudy.backHref}
-          class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
-        >
-          <span class="w-4 h-px bg-text-tertiary"></span>
-          Back
-        </a>
+        {requiresProtection ? (
+          <div
+            class="mt-2 sm:mt-4 mb-8 sm:mb-10 flex items-center justify-between gap-4"
+            data-case-study-topbar
+            data-storage-key={`case-study:${caseStudy.slug}`}
+          >
+            <a
+              href={caseStudy.backHref}
+              class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
+            >
+              <span class="w-4 h-px bg-text-tertiary"></span>
+              Back
+            </a>
+            <button
+              type="button"
+              hidden
+              data-case-study-lock
+              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="h-4 w-4"
+              >
+                <rect x="4" y="11" width="16" height="9" rx="2" />
+                <path d="M8 11V8a4 4 0 1 1 8 0v3" />
+              </svg>
+              Lock again
+            </button>
+          </div>
+        ) : (
+          <a
+            href={caseStudy.backHref}
+            class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
+          >
+            <span class="w-4 h-px bg-text-tertiary"></span>
+            Back
+          </a>
+        )}
         {requiresProtection ? (
           <ProtectedCaseStudy
             client:load
@@ -204,3 +242,43 @@ Content = contentModule.default;
     <Footer />
   </div>
 </BaseLayout>
+
+<script is:inline>
+  (() => {
+    const syncTopBars = () => {
+      document.querySelectorAll("[data-case-study-topbar]").forEach((toolbar) => {
+        if (!(toolbar instanceof HTMLElement)) return;
+        const storageKey = toolbar.dataset.storageKey;
+        const button = toolbar.querySelector("[data-case-study-lock]");
+        if (!storageKey || !(button instanceof HTMLButtonElement)) return;
+
+        button.hidden = window.sessionStorage.getItem(storageKey) !== "unlocked";
+      });
+    };
+
+    document.addEventListener("click", (event) => {
+      const button = event.target instanceof Element
+        ? event.target.closest("[data-case-study-lock]")
+        : null;
+      if (!(button instanceof HTMLButtonElement)) return;
+
+      const toolbar = button.closest("[data-case-study-topbar]");
+      if (!(toolbar instanceof HTMLElement)) return;
+
+      const storageKey = toolbar.dataset.storageKey;
+      if (!storageKey) return;
+
+      window.sessionStorage.removeItem(storageKey);
+      window.dispatchEvent(
+        new CustomEvent("case-study-protection-change", {
+          detail: { key: storageKey, state: "locked" },
+        }),
+      );
+      syncTopBars();
+    });
+
+    window.addEventListener("storage", syncTopBars);
+    window.addEventListener("case-study-protection-change", syncTopBars);
+    syncTopBars();
+  })();
+</script>

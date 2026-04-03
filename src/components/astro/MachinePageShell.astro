@@ -68,32 +68,3 @@ const links: MachineLink[] = [
     </section>
   </div>
 </section>
-
-<script is:inline>
-  (() => {
-    const roots = document.querySelectorAll("[data-machine-shell]");
-    roots.forEach((root) => {
-      const button = root.querySelector("[data-machine-copy]");
-      const target = root.querySelector("[data-machine-copy-target]");
-      if (!(button instanceof HTMLButtonElement) || !(target instanceof HTMLElement)) return;
-
-      button.addEventListener("click", async () => {
-        const content = target.innerText.trim();
-        if (!content) return;
-
-        try {
-          await navigator.clipboard.writeText(content);
-          button.dataset.copied = "true";
-          window.setTimeout(() => {
-            delete button.dataset.copied;
-          }, 1200);
-        } catch (_error) {
-          button.dataset.copied = "false";
-          window.setTimeout(() => {
-            delete button.dataset.copied;
-          }, 1200);
-        }
-      });
-    });
-  })();
-</script>

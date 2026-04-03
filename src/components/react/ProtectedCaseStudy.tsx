@@ -83,33 +83,7 @@ export default function ProtectedCaseStudy({
   }
 
   if (unlocked) {
-    return (
-      <div>
-        <div className="mt-8 mb-6 flex justify-end">
-          <button
-            type="button"
-            onClick={handleLockAgain}
-            className="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
-          >
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <rect x="4" y="11" width="16" height="9" rx="2" />
-              <path d="M8 11V8a4 4 0 1 1 8 0v3" />
-            </svg>
-            Lock again
-          </button>
-        </div>
-        {children}
-      </div>
-    );
+    return <>{children}</>;
   }
 
   return (
