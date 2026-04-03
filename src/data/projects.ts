@@ -8,8 +8,9 @@ export interface ProjectLink {
 
 export const portfolioMachineLinks = {
   siteHref: "https://portfolio-seven-ivory-74.vercel.app",
-  resumeHref: "/#resume",
+  resumeHref: "https://drive.google.com/file/d/1KQSSWbCDAwvKiQgXSI1ssj7m3p-vtZmD/view",
   emailHref: "mailto:mymailchetan25@gmail.com",
+  xHref: "https://x.com/kchetank19",
   linkedInHref: "https://linkedin.com/in/chetan-kumar25/",
 };
 
@@ -215,6 +216,7 @@ export const websiteProjects: Project[] = [
     image: "/assets/project-learnhadiya.jpg",
     tags: [],
     type: "website",
+    liveUrl: "https://www.learnhadiya.com/",
   },
   {
     slug: "aftercrop-microsite",
@@ -225,6 +227,7 @@ export const websiteProjects: Project[] = [
     image: "/assets/project-aftercrop-microsite.png",
     tags: [],
     type: "website",
+    liveUrl: "https://aftercrop.in/",
   },
   {
     slug: "konic",
@@ -235,6 +238,7 @@ export const websiteProjects: Project[] = [
     image: "/assets/project-konic.png",
     tags: [],
     type: "website",
+    liveUrl: "https://www.konic.net/en/",
   },
 ];
 
@@ -321,7 +325,8 @@ export const skills = [
 
 export const tools = [
   "Figma",
-  "Adobe XD",
+  "Claude",
+  "Codex",
   "Cursor AI",
   "Adobe Illustrator",
   "Adobe After Effects",

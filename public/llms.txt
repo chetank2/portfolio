@@ -88,7 +88,7 @@ Skills:
 - User Research, Design Systems, Prototyping, Visual Design, Interaction Design, Information Architecture, User Testing, Design Thinking, Wireframing, User Flows
 
 Tools:
-- Figma, Adobe XD, Cursor AI, Adobe Illustrator, Adobe After Effects
+- Figma, Claude, Codex, Cursor AI, Adobe Illustrator, Adobe After Effects
 
 Contact:
 - Email: mailto:mymailchetan25@gmail.com

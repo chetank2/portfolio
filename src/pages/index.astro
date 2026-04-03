@@ -54,7 +54,7 @@ const homeMachineText = [
   "## App Designs",
   ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),
   "",
-  "## Resume",
+  "## Experience",
   ...experience.flatMap((exp) => [
     `### ${exp.role} — ${exp.company}`,
     `- Location: ${exp.location}`,
@@ -72,7 +72,9 @@ const homeMachineText = [
   `- ${article.title} — ${article.summary} (${article.url})`,
   "",
   "## Contact",
+  "- Resume: https://drive.google.com/file/d/1KQSSWbCDAwvKiQgXSI1ssj7m3p-vtZmD/view",
   "- Email: mailto:mymailchetan25@gmail.com",
+  "- X: https://x.com/kchetank19",
   "- LinkedIn: https://linkedin.com/in/chetan-kumar25/",
   "- GitHub: https://github.com/chetank2",
 ].join("\n");
@@ -101,7 +103,7 @@ const homeMachineText = [
     <section class="section-padding" id="work">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="01" label="Selected Work" title="Deep Case Studies" />
+          <SectionHeading number="01" label="Work" title="Case Studies" />
         </ScrollReveal>
 
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
@@ -179,7 +181,7 @@ const homeMachineText = [
     <section class="section-padding" id="writing">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="03" label="Writing" title="Writing" />
+          <SectionHeading number="03" label="Writing" title="Articles" />
         </ScrollReveal>
         <ScrollReveal client:load>
           <div class="max-w-2xl">
@@ -242,6 +244,7 @@ const homeMachineText = [
                 title={project.title}
                 tagline={project.tagline}
                 image={project.image!}
+                href={project.liveUrl}
               />
             </ScrollReveal>
           ))}
@@ -269,6 +272,7 @@ const homeMachineText = [
                 period={exp.period}
                 highlights={exp.highlights}
                 isFirst={i === 0}
+                isLast={i === experience.length - 1}
               />
             </ScrollReveal>
           ))}

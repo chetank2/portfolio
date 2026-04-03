@@ -3,22 +3,30 @@ interface Props {
   title: string;
   tagline: string;
   image: string;
+  href?: string;
 }
 
-const { title, tagline, image } = Astro.props;
+const { title, tagline, image, href } = Astro.props;
 ---
 
-<div class="border border-border bg-bg-surface radius-xl overflow-hidden group card-accent transition-all duration-400 hover:border-border-hover">
-  <div class="aspect-video overflow-hidden">
-    <img
-      src={image}
-      alt={title}
-      class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-      loading="lazy"
-    />
+<a
+  href={href ?? "#"}
+  class="block no-underline"
+  target={href ? "_blank" : undefined}
+  rel={href ? "noopener noreferrer" : undefined}
+>
+  <div class="border border-border bg-bg-surface radius-xl overflow-hidden group card-accent transition-all duration-400 hover:border-border-hover">
+    <div class="aspect-video overflow-hidden">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+    <div class="p-5">
+      <h3 class="type-card-title-md text-text-primary">{title}</h3>
+      <p class="type-body-sm text-text-secondary mt-1">{tagline}</p>
+    </div>
   </div>
-  <div class="p-5">
-    <h3 class="type-card-title-md text-text-primary">{title}</h3>
-    <p class="type-body-sm text-text-secondary mt-1">{tagline}</p>
-  </div>
-</div>
+</a>

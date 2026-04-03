@@ -2,7 +2,7 @@
 import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ImageLightbox from "../../components/react/ImageLightbox.tsx";
 import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
-import { getProjectLinksBySlug } from "../../data/projects";
+import { appProjects, getProjectLinksBySlug } from "../../data/projects";
 import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
 
 interface Props {
@@ -11,6 +11,34 @@ interface Props {
 
 const { study } = Astro.props as Props;
 const relatedLinks = getProjectLinksBySlug(study.slug);
+const appStudySlugs = appProjects.map((project) => project.slug);
+const currentAppStudyIndex = appStudySlugs.indexOf(study.slug);
+const prevAppStudySlug = currentAppStudyIndex > 0 ? appStudySlugs[currentAppStudyIndex - 1] : null;
+const nextAppStudySlug =
+  currentAppStudyIndex >= 0 && currentAppStudyIndex < appStudySlugs.length - 1
+    ? appStudySlugs[currentAppStudyIndex + 1]
+    : null;
+const prevAppStudy = prevAppStudySlug ? appProjects.find((project) => project.slug === prevAppStudySlug) : null;
+const nextAppStudy = nextAppStudySlug ? appProjects.find((project) => project.slug === nextAppStudySlug) : null;
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+
+const renderInlineMarkdown = (value: string) => {
+  const markdownLinkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+  return escapeHtml(value).replace(markdownLinkPattern, (_match, label, href) => {
+    const safeLabel = escapeHtml(label);
+    const safeHref = escapeHtml(href);
+
+    return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer" class="text-text-primary underline decoration-border underline-offset-4 transition-colors duration-200 hover:text-accent">${safeLabel}</a>`;
+  });
+};
 ---
 
 <ScrollReveal client:load>
@@ -74,10 +102,10 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                   ) : (
                     <span class="text-accent/50 flex-shrink-0">—</span>
                   )}
-                  <span>
-                    {typeof item === "string" ? (
-                      item
-                    ) : (
+                    <span>
+                      {typeof item === "string" ? (
+                      <Fragment set:html={renderInlineMarkdown(item)} />
+                      ) : (
                       <>
                         {item.title ? <strong class="text-text-primary font-display">{item.title}</strong> : null}
                         {item.title ? " — " : ""}
@@ -136,7 +164,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                           )}
                           <span>
                             {typeof bullet === "string" ? (
-                              bullet
+                              <Fragment set:html={renderInlineMarkdown(bullet)} />
                             ) : (
                               <>
                                 {bullet.title ? <strong class="text-text-primary font-display">{bullet.title}</strong> : null}
@@ -270,3 +298,20 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 ))}
 
 <CaseStudyRelatedLinks links={relatedLinks} />
+
+{study.backHref === "/#apps" && (prevAppStudy || nextAppStudy) ? (
+  <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+    {prevAppStudy ? (
+      <a href={`/work/${prevAppStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
+        <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
+        <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevAppStudy.title}</span>
+      </a>
+    ) : <div />}
+    {nextAppStudy ? (
+      <a href={`/work/${nextAppStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
+        <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
+        <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextAppStudy.title}</span>
+      </a>
+    ) : <div />}
+  </nav>
+) : null}
