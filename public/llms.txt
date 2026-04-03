@@ -42,34 +42,53 @@ Resume:
 ### Senior Product Designer — Freight Tiger
 - Location: Bangalore
 - Period: Dec 2023 – Present
-- Revamped FTL tracking end-to-end. Platform scale: ~1.6L shipments/month.
-- Tracking quality improved from 84% → 96–97%.
-- Built Design System from scratch — tokens, components, Storybook, npm package.
-- Designed full PTL flows, Control Tower, Gatekeeper app, and Planning module.
+- Revamped FTL tracking end-to-end, from Add Journey to live tracking, making the flow simpler and faster to use.
+- Handled platform scale of roughly 1.6 lakh shipments per month, with around 1.5 lakh tracked monthly.
+- Improved tracking quality from 84% to about 96–97%.
+- Designed TigerSight as the operational awareness and control-tower layer for live monitoring, exception handling, and network intelligence.
+- Designed Freight Invoicing flows to make logistics billing, reconciliation, and operational handoff clearer and more usable.
+- Designed full PTL flows including order creation, tracking, ePOD, invoicing, reconciliation, dispute management, and courier recommendation.
+- Built the Planning module for dispatch and capacity planning.
+- Created a design system from scratch with tokens, components, states, Storybook, and an npm package.
+- Designed Control Tower for FTL exceptions with alert rules, issue cards, triage views, and audit trail.
+- Designed the Gatekeeper app for tracking FTL vehicles inside plants.
+- Built hackathon demos across planning to invoicing, including a dispatch planning POC for non-cuboidal and liquid cargo.
+- Designed for enterprise users across TML warehouses, JSW and Dalmia plants, Asian Paints warehouses, and Zepto dark stores.
 
 ### Product Designer, Co-Founder — Konic Technologies
 - Location: Hyderabad
 - Period: Jan 2021 – Dec 2023
-- Co-founded and designed AfterCrop (WMS) for small-medium warehouses.
-- Mobile-first design supporting varied literacy and tech levels.
-- Shipped working prototype with cloud SaaS access patterns.
+- Co-founded and designed AfterCrop, a mobile-first WMS for small and medium warehouses.
+- Researched market gaps and aimed for off-the-shelf flows with easy onboarding.
+- Built simple card and list UI with power features for operations and clear owner summaries.
+- Focused on low-disruption workflows and portability for users with varied literacy and tech levels.
+- Shipped a working prototype and defined data security and cloud SaaS access patterns.
 
-### UX/UI Designer — Versatile Mobitech
+### UX/UI Designer — Versatile Mobitech Pvt Ltd Technologies
 - Location: Hyderabad
 - Period: Sep 2020 – Nov 2020
-- Led the design team. Collaborated with foreign clients from Dubai, Nigeria, and America.
-- Designed QPL, Wrkman, and a warehouse management app.
+- Collaborated with stakeholders and developers to redesign Android apps and websites.
+- Led the design team and recruited and managed a junior designer.
+- Worked with clients from Dubai, Nigeria, and the United States.
+- Designed the QPL mobile cricket quiz app, Wrkman, and a warehouse management app for an apparel chain in the US.
 
-### Freelance Designer — Independent
+### UX/UI Designer — Freelance Designer
 - Location: Hyderabad
 - Period: Aug 2017 – Dec 2020
-- Designed and launched Learn Hadiya web app.
+- Worked as a product designer for the Learn Hadiya project.
+- Developed and launched the web app in collaboration with a developer and stakeholders.
+
+### UI Designer — Avantari Medical Technologies
+- Location: Hyderabad
+- Period: Mar 2017 – Jul 2017
+- Designed mobile apps, logos, and 3D product mockups.
+- Created a Blender-based animation advert and storyboarded an advertisement.
 
 Skills:
-- Design Systems, System Design, Interaction Design, Prototyping, Information Architecture, Visual Design, Product Thinking, AI-Assisted Building, Design-to-Code, User Research
+- User Research, Design Systems, Prototyping, Visual Design, Interaction Design, Information Architecture, User Testing, Design Thinking, Wireframing, User Flows
 
 Tools:
-- Figma, Claude Code, Cursor AI, Codex, Storybook, Adobe Illustrator, Adobe After Effects
+- Figma, Adobe XD, Cursor AI, Adobe Illustrator, Adobe After Effects
 
 Contact:
 - Email: mailto:mymailchetan25@gmail.com
