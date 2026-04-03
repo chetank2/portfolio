@@ -84,7 +84,7 @@ Content = contentModule.default;
           >
             <a
               href={caseStudy.backHref}
-              class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
+              class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300"
             >
               <span class="w-4 h-px bg-text-tertiary"></span>
               Back
@@ -93,7 +93,7 @@ Content = contentModule.default;
               type="button"
               hidden
               data-case-study-lock
-              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
+              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-display text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
             >
               <svg
                 aria-hidden="true"
@@ -114,7 +114,7 @@ Content = contentModule.default;
         ) : (
           <a
             href={caseStudy.backHref}
-            class="inline-flex items-center gap-2 font-mono text-xs text-text-tertiary hover:text-accent transition-colors duration-300"
+            class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300"
           >
             <span class="w-4 h-px bg-text-tertiary"></span>
             Back
@@ -129,13 +129,13 @@ Content = contentModule.default;
           >
             <ScrollReveal client:visible>
               <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
+                <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
                 </h1>
-                <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+                <p class="type-page-tagline text-text-secondary italic mb-10">
                   {caseStudy.tagline}
                 </p>
-                <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+                <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
                   <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
                   <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
                   <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
@@ -155,14 +155,14 @@ Content = contentModule.default;
               <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
                 {prevStudy ? (
                   <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
-                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
+                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
                   </a>
                 ) : <div />}
                 {nextStudy ? (
                   <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
-                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
+                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
                   </a>
                 ) : <div />}
               </nav>
@@ -172,13 +172,13 @@ Content = contentModule.default;
           <>
             <ScrollReveal client:visible>
               <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-                <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-4 sm:mb-5 leading-tight">
+                <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
                 </h1>
-                <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+                <p class="type-page-tagline text-text-secondary italic mb-10">
                   {caseStudy.tagline}
                 </p>
-                <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+                <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
                   <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
                   <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
                   <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
@@ -198,14 +198,14 @@ Content = contentModule.default;
               <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
                 {prevStudy ? (
                   <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
-                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
+                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
                   </a>
                 ) : <div />}
                 {nextStudy ? (
                   <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
-                    <span class="font-display text-sm sm:text-base font-600 text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
+                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
                   </a>
                 ) : <div />}
               </nav>

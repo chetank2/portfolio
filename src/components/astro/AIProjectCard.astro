@@ -17,13 +17,13 @@ const { title, tagline, description, tags, liveUrl, repoUrl, caseStudyUrl } = As
 <ProjectCardHover client:visible>
   <a href={caseStudyUrl ?? liveUrl ?? repoUrl ?? "#"} class="block h-full no-underline">
     <div class="p-6 h-full flex flex-col">
-      <span class="ai-badge radius-xl inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider mb-4 px-2.5 py-1 w-fit border">
+      <span class="ai-badge radius-xl inline-flex items-center gap-1.5 font-display text-[10px] uppercase tracking-wider mb-4 px-2.5 py-1 w-fit border">
         Built with AI
       </span>
 
-      <h3 class="text-lg font-display font-700 text-text-primary">{title}</h3>
-      <p class="text-text-secondary font-body text-sm italic mt-1.5">{tagline}</p>
-      <p class="text-text-secondary font-body text-sm mt-3 flex-1 leading-relaxed">{description}</p>
+      <h3 class="type-card-title-md text-text-primary">{title}</h3>
+      <p class="type-body-sm text-text-secondary italic mt-1.5">{tagline}</p>
+      <p class="type-body-sm text-text-secondary mt-3 flex-1">{description}</p>
 
       <div class="flex flex-wrap gap-2 mt-5">
         {tags.map((tag) => (

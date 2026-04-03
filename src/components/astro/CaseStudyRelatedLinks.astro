@@ -10,7 +10,7 @@ const { links } = Astro.props as Props;
 
 {links.length ? (
   <section class="mt-20 mb-20">
-    <h3 class="text-2xl font-display font-700 text-text-primary mb-6">Related Links</h3>
+    <h3 class="case-study-section-title mb-6 text-text-primary">Related Links</h3>
     <div class="space-y-4">
       {links.map((link) => (
         <a
@@ -21,8 +21,8 @@ const { links } = Astro.props as Props;
         >
           <div class="flex items-center justify-between gap-4">
             <div>
-              <p class="text-text-primary font-display font-700">{link.title}</p>
-              <p class="text-text-secondary font-body text-sm mt-1">{link.description}</p>
+              <p class="type-card-title-md text-text-primary">{link.title}</p>
+              <p class="type-body-sm text-text-secondary mt-1">{link.description}</p>
             </div>
             <span class="text-accent">&nearr;</span>
           </div>

@@ -53,8 +53,8 @@ export default function NavigationMenu({ links }: Props) {
                   transition={{ delay: 0.06 + i * 0.04, duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
                   className="flex items-baseline gap-4 group"
                 >
-                  <span className="font-mono text-sm text-accent">{link.number}</span>
-                  <span className="font-display text-3xl text-text-primary group-hover:text-accent transition-colors duration-300">
+                  <span className="type-overlay-nav-number text-accent">{link.number}</span>
+                  <span className="type-overlay-nav-title text-text-primary group-hover:text-accent transition-colors duration-300">
                     {link.label}
                   </span>
                 </motion.a>

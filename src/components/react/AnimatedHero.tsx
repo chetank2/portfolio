@@ -32,7 +32,7 @@ export default function AnimatedHero({ tagline, subtitle, bio }: Props) {
         variants={wordContainer}
         initial="hidden"
         animate="visible"
-        className="font-display text-2xl sm:text-3xl md:text-[2rem] lg:text-[2.5rem] xl:text-[2.75rem] 2xl:text-[3.5rem] font-800 tracking-tight leading-[1.15] text-text-primary"
+        className="type-hero-title text-text-primary"
       >
         {words.map((word, i) => (
           <motion.span
@@ -50,7 +50,7 @@ export default function AnimatedHero({ tagline, subtitle, bio }: Props) {
         initial="hidden"
         animate="visible"
         transition={{ delay: words.length * 0.05 + 0.16 }}
-        className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl 2xl:text-2xl text-text-secondary font-body leading-relaxed max-w-2xl 2xl:max-w-3xl"
+        className="type-hero-body mt-6 sm:mt-8 text-text-secondary max-w-2xl 2xl:max-w-3xl"
       >
         {subtitle}
       </motion.p>
@@ -61,7 +61,7 @@ export default function AnimatedHero({ tagline, subtitle, bio }: Props) {
           initial="hidden"
           animate="visible"
           transition={{ delay: words.length * 0.05 + 0.32 }}
-          className="mt-3 sm:mt-4 text-sm sm:text-base 2xl:text-lg text-text-tertiary font-body max-w-xl 2xl:max-w-2xl"
+          className="type-body-sm mt-3 sm:mt-4 text-text-tertiary max-w-xl 2xl:max-w-2xl"
         >
           {bio}
         </motion.p>

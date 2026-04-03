@@ -14,7 +14,7 @@ const { role, company, location, period, highlights, isFirst = false } = Astro.p
 <div class="flex flex-col md:flex-row gap-4 md:gap-12">
   <!-- Period -->
   <div class="md:w-44 flex-shrink-0">
-    <span class="font-mono text-xs text-text-tertiary">{period}</span>
+    <span class="type-ui-meta text-text-tertiary">{period}</span>
   </div>
 
   <!-- Timeline dot + content -->
@@ -32,15 +32,15 @@ const { role, company, location, period, highlights, isFirst = false } = Astro.p
     </div>
 
     <div class="pb-12">
-      <h3 class="font-display font-700 text-text-primary">{role}</h3>
-      <p class="text-text-secondary font-body text-sm mt-0.5">
+      <h3 class="type-card-title-md text-text-primary">{role}</h3>
+      <p class="type-body-sm text-text-secondary mt-0.5">
         {company} <span class="text-text-tertiary mx-1">/</span> {location}
       </p>
 
       {highlights.length > 0 && (
         <ul class="mt-4 space-y-2.5">
           {highlights.map((highlight) => (
-            <li class="text-text-secondary font-body text-sm flex gap-3 leading-relaxed">
+            <li class="type-body-sm text-text-secondary flex gap-3">
               <span class="text-accent/50 mt-0.5 flex-shrink-0">—</span>
               <span>{highlight}</span>
             </li>

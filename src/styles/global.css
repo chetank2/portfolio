@@ -17,6 +17,14 @@
   --font-display: var(--font-sans);
   --font-body: var(--font-serif);
   --font-mono: var(--font-mono-stack);
+  --type-case-study-section-size: 1.75rem;
+  --type-case-study-section-size-md: 2rem;
+  --type-case-study-section-size-2xl: 2.25rem;
+  --type-case-study-section-weight: 700;
+  --type-case-study-subsection-size: 1.125rem;
+  --type-case-study-subsection-size-md: 1.25rem;
+  --type-case-study-subsection-size-2xl: 1.375rem;
+  --type-case-study-subsection-weight: 700;
   --radius-sm: calc(var(--radius) - 0.25rem);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 0.25rem);
@@ -77,6 +85,14 @@ html.theme-light {
   --font-display: var(--font-sans);
   --font-body: var(--font-serif);
   --font-mono: var(--font-mono-stack);
+  --type-case-study-section-size: 1.75rem;
+  --type-case-study-section-size-md: 2rem;
+  --type-case-study-section-size-2xl: 2.25rem;
+  --type-case-study-section-weight: 700;
+  --type-case-study-subsection-size: 1.125rem;
+  --type-case-study-subsection-size-md: 1.25rem;
+  --type-case-study-subsection-size-2xl: 1.375rem;
+  --type-case-study-subsection-weight: 700;
   --radius-sm: calc(var(--radius) - 0.25rem);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 0.25rem);
@@ -390,10 +406,189 @@ html.dark {
 
   /* ---- Section number ---- */
   .section-number {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.75rem;
     color: var(--color-accent);
     letter-spacing: 0.05em;
+  }
+
+  .type-ui-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .type-ui-meta {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .type-button {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .type-body-sm {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+
+  .type-body-md {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.82;
+  }
+
+  .type-body-lg {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  .type-card-title-md {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  .type-card-title-lg {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .type-section-heading {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .type-page-title {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+
+  .type-page-tagline {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.75;
+  }
+
+  .type-section-intro {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .type-hero-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.04em;
+  }
+
+  .type-hero-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .type-overlay-nav-number {
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .type-overlay-nav-title {
+    font-family: var(--font-display);
+    font-size: 1.875rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  @media (min-width: 640px) {
+    .type-hero-title {
+      font-size: 2.5rem;
+    }
+    .type-hero-body {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .type-page-title {
+      font-size: 3rem;
+    }
+    .type-section-heading {
+      font-size: 2.75rem;
+    }
+    .type-card-title-lg {
+      font-size: 1.5rem;
+    }
+    .type-card-title-md {
+      font-size: 1.25rem;
+    }
+    .type-hero-title {
+      font-size: 2rem;
+    }
+    .type-hero-body {
+      font-size: 1.25rem;
+    }
+    .type-section-intro {
+      font-size: 1.125rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .type-hero-title {
+      font-size: 2.5rem;
+    }
+    .type-overlay-nav-title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .type-hero-title {
+      font-size: 2.75rem;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .type-page-title {
+      font-size: 3.75rem;
+    }
+    .type-section-heading {
+      font-size: 3rem;
+    }
+    .type-hero-title {
+      font-size: 3.5rem;
+    }
+    .type-hero-body {
+      font-size: 1.5rem;
+    }
+    .type-overlay-nav-title {
+      font-size: 2.5rem;
+    }
   }
 
   /* ---- Bounce ---- */
@@ -551,7 +746,7 @@ html.dark {
     background: transparent;
     cursor: pointer;
     color: var(--theme-toggle-text);
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.08em;
@@ -619,7 +814,7 @@ html.dark {
     border-radius: var(--radius-lg);
     background: color-mix(in srgb, var(--color-bg-elevated) 88%, transparent);
     color: var(--color-text-secondary);
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -801,7 +996,7 @@ html.dark {
     }
   }
   .tag-pill {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.6875rem;
     letter-spacing: 0.03em;
     padding: 4px 10px;
@@ -847,8 +1042,8 @@ html.dark {
     margin-bottom: 18px;
     color: var(--color-text-primary);
     font-family: var(--font-display);
-    font-size: 1.375rem;
-    font-weight: 700;
+    font-size: var(--type-case-study-section-size);
+    font-weight: var(--type-case-study-section-weight);
     line-height: 1.18;
     letter-spacing: -0.02em;
   }
@@ -859,8 +1054,8 @@ html.dark {
     margin-bottom: 14px;
     color: var(--color-text-primary);
     font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: 650;
+    font-size: var(--type-case-study-subsection-size);
+    font-weight: var(--type-case-study-subsection-weight);
     line-height: 1.28;
     letter-spacing: -0.015em;
   }
@@ -875,6 +1070,24 @@ html.dark {
     font-weight: 650;
     line-height: 1.35;
     letter-spacing: -0.01em;
+  }
+
+  .case-study-section-title {
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: var(--type-case-study-section-size);
+    font-weight: var(--type-case-study-section-weight);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+
+  .case-study-subsection-title {
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-size: var(--type-case-study-subsection-size);
+    font-weight: var(--type-case-study-subsection-weight);
+    line-height: 1.28;
+    letter-spacing: -0.015em;
   }
 
   .longform-content p,
@@ -1083,13 +1296,13 @@ html.dark {
     .case-study-content h2 {
       margin-top: 72px;
       margin-bottom: 24px;
-      font-size: 1.625rem;
+      font-size: var(--type-case-study-section-size-md);
     }
     .longform-content h3,
     .case-study-content h3 {
       margin-top: 44px;
       margin-bottom: 16px;
-      font-size: 1.1875rem;
+      font-size: var(--type-case-study-subsection-size-md);
     }
     .longform-content h4,
     .case-study-content h4 {
@@ -1134,17 +1347,29 @@ html.dark {
     .case-study-content p:has(> img:only-child) {
       margin-bottom: 28px;
     }
+    .case-study-section-title {
+      font-size: var(--type-case-study-section-size-md);
+    }
+    .case-study-subsection-title {
+      font-size: var(--type-case-study-subsection-size-md);
+    }
   }
 
   /* Long-form content — TV */
   @media (min-width: 1536px) {
     .longform-content h2,
     .case-study-content h2 {
-      font-size: 1.75rem;
+      font-size: var(--type-case-study-section-size-2xl);
     }
     .longform-content h3,
     .case-study-content h3 {
-      font-size: 1.25rem;
+      font-size: var(--type-case-study-subsection-size-2xl);
+    }
+    .case-study-section-title {
+      font-size: var(--type-case-study-section-size-2xl);
+    }
+    .case-study-subsection-title {
+      font-size: var(--type-case-study-subsection-size-2xl);
     }
     .longform-content p,
     .longform-content li,

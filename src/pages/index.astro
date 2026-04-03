@@ -102,7 +102,7 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
           <SectionHeading number="01" label="Selected Work" title="Deep Case Studies" />
-          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             My strongest work is in high-complexity product environments where design has to improve decisions, reduce friction, and make systems easier to trust.
           </p>
         </ScrollReveal>
@@ -127,7 +127,7 @@ const homeMachineText = [
           <ScrollReveal client:visible>
             <div class="flex items-center gap-3 mb-10">
               <span class="w-8 h-px bg-border"></span>
-              <h3 class="font-mono text-xs text-text-tertiary uppercase tracking-wide">
+              <h3 class="type-ui-label text-text-tertiary">
                 Systems, Design Systems & Builder Work
               </h3>
             </div>
@@ -162,7 +162,7 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
           <SectionHeading number="02" label="Builder" title="Built with AI" />
-          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             Products I designed and shipped using AI-assisted development.
           </p>
         </ScrollReveal>
@@ -195,7 +195,7 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
           <SectionHeading number="03" label="Writing" title="Writing" />
-          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             Notes on product thinking, design systems, and designing for complexity.
           </p>
         </ScrollReveal>
@@ -217,7 +217,7 @@ const homeMachineText = [
     <section class="section-padding bg-bg-surface" id="apps">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
-          <SectionHeading label="Design Work" title="App Designs" />
+          <SectionHeading number="04" label="Design Work" title="App Designs" />
         </ScrollReveal>
 
         <HorizontalScrollGallery client:visible>
@@ -236,8 +236,8 @@ const homeMachineText = [
                     </div>
                   )}
                   <div class="p-4">
-                    <h4 class="font-display font-700 text-text-primary text-sm">{project.title}</h4>
-                    <p class="text-xs text-text-secondary font-body mt-1">{project.tagline}</p>
+                    <h4 class="type-ui-meta text-text-primary">{project.title}</h4>
+                    <p class="type-ui-meta text-text-secondary mt-1">{project.tagline}</p>
                   </div>
                 </div>
               </a>
@@ -251,7 +251,7 @@ const homeMachineText = [
     <section class="section-padding" id="websites">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
-          <SectionHeading label="Websites" title="Web Projects" />
+          <SectionHeading number="05" label="Websites" title="Web Projects" />
         </ScrollReveal>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
           {websiteProjects.map((project, i) => (
@@ -271,8 +271,8 @@ const homeMachineText = [
     <section class="section-padding bg-bg-surface" id="resume">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:visible>
-          <SectionHeading number="04" label="Experience" title="Experience" />
-          <p class="text-text-secondary font-body -mt-8 mb-14 max-w-2xl leading-relaxed">
+          <SectionHeading number="06" label="Experience" title="Experience" />
+          <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             I've worked across logistics, warehouse operations, and product platforms, mostly on systems where the challenge is less about visual polish and more about clarity under complexity.
           </p>
         </ScrollReveal>
@@ -295,7 +295,7 @@ const homeMachineText = [
         <!-- Skills & Tools -->
         <div class="mt-16 sm:mt-20 grid sm:grid-cols-2 gap-10 sm:gap-16">
           <ScrollReveal client:visible>
-            <h3 class="font-display font-700 text-text-secondary mb-5">Skills</h3>
+            <h3 class="type-card-title-md text-text-secondary mb-5">Skills</h3>
             <div class="flex flex-wrap gap-2">
               {skills.map((skill) => (
                 <span class="tag-pill">{skill}</span>
@@ -304,7 +304,7 @@ const homeMachineText = [
           </ScrollReveal>
 
           <ScrollReveal client:visible delay={0.1}>
-            <h3 class="font-display font-700 text-text-secondary mb-5">Tools</h3>
+            <h3 class="type-card-title-md text-text-secondary mb-5">Tools</h3>
             <div class="flex flex-wrap gap-2">
               {tools.map((tool) => (
                 <span class="tag-pill">{tool}</span>
@@ -319,9 +319,8 @@ const homeMachineText = [
     <section class="section-padding" id="contact">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 text-center">
         <ScrollReveal client:visible>
-          <span class="section-number block mb-4">05 / Contact</span>
-          <h2 class="text-2xl sm:text-3xl md:text-5xl 2xl:text-6xl font-display font-700 mb-5">Let's Build Better Systems</h2>
-          <p class="text-text-secondary font-body mb-14 max-w-lg mx-auto leading-relaxed">
+          <SectionHeading number="07" label="Contact" title="Let's Build Better Systems" centered />
+          <p class="type-section-intro text-text-secondary mb-14 max-w-2xl mx-auto -mt-8">
             I'm interested in product design roles where workflow design, systems thinking, and design-to-implementation quality actually matter.
           </p>
         </ScrollReveal>
@@ -330,7 +329,7 @@ const homeMachineText = [
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="mailto:mymailchetan25@gmail.com"
-              class="inline-flex items-center justify-center gap-2 radius-lg bg-accent text-bg-deep font-display font-700 text-sm px-8 py-3.5 hover:bg-accent/90 transition-colors duration-300"
+              class="type-button inline-flex items-center justify-center gap-2 radius-lg bg-accent text-bg-deep px-8 py-3.5 hover:bg-accent/90 transition-colors duration-300"
             >
               Get in Touch
             </a>
@@ -338,7 +337,7 @@ const homeMachineText = [
               href="https://linkedin.com/in/chetan-kumar25/"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 radius-lg border border-border text-text-primary font-display font-700 text-sm px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
+              class="type-button inline-flex items-center justify-center gap-2 radius-lg border border-border text-text-primary px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
             >
               LinkedIn
             </a>
@@ -346,7 +345,7 @@ const homeMachineText = [
               href="https://github.com/chetank2"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 radius-lg border border-border text-text-primary font-display font-700 text-sm px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
+              class="type-button inline-flex items-center justify-center gap-2 radius-lg border border-border text-text-primary px-8 py-3.5 hover:border-accent hover:text-accent transition-colors duration-300"
             >
               GitHub
             </a>

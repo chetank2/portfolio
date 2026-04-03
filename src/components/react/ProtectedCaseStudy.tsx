@@ -88,10 +88,10 @@ export default function ProtectedCaseStudy({
 
   return (
     <section className="mt-10 radius-xl border border-border bg-bg-elevated/60 p-6 sm:mt-12 sm:p-8">
-      <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent/70">
+      <p className="type-ui-label text-accent/70">
         Protected Case Study
       </p>
-      <h2 className="mt-4 text-2xl font-display font-700 text-text-primary sm:text-3xl">
+      <h2 className="case-study-section-title mt-4 text-text-primary">
         {title}
       </h2>
       <p className="mt-3 max-w-xl text-text-secondary font-body leading-relaxed">
@@ -146,11 +146,11 @@ export default function ProtectedCaseStudy({
           </button>
         </div>
         {error ? (
-          <p className="text-sm font-body text-red-400">{error}</p>
+          <p className="type-body-sm text-red-400">{error}</p>
         ) : null}
         <button
           type="submit"
-          className="inline-flex w-fit items-center justify-center radius-lg bg-text-primary px-5 py-3 font-mono text-xs uppercase tracking-[0.18em] text-bg-deep transition-opacity hover:opacity-90"
+          className="type-ui-label inline-flex w-fit items-center justify-center radius-lg bg-text-primary px-5 py-3 text-bg-deep transition-opacity hover:opacity-90"
         >
           Unlock
         </button>

@@ -69,8 +69,8 @@ export default function ImageLightbox({ image, title, description, children }: P
             </div>
 
             <div className="md:w-72 shrink-0 text-center md:text-left">
-              <h3 className="text-2xl font-display font-700 text-text-primary mb-3">{title}</h3>
-              <p className="text-text-secondary font-body text-sm leading-relaxed">{description}</p>
+              <h3 className="case-study-section-title mb-3 text-text-primary">{title}</h3>
+              <p className="type-body-sm text-text-secondary">{description}</p>
             </div>
 
             <button

@@ -4,21 +4,22 @@ interface Props {
   title: string;
   number?: string;
   id?: string;
+  centered?: boolean;
 }
 
-const { label, title, number, id } = Astro.props;
+const { label, title, number, id, centered = false } = Astro.props;
 ---
 
-<div class="mb-14" id={id}>
-  <div class="flex items-center gap-3 mb-4">
+<div class:list={["mb-14", centered && "text-center"]} id={id}>
+  <div class:list={["flex items-center gap-3 mb-4", centered && "justify-center"]}>
     {number && (
       <span class="section-number">{number} /</span>
     )}
     {label && (
-      <span class="font-mono text-xs tracking-wide text-text-tertiary uppercase">{label}</span>
+      <span class="type-ui-label text-text-tertiary">{label}</span>
     )}
   </div>
-  <h2 class="text-2xl sm:text-3xl md:text-[2.75rem] 2xl:text-5xl font-display font-700 text-text-primary leading-tight">
+  <h2 class="type-section-heading text-text-primary">
     {title}
   </h2>
 </div>

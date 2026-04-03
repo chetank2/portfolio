@@ -15,13 +15,13 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 
 <ScrollReveal client:visible>
   <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl 2xl:text-6xl font-display font-800 text-text-primary mb-5 leading-tight">
+    <h1 class="type-page-title text-text-primary mb-5">
       {study.title}
     </h1>
-    <p class="text-lg text-text-secondary font-body italic mb-10 leading-relaxed">
+    <p class="type-page-tagline text-text-secondary italic mb-10">
       {study.tagline}
     </p>
-    <div class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-xs text-text-secondary">
+    <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
       {study.meta.map((meta) => (
         <span>
           <span class="text-accent/60">{meta.label}</span> <span class="mx-1 text-text-tertiary">/</span> {meta.value}
@@ -47,7 +47,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 {study.sections.map((section, sectionIndex) => (
   <ScrollReveal client:visible>
     <section class:list={["mt-20 sm:mt-24", sectionIndex === study.sections.length - 1 && "mb-20"]}>
-      <h3 class="text-2xl font-display font-700 text-text-primary mb-6">{section.title}</h3>
+      <h3 class="case-study-section-title mb-6">{section.title}</h3>
 
       {section.blocks.map((block) => (
         <>
@@ -70,7 +70,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
               {block.items.map((item, itemIndex) => (
                 <li class="text-text-secondary font-body flex gap-3">
                   {block.ordered ? (
-                    <span class="text-accent font-mono text-xs mt-1">{String(itemIndex + 1).padStart(2, "0")}</span>
+                    <span class="type-ui-meta text-accent mt-1">{String(itemIndex + 1).padStart(2, "0")}</span>
                   ) : (
                     <span class="text-accent/50 flex-shrink-0">—</span>
                   )}
@@ -93,7 +93,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
           {block.type === "chips" ? (
             <div class="space-y-3 mt-4">
               {block.rows.map((row) => (
-                <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+                <div class="type-ui-meta flex flex-wrap items-center gap-2.5 text-text-secondary">
                   {row.map((chip, chipIndex) => (
                     <>
                       <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -109,14 +109,14 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
             <>
               {block.items.map((item) => (
                 <div class="mt-10 first:mt-0">
-                  <h4 class="text-base font-display font-700 text-text-primary mb-3">{item.title}</h4>
+                  <h4 class="case-study-subsection-title mb-3">{item.title}</h4>
                   {item.paragraphs?.map((paragraph, paragraphIndex) => (
                     <p class:list={["text-text-secondary font-body leading-relaxed", paragraphIndex < (item.paragraphs?.length ?? 0) - 1 ? "mb-5" : ""]}>
                       {paragraph}
                     </p>
                   ))}
                   {item.chips ? (
-                    <div class="flex flex-wrap items-center gap-2.5 text-text-secondary font-mono text-xs">
+                    <div class="type-ui-meta flex flex-wrap items-center gap-2.5 text-text-secondary">
                       {item.chips.map((chip, chipIndex) => (
                         <>
                           <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -130,7 +130,7 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                       {item.bullets.map((bullet, bulletIndex) => (
                         <li class="text-text-secondary font-body flex gap-3">
                           {item.ordered ? (
-                            <span class="text-accent font-mono text-xs mt-1">{String(bulletIndex + 1).padStart(2, "0")}</span>
+                            <span class="type-ui-meta text-accent mt-1">{String(bulletIndex + 1).padStart(2, "0")}</span>
                           ) : (
                             <span class="text-accent/50 flex-shrink-0">—</span>
                           )}
@@ -165,8 +165,8 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                 >
                   <div class="flex items-center justify-between gap-4">
                     <div>
-                      <p class="text-text-primary font-display font-700">{card.title}</p>
-                      <p class="text-text-secondary font-body text-sm mt-1">{card.description}</p>
+                      <p class="type-card-title-md text-text-primary">{card.title}</p>
+                      <p class="type-body-sm text-text-secondary mt-1">{card.description}</p>
                     </div>
                     <span class="text-accent">&nearr;</span>
                   </div>
@@ -193,12 +193,12 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                   <figcaption class="px-5 py-4 sm:px-6 sm:py-5 bg-bg-elevated/40 border-t border-border">
                     {block.image.title ? (
                       <div class="flex items-center justify-between gap-4 mb-2">
-                        <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">{block.image.title}</h4>
-                        <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">Tap to expand</span>
+                        <h4 class="case-study-subsection-title">{block.image.title}</h4>
+                        <span class="type-ui-label text-accent/70">Tap to expand</span>
                       </div>
                     ) : null}
                     {block.image.description ? (
-                      <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">{block.image.description}</p>
+                      <p class="type-body-sm text-text-secondary">{block.image.description}</p>
                     ) : null}
                   </figcaption>
                 ) : null}
@@ -221,10 +221,10 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
                     </div>
                     <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
                       <div class="flex items-center justify-between gap-4 mb-2">
-                        <h4 class="text-base sm:text-lg font-display font-700 text-text-primary">{image.title}</h4>
-                        <span class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-accent/70">Tap to expand</span>
+                        <h4 class="case-study-subsection-title">{image.title}</h4>
+                        <span class="type-ui-label text-accent/70">Tap to expand</span>
                       </div>
-                      <p class="text-sm sm:text-base text-text-secondary font-body leading-relaxed">{image.description}</p>
+                      <p class="type-body-sm text-text-secondary">{image.description}</p>
                     </figcaption>
                   </figure>
                 </ImageLightbox>
@@ -252,9 +252,9 @@ const relatedLinks = getProjectLinksBySlug(study.slug);
 
                   <div class:list={["space-y-4", item.imagePosition === "right" && "md:order-1"]}>
                     {item.eyebrow ? (
-                      <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-accent/80">{item.eyebrow}</p>
+                      <p class="font-display text-[11px] uppercase tracking-[0.18em] text-accent/80">{item.eyebrow}</p>
                     ) : null}
-                    <h4 class="text-xl sm:text-2xl font-display font-700 text-text-primary">{item.title}</h4>
+                    <h4 class="case-study-section-title">{item.title}</h4>
                     {item.paragraphs.map((paragraph) => (
                       <p class="text-text-secondary font-body leading-relaxed">{paragraph}</p>
                     ))}
