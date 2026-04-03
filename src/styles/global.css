@@ -1025,6 +1025,69 @@ html.dark {
     opacity: 1;
   }
 
+  .contact-section {
+    min-height: clamp(26rem, 60vh, 42rem);
+  }
+
+  .contact-section > div {
+    width: 100%;
+  }
+
+  .contact-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: left;
+    width: 100%;
+  }
+
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    max-width: 12ch;
+  }
+
+  .contact-email {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4.2vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    max-width: 100%;
+    word-break: break-word;
+  }
+
+  .footer-clean {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .footer-link-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.9rem 1.35rem;
+  }
+
+  @media (min-width: 768px) {
+    .footer-clean {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .footer-link-row {
+      justify-content: flex-end;
+    }
+  }
+
   /* ---- Long-form content ---- */
   .longform-content > :first-child,
   .case-study-content > :first-child {

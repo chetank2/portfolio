@@ -45,3 +45,26 @@ test("scroll reveal hydrates on load and does not use a delayed negative in-view
   assert.match(scrollReveal, /client:load|useInView/);
   assert.doesNotMatch(scrollReveal, /margin:\s*"-80px"/);
 });
+
+test("homepage contact and shared footer use centered mailto-focused contact layout", async () => {
+  const [homePage, footer] = await Promise.all([
+    read("/src/pages/index.astro"),
+    read("/src/components/astro/Footer.astro"),
+  ]);
+
+  assert.match(homePage, /id="contact"/);
+  assert.match(homePage, /SectionHeading number="07" label="Contact" title="Let's Build Better Systems"/);
+  assert.match(homePage, /mailto:mymailchetan25@gmail\.com/);
+  assert.match(homePage, /Let's Build Better Systems/);
+  assert.doesNotMatch(homePage, />\s*Get in Touch\s*</);
+
+  assert.doesNotMatch(footer, /mailto:mymailchetan25@gmail\.com/);
+  assert.doesNotMatch(footer, /label:\s*"Work"/);
+  assert.doesNotMatch(footer, /label:\s*"Built with AI"/);
+  assert.doesNotMatch(footer, /label:\s*"Writing"/);
+  assert.doesNotMatch(footer, /label:\s*"Resume"/);
+  assert.doesNotMatch(footer, /label:\s*"Email"/);
+  assert.match(footer, /label:\s*"X", href:\s*"https:\/\/x\.com\/kchetank19"/);
+  assert.match(footer, /label:\s*"LinkedIn", href:\s*"https:\/\/linkedin\.com\/in\/chetan-kumar25\/"/);
+  assert.match(footer, /&copy; 2026 Chetan Kummari/);
+});

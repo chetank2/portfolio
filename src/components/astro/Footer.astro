@@ -1,14 +1,27 @@
 ---
+const footerLinks = [
+  { label: "X", href: "https://x.com/kchetank19", external: true },
+  { label: "LinkedIn", href: "https://linkedin.com/in/chetan-kumar25/", external: true },
+  { label: "GitHub", href: "https://github.com/chetank2", external: true },
+];
 ---
 
 <footer class="border-t border-border">
-  <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 py-8 sm:py-12">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-      <span class="type-button text-text-tertiary hover:text-text-secondary transition-colors duration-300">
-        చే. Chetan Kummari
-      </span>
-      <span class="type-ui-meta text-text-tertiary">v2.0</span>
-      <span class="type-ui-meta text-text-tertiary">&copy; 2026</span>
+  <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 py-10 sm:py-14">
+    <div class="footer-clean">
+      <p class="type-ui-meta text-text-tertiary">&copy; 2026 Chetan Kummari</p>
+      <nav class="footer-link-row" aria-label="Footer">
+        {footerLinks.map((link) => (
+          <a
+            href={link.href}
+            class="type-ui-meta text-text-tertiary transition-colors duration-300 hover:text-text-primary"
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
     </div>
   </div>
 </footer>
