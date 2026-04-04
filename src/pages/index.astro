@@ -4,30 +4,21 @@ import Navigation from "../components/astro/Navigation.astro";
 import Hero from "../components/astro/Hero.astro";
 import SectionHeading from "../components/astro/SectionHeading.astro";
 import ProjectCard from "../components/astro/ProjectCard.astro";
-import SupportingProjectCard from "../components/astro/SupportingProjectCard.astro";
 import AIProjectCard from "../components/astro/AIProjectCard.astro";
 import ArticleCard from "../components/astro/ArticleCard.astro";
-import WebsiteCard from "../components/astro/WebsiteCard.astro";
 import TimelineItem from "../components/astro/TimelineItem.astro";
 import MachinePageShell from "../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../components/astro/ViewModeToggle.astro";
 import Footer from "../components/astro/Footer.astro";
 import ScrollReveal from "../components/react/ScrollReveal.tsx";
-import HorizontalScrollGallery from "../components/react/HorizontalScrollGallery.tsx";
-import ImageLightbox from "../components/react/ImageLightbox.tsx";
 import {
   deepProjects,
-  supportingProjects,
   aiProjects,
-  appProjects,
-  websiteProjects,
   experience,
-  skills,
-  tools,
   article,
 } from "../data/projects";
 
-function formatProjectLine(project: (typeof deepProjects)[number] | (typeof supportingProjects)[number] | (typeof aiProjects)[number] | (typeof appProjects)[number]) {
+function formatProjectLine(project: (typeof deepProjects)[number] | (typeof aiProjects)[number]) {
   const href = project.caseStudyUrl ?? "#";
   if (project.protected) {
     return `- ${project.title} — ${project.tagline} (${href}, protected)`;
@@ -46,13 +37,10 @@ const homeMachineText = [
   "",
   "## Work",
   ...deepProjects.map(formatProjectLine),
-  ...supportingProjects.map(formatProjectLine),
+  "- More work: /work",
   "",
   "## Built with AI",
   ...aiProjects.map(formatProjectLine),
-  "",
-  "## App Designs",
-  ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),
   "",
   "## Experience",
   ...experience.flatMap((exp) => [
@@ -62,12 +50,6 @@ const homeMachineText = [
     ...exp.highlights.map((highlight) => `- ${highlight}`),
     "",
   ]),
-  "## Skills",
-  `- ${skills.join(", ")}`,
-  "",
-  "## Tools",
-  `- ${tools.join(", ")}`,
-  "",
   "## Writing",
   `- ${article.title} — ${article.summary} (${article.url})`,
   "",
@@ -103,7 +85,7 @@ const homeMachineText = [
     <section class="section-padding" id="work">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="01" label="Work" title="Case Studies" />
+          <SectionHeading label="Work" title="Case Studies" />
         </ScrollReveal>
 
         <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 2xl:gap-8">
@@ -121,24 +103,17 @@ const homeMachineText = [
           ))}
         </div>
 
-        <div class="mt-20">
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
-            {supportingProjects.map((project, i) => (
-              <ScrollReveal client:load delay={i * 0.08}>
-                <SupportingProjectCard
-                  title={project.title}
-                  tagline={project.tagline}
-                  description={project.description}
-                  tags={project.tags}
-                  protected={project.protected}
-                  liveUrl={project.liveUrl}
-                  npmUrl={project.npmUrl}
-                  caseStudyUrl={project.caseStudyUrl}
-                />
-              </ScrollReveal>
-            ))}
+        <ScrollReveal client:load delay={0.12}>
+          <div class="mt-10 flex justify-start">
+            <a
+              href="/work"
+              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2.5 type-button text-text-secondary transition-colors duration-300 hover:text-text-primary hover:border-border-hover"
+            >
+              View more
+              <span aria-hidden="true">&rarr;</span>
+            </a>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
 
@@ -151,7 +126,7 @@ const homeMachineText = [
     <section class="section-padding bg-bg-surface" id="ai">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="02" label="Builder" title="Built with AI" />
+          <SectionHeading label="Builder" title="Built with AI" />
         </ScrollReveal>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
@@ -181,7 +156,7 @@ const homeMachineText = [
     <section class="section-padding" id="writing">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="03" label="Writing" title="Articles" />
+          <SectionHeading label="Writing" title="Articles" />
         </ScrollReveal>
         <ScrollReveal client:load>
           <div class="max-w-2xl">
@@ -197,66 +172,11 @@ const homeMachineText = [
       </div>
     </section>
 
-    <!-- App Designs -->
-    <section class="section-padding bg-bg-surface" id="apps">
-      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:load>
-          <SectionHeading number="04" label="Design Work" title="App Designs" />
-        </ScrollReveal>
-
-        <HorizontalScrollGallery client:visible>
-          {appProjects.map((project) => (
-            <div class="snap-start shrink-0 w-56 sm:w-64 md:w-72 lg:w-80 2xl:w-96">
-              <a href={project.caseStudyUrl || `#`} class="block no-underline group">
-                <div class="bg-bg-elevated border border-border radius-xl overflow-hidden card-accent hover:border-border-hover transition-all duration-400 group-hover:-translate-y-1">
-                  {project.image && (
-                    <div class="aspect-[3/4] overflow-hidden bg-bg-surface flex items-center justify-center">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        class="w-full h-full object-contain p-4"
-                        loading="lazy"
-                      />
-                    </div>
-                  )}
-                  <div class="p-4">
-                    <h4 class="type-ui-meta text-text-primary">{project.title}</h4>
-                    <p class="type-ui-meta text-text-secondary mt-1">{project.tagline}</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          ))}
-        </HorizontalScrollGallery>
-      </div>
-    </section>
-
-    <!-- Websites -->
-    <section class="section-padding" id="websites">
-      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
-        <ScrollReveal client:load>
-          <SectionHeading number="05" label="Websites" title="Web Projects" />
-        </ScrollReveal>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
-          {websiteProjects.map((project, i) => (
-            <ScrollReveal client:load delay={i * 0.1}>
-              <WebsiteCard
-                title={project.title}
-                tagline={project.tagline}
-                image={project.image!}
-                href={project.liveUrl}
-              />
-            </ScrollReveal>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <!-- Resume -->
     <section class="section-padding bg-bg-surface" id="resume">
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
-          <SectionHeading number="06" label="Experience" title="Experience" />
+          <SectionHeading label="Experience" title="Experience" />
           <p class="type-section-intro text-text-secondary -mt-8 mb-14 max-w-2xl">
             I've worked across logistics, warehouse operations, and product platforms, mostly on systems where the challenge is less about visual polish and more about clarity under complexity.
           </p>
@@ -277,27 +197,6 @@ const homeMachineText = [
             </ScrollReveal>
           ))}
         </div>
-
-        <!-- Skills & Tools -->
-        <div class="mt-16 sm:mt-20 grid sm:grid-cols-2 gap-10 sm:gap-16">
-          <ScrollReveal client:load>
-            <h3 class="type-card-title-md text-text-secondary mb-5">Skills</h3>
-            <div class="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span class="tag-pill">{skill}</span>
-              ))}
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal client:load delay={0.1}>
-            <h3 class="type-card-title-md text-text-secondary mb-5">Tools</h3>
-            <div class="flex flex-wrap gap-2">
-              {tools.map((tool) => (
-                <span class="tag-pill">{tool}</span>
-              ))}
-            </div>
-          </ScrollReveal>
-        </div>
       </div>
     </section>
 
@@ -306,7 +205,7 @@ const homeMachineText = [
       <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
         <ScrollReveal client:load>
           <div class="contact-panel">
-            <SectionHeading number="07" label="Contact" title="Let's Build Better Systems" />
+            <SectionHeading label="Contact" title="Let's Build Better Systems" />
             <a
               href="mailto:mymailchetan25@gmail.com"
               class="contact-email -mt-8 inline-flex items-center justify-start text-text-secondary transition-colors duration-300 hover:text-text-primary"

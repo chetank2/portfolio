@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
+import SectionHeading from "../../components/astro/SectionHeading.astro";
+import SupportingProjectCard from "../../components/astro/SupportingProjectCard.astro";
+import WebsiteCard from "../../components/astro/WebsiteCard.astro";
+import MachinePageShell from "../../components/astro/MachinePageShell.astro";
+import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
+import ScrollReveal from "../../components/react/ScrollReveal.tsx";
+import { supportingProjects, appProjects, websiteProjects } from "../../data/projects";
+
+const workMachineText = [
+  "# Work",
+  "> Extended archive of systems work, app designs, and web projects.",
+  "",
+  "## Systems",
+  ...supportingProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl}, protected)`),
+  "",
+  "## App Designs",
+  ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),
+  "",
+  "## Web Projects",
+  ...websiteProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.liveUrl})`),
+].join("\n");
+---
+
+<BaseLayout title="Work — Chetan Kummari">
+  <div data-view-panel="human">
+    <Navigation />
+  </div>
+
+  <main id="main">
+    <div data-view-panel="machine" hidden class="bg-bg-deep min-h-screen">
+      <MachinePageShell title="Work" pageHref="/work" text={workMachineText} />
+    </div>
+
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20">
+      <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24">
+        <ScrollReveal client:load>
+          <header class="mb-16 sm:mb-20 md:mb-24">
+            <a href="/#work" class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300 mb-8">
+              <span class="w-4 h-px bg-text-tertiary"></span>
+              Back
+            </a>
+          </header>
+        </ScrollReveal>
+
+        <section class="mb-20 sm:mb-24">
+          <ScrollReveal client:load>
+            <h2 class="type-section-heading text-text-primary mb-14">Case Studies</h2>
+          </ScrollReveal>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
+            {supportingProjects.map((project, i) => (
+              <ScrollReveal client:load delay={i * 0.08}>
+                <SupportingProjectCard
+                  title={project.title}
+                  tagline={project.tagline}
+                  description={project.description}
+                  tags={project.tags}
+                  protected={project.protected}
+                  liveUrl={project.liveUrl}
+                  npmUrl={project.npmUrl}
+                  caseStudyUrl={project.caseStudyUrl}
+                />
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+
+        <section class="mb-20 sm:mb-24">
+          <ScrollReveal client:load>
+            <h2 class="type-section-heading text-text-primary mb-14">App Designs</h2>
+          </ScrollReveal>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 2xl:gap-8">
+            {appProjects.map((project, i) => (
+              <ScrollReveal client:load delay={i * 0.08}>
+                <a href={project.caseStudyUrl || "#"} class="block no-underline group">
+                  <div class="bg-bg-elevated border border-border radius-xl overflow-hidden card-accent hover:border-border-hover transition-all duration-400 group-hover:-translate-y-1 h-full">
+                    {project.image ? (
+                      <div class="aspect-[3/4] overflow-hidden bg-bg-surface flex items-center justify-center">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          class="w-full h-full object-contain p-4"
+                          loading="lazy"
+                        />
+                      </div>
+                    ) : null}
+                    <div class="p-4">
+                      <h4 class="type-ui-meta text-text-primary">{project.title}</h4>
+                      <p class="type-ui-meta text-text-secondary mt-1">{project.tagline}</p>
+                    </div>
+                  </div>
+                </a>
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+
+        <section class="mb-20">
+          <ScrollReveal client:load>
+            <h2 class="type-section-heading text-text-primary mb-14">Web Designs</h2>
+          </ScrollReveal>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 2xl:gap-8">
+            {websiteProjects.map((project, i) => (
+              <ScrollReveal client:load delay={i * 0.08}>
+                <WebsiteCard
+                  title={project.title}
+                  tagline={project.tagline}
+                  image={project.image!}
+                  href={project.liveUrl}
+                />
+              </ScrollReveal>
+            ))}
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <ViewModeToggle />
+  <div data-view-panel="human">
+    <Footer />
+  </div>
+</BaseLayout>

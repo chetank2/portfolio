@@ -3,11 +3,11 @@ import NavigationMenu from "../react/NavigationMenu.tsx";
 import ThemeToggle from "../react/ThemeToggle.tsx";
 
 const links = [
-  { label: "Work", href: "/#work", number: "01" },
-  { label: "Built with AI", href: "/#ai", number: "02" },
-  { label: "Writing", href: "/#writing", number: "03" },
-  { label: "Experience", href: "/#resume", number: "04" },
-  { label: "Contact", href: "/#contact", number: "05" },
+  { label: "Work", href: "/#work" },
+  { label: "Built with AI", href: "/#ai" },
+  { label: "Writing", href: "/#writing" },
+  { label: "Experience", href: "/#resume" },
+  { label: "Contact", href: "/#contact" },
 ];
 ---
 
@@ -32,9 +32,8 @@ const links = [
         {links.map((link) => (
           <a
             href={link.href}
-            class="flex items-baseline gap-1.5 text-text-secondary hover:text-accent transition-colors duration-300 link-hover"
+            class="text-text-secondary hover:text-accent transition-colors duration-300 link-hover"
           >
-            <span class="font-display text-[10px] text-accent/60">{link.number}</span>
             <span class="type-ui-meta">{link.label}</span>
           </a>
         ))}
