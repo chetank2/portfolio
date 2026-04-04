@@ -24,6 +24,8 @@ export const deepProjects: Project[] = [
     tags: ["System Design", "Architecture", "UX Redesign", "Freight Tiger"],
     type: "deep",
     protected: true,
+    cardImageLight: "/assets/home/journeys-light.png",
+    cardImageDark: "/assets/home/journeys-dark.png",
     caseStudyUrl: "/work/ft-tms-redesign",
   },
   {
@@ -35,6 +37,8 @@ export const deepProjects: Project[] = [
     tags: ["Operations", "Logistics", "Decision Systems"],
     type: "deep",
     protected: true,
+    cardImageLight: "/assets/home/control-tower-light.png",
+    cardImageDark: "/assets/home/control-tower-dark.png",
     caseStudyUrl: "/work/control-tower",
   },
   {
@@ -45,6 +49,8 @@ export const deepProjects: Project[] = [
       "Built a production design system from scratch as a solo builder — 125+ React components, token architecture, AI protection layer, and dual-audience documentation for humans and AI agents.",
     tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
     type: "deep",
+    cardImageLight: "/assets/home/ft-design-system-light.png",
+    cardImageDark: "/assets/home/ft-design-system-dark.png",
     liveUrl: "https://ftdesignsystem.netlify.app",
     npmUrl: "https://www.npmjs.com/package/ft-design-system",
     caseStudyUrl: "/work/ft-design-system",
@@ -57,6 +63,8 @@ export const deepProjects: Project[] = [
       "A mobile-first software solution designed to simplify warehouse operations. With a keen focus on design, adaptability, and user-friendliness.",
     tags: ["Mobile App", "Warehouse Ops", "UX Design"],
     type: "deep",
+    cardImageLight: "/assets/aftercrop/hero.avif",
+    cardImageDark: "/assets/aftercrop/hero.avif",
     caseStudyUrl: "/work/aftercrop",
   },
 ];

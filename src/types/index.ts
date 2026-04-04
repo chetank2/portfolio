@@ -7,6 +7,8 @@ export interface Project {
   type: "deep" | "supporting" | "ai" | "app" | "website";
   protected?: boolean;
   image?: string;
+  cardImageLight?: string;
+  cardImageDark?: string;
   liveUrl?: string;
   repoUrl?: string;
   npmUrl?: string;
