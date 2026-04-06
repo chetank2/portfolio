@@ -41,13 +41,13 @@ const renderInlineMarkdown = (value: string) => {
 ---
 
   <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
-    <h1 style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 600; line-height: 1.35; color: var(--color-text-primary); margin-bottom: 0.75rem;">
+    <h1 class="min-title mb-3">
       {study.title}
     </h1>
-    <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75; color: var(--color-text-secondary); font-style: italic; margin-bottom: 1.5rem;">
+    <p class="min-subtitle mb-6">
       {study.tagline}
     </p>
-    <div style="font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: var(--color-text-secondary); display: flex; flex-wrap: wrap; gap: 1.5rem;">
+    <div class="min-meta flex flex-wrap gap-6">
       {study.meta.map((meta) => (
         <span>{meta.value}</span>
       ))}
@@ -73,14 +73,14 @@ const renderInlineMarkdown = (value: string) => {
         <>
           {block.type === "paragraphs" ? (
             block.paragraphs.map((paragraph, paragraphIndex) => (
-              <p class:list={["text-text-secondary font-body leading-relaxed", paragraphIndex < block.paragraphs.length - 1 ? "mb-5" : ""]}>
+              <p class:list={["min-body", paragraphIndex < block.paragraphs.length - 1 ? "mb-5" : ""]}>
                 {paragraph}
               </p>
             ))
           ) : null}
 
           {block.type === "quote" ? (
-            <blockquote class="border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 font-body italic text-text-primary leading-relaxed">
+            <blockquote class="min-body border-l-3 border-accent bg-accent-soft px-7 py-5 my-10 italic">
               {block.text}
             </blockquote>
           ) : null}
@@ -88,9 +88,9 @@ const renderInlineMarkdown = (value: string) => {
           {block.type === "bullets" ? (
             <ul class="space-y-2.5 mt-4">
               {block.items.map((item, itemIndex) => (
-                <li class="text-text-secondary font-body flex gap-3">
+                <li class="min-body flex gap-3">
                   {block.ordered ? (
-                    <span class="text-text-tertiary mt-0.5" style="font-family: var(--font-body); font-size: 0.8rem;">{String(itemIndex + 1).padStart(2, "0")}</span>
+                    <span class="min-small mt-0.5">{String(itemIndex + 1).padStart(2, "0")}</span>
                   ) : (
                     <span class="text-accent/50 flex-shrink-0">—</span>
                   )}
@@ -113,7 +113,7 @@ const renderInlineMarkdown = (value: string) => {
           {block.type === "chips" ? (
             <div class="space-y-3 mt-4">
               {block.rows.map((row) => (
-                <div class="flex flex-wrap items-center gap-2.5 text-text-secondary" style="font-family: var(--font-body); font-size: 0.8rem;">
+                <div class="min-small flex flex-wrap items-center gap-2.5">
                   {row.map((chip, chipIndex) => (
                     <>
                       <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -131,12 +131,12 @@ const renderInlineMarkdown = (value: string) => {
                 <div class="mt-10 first:mt-0">
                   <h4 class="case-study-subsection-title mb-3">{item.title}</h4>
                   {item.paragraphs?.map((paragraph, paragraphIndex) => (
-                    <p class:list={["text-text-secondary font-body leading-relaxed", paragraphIndex < (item.paragraphs?.length ?? 0) - 1 ? "mb-5" : ""]}>
+                    <p class:list={["min-body", paragraphIndex < (item.paragraphs?.length ?? 0) - 1 ? "mb-5" : ""]}>
                       {paragraph}
                     </p>
                   ))}
                   {item.chips ? (
-                    <div class="flex flex-wrap items-center gap-2.5 text-text-secondary" style="font-family: var(--font-body); font-size: 0.8rem;">
+                    <div class="min-small flex flex-wrap items-center gap-2.5">
                       {item.chips.map((chip, chipIndex) => (
                         <>
                           <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -148,9 +148,9 @@ const renderInlineMarkdown = (value: string) => {
                   {item.bullets ? (
                     <ul class="space-y-2.5 mt-4">
                       {item.bullets.map((bullet, bulletIndex) => (
-                        <li class="text-text-secondary font-body flex gap-3">
+                        <li class="min-body flex gap-3">
                           {item.ordered ? (
-                            <span class="text-text-tertiary mt-0.5" style="font-family: var(--font-body); font-size: 0.8rem;">{String(bulletIndex + 1).padStart(2, "0")}</span>
+                            <span class="min-small mt-0.5">{String(bulletIndex + 1).padStart(2, "0")}</span>
                           ) : (
                             <span class="text-accent/50 flex-shrink-0">—</span>
                           )}
@@ -181,8 +181,7 @@ const renderInlineMarkdown = (value: string) => {
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="block py-2 text-text-secondary hover:text-text-primary transition-colors duration-200"
-                  style="font-family: var(--font-body); font-size: 1rem; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--color-border);"
+                  class="block py-2 min-link"
                 >
                   {card.title} — {card.description}
                 </a>
@@ -209,7 +208,7 @@ const renderInlineMarkdown = (value: string) => {
                     {block.image.title ? (
                       <div class="flex items-center justify-between gap-4 mb-2">
                         <h4 class="case-study-subsection-title">{block.image.title}</h4>
-                        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);">Tap to expand</span>
+                        <span class="min-small">Tap to expand</span>
                       </div>
                     ) : null}
                     {block.image.description ? (
@@ -237,7 +236,7 @@ const renderInlineMarkdown = (value: string) => {
                     <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
                       <div class="flex items-center justify-between gap-4 mb-2">
                         <h4 class="case-study-subsection-title">{image.title}</h4>
-                        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);">Tap to expand</span>
+                        <span class="min-small">Tap to expand</span>
                       </div>
                       <p class="type-body-sm text-text-secondary">{image.description}</p>
                     </figcaption>
@@ -267,11 +266,11 @@ const renderInlineMarkdown = (value: string) => {
 
                   <div class:list={["space-y-4", item.imagePosition === "right" && "md:order-1"]}>
                     {item.eyebrow ? (
-                      <p style="font-family: var(--font-body); font-size: 0.8rem; color: var(--color-text-tertiary);">{item.eyebrow}</p>
+                      <p class="min-small">{item.eyebrow}</p>
                     ) : null}
                     <h4 class="case-study-section-title">{item.title}</h4>
                     {item.paragraphs.map((paragraph) => (
-                      <p class="text-text-secondary font-body leading-relaxed">{paragraph}</p>
+                      <p class="min-body">{paragraph}</p>
                     ))}
                   </div>
                 </div>
@@ -289,14 +288,14 @@ const renderInlineMarkdown = (value: string) => {
   <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
     {prevAppStudy ? (
       <a href={`/work/${prevAppStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
-        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
-        <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{prevAppStudy.title}</span>
+        <span class="min-small group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
+        <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{prevAppStudy.title}</span>
       </a>
     ) : <div />}
     {nextAppStudy ? (
       <a href={`/work/${nextAppStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
-        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
-        <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{nextAppStudy.title}</span>
+        <span class="min-small group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
+        <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{nextAppStudy.title}</span>
       </a>
     ) : <div />}
   </nav>
