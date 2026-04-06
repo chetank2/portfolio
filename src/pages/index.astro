@@ -52,16 +52,48 @@ const homeMachineText = [
 ].join("\n");
 
 const caseStudyLinks = [
-  ...deepProjects.map((p) => ({
-    title: `${p.title} — ${p.tagline}`,
-    href: p.caseStudyUrl ?? "#",
-    protected: p.protected,
-  })),
-  ...aiProjects.map((p) => ({
-    title: `${p.title} — ${p.tagline}`,
-    href: p.caseStudyUrl ?? "#",
+  {
+    name: "Freight Tiger TMS",
+    tagline: "When tracking becomes the product, operations start to move right",
+    href: "/work/ft-tms-redesign",
+    protected: true,
+  },
+  {
+    name: "Control Tower",
+    tagline: "Seeing everything is not the same as controlling it, so we designed for action, not visibility",
+    href: "/work/control-tower",
+    protected: true,
+  },
+  {
+    name: "FT Design System",
+    tagline: "Consistency does not happen by default, it is built into the system from the ground up",
+    href: "/work/ft-design-system",
     protected: false,
-  })),
+  },
+  {
+    name: "AfterCrop",
+    tagline: "Designed for the warehouse floor, not the office, where speed and clarity actually matter",
+    href: "/work/aftercrop",
+    protected: false,
+  },
+  {
+    name: "CouponTracker",
+    tagline: "Turning scattered screenshots into a system people can actually use and trust",
+    href: "/work/coupontracker",
+    protected: false,
+  },
+  {
+    name: "Design QA",
+    tagline: "Closing the gap between design and reality before it becomes a problem",
+    href: "/work/designqa",
+    protected: false,
+  },
+  {
+    name: "Component-first Design",
+    tagline: "Moving from static screens to systems that behave closer to real products",
+    href: "/work/component-first-design",
+    protected: false,
+  },
 ];
 ---
 
@@ -115,7 +147,7 @@ const caseStudyLinks = [
               href={link.href}
               class="project-link"
             >
-              <span class="project-name">{link.title.split(' — ')[0]}</span> — {link.title.split(' — ')[1]}{link.protected ? " ↗" : ""}
+              <span class="project-name">{link.name}.</span> {link.tagline}{link.protected ? " ↗" : ""}
             </a>
           ))}
 
@@ -124,7 +156,7 @@ const caseStudyLinks = [
             class="project-link"
             style="color: var(--color-text-tertiary);"
           >
-            <span class="project-name">More work</span> — the full archive →
+            <span class="project-name">More work.</span> A collection of smaller systems, experiments, and ideas that shipped
           </a>
         </div>
 
