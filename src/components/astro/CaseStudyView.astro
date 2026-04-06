@@ -116,7 +116,7 @@ const renderInlineMarkdown = (value: string) => {
                 <div class="min-small flex flex-wrap items-center gap-2.5">
                   {row.map((chip, chipIndex) => (
                     <>
-                      <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
+                      <span class="border border-border px-3 py-1 bg-transparent italic">{chip}</span>
                       {chipIndex < row.length - 1 ? <span class="text-accent/40">&rarr;</span> : null}
                     </>
                   ))}
@@ -139,7 +139,7 @@ const renderInlineMarkdown = (value: string) => {
                     <div class="min-small flex flex-wrap items-center gap-2.5">
                       {item.chips.map((chip, chipIndex) => (
                         <>
-                          <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
+                          <span class="border border-border px-3 py-1 bg-transparent italic">{chip}</span>
                           {chipIndex < item.chips.length - 1 ? <span class="text-accent/40">&rarr;</span> : null}
                         </>
                       ))}

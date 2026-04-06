@@ -13,20 +13,22 @@ const footerLinks = [
 ];
 ---
 
-<footer class="border-t border-border">
+<footer>
   <div class:list={[
-    "mx-auto py-10 sm:py-14",
+    "mx-auto pt-8 pb-12 sm:pt-10 sm:pb-16",
     minimal
-      ? "max-w-[640px] px-6 sm:px-8"
+      ? "max-w-[600px] px-6 sm:px-8"
       : "max-w-[1200px] 2xl:max-w-[1600px] px-5 sm:px-6 md:px-12 2xl:px-24",
   ]}>
+    {minimal && <hr class="mb-8" style="border: none; height: 1px; background: var(--color-text-primary); opacity: 0.15;" />}
     <div class="footer-clean">
-      <p class="type-ui-meta text-text-tertiary">&copy; 2026 Chetan Kummari</p>
+      <p class="min-small">&copy; 2026 Chetan Kummari</p>
       <nav class="footer-link-row" aria-label="Footer">
         {footerLinks.map((link) => (
           <a
             href={link.href}
-            class="type-ui-meta text-text-tertiary transition-colors duration-300 hover:text-text-primary"
+            class="min-small transition-colors duration-200 hover:text-text-primary"
+            style="text-decoration: none;"
             target={link.external ? "_blank" : undefined}
             rel={link.external ? "noopener noreferrer" : undefined}
           >

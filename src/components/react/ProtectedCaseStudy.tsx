@@ -88,19 +88,20 @@ export default function ProtectedCaseStudy({
 
   return (
     <section className="mt-10 sm:mt-12">
-      <p className="min-small mb-4">Protected case study</p>
+      <p className="min-small mb-4" style={{ fontStyle: "italic" }}>Protected case study</p>
       <h2 className="min-title">{title}</h2>
       <p className="min-body-secondary mt-3">
         Enter the shared password to view this case study.
       </p>
-      <form onSubmit={handleSubmit} className="mt-6 flex max-w-md flex-col gap-4">
+      <form onSubmit={handleSubmit} className="mt-8 flex max-w-sm flex-col gap-4">
         <div className="relative">
           <input
             type={showPassword ? "text" : "password"}
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder="Enter password"
-            className="min-body w-full rounded-lg border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-text-primary"
+            className="min-meta w-full border-b border-border bg-transparent px-0 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-text-primary"
+            style={{ borderRadius: 0 }}
           />
           <button
             type="button"
@@ -146,7 +147,8 @@ export default function ProtectedCaseStudy({
         ) : null}
         <button
           type="submit"
-          className="min-meta inline-flex w-fit items-center justify-center rounded-lg bg-text-primary px-5 py-2.5 text-bg-deep transition-opacity hover:opacity-90"
+          className="min-meta inline-flex w-fit items-center justify-center border border-text-primary px-6 py-2 text-text-primary bg-transparent transition-all duration-200 hover:bg-text-primary hover:text-bg-deep"
+          style={{ fontStyle: "italic", letterSpacing: "0.02em" }}
         >
           Unlock
         </button>

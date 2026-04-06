@@ -794,10 +794,8 @@ html.dark {
   }
 
   .site-header {
-    background: var(--theme-header-bg);
-    border-color: var(--theme-header-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: transparent;
+    border-color: transparent;
   }
 
   .site-logo {

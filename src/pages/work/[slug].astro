@@ -74,7 +74,7 @@ Content = contentModule.default;
   </div>
   <main id="main">
     <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-8 sm:pt-12 pb-16 sm:pb-20 px-5 sm:px-6">
-      <div class="max-w-[640px] mx-auto">
+      <div class="max-w-[600px] mx-auto">
         {requiresProtection ? (
           <div
             class="mt-2 sm:mt-4 mb-8 sm:mb-10 flex items-center justify-between gap-4"
@@ -92,7 +92,8 @@ Content = contentModule.default;
               type="button"
               hidden
               data-case-study-lock
-              class="min-meta inline-flex items-center gap-2 border border-border bg-bg-elevated/60 px-4 py-2 text-text-secondary transition-colors hover:text-text-primary"
+              class="min-small inline-flex items-center gap-2 border border-border bg-transparent px-4 py-1.5 text-text-tertiary transition-colors hover:text-text-primary hover:border-text-primary"
+              style="font-style: italic;"
             >
               <svg
                 aria-hidden="true"
