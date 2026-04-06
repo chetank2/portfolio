@@ -1,4 +1,10 @@
 ---
+interface Props {
+  minimal?: boolean;
+}
+
+const { minimal = false } = Astro.props;
+
 const footerLinks = [
   { label: "Resume", href: "https://drive.google.com/file/d/1KQSSWbCDAwvKiQgXSI1ssj7m3p-vtZmD/view", external: true },
   { label: "X", href: "https://x.com/kchetank19", external: true },
@@ -8,7 +14,12 @@ const footerLinks = [
 ---
 
 <footer class="border-t border-border">
-  <div class="max-w-[1200px] 2xl:max-w-[1600px] mx-auto px-5 sm:px-6 md:px-12 2xl:px-24 py-10 sm:py-14">
+  <div class:list={[
+    "mx-auto py-10 sm:py-14",
+    minimal
+      ? "max-w-[640px] px-6 sm:px-8"
+      : "max-w-[1200px] 2xl:max-w-[1600px] px-5 sm:px-6 md:px-12 2xl:px-24",
+  ]}>
     <div class="footer-clean">
       <p class="type-ui-meta text-text-tertiary">&copy; 2026 Chetan Kummari</p>
       <nav class="footer-link-row" aria-label="Footer">
