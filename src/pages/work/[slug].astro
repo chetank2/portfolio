@@ -5,7 +5,6 @@ import Footer from "../../components/astro/Footer.astro";
 import MachinePageShell from "../../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import CaseStudyRelatedLinks from "../../components/astro/CaseStudyRelatedLinks.astro";
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
 import { getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
@@ -71,10 +70,10 @@ Content = contentModule.default;
 
 <BaseLayout title={`${caseStudy.title} — Chetan Kummari`}>
   <div data-view-panel="human">
-    <Navigation />
+    <Navigation minimal />
   </div>
   <main id="main">
-    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-20 sm:pt-24 md:pt-28 pb-16 sm:pb-20 px-5 sm:px-6">
+    <div data-view-panel="human" class="bg-bg-deep min-h-screen pt-8 sm:pt-12 pb-16 sm:pb-20 px-5 sm:px-6">
       <div class="max-w-3xl 2xl:max-w-4xl mx-auto">
         {requiresProtection ? (
           <div
@@ -127,8 +126,7 @@ Content = contentModule.default;
             storageKey={`case-study:${caseStudy.slug}`}
             title={caseStudy.title}
           >
-            <ScrollReveal client:load>
-              <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
                 <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
                 </h1>
@@ -141,13 +139,10 @@ Content = contentModule.default;
                   <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
                 </div>
               </header>
-            </ScrollReveal>
 
-            <ScrollReveal client:load>
-              <article class="longform-content case-study-content mb-20">
+            <article class="longform-content case-study-content mb-20">
                 <Content />
               </article>
-            </ScrollReveal>
 
             <CaseStudyRelatedLinks links={relatedLinks} />
 
@@ -170,8 +165,7 @@ Content = contentModule.default;
           </ProtectedCaseStudy>
         ) : (
           <>
-            <ScrollReveal client:load>
-              <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
+            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
                 <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
                   {caseStudy.title}
                 </h1>
@@ -184,13 +178,10 @@ Content = contentModule.default;
                   <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
                 </div>
               </header>
-            </ScrollReveal>
 
-            <ScrollReveal client:load>
-              <article class="longform-content case-study-content mb-20">
+            <article class="longform-content case-study-content mb-20">
                 <Content />
               </article>
-            </ScrollReveal>
 
             <CaseStudyRelatedLinks links={relatedLinks} />
 
@@ -239,7 +230,7 @@ Content = contentModule.default;
   </main>
   <ViewModeToggle />
   <div data-view-panel="human">
-    <Footer />
+    <Footer minimal />
   </div>
 </BaseLayout>
 
