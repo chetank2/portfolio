@@ -87,14 +87,37 @@ export default function ProtectedCaseStudy({
   }
 
   return (
-    <section className="mt-10 radius-xl border border-border bg-bg-elevated/60 p-6 sm:mt-12 sm:p-8">
-      <p className="type-ui-label text-accent/70">
-        Protected Case Study
+    <section className="mt-10 sm:mt-12">
+      <p
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "0.875rem",
+          color: "var(--color-text-tertiary)",
+          marginBottom: "1rem",
+        }}
+      >
+        Protected case study
       </p>
-      <h2 className="case-study-section-title mt-4 text-text-primary">
+      <h2
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "1.5rem",
+          fontWeight: 600,
+          lineHeight: 1.35,
+          color: "var(--color-text-primary)",
+        }}
+      >
         {title}
       </h2>
-      <p className="mt-3 max-w-xl text-text-secondary font-body leading-relaxed">
+      <p
+        style={{
+          fontFamily: "var(--font-body)",
+          fontSize: "1.125rem",
+          lineHeight: 1.75,
+          color: "var(--color-text-secondary)",
+          marginTop: "0.75rem",
+        }}
+      >
         Enter the shared password to view this case study.
       </p>
       <form onSubmit={handleSubmit} className="mt-6 flex max-w-md flex-col gap-4">
@@ -104,7 +127,8 @@ export default function ProtectedCaseStudy({
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder="Enter password"
-            className="w-full radius-lg border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-accent"
+            style={{ fontFamily: "var(--font-body)", fontSize: "1rem" }}
+            className="w-full border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-text-primary"
           />
           <button
             type="button"
@@ -146,11 +170,12 @@ export default function ProtectedCaseStudy({
           </button>
         </div>
         {error ? (
-          <p className="type-body-sm text-red-400">{error}</p>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", color: "#ef4444" }}>{error}</p>
         ) : null}
         <button
           type="submit"
-          className="type-ui-label inline-flex w-fit items-center justify-center radius-lg bg-text-primary px-5 py-3 text-bg-deep transition-opacity hover:opacity-90"
+          style={{ fontFamily: "var(--font-body)", fontSize: "0.875rem", letterSpacing: 0 }}
+          className="inline-flex w-fit items-center justify-center bg-text-primary px-5 py-2.5 text-bg-deep transition-opacity hover:opacity-90"
         >
           Unlock
         </button>
