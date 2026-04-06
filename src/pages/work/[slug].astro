@@ -83,7 +83,8 @@ Content = contentModule.default;
           >
             <a
               href={caseStudy.backHref}
-              class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300"
+              class="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary transition-colors duration-200"
+              style="font-family: var(--font-body); font-size: 0.875rem;"
             >
               <span class="w-4 h-px bg-text-tertiary"></span>
               Back
@@ -92,7 +93,8 @@ Content = contentModule.default;
               type="button"
               hidden
               data-case-study-lock
-              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 font-display text-[10px] uppercase tracking-[0.18em] text-text-secondary transition-colors hover:text-text-primary"
+              class="inline-flex items-center gap-2 radius-xl border border-border bg-bg-elevated/60 px-4 py-2 text-[11px] text-text-secondary transition-colors hover:text-text-primary"
+              style="font-family: var(--font-body);"
             >
               <svg
                 aria-hidden="true"
@@ -113,7 +115,8 @@ Content = contentModule.default;
         ) : (
           <a
             href={caseStudy.backHref}
-            class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300"
+            class="inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary transition-colors duration-200"
+              style="font-family: var(--font-body); font-size: 0.875rem;"
           >
             <span class="w-4 h-px bg-text-tertiary"></span>
             Back
@@ -126,17 +129,17 @@ Content = contentModule.default;
             storageKey={`case-study:${caseStudy.slug}`}
             title={caseStudy.title}
           >
-            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-                <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
+            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
+                <h1 style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 600; line-height: 1.35; color: var(--color-text-primary); margin-bottom: 0.75rem;">
                   {caseStudy.title}
                 </h1>
-                <p class="type-page-tagline text-text-secondary italic mb-10">
+                <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75; color: var(--color-text-secondary); font-style: italic; margin-bottom: 1.5rem;">
                   {caseStudy.tagline}
                 </p>
-                <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
-                  <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
-                  <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
-                  <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
+                <div style="font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: var(--color-text-secondary); display: flex; flex-wrap: wrap; gap: 1.5rem;">
+                  <span>{caseStudy.role}</span>
+                  <span>{caseStudy.company}</span>
+                  <span>{caseStudy.timeline}</span>
                 </div>
               </header>
 
@@ -147,17 +150,17 @@ Content = contentModule.default;
             <CaseStudyRelatedLinks links={relatedLinks} />
 
             {(prevStudy || nextStudy) && (
-              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
                 {prevStudy ? (
-                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
-                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
-                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
+                    <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
+                    <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{prevStudy.title}</span>
                   </a>
                 ) : <div />}
                 {nextStudy ? (
-                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
-                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
-                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
+                    <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
+                    <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{nextStudy.title}</span>
                   </a>
                 ) : <div />}
               </nav>
@@ -165,17 +168,17 @@ Content = contentModule.default;
           </ProtectedCaseStudy>
         ) : (
           <>
-            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-                <h1 class="type-page-title text-text-primary mb-4 sm:mb-5">
+            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
+                <h1 style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 600; line-height: 1.35; color: var(--color-text-primary); margin-bottom: 0.75rem;">
                   {caseStudy.title}
                 </h1>
-                <p class="type-page-tagline text-text-secondary italic mb-10">
+                <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75; color: var(--color-text-secondary); font-style: italic; margin-bottom: 1.5rem;">
                   {caseStudy.tagline}
                 </p>
-                <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
-                  <span><span class="text-accent/60">Role</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.role}</span>
-                  <span><span class="text-accent/60">Company</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.company}</span>
-                  <span><span class="text-accent/60">Timeline</span> <span class="mx-1 text-text-tertiary">/</span> {caseStudy.timeline}</span>
+                <div style="font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: var(--color-text-secondary); display: flex; flex-wrap: wrap; gap: 1.5rem;">
+                  <span>{caseStudy.role}</span>
+                  <span>{caseStudy.company}</span>
+                  <span>{caseStudy.timeline}</span>
                 </div>
               </header>
 
@@ -186,17 +189,17 @@ Content = contentModule.default;
             <CaseStudyRelatedLinks links={relatedLinks} />
 
             {(prevStudy || nextStudy) && (
-              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
                 {prevStudy ? (
-                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
-                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
-                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevStudy.title}</span>
+                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
+                    <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
+                    <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{prevStudy.title}</span>
                   </a>
                 ) : <div />}
                 {nextStudy ? (
-                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
-                    <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
-                    <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextStudy.title}</span>
+                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
+                    <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
+                    <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{nextStudy.title}</span>
                   </a>
                 ) : <div />}
               </nav>

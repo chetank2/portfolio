@@ -1330,10 +1330,10 @@ html.dark {
   .longform-content li,
   .case-study-content p,
   .case-study-content li {
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.82;
+    font-size: 1.125rem;
+    line-height: 1.75;
   }
 
   .longform-content p + p,
@@ -1550,8 +1550,8 @@ html.dark {
     .longform-content li,
     .case-study-content p,
     .case-study-content li {
-      font-size: 1.0625rem;
-      line-height: 1.85;
+      font-size: 1.125rem;
+      line-height: 1.75;
     }
     .longform-content p + p,
     .case-study-content p + p {

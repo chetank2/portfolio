@@ -1,5 +1,4 @@
 ---
-import ScrollReveal from "../../components/react/ScrollReveal.tsx";
 import ImageLightbox from "../../components/react/ImageLightbox.tsx";
 import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
 import { appProjects, getProjectLinksBySlug } from "../../data/projects";
@@ -41,27 +40,22 @@ const renderInlineMarkdown = (value: string) => {
 };
 ---
 
-<ScrollReveal client:load>
-  <header class="mt-8 sm:mt-12 mb-12 sm:mb-16 md:mb-20">
-    <h1 class="type-page-title text-text-primary mb-5">
+  <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
+    <h1 style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 600; line-height: 1.35; color: var(--color-text-primary); margin-bottom: 0.75rem;">
       {study.title}
     </h1>
-    <p class="type-page-tagline text-text-secondary italic mb-10">
+    <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.75; color: var(--color-text-secondary); font-style: italic; margin-bottom: 1.5rem;">
       {study.tagline}
     </p>
-    <div class="type-ui-meta flex flex-wrap gap-x-8 gap-y-3 text-text-secondary">
+    <div style="font-family: var(--font-body); font-size: 0.875rem; line-height: 1.5; color: var(--color-text-secondary); display: flex; flex-wrap: wrap; gap: 1.5rem;">
       {study.meta.map((meta) => (
-        <span>
-          <span class="text-accent/60">{meta.label}</span> <span class="mx-1 text-text-tertiary">/</span> {meta.value}
-        </span>
+        <span>{meta.value}</span>
       ))}
     </div>
   </header>
-</ScrollReveal>
 
 {study.media ? (
-  <ScrollReveal client:load>
-    <figure class="overflow-hidden rounded-2xl border border-border bg-bg-elevated/60">
+    <figure class="overflow-hidden rounded-lg border border-border">
       <img
         src={study.media.src}
         alt={study.media.alt}
@@ -69,12 +63,10 @@ const renderInlineMarkdown = (value: string) => {
         loading="lazy"
       />
     </figure>
-  </ScrollReveal>
 ) : null}
 
 {study.sections.map((section, sectionIndex) => (
-  <ScrollReveal client:load>
-    <section class:list={["mt-20 sm:mt-24", sectionIndex === study.sections.length - 1 && "mb-20"]}>
+    <section class:list={["mt-16 sm:mt-20", sectionIndex === study.sections.length - 1 && "mb-16"]}>
       <h3 class="case-study-section-title mb-6">{section.title}</h3>
 
       {section.blocks.map((block) => (
@@ -98,7 +90,7 @@ const renderInlineMarkdown = (value: string) => {
               {block.items.map((item, itemIndex) => (
                 <li class="text-text-secondary font-body flex gap-3">
                   {block.ordered ? (
-                    <span class="type-ui-meta text-accent mt-1">{String(itemIndex + 1).padStart(2, "0")}</span>
+                    <span class="text-text-tertiary mt-0.5" style="font-family: var(--font-body); font-size: 0.8rem;">{String(itemIndex + 1).padStart(2, "0")}</span>
                   ) : (
                     <span class="text-accent/50 flex-shrink-0">—</span>
                   )}
@@ -107,7 +99,7 @@ const renderInlineMarkdown = (value: string) => {
                       <Fragment set:html={renderInlineMarkdown(item)} />
                       ) : (
                       <>
-                        {item.title ? <strong class="text-text-primary font-display">{item.title}</strong> : null}
+                        {item.title ? <strong class="text-text-primary" style="font-weight: 600;">{item.title}</strong> : null}
                         {item.title ? " — " : ""}
                         {item.text}
                       </>
@@ -121,7 +113,7 @@ const renderInlineMarkdown = (value: string) => {
           {block.type === "chips" ? (
             <div class="space-y-3 mt-4">
               {block.rows.map((row) => (
-                <div class="type-ui-meta flex flex-wrap items-center gap-2.5 text-text-secondary">
+                <div class="flex flex-wrap items-center gap-2.5 text-text-secondary" style="font-family: var(--font-body); font-size: 0.8rem;">
                   {row.map((chip, chipIndex) => (
                     <>
                       <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -144,7 +136,7 @@ const renderInlineMarkdown = (value: string) => {
                     </p>
                   ))}
                   {item.chips ? (
-                    <div class="type-ui-meta flex flex-wrap items-center gap-2.5 text-text-secondary">
+                    <div class="flex flex-wrap items-center gap-2.5 text-text-secondary" style="font-family: var(--font-body); font-size: 0.8rem;">
                       {item.chips.map((chip, chipIndex) => (
                         <>
                           <span class="bg-bg-elevated border border-border px-3.5 py-1.5">{chip}</span>
@@ -158,7 +150,7 @@ const renderInlineMarkdown = (value: string) => {
                       {item.bullets.map((bullet, bulletIndex) => (
                         <li class="text-text-secondary font-body flex gap-3">
                           {item.ordered ? (
-                            <span class="type-ui-meta text-accent mt-1">{String(bulletIndex + 1).padStart(2, "0")}</span>
+                            <span class="text-text-tertiary mt-0.5" style="font-family: var(--font-body); font-size: 0.8rem;">{String(bulletIndex + 1).padStart(2, "0")}</span>
                           ) : (
                             <span class="text-accent/50 flex-shrink-0">—</span>
                           )}
@@ -189,15 +181,10 @@ const renderInlineMarkdown = (value: string) => {
                   href={card.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="block bg-elevated radius-lg border border-border p-6 hover:border-accent-border transition-colors duration-300"
+                  class="block py-2 text-text-secondary hover:text-text-primary transition-colors duration-200"
+                  style="font-family: var(--font-body); font-size: 1rem; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--color-border);"
                 >
-                  <div class="flex items-center justify-between gap-4">
-                    <div>
-                      <p class="type-card-title-md text-text-primary">{card.title}</p>
-                      <p class="type-body-sm text-text-secondary mt-1">{card.description}</p>
-                    </div>
-                    <span class="text-accent">&nearr;</span>
-                  </div>
+                  {card.title} — {card.description}
                 </a>
               ))}
             </div>
@@ -222,7 +209,7 @@ const renderInlineMarkdown = (value: string) => {
                     {block.image.title ? (
                       <div class="flex items-center justify-between gap-4 mb-2">
                         <h4 class="case-study-subsection-title">{block.image.title}</h4>
-                        <span class="type-ui-label text-accent/70">Tap to expand</span>
+                        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);">Tap to expand</span>
                       </div>
                     ) : null}
                     {block.image.description ? (
@@ -250,7 +237,7 @@ const renderInlineMarkdown = (value: string) => {
                     <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
                       <div class="flex items-center justify-between gap-4 mb-2">
                         <h4 class="case-study-subsection-title">{image.title}</h4>
-                        <span class="type-ui-label text-accent/70">Tap to expand</span>
+                        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);">Tap to expand</span>
                       </div>
                       <p class="type-body-sm text-text-secondary">{image.description}</p>
                     </figcaption>
@@ -280,7 +267,7 @@ const renderInlineMarkdown = (value: string) => {
 
                   <div class:list={["space-y-4", item.imagePosition === "right" && "md:order-1"]}>
                     {item.eyebrow ? (
-                      <p class="font-display text-[11px] uppercase tracking-[0.18em] text-accent/80">{item.eyebrow}</p>
+                      <p style="font-family: var(--font-body); font-size: 0.8rem; color: var(--color-text-tertiary);">{item.eyebrow}</p>
                     ) : null}
                     <h4 class="case-study-section-title">{item.title}</h4>
                     {item.paragraphs.map((paragraph) => (
@@ -294,23 +281,22 @@ const renderInlineMarkdown = (value: string) => {
         </>
       ))}
     </section>
-  </ScrollReveal>
 ))}
 
 <CaseStudyRelatedLinks links={relatedLinks} />
 
 {study.backHref === "/#apps" && (prevAppStudy || nextAppStudy) ? (
-  <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-10 mb-20">
+  <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
     {prevAppStudy ? (
-      <a href={`/work/${prevAppStudy.slug}`} class="group flex flex-col items-start gap-1.5 max-w-[45%]">
-        <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">&larr; Previous</span>
-        <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{prevAppStudy.title}</span>
+      <a href={`/work/${prevAppStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
+        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
+        <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{prevAppStudy.title}</span>
       </a>
     ) : <div />}
     {nextAppStudy ? (
-      <a href={`/work/${nextAppStudy.slug}`} class="group flex flex-col items-end gap-1.5 max-w-[45%] text-right ml-auto">
-        <span class="font-display text-[10px] uppercase tracking-widest text-text-tertiary group-hover:text-accent transition-colors duration-300">Next &rarr;</span>
-        <span class="type-body-sm text-text-secondary group-hover:text-text-primary transition-colors duration-300">{nextAppStudy.title}</span>
+      <a href={`/work/${nextAppStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
+        <span style="font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-tertiary);" class="group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
+        <span style="font-family: var(--font-body); font-size: 0.875rem; color: var(--color-text-secondary);" class="group-hover:text-text-primary transition-colors duration-200">{nextAppStudy.title}</span>
       </a>
     ) : <div />}
   </nav>
