@@ -100,7 +100,7 @@ export default function ProtectedCaseStudy({
             value={value}
             onChange={(event) => setValue(event.target.value)}
             placeholder="Enter password"
-            className="min-body w-full border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-text-primary"
+            className="min-body w-full rounded-lg border border-border bg-bg-deep px-4 py-3 pr-14 text-text-primary outline-none transition-colors focus:border-text-primary"
           />
           <button
             type="button"
@@ -146,7 +146,7 @@ export default function ProtectedCaseStudy({
         ) : null}
         <button
           type="submit"
-          className="min-meta inline-flex w-fit items-center justify-center bg-text-primary px-5 py-2.5 text-bg-deep transition-opacity hover:opacity-90"
+          className="min-meta inline-flex w-fit items-center justify-center rounded-lg bg-text-primary px-5 py-2.5 text-bg-deep transition-opacity hover:opacity-90"
         >
           Unlock
         </button>
