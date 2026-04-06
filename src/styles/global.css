@@ -49,10 +49,10 @@ html.theme-light {
   --primary: #18181b;
   --sidebar: #fafafa;
   --font-mono-stack: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Libre Baskerville", "EB Garamond", ui-serif, Georgia, serif;
   --secondary: #f4f4f5;
   --background: #ffffff;
-  --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --foreground: #0a0a0a;
   --destructive: #ef4444;
   --sidebar-ring: #d4d4d8;
@@ -149,10 +149,10 @@ html.dark {
   --primary: #fafafa;
   --sidebar: #171717;
   --font-mono-stack: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Libre Baskerville", "EB Garamond", ui-serif, Georgia, serif;
   --secondary: #27272a;
   --background: #0a0a0a;
-  --font-serif: "Newsreader", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-serif: "EB Garamond", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --foreground: #fafafa;
   --destructive: #7f1d1d;
   --sidebar-ring: #52525b;
@@ -1280,9 +1280,9 @@ html.dark {
   .longform-content h2,
   .case-study-content h2,
   .case-study-section-title {
-    font-family: var(--font-body);
-    font-size: 1.375rem;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 400;
     line-height: 1.35;
     letter-spacing: 0;
     color: var(--color-text-primary);
@@ -1292,8 +1292,9 @@ html.dark {
   .case-study-content h3,
   .case-study-subsection-title {
     font-family: var(--font-body);
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 500;
+    font-style: italic;
     line-height: 1.5;
     letter-spacing: 0;
     color: var(--color-text-primary);
@@ -1303,7 +1304,8 @@ html.dark {
   .case-study-content h4 {
     font-family: var(--font-body);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
+    font-style: italic;
     line-height: 1.5;
     letter-spacing: 0;
     color: var(--color-text-primary);
@@ -1315,8 +1317,9 @@ html.dark {
   .case-study-content li {
     color: var(--color-text-primary);
     font-family: var(--font-body);
-    font-size: 1.125rem;
-    line-height: 1.75;
+    font-size: 1.15rem;
+    line-height: 1.85;
+    letter-spacing: 0.005em;
   }
 
   .longform-content p + p,
@@ -1447,13 +1450,13 @@ html.dark {
   .case-study-content blockquote {
     margin-top: 28px;
     margin-bottom: 28px;
-    padding: 20px 24px;
-    border-left: 3px solid var(--color-accent);
-    background: var(--color-accent-soft);
+    padding: 20px 0 20px 24px;
+    border-left: 2px solid var(--color-text-primary);
+    background: transparent;
     color: var(--color-text-primary);
     font-style: italic;
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.75;
   }
 
   .longform-content code,
@@ -1521,20 +1524,20 @@ html.dark {
     .case-study-content h3 {
       margin-top: 44px;
       margin-bottom: 16px;
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
     .longform-content h4,
     .case-study-content h4 {
       margin-top: 32px;
       margin-bottom: 14px;
-      font-size: 1.0625rem;
+      font-size: 1.05rem;
     }
     .longform-content p,
     .longform-content li,
     .case-study-content p,
     .case-study-content li {
-      font-size: 1.125rem;
-      line-height: 1.75;
+      font-size: 1.15rem;
+      line-height: 1.85;
     }
     .longform-content p + p,
     .case-study-content p + p {
@@ -1620,18 +1623,18 @@ html.dark {
 ── */
 
 .min-title {
-  font-family: var(--font-body);
-  font-size: 1.5rem;
-  font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: 0;
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
   color: var(--color-text-primary);
 }
 
 .min-section-title {
-  font-family: var(--font-body);
-  font-size: 1.375rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
   line-height: 1.35;
   letter-spacing: 0;
   color: var(--color-text-primary);
@@ -1639,8 +1642,9 @@ html.dark {
 
 .min-subsection-title {
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-style: italic;
   line-height: 1.5;
   letter-spacing: 0;
   color: var(--color-text-primary);
@@ -1648,23 +1652,25 @@ html.dark {
 
 .min-body {
   font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-size: 1.15rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
   color: var(--color-text-primary);
 }
 
 .min-body-secondary {
   font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-size: 1.15rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
   color: var(--color-text-secondary);
 }
 
 .min-subtitle {
   font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.75;
   font-style: italic;
@@ -1673,41 +1679,42 @@ html.dark {
 
 .min-meta {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.5;
+  letter-spacing: 0.01em;
   color: var(--color-text-secondary);
 }
 
 .min-small {
   font-family: var(--font-body);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 400;
   line-height: 1.5;
+  letter-spacing: 0.02em;
   color: var(--color-text-tertiary);
 }
 
 .min-link {
   font-family: var(--font-body);
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   line-height: 1.75;
-  color: var(--color-text-secondary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-primary) 15%, transparent);
+  transition: border-color 0.2s ease;
 }
 
 .min-link:hover {
-  color: var(--color-text-primary);
-  text-decoration-color: var(--color-text-primary);
+  border-bottom-color: var(--color-text-primary);
 }
 
 .min-link-inline {
-  font-weight: 600;
+  font-style: italic;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
   transition: text-decoration-color 0.2s ease;
 }
 
@@ -1715,75 +1722,106 @@ html.dark {
   text-decoration-color: var(--color-text-primary);
 }
 
-/* ── Minimal homepage ── */
-.highlight-pill {
-  background-color: var(--color-highlight, rgba(200, 230, 210, 0.45));
-  padding: 1px 6px;
-  border-radius: 3px;
-  font-weight: inherit;
-}
-
-.theme-dark .highlight-pill {
-  --color-highlight: rgba(120, 180, 140, 0.2);
-}
+/* ── Editorial page (New Yorker style) ── */
 
 .minimal-page {
-  max-width: 640px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 4rem 1.5rem 6rem;
+  padding: 5rem 1.5rem 6rem;
 }
 
 @media (min-width: 640px) {
   .minimal-page {
-    padding: 6rem 2rem 8rem;
+    padding: 7rem 2rem 8rem;
   }
 }
 
 .minimal-page p {
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1.15rem;
+  line-height: 1.85;
   color: var(--color-text-primary);
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.005em;
+}
+
+/* Drop cap on the first real paragraph */
+.minimal-page .drop-cap::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.75;
+  font-weight: 400;
+  padding-right: 0.12em;
+  padding-top: 0.08em;
+  color: var(--color-text-primary);
 }
 
 .minimal-page .intro-line {
-  font-size: 1.125rem;
-  line-height: 1.75;
-  margin-bottom: 2.5rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
+  color: var(--color-text-primary);
+}
+
+/* Thin horizontal rule dividers */
+.minimal-page hr.editorial-rule {
+  border: none;
+  height: 1px;
+  background: var(--color-text-primary);
+  margin: 2.5rem 0;
+  opacity: 0.15;
 }
 
 .minimal-page .section-gap {
-  margin-top: 3.5rem;
+  margin-top: 0;
 }
 
+/* Project links — understated, italic title */
 .minimal-page a.project-link {
   display: block;
   font-family: var(--font-body);
-  font-size: 1.125rem;
-  line-height: 1.75;
-  color: var(--color-text-secondary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
-  padding: 0.75rem 0;
-  transition: color 0.2s ease;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.minimal-page a.project-link:first-child {
+  border-top: 1px solid color-mix(in srgb, var(--color-text-primary) 8%, transparent);
 }
 
 .minimal-page a.project-link:hover {
-  color: var(--color-text-primary);
-  text-decoration-color: var(--color-text-primary);
+  color: var(--color-text-secondary);
+  border-bottom-color: color-mix(in srgb, var(--color-text-primary) 25%, transparent);
+}
+
+.minimal-page a.project-link .project-name {
+  font-style: italic;
 }
 
 .minimal-page .closing-section {
-  margin-top: 4rem;
+  margin-top: 3rem;
+}
+
+.minimal-page .closing-section p {
+  font-size: 1.05rem;
+  color: var(--color-text-secondary);
+  line-height: 1.85;
 }
 
 .minimal-page .closing-section a {
-  font-weight: 600;
+  font-style: italic;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: var(--color-border);
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--color-text-secondary) 40%, transparent);
   transition: text-decoration-color 0.2s ease;
 }
 

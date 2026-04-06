@@ -87,25 +87,26 @@ const caseStudyLinks = [
           Hey, I'm Chetan.
         </p>
 
-        <!-- Bio -->
-        <p>
-          I'm a product designer with 6+ years of experience building across industries. I love to build stuff and learn new things out of it, and currently exploring many things on AI as a designer.
+        <hr class="editorial-rule" />
+
+        <!-- Bio with drop cap -->
+        <p class="drop-cap">
+          I'm a product designer with six years of experience building across industries. I love to build things, to learn from the making of them, and lately I've been exploring what AI means for the craft of design.
         </p>
 
         <p>
-          Currently designing at Freight Tiger, building systems for India's freight logistics. Before I designed for Konic Technologies, Versatile Mobitech, and more.
+          Currently I design at Freight Tiger, where I build systems for India's freight logistics. Before that I designed for Konic Technologies, Versatile Mobitech, and others.
         </p>
 
-        <!-- What I do -->
-        <div class="section-gap">
-          <p>
-            I help teams build systems that scale, bring clarity to complex operations, and make enterprise software feel human. Experienced in B2B platforms, design systems, and operational tools where the challenge is less about visual polish and more about clarity under complexity.
-          </p>
+        <p>
+          I help teams build systems that scale, bring clarity to complex operations, and make enterprise software feel human. My work lives in B2B platforms, design systems, and operational tools — places where the challenge is less about visual polish and more about clarity under complexity.
+        </p>
 
-          <p>
-            Those experiences shaped me to be more <strong>systematic</strong>, <strong>collaborative</strong>, and <strong>empathetic</strong>. Here are some projects that reflect that journey:
-          </p>
-        </div>
+        <p>
+          Those experiences shaped me to be more <em>systematic</em>, <em>collaborative</em>, and <em>empathetic</em>. Here are some projects that reflect that journey:
+        </p>
+
+        <hr class="editorial-rule" />
 
         <!-- Project links -->
         <div class="section-gap">
@@ -114,23 +115,25 @@ const caseStudyLinks = [
               href={link.href}
               class="project-link"
             >
-              {link.title}{link.protected ? " ↗" : ""}
+              <span class="project-name">{link.title.split(' — ')[0]}</span> — {link.title.split(' — ')[1]}{link.protected ? " ↗" : ""}
             </a>
           ))}
 
           <a
             href="/work"
             class="project-link"
-            style="color: var(--color-text-tertiary); margin-top: 0.5rem;"
+            style="color: var(--color-text-tertiary);"
           >
-            View more work →
+            <span class="project-name">More work</span> — the full archive →
           </a>
         </div>
+
+        <hr class="editorial-rule" />
 
         <!-- Closing -->
         <div class="closing-section">
           <p>
-            Last but not least, good design begins with curiosity. Outside design, I write about <a href={article.url} target="_blank" rel="noopener noreferrer">complex table design</a>, build side projects on <a href="https://github.com/chetank2" target="_blank" rel="noopener noreferrer">GitHub</a>, and share my work on <a href="https://x.com/kchetank19" target="_blank" rel="noopener noreferrer">X</a> and <a href="https://linkedin.com/in/chetan-kumar25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
+            Good design begins with curiosity. Outside of work, I write about <a href={article.url} target="_blank" rel="noopener noreferrer">complex table design</a>, build side projects on <a href="https://github.com/chetank2" target="_blank" rel="noopener noreferrer">GitHub</a>, and share my work on <a href="https://x.com/kchetank19" target="_blank" rel="noopener noreferrer">X</a> and <a href="https://linkedin.com/in/chetan-kumar25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
           </p>
         </div>
       </div>
