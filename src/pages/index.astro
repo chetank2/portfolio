@@ -51,7 +51,7 @@ const homeMachineText = [
   "- GitHub: https://github.com/chetank2",
 ].join("\n");
 
-const caseStudyLinks = [
+const designWork = [
   {
     name: "Freight Tiger TMS",
     tagline: "When tracking becomes the product, operations start to move right",
@@ -76,23 +76,23 @@ const caseStudyLinks = [
     href: "/work/aftercrop",
     protected: false,
   },
+];
+
+const builtWithAI = [
   {
     name: "CouponTracker",
     tagline: "Turning scattered screenshots into a system people can actually use and trust",
     href: "/work/coupontracker",
-    protected: false,
   },
   {
     name: "Design QA",
     tagline: "Closing the gap between design and reality before it becomes a problem",
     href: "/work/designqa",
-    protected: false,
   },
   {
     name: "Component-first Design",
     tagline: "Moving from static screens to systems that behave closer to real products",
     href: "/work/component-first-design",
-    protected: false,
   },
 ];
 ---
@@ -140,9 +140,9 @@ const caseStudyLinks = [
 
         <hr class="editorial-rule" />
 
-        <!-- Project links -->
+        <!-- Design work -->
         <div class="section-gap">
-          {caseStudyLinks.map((link) => (
+          {designWork.map((link) => (
             <a
               href={link.href}
               class="project-link"
@@ -150,7 +150,24 @@ const caseStudyLinks = [
               <span class="project-name">{link.name}.</span> {link.tagline}{link.protected ? " ↗" : ""}
             </a>
           ))}
+        </div>
 
+        <!-- Built with AI -->
+        <div style="margin-top: 3rem;">
+          <p class="min-small" style="font-style: italic; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">Built with AI</p>
+
+          {builtWithAI.map((link) => (
+            <a
+              href={link.href}
+              class="project-link"
+            >
+              <span class="project-name">{link.name}.</span> {link.tagline}
+            </a>
+          ))}
+        </div>
+
+        <!-- More work -->
+        <div style="margin-top: 1.5rem;">
           <a
             href="/work"
             class="project-link"
