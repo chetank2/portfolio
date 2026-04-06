@@ -34,13 +34,13 @@ const workMachineText = [
     <div data-view-panel="human">
       <div class="minimal-page">
         <!-- Back link -->
-        <a href="/" class="type-ui-meta inline-flex items-center gap-2 text-text-tertiary hover:text-accent transition-colors duration-300 mb-12">
+        <a href="/" class="min-meta inline-flex items-center gap-2 text-text-tertiary hover:text-text-primary transition-colors duration-200 mb-10" style="font-style: italic; text-decoration: none;">
           <span class="w-4 h-px bg-text-tertiary"></span>
           Back
         </a>
 
         <!-- Case Studies section -->
-        <h2 class="min-subsection-title mb-4">Case Studies</h2>
+        <h2 class="min-subsection-title mb-2">Case Studies</h2>
         {supportingProjects.map((project) => (
           <a href={project.caseStudyUrl || "#"} class="project-link">
             {project.title} — {project.tagline}{project.protected ? " ↗" : ""}
@@ -48,8 +48,8 @@ const workMachineText = [
         ))}
 
         <!-- App Designs section -->
-        <div class="section-gap">
-          <h2 class="min-subsection-title mb-4">App Designs</h2>
+        <div style="margin-top: 3rem;">
+          <h2 class="min-subsection-title mb-2">App Designs</h2>
           {appProjects.map((project) => (
             <a href={project.caseStudyUrl || "#"} class="project-link">
               {project.title} — {project.tagline}
@@ -58,8 +58,8 @@ const workMachineText = [
         </div>
 
         <!-- Web Designs section -->
-        <div class="section-gap">
-          <h2 class="min-subsection-title mb-4">Web Projects</h2>
+        <div style="margin-top: 3rem;">
+          <h2 class="min-subsection-title mb-2">Web Projects</h2>
           {websiteProjects.map((project) => (
             <a href={project.liveUrl || "#"} class="project-link" target="_blank" rel="noopener noreferrer">
               {project.title} — {project.tagline}
