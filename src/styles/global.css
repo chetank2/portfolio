@@ -1629,3 +1629,79 @@ html.dark {
     -ms-overflow-style: none;
   }
 }
+
+/* ── Minimal homepage ── */
+.highlight-pill {
+  background-color: var(--color-highlight, rgba(200, 230, 210, 0.45));
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: inherit;
+}
+
+.theme-dark .highlight-pill {
+  --color-highlight: rgba(120, 180, 140, 0.2);
+}
+
+.minimal-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 6rem;
+}
+
+@media (min-width: 640px) {
+  .minimal-page {
+    padding: 6rem 2rem 8rem;
+  }
+}
+
+.minimal-page p {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-text-primary);
+  margin-bottom: 1.75rem;
+}
+
+.minimal-page .intro-line {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+
+.minimal-page .section-gap {
+  margin-top: 3.5rem;
+}
+
+.minimal-page a.project-link {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border);
+  padding: 0.75rem 0;
+  transition: color 0.2s ease;
+}
+
+.minimal-page a.project-link:hover {
+  color: var(--color-text-primary);
+  text-decoration-color: var(--color-text-primary);
+}
+
+.minimal-page .closing-section {
+  margin-top: 4rem;
+}
+
+.minimal-page .closing-section a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-border);
+  transition: text-decoration-color 0.2s ease;
+}
+
+.minimal-page .closing-section a:hover {
+  text-decoration-color: var(--color-text-primary);
+}
