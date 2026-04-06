@@ -808,38 +808,25 @@ html.dark {
   .theme-toggle-button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    background: color-mix(in srgb, var(--color-bg-elevated) 88%, transparent);
-    color: var(--color-text-secondary);
-    font-family: var(--font-display);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition:
-      color 0.25s ease,
-      border-color 0.25s ease,
-      background-color 0.25s ease;
+    padding: 6px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-tertiary);
+    cursor: pointer;
+    transition: color 0.2s ease;
   }
 
   .theme-toggle-button:hover {
-    border-color: var(--color-accent-border);
     color: var(--color-text-primary);
-    background: color-mix(in srgb, var(--color-bg-hover) 92%, transparent);
   }
 
   .theme-toggle-button__icon {
-    width: 14px;
-    height: 14px;
-    color: var(--color-accent);
+    width: 16px;
+    height: 16px;
   }
 
   .theme-toggle-button__label {
-    display: inline-flex;
-    min-width: 3.5rem;
-    justify-content: flex-start;
+    display: none;
   }
 
   .radius-sm {
