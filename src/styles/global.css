@@ -881,7 +881,7 @@ html.dark {
   }
 
   .machine-page-shell__layout {
-    width: min(920px, 100%);
+    width: min(600px, 100%);
     margin: 0 auto;
   }
 
