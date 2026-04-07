@@ -49,6 +49,9 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
       <link rel="alternate" type="text/plain" href={machineAlternateHref} title="Machine-readable version" />
     )}
 
+    <!-- llms.txt — AI/LLM agent discovery (https://llmstxt.org) -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — AI agent briefing" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline>
       (() => {
