@@ -1745,6 +1745,24 @@ html.dark {
 
 /* ── Editorial page (New Yorker style) ── */
 
+/* Editorial container — same horizontal alignment as .minimal-page,
+   used by nav, footer, and any wrapper that needs to share the body's content axis */
+.editorial-container {
+  box-sizing: content-box;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .editorial-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
 .minimal-page {
   box-sizing: content-box;
   max-width: 600px;
