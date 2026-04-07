@@ -7,7 +7,7 @@ import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import CaseStudyRelatedLinks from "../../components/astro/CaseStudyRelatedLinks.astro";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
-import { getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
+import { findProjectBySlug, getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
 import {
   SHARED_CASE_STUDY_PASSWORD,
   isProtectedCaseStudy,
@@ -29,6 +29,8 @@ const modulePath = `../../../content/${caseStudy.contentFile}`;
 const contentLoader = contentModules[modulePath];
 const requiresProtection =
   caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug);
+const projectMeta = findProjectBySlug(caseStudy.slug);
+const protectedSummary = projectMeta?.machineSummary;
 const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) =>
   serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
 );
@@ -126,6 +128,8 @@ Content = contentModule.default;
             password={SHARED_CASE_STUDY_PASSWORD}
             storageKey={`case-study:${caseStudy.slug}`}
             title={caseStudy.title}
+            tagline={caseStudy.tagline}
+            summary={protectedSummary}
           >
             <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
                 <h1 class="min-title mb-3">

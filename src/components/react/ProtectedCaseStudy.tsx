@@ -4,6 +4,8 @@ interface Props {
   password: string;
   storageKey: string;
   title: string;
+  tagline?: string;
+  summary?: string;
   children: ReactNode;
 }
 
@@ -11,6 +13,8 @@ export default function ProtectedCaseStudy({
   password,
   storageKey,
   title,
+  tagline,
+  summary,
   children,
 }: Props) {
   const [value, setValue] = useState("");
@@ -90,8 +94,14 @@ export default function ProtectedCaseStudy({
     <section className="mt-10 sm:mt-12">
       <p className="min-small mb-4" style={{ fontStyle: "italic" }}>Protected case study</p>
       <h2 className="min-title">{title}</h2>
-      <p className="min-body-secondary mt-3">
-        Enter the shared password to view this case study.
+      {tagline ? (
+        <p className="min-subtitle mt-3">{tagline}</p>
+      ) : null}
+      {summary ? (
+        <p className="min-body-secondary mt-5">{summary}</p>
+      ) : null}
+      <p className="min-meta mt-6" style={{ fontStyle: "italic" }}>
+        Enter the shared password to view the full case study.
       </p>
       <form onSubmit={handleSubmit} className="mt-8 flex max-w-sm flex-col gap-4">
         <div className="relative">
