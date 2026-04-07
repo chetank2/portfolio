@@ -5,13 +5,15 @@ import {
   loadMachineCaseStudyContent,
   serializeMachineCaseStudyCollection,
 } from "../src/lib/machine/index.js";
-import { experience, skills, tools } from "../src/data/projects.ts";
+import { experience, skills, tools, portfolioMachineLinks } from "../src/data/projects.ts";
 
 const outputPath = new URL("../public/llms.txt", import.meta.url);
 
 const contactLines = [
-  "- Email: mailto:mymailchetan25@gmail.com",
-  "- LinkedIn: https://linkedin.com/in/chetan-kumar25/",
+  `- Resume: ${portfolioMachineLinks.resumeHref}`,
+  `- Email: ${portfolioMachineLinks.emailHref}`,
+  `- LinkedIn: ${portfolioMachineLinks.linkedInHref}`,
+  `- X: ${portfolioMachineLinks.xHref}`,
   "- GitHub: https://github.com/chetank2",
 ];
 
