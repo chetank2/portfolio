@@ -27,6 +27,8 @@ export const deepProjects: Project[] = [
     cardImageLight: "/assets/home/journeys-light.png",
     cardImageDark: "/assets/home/journeys-dark.png",
     caseStudyUrl: "/work/ft-tms-redesign",
+    machineSummary:
+      "Redesigned the trip-state machine from a linear list to a branching workflow; decoupled awareness (TigerSight) from execution (My Journeys); influenced backend architecture; lifted tracking quality from 84% to 96–97% across ~1.5 lakh monthly shipments.",
   },
   {
     slug: "control-tower",
@@ -40,6 +42,8 @@ export const deepProjects: Project[] = [
     cardImageLight: "/assets/home/control-tower-light.png",
     cardImageDark: "/assets/home/control-tower-dark.png",
     caseStudyUrl: "/work/control-tower",
+    machineSummary:
+      "Designed a Human–AI control tower with alert rules, issue cards, triage queues, and audit trails. Shifted logistics teams from reactive monitoring to guided action by orchestrating exceptions instead of just surfacing them.",
   },
   {
     slug: "ft-design-system",
@@ -80,6 +84,8 @@ export const supportingProjects: Project[] = [
     type: "supporting",
     protected: true,
     caseStudyUrl: "/work/tigersight",
+    machineSummary:
+      "Aggregated fragmented transport signals into a single awareness layer with exception triage queues, network intelligence, and AI-assisted decision support. Decoupled awareness from execution so the operations team could prioritize action over monitoring.",
   },
   {
     slug: "freight-invoicing",
@@ -91,6 +97,8 @@ export const supportingProjects: Project[] = [
     type: "supporting",
     protected: true,
     caseStudyUrl: "/work/freight-invoicing",
+    machineSummary:
+      "Introduced a pre-invoice reconciliation layer that moves billing validation upstream of invoice creation. Reduced disputes, improved auditability, and clarified ownership between logistics and finance teams.",
   },
   {
     slug: "ptl-module-design",
@@ -102,6 +110,8 @@ export const supportingProjects: Project[] = [
     type: "supporting",
     protected: true,
     caseStudyUrl: "/work/ptl-module-design",
+    machineSummary:
+      "Designed PTL flows for grouped shipments, split deliveries, ePOD, invoicing, reconciliation, dispute management, and courier recommendation — without forcing FTL workflow assumptions onto a fundamentally different shipment model.",
   },
 ];
 

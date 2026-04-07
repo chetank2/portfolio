@@ -11,7 +11,10 @@ const workMachineText = [
   "> Extended archive of systems work, app designs, and web projects.",
   "",
   "## Systems",
-  ...supportingProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl}, protected)`),
+  ...supportingProjects.map((project) => {
+    const summary = project.machineSummary ?? project.tagline;
+    return `- ${project.title} (protected) — ${summary} (${project.caseStudyUrl})`;
+  }),
   "",
   "## App Designs",
   ...appProjects.map((project) => `- ${project.title} — ${project.tagline} (${project.caseStudyUrl})`),

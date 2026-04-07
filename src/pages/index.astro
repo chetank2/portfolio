@@ -14,7 +14,8 @@ import {
 function formatProjectLine(project: (typeof deepProjects)[number] | (typeof aiProjects)[number]) {
   const href = project.caseStudyUrl ?? "#";
   if (project.protected) {
-    return `- ${project.title} — ${project.tagline} (${href}, protected)`;
+    const summary = project.machineSummary ?? project.tagline;
+    return `- ${project.title} (protected) — ${summary} (${href})`;
   }
   if (project.caseStudyUrl?.startsWith("/work/")) {
     return `- ${project.title} — ${project.tagline} (${project.caseStudyUrl}, /machine${project.caseStudyUrl})`;

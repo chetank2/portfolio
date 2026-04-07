@@ -13,6 +13,8 @@ export interface Project {
   repoUrl?: string;
   npmUrl?: string;
   caseStudyUrl?: string;
+  /** Public-safe summary of the systems thinking, surfaced in machine mode even for protected projects */
+  machineSummary?: string;
 }
 
 export interface Experience {

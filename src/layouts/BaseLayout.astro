@@ -12,6 +12,11 @@ const {
   description = "Senior Product Designer specializing in complex B2B systems, design systems, and building products with AI. Currently at Freight Tiger.",
   machineMode = false,
 } = Astro.props;
+
+// Compute machine-readable alternate URL for case study pages
+const pathname = Astro.url.pathname.replace(/\/$/, "");
+const isCaseStudy = pathname.startsWith("/work/") && pathname !== "/work";
+const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
 ---
 
 <!doctype html>
@@ -39,6 +44,10 @@ const {
       href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
       rel="stylesheet"
     />
+
+    {machineAlternateHref && (
+      <link rel="alternate" type="text/plain" href={machineAlternateHref} title="Machine-readable version" />
+    )}
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline>
