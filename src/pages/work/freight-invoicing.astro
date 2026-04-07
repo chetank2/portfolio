@@ -10,9 +10,13 @@ import {
   standaloneCaseStudies,
   standaloneCaseStudyMachineText,
 } from "../../data/standaloneCaseStudies";
+import { findProjectBySlug } from "../../data/projects";
 import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
 
 const study = standaloneCaseStudies["freight-invoicing"];
+const projectMeta = findProjectBySlug(study.slug);
+const protectedSummary = projectMeta?.machineSummary;
+const protectedTagline = projectMeta?.tagline;
 ---
 
 <BaseLayout title={`${study.title} — Chetan Kummari`}>
@@ -31,6 +35,8 @@ const study = standaloneCaseStudies["freight-invoicing"];
           password={SHARED_CASE_STUDY_PASSWORD}
           storageKey={`case-study:${study.slug}`}
           title={study.title}
+          tagline={protectedTagline}
+          summary={protectedSummary}
         >
           <CaseStudyView study={study} />
         </ProtectedCaseStudy>
