@@ -1226,11 +1226,11 @@ Most design systems assume humans are the only consumers. This system recognizes
 
 That is not just a code utility. It is a product-level architectural decision.
 
-## 13. Figma to Code Bridge
+## 13. Figma to AI Bridge
 
-To close the designer-to-developer loop, I integrated Figma Code Connect so designers could select a component in Figma and see the exact React implementation to use.
+To close the designer-to-AI loop, I connected the design system to AI tools using the Figma MCP server and the Figma API. This let AI assistants read live component metadata, tokens, and variants directly from Figma while generating code — so the output stayed grounded in the actual design source of truth instead of drifting into invented components.
 
-This moved the design system beyond a library and into a workflow bridge between design and engineering.
+This moved the design system beyond a static library and into a live workflow bridge between design, AI, and engineering.
 
 ## 14. Technical Architecture
 
