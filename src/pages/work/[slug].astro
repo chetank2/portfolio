@@ -11,6 +11,7 @@ import { findProjectBySlug, getProjectLinksBySlug, portfolioMachineLinks } from 
 import {
   SHARED_CASE_STUDY_PASSWORD,
   isProtectedCaseStudy,
+  shouldRenderProtectedBody,
 } from "../../lib/caseStudyProtection";
 import { loadMachineCaseStudyContent } from "../../lib/machine/content.js";
 import { serializeMachineCaseStudy } from "../../lib/machine/serialize.js";
@@ -25,49 +26,76 @@ export function getStaticPaths() {
 }
 
 const { caseStudy } = Astro.props;
-const modulePath = `../../../content/${caseStudy.contentFile}`;
-const contentLoader = contentModules[modulePath];
 const requiresProtection =
   caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug);
 const projectMeta = findProjectBySlug(caseStudy.slug);
 const protectedSummary = projectMeta?.machineSummary;
-const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) =>
-  serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
-);
-const relatedLinks = getProjectLinksBySlug(caseStudy.slug);
-const machineRelatedLinksText = relatedLinks.length
-  ? [
-      "",
-      "## Related Links",
-      ...relatedLinks.map((link) => `- ${link.title}: ${link.href}`),
-    ].join("\n")
-  : "";
 
-// Compute prev/next case studies
-const currentIndex = caseStudies.findIndex((cs) => cs.slug === caseStudy.slug);
-const prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
-const nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
-const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
-const machineNavigationText =
-  prevStudy || nextStudy
+// Build-time gate: when protected content should not be revealed, we avoid
+// loading the markdown, computing related links, prev/next nav, and machine
+// text entirely — so none of it lands in the static HTML.
+const revealBody = shouldRenderProtectedBody(caseStudy.slug);
+
+let Content: any = null;
+let machinePageText = "";
+let relatedLinks: ReturnType<typeof getProjectLinksBySlug> = [];
+let prevStudy: (typeof caseStudies)[number] | null = null;
+let nextStudy: (typeof caseStudies)[number] | null = null;
+
+if (revealBody) {
+  const modulePath = `../../../content/${caseStudy.contentFile}`;
+  const contentLoader = contentModules[modulePath];
+  if (!contentLoader) {
+    throw new Error(`Missing case study content for ${caseStudy.slug}`);
+  }
+  const contentModule = await contentLoader();
+  Content = contentModule.default;
+
+  const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) =>
+    serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
+  );
+  relatedLinks = getProjectLinksBySlug(caseStudy.slug);
+  const machineRelatedLinksText = relatedLinks.length
     ? [
         "",
-        "## Navigation",
-        prevStudy ? `- Previous: ${prevStudy.title} (${siteHref}/work/${prevStudy.slug})` : "",
-        nextStudy ? `- Next: ${nextStudy.title} (${siteHref}/work/${nextStudy.slug})` : "",
-      ]
-        .filter(Boolean)
-        .join("\n")
+        "## Related Links",
+        ...relatedLinks.map((link) => `- ${link.title}: ${link.href}`),
+      ].join("\n")
     : "";
-const machinePageText = `${machineText}${machineRelatedLinksText}${machineNavigationText}`;
 
-let Content;
-if (!contentLoader) {
-  throw new Error(`Missing case study content for ${caseStudy.slug}`);
+  const currentIndex = caseStudies.findIndex((cs) => cs.slug === caseStudy.slug);
+  prevStudy = currentIndex > 0 ? caseStudies[currentIndex - 1] : null;
+  nextStudy = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
+  const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
+  const machineNavigationText =
+    prevStudy || nextStudy
+      ? [
+          "",
+          "## Navigation",
+          prevStudy ? `- Previous: ${prevStudy.title} (${siteHref}/work/${prevStudy.slug})` : "",
+          nextStudy ? `- Next: ${nextStudy.title} (${siteHref}/work/${nextStudy.slug})` : "",
+        ]
+          .filter(Boolean)
+          .join("\n")
+      : "";
+  machinePageText = `${machineText}${machineRelatedLinksText}${machineNavigationText}`;
+} else {
+  // Build a machine-safe summary for protected slugs. Only public data from
+  // projects.ts is included — no markdown body, no asset references.
+  const lines = [
+    `# ${caseStudy.title}`,
+    `> ${caseStudy.tagline}`,
+    "",
+    `- Role: ${caseStudy.role}`,
+    `- Company: ${caseStudy.company}`,
+    `- Timeline: ${caseStudy.timeline}`,
+    `- Status: Protected — full case study available on request`,
+  ];
+  if (protectedSummary) {
+    lines.push("", "## Summary", protectedSummary);
+  }
+  machinePageText = lines.join("\n");
 }
-
-const contentModule = await contentLoader();
-Content = contentModule.default;
 ---
 
 <BaseLayout title={`${caseStudy.title} — Chetan Kummari`}>
@@ -119,41 +147,45 @@ Content = contentModule.default;
             tagline={caseStudy.tagline}
             summary={protectedSummary}
           >
-            <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
-                <h1 class="min-title mb-3">
-                  {caseStudy.title}
-                </h1>
-                <p class="min-subtitle mb-6">
-                  {caseStudy.tagline}
-                </p>
-                <div class="min-meta flex flex-wrap gap-6">
-                  <span>{caseStudy.role}</span>
-                  <span>{caseStudy.company}</span>
-                  <span>{caseStudy.timeline}</span>
-                </div>
-              </header>
+            {revealBody && (
+              <>
+                <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
+                  <h1 class="min-title mb-3">
+                    {caseStudy.title}
+                  </h1>
+                  <p class="min-subtitle mb-6">
+                    {caseStudy.tagline}
+                  </p>
+                  <div class="min-meta flex flex-wrap gap-6">
+                    <span>{caseStudy.role}</span>
+                    <span>{caseStudy.company}</span>
+                    <span>{caseStudy.timeline}</span>
+                  </div>
+                </header>
 
-            <article class="longform-content case-study-content mb-20">
-                <Content />
-              </article>
+                <article class="longform-content case-study-content mb-20">
+                  <Content />
+                </article>
 
-            <CaseStudyRelatedLinks links={relatedLinks} />
+                <CaseStudyRelatedLinks links={relatedLinks} />
 
-            {(prevStudy || nextStudy) && (
-              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
-                {prevStudy ? (
-                  <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
-                    <span class="min-small group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
-                    <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{prevStudy.title}</span>
-                  </a>
-                ) : <div />}
-                {nextStudy ? (
-                  <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
-                    <span class="min-small group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
-                    <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{nextStudy.title}</span>
-                  </a>
-                ) : <div />}
-              </nav>
+                {(prevStudy || nextStudy) && (
+                  <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
+                    {prevStudy ? (
+                      <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
+                        <span class="min-small group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
+                        <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{prevStudy.title}</span>
+                      </a>
+                    ) : <div />}
+                    {nextStudy ? (
+                      <a href={`/work/${nextStudy.slug}`} class="group flex flex-col items-end gap-1 max-w-[45%] text-right ml-auto">
+                        <span class="min-small group-hover:text-text-primary transition-colors duration-200">Next &rarr;</span>
+                        <span class="min-meta group-hover:text-text-primary transition-colors duration-200">{nextStudy.title}</span>
+                      </a>
+                    ) : <div />}
+                  </nav>
+                )}
+              </>
             )}
           </ProtectedCaseStudy>
         ) : (

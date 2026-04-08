@@ -11,12 +11,25 @@ import {
   standaloneCaseStudyMachineText,
 } from "../../data/standaloneCaseStudies";
 import { findProjectBySlug } from "../../data/projects";
-import { SHARED_CASE_STUDY_PASSWORD } from "../../lib/caseStudyProtection";
+import {
+  SHARED_CASE_STUDY_PASSWORD,
+  shouldRenderProtectedBody,
+} from "../../lib/caseStudyProtection";
 
 const study = standaloneCaseStudies["freight-invoicing"];
 const projectMeta = findProjectBySlug(study.slug);
 const protectedSummary = projectMeta?.machineSummary;
-const protectedTagline = projectMeta?.tagline;
+const protectedTagline = projectMeta?.tagline ?? study.tagline;
+const revealBody = shouldRenderProtectedBody(study.slug);
+const machinePageText = revealBody
+  ? standaloneCaseStudyMachineText[study.slug]
+  : [
+      `# ${study.title}`,
+      `> ${protectedTagline}`,
+      "",
+      `- Status: Protected — full case study available on request`,
+      ...(protectedSummary ? ["", "## Summary", protectedSummary] : []),
+    ].join("\n");
 ---
 
 <BaseLayout title={`${study.title} — Chetan Kummari`}>
@@ -35,7 +48,7 @@ const protectedTagline = projectMeta?.tagline;
           tagline={protectedTagline}
           summary={protectedSummary}
         >
-          <CaseStudyView study={study} />
+          {revealBody && <CaseStudyView study={study} />}
         </ProtectedCaseStudy>
       </div>
     </div>
@@ -45,9 +58,10 @@ const protectedTagline = projectMeta?.tagline;
         password={SHARED_CASE_STUDY_PASSWORD}
         storageKey={`case-study:${study.slug}`}
         title={study.title}
+        tagline={protectedTagline}
+        summary={protectedSummary}
       >
-        <MachinePageShell title={study.title} pageHref={`/work/${study.slug}`} text={standaloneCaseStudyMachineText[study.slug]} />
-      </ProtectedCaseStudy>
+        <MachinePageShell title={study.title} pageHref={`/work/${study.slug}`} text={machinePageText} />
     </div>
   </main>
   <ViewModeToggle />
