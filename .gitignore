@@ -3,3 +3,13 @@ dist/
 .astro/
 .DS_Store
 .claude/
+
+# Protected case study assets — canonical location is private-assets/.
+# These paths are temporarily repopulated during local dev with protected
+# content enabled, and must never be committed back into public/.
+public/assets/ft-tms-redesign/
+public/assets/control-tower/
+public/assets/freight-invoicing/
+public/assets/my-journeys/
+public/assets/ptl/
+public/assets/apollo/
