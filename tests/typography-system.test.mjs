@@ -1,11 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 
-const root = "/Users/user/Documents/portfolio";
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 async function read(path) {
-  return readFile(`${root}${path}`, "utf8");
+  return readFile(resolve(root, path.replace(/^\//, "")), "utf8");
 }
 
 test("human-facing Astro pages and components do not use font-mono utility classes", async () => {

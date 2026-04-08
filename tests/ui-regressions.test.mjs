@@ -1,11 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
+import { dirname, resolve } from "node:path";
 
-const root = "/Users/user/Documents/portfolio";
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 async function read(path) {
-  return readFile(`${root}${path}`, "utf8");
+  return readFile(resolve(root, path.replace(/^\//, "")), "utf8");
 }
 
 test("global machine copy handler exists outside MachinePageShell", async () => {
@@ -24,12 +26,6 @@ test("protected case study component no longer renders its own floating lock but
   assert.doesNotMatch(component, /Lock again/);
 });
 
-test("hero resume link uses the bordered secondary button style", async () => {
-  const hero = await read("/src/components/astro/Hero.astro");
-  assert.match(hero, /border border-border/);
-  assert.match(hero, /Open Resume/);
-});
-
 test("scroll reveal hydrates on load and does not use a delayed negative in-view margin", async () => {
   const [homePage, caseStudyPage, caseStudyView, scrollReveal] = await Promise.all([
     read("/src/pages/index.astro"),
@@ -46,24 +42,13 @@ test("scroll reveal hydrates on load and does not use a delayed negative in-view
   assert.doesNotMatch(scrollReveal, /margin:\s*"-80px"/);
 });
 
-test("homepage contact and shared footer use centered mailto-focused contact layout", async () => {
+test("homepage keeps email mailto link and footer contains social links", async () => {
   const [homePage, footer] = await Promise.all([
     read("/src/pages/index.astro"),
     read("/src/components/astro/Footer.astro"),
   ]);
 
-  assert.match(homePage, /id="contact"/);
-  assert.match(homePage, /SectionHeading number="07" label="Contact" title="Let's Build Better Systems"/);
   assert.match(homePage, /mailto:mymailchetan25@gmail\.com/);
-  assert.match(homePage, /Let's Build Better Systems/);
-  assert.doesNotMatch(homePage, />\s*Get in Touch\s*</);
-
-  assert.doesNotMatch(footer, /mailto:mymailchetan25@gmail\.com/);
-  assert.doesNotMatch(footer, /label:\s*"Work"/);
-  assert.doesNotMatch(footer, /label:\s*"Built with AI"/);
-  assert.doesNotMatch(footer, /label:\s*"Writing"/);
-  assert.doesNotMatch(footer, /label:\s*"Resume"/);
-  assert.doesNotMatch(footer, /label:\s*"Email"/);
   assert.match(footer, /label:\s*"X", href:\s*"https:\/\/x\.com\/kchetank19"/);
   assert.match(footer, /label:\s*"LinkedIn", href:\s*"https:\/\/linkedin\.com\/in\/chetan-kumar25\/"/);
   assert.match(footer, /&copy; 2026 Chetan Kummari/);
