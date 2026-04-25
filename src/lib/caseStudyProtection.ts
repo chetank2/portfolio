@@ -1,5 +1,21 @@
 export const SHARED_CASE_STUDY_PASSWORD = "chetan19";
 
+export const PASSWORD_REQUEST_CHANNELS = {
+  linkedin: {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/chetan-kumar25/",
+  },
+  x: {
+    label: "X",
+    href: "https://x.com/messages/compose",
+    recipientId: "784100815891894272",
+  },
+  email: {
+    label: "Email",
+    href: "mailto:mymailchetan25@gmail.com",
+  },
+} as const;
+
 export const PROTECTED_CASE_STUDY_SLUGS = new Set([
   "journey-redesign",
   "control-tower",
@@ -11,6 +27,34 @@ export const PROTECTED_CASE_STUDY_SLUGS = new Set([
 
 export function isProtectedCaseStudy(slug: string): boolean {
   return PROTECTED_CASE_STUDY_SLUGS.has(slug);
+}
+
+export function buildPasswordRequestMessage(caseStudyTitle: string): string {
+  return [
+    "Hey Chetan,",
+    "",
+    `I'd like to view your protected case study: ${caseStudyTitle}.`,
+    "Could you please share the password?",
+  ].join("\n");
+}
+
+export function buildPasswordRequestEmailUrl(caseStudyTitle: string): string {
+  const message = buildPasswordRequestMessage(caseStudyTitle);
+  const subject = `Password request: ${caseStudyTitle}`;
+  const emailHref = PASSWORD_REQUEST_CHANNELS.email.href;
+
+  return `${emailHref}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+}
+
+export function buildPasswordRequestXUrl(caseStudyTitle: string): string {
+  const message = buildPasswordRequestMessage(caseStudyTitle);
+  const xChannel = PASSWORD_REQUEST_CHANNELS.x;
+  const params = new URLSearchParams({
+    recipient_id: xChannel.recipientId,
+    text: message,
+  });
+
+  return `${xChannel.href}?${params.toString()}`;
 }
 
 /**

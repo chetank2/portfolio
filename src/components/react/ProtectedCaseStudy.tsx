@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import PasswordRequestOptions from "./PasswordRequestOptions";
 
 interface Props {
   password: string;
@@ -163,6 +164,7 @@ export default function ProtectedCaseStudy({
           Unlock
         </button>
       </form>
+      <PasswordRequestOptions caseStudyTitle={title} />
     </section>
   );
 }
