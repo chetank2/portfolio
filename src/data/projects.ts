@@ -263,9 +263,19 @@ export const websiteProjects: Project[] = [
 export const experience: Experience[] = [
   {
     role: "Senior Product Designer",
+    company: "Generalmind",
+    location: "Bangalore",
+    period: "April 2026 – Present",
+    highlights: [
+      "Designing AI-assisted enterprise workflows and operational systems for autonomous task execution across enterprise environments.",
+      "Working closely with product, engineering, and leadership teams to shape high-ambiguity AI-native product experiences.",
+    ],
+  },
+  {
+    role: "Senior Product Designer",
     company: "Freight Tiger",
     location: "Bangalore",
-    period: "Dec 2023 – Present",
+    period: "Dec 2023 – April 2026",
     highlights: [
       "Revamped FTL tracking end-to-end, from Add Journey to live tracking, making the flow simpler and faster to use.",
       "Handled platform scale of roughly 1.6 lakh shipments per month, with around 1.5 lakh tracked monthly.",

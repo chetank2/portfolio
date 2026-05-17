@@ -39,9 +39,15 @@ Rules:
 - Use `?view=machine` on supported human routes for in-browser preview.
 
 Resume:
+### Senior Product Designer — Generalmind
+- Location: Bangalore
+- Period: April 2026 – Present
+- Designing AI-assisted enterprise workflows and operational systems for autonomous task execution across enterprise environments.
+- Working closely with product, engineering, and leadership teams to shape high-ambiguity AI-native product experiences.
+
 ### Senior Product Designer — Freight Tiger
 - Location: Bangalore
-- Period: Dec 2023 – Present
+- Period: Dec 2023 – April 2026
 - Revamped FTL tracking end-to-end, from Add Journey to live tracking, making the flow simpler and faster to use.
 - Handled platform scale of roughly 1.6 lakh shipments per month, with around 1.5 lakh tracked monthly.
 - Improved tracking quality from 84% to about 96–97%.
