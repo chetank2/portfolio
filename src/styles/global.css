@@ -1743,6 +1743,22 @@ html.dark {
   width: 1.5rem;
 }
 
+.case-study-sticky-back {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-bottom: 2rem;
+  padding: 0.85rem max(1.5rem, calc((100vw - 600px) / 2));
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
+  background: color-mix(in srgb, var(--color-bg-deep) 82%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
 /* ── Editorial page (New Yorker style) ── */
 
 /* Editorial container — same horizontal alignment as .minimal-page,

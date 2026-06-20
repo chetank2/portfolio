@@ -112,7 +112,7 @@ if (revealBody) {
             data-case-study-topbar
             data-storage-key={`case-study:${caseStudy.slug}`}
           >
-            <a href={caseStudy.backHref} class="back-link">Back</a>
+            <a href={caseStudy.backHref} class="back-link case-study-sticky-back">Back</a>
             <button
               type="button"
               hidden
@@ -137,7 +137,7 @@ if (revealBody) {
             </button>
           </div>
         ) : (
-          <a href={caseStudy.backHref} class="back-link">Back</a>
+          <a href={caseStudy.backHref} class="back-link case-study-sticky-back">Back</a>
         )}
         {requiresProtection ? (
           <ProtectedCaseStudy
