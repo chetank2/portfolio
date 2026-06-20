@@ -1744,19 +1744,28 @@ html.dark {
 }
 
 .case-study-sticky-back {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   z-index: 40;
   box-sizing: border-box;
   width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  margin-bottom: 2rem;
   padding: 0.85rem max(1.5rem, calc((100vw - 600px) / 2));
-  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);
   background: color-mix(in srgb, var(--color-bg-deep) 82%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.case-study-sticky-back[data-visible="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 /* ── Editorial page (New Yorker style) ── */

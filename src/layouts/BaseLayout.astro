@@ -146,5 +146,20 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
   <body class:list={[machineMode && "machine-mode"]}>
     <a href="#main" class="skip-link">Skip to content</a>
     <slot />
+    <script is:inline>
+      (() => {
+        const updateStickyBackLinks = () => {
+          const shouldShow = window.scrollY > 96;
+          document.querySelectorAll(".case-study-sticky-back").forEach((link) => {
+            if (!(link instanceof HTMLElement)) return;
+            link.dataset.visible = shouldShow ? "true" : "false";
+          });
+        };
+
+        window.addEventListener("scroll", updateStickyBackLinks, { passive: true });
+        window.addEventListener("resize", updateStickyBackLinks);
+        updateStickyBackLinks();
+      })();
+    </script>
   </body>
 </html>
