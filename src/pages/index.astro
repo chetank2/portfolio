@@ -10,10 +10,11 @@ import {
   experience,
   article,
 } from "../data/projects";
+import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../lib/caseStudyProtection";
 
 function formatProjectLine(project: (typeof deepProjects)[number] | (typeof aiProjects)[number]) {
   const href = project.caseStudyUrl ?? "#";
-  if (project.protected) {
+  if (CASE_STUDY_PASSWORD_LOCK_ENABLED && project.protected) {
     const summary = project.machineSummary ?? project.tagline;
     return `- ${project.title} (protected) — ${summary} (${href})`;
   }
@@ -67,7 +68,7 @@ const designWork = [
   },
   {
     name: "FT Design System",
-    tagline: "Consistency does not happen by default, it is built into the system from the ground up",
+    tagline: "Design infrastructure for humans, engineers, and AI agents",
     href: "/work/ft-design-system",
     protected: false,
   },
@@ -87,7 +88,7 @@ const builtWithAI = [
   },
   {
     name: "Design QA",
-    tagline: "Closing the gap between design and reality before it becomes a problem",
+    tagline: "An LLM-free quality gate that catches design-to-code drift before release",
     href: "/work/designqa",
   },
   {
@@ -138,7 +139,7 @@ const builtWithAI = [
               href={link.href}
               class="project-link"
             >
-              <span class="project-name">{link.name}.</span> {link.tagline}{link.protected ? "\u00a0↗" : ""}
+              <span class="project-name">{link.name}.</span> {link.tagline}{CASE_STUDY_PASSWORD_LOCK_ENABLED && link.protected ? "\u00a0↗" : ""}
             </a>
           ))}
         </div>
@@ -146,6 +147,9 @@ const builtWithAI = [
         <!-- Built with AI -->
         <div style="margin-top: 3rem;">
           <p class="min-small" style="font-style: italic; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">Built with AI</p>
+          <p style="margin-bottom: 1.5rem;">
+            The strongest AI work here is not screen generation. It is design workflow infrastructure: tools that automate QA, protect design-system fidelity, and help teams move from manual execution to higher-quality orchestration.
+          </p>
 
           {builtWithAI.map((link) => (
             <a

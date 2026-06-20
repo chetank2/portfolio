@@ -1,5 +1,6 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import PasswordRequestOptions from "./PasswordRequestOptions";
+import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../../lib/caseStudyProtection";
 
 interface Props {
   password: string;
@@ -22,6 +23,10 @@ export default function ProtectedCaseStudy({
   const [unlocked, setUnlocked] = useState(false);
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  if (!CASE_STUDY_PASSWORD_LOCK_ENABLED) {
+    return <>{children}</>;
+  }
 
   useEffect(() => {
     if (typeof window === "undefined") return;

@@ -48,10 +48,10 @@ export const deepProjects: Project[] = [
   {
     slug: "ft-design-system",
     title: "FT Design System",
-    tagline: "125+ components, AI protection, dual-mode docs",
+    tagline: "AI-native design infrastructure for teams and agents",
     description:
-      "Built a production design system from scratch as a solo builder — 125+ React components, token architecture, AI protection layer, and dual-audience documentation for humans and AI agents.",
-    tags: ["Design System", "React", "AI Protection", "Freight Tiger"],
+      "Built Freight Tiger's design system as production infrastructure: Figma foundations, npm components, AI-ready prompts, machine-readable docs, and an AI protection layer that kept generated prototypes aligned with production standards.",
+    tags: ["Design System", "AI Infrastructure", "AI Protection", "Freight Tiger"],
     type: "deep",
     cardImageLight: "/assets/home/ft-design-system-light.png",
     cardImageDark: "/assets/home/ft-design-system-dark.png",
@@ -130,10 +130,10 @@ export const aiProjects: Project[] = [
   {
     slug: "designqa",
     title: "Design QA",
-    tagline: "Automating design-to-code checks across projects",
+    tagline: "LLM-free design QA for enterprise environments",
     description:
-      "Built a cross-platform tool that compares Figma designs against live production pages and exports discrepancies as trackable issues — because pixel-checking manually across multiple projects doesn't scale.",
-    tags: ["Electron", "Cross-platform", "Figma MCP", "AI-built"],
+      "Built a local-first Design QA system that compares Figma designs against live production pages and flags color, typography, spacing, sizing, layout, missing-element, and component-drift issues without relying on an LLM.",
+    tags: ["Design QA", "LLM-free", "Figma MCP", "Enterprise Workflow"],
     type: "ai",
     liveUrl: "https://designqa-rho.vercel.app",
     repoUrl: "https://github.com/chetank2/designqa",

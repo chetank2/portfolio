@@ -5,6 +5,7 @@ import Footer from "../../components/astro/Footer.astro";
 import MachinePageShell from "../../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import { supportingProjects, appProjects, websiteProjects } from "../../data/projects";
+import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../../lib/caseStudyProtection";
 
 const workMachineText = [
   "# Work",
@@ -13,7 +14,8 @@ const workMachineText = [
   "## Systems",
   ...supportingProjects.map((project) => {
     const summary = project.machineSummary ?? project.tagline;
-    return `- ${project.title} (protected) — ${summary} (${project.caseStudyUrl})`;
+    const status = CASE_STUDY_PASSWORD_LOCK_ENABLED && project.protected ? " (protected)" : "";
+    return `- ${project.title}${status} — ${summary} (${project.caseStudyUrl})`;
   }),
   "",
   "## App Designs",
@@ -43,7 +45,7 @@ const workMachineText = [
         <h2 class="min-subsection-title mb-2">Case Studies</h2>
         {supportingProjects.map((project) => (
           <a href={project.caseStudyUrl || "#"} class="project-link">
-            {project.title} — {project.tagline}{project.protected ? " ↗" : ""}
+            {project.title} — {project.tagline}{CASE_STUDY_PASSWORD_LOCK_ENABLED && project.protected ? " ↗" : ""}
           </a>
         ))}
 

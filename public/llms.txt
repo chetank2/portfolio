@@ -8,7 +8,13 @@ Human pages:
 - /work/designqa
 - /work/coupontracker
 - /work/component-first-design
+- /work/ft-tms-redesign
+- /work/control-tower
+- /work/tigersight
+- /work/ptl-module-design
 - /work/ft-design-system
+- /work/journey-redesign
+- /work/freight-invoicing
 - /work/aftercrop
 - /work/fitx
 - /work/swiggy
@@ -22,7 +28,13 @@ Machine pages:
 - /machine/work/designqa
 - /machine/work/coupontracker
 - /machine/work/component-first-design
+- /machine/work/ft-tms-redesign
+- /machine/work/control-tower
+- /machine/work/tigersight
+- /machine/work/ptl-module-design
 - /machine/work/ft-design-system
+- /machine/work/journey-redesign
+- /machine/work/freight-invoicing
 - /machine/work/aftercrop
 - /machine/work/fitx
 - /machine/work/swiggy

@@ -1,6 +1,9 @@
 import { caseStudies } from "../data/caseStudies";
 import { standaloneCaseStudies } from "../data/standaloneCaseStudies";
-import { isProtectedCaseStudy } from "../lib/caseStudyProtection";
+import {
+  CASE_STUDY_PASSWORD_LOCK_ENABLED,
+  isProtectedCaseStudy,
+} from "../lib/caseStudyProtection";
 
 export const prerender = true;
 
@@ -9,6 +12,7 @@ const SITE_URL = "https://chetank.vercel.app";
 const staticRoutes = ["/", "/work", "/llms.txt"];
 
 function isPublicCaseStudy(slug: string, protectedFlag?: boolean): boolean {
+  if (!CASE_STUDY_PASSWORD_LOCK_ENABLED) return true;
   return !protectedFlag && !isProtectedCaseStudy(slug);
 }
 

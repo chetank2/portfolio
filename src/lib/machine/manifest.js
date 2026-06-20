@@ -119,9 +119,17 @@ async function loadProtectedSlugs() {
   throw new Error("Protected case study slugs were not parsed as a Set or array.");
 }
 
-function normalizeMarkdownCaseStudy(raw, protectedSlugs) {
+async function loadPasswordLockEnabled() {
+  const enabled = await loadExportedValue("src/lib/caseStudyProtection.ts", "CASE_STUDY_PASSWORD_LOCK_ENABLED", {
+    required: true,
+  });
+
+  return Boolean(enabled);
+}
+
+function normalizeMarkdownCaseStudy(raw, protectedSlugs, protectionEnabled) {
   const slug = String(raw.slug);
-  const inferredProtected = Boolean(raw.protected) || protectedSlugs.has(slug);
+  const inferredProtected = protectionEnabled && (Boolean(raw.protected) || protectedSlugs.has(slug));
 
   return {
     slug,
@@ -148,9 +156,9 @@ function parseStandaloneMeta(study) {
   return { role, company, timeline, type };
 }
 
-function normalizeStandaloneCaseStudy(raw, protectedSlugs, machineTextBySlug) {
+function normalizeStandaloneCaseStudy(raw, protectedSlugs, machineTextBySlug, protectionEnabled) {
   const slug = String(raw.slug);
-  const inferredProtected = Boolean(raw.protected) || protectedSlugs.has(slug);
+  const inferredProtected = protectionEnabled && (Boolean(raw.protected) || protectedSlugs.has(slug));
   const { role, company, timeline } = parseStandaloneMeta(raw);
   const content = machineTextBySlug?.[slug];
 
@@ -170,23 +178,24 @@ function normalizeStandaloneCaseStudy(raw, protectedSlugs, machineTextBySlug) {
   };
 }
 
-function normalizeStandaloneCollection(rawCollection, protectedSlugs, machineTextBySlug) {
+function normalizeStandaloneCollection(rawCollection, protectedSlugs, machineTextBySlug, protectionEnabled) {
   if (!rawCollection) {
     return [];
   }
 
   if (Array.isArray(rawCollection)) {
-    return rawCollection.map((item) => normalizeStandaloneCaseStudy(item, protectedSlugs, machineTextBySlug));
+    return rawCollection.map((item) => normalizeStandaloneCaseStudy(item, protectedSlugs, machineTextBySlug, protectionEnabled));
   }
 
   if (typeof rawCollection === "object") {
-    return Object.values(rawCollection).map((item) => normalizeStandaloneCaseStudy(item, protectedSlugs, machineTextBySlug));
+    return Object.values(rawCollection).map((item) => normalizeStandaloneCaseStudy(item, protectedSlugs, machineTextBySlug, protectionEnabled));
   }
 
   throw new Error("Standalone case studies must export an array or record.");
 }
 
 export async function loadMachineCaseStudies({ includeProtected = false } = {}) {
+  const protectionEnabled = await loadPasswordLockEnabled();
   const protectedSlugs = await loadProtectedSlugs();
   const markdownCaseStudies = await loadExportedValue("src/data/caseStudies.ts", "caseStudies", {
     required: true,
@@ -202,11 +211,12 @@ export async function loadMachineCaseStudies({ includeProtected = false } = {}) 
     "standaloneCaseStudyMachineText"
   );
 
-  const normalizedMarkdown = markdownCaseStudies.map((caseStudy) => normalizeMarkdownCaseStudy(caseStudy, protectedSlugs));
+  const normalizedMarkdown = markdownCaseStudies.map((caseStudy) => normalizeMarkdownCaseStudy(caseStudy, protectedSlugs, protectionEnabled));
   const normalizedStandalone = normalizeStandaloneCollection(
     standaloneCaseStudies,
     protectedSlugs,
-    standaloneMachineText
+    standaloneMachineText,
+    protectionEnabled
   );
 
   const merged = [...normalizedMarkdown, ...normalizedStandalone];

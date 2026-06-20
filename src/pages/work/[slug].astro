@@ -9,6 +9,7 @@ import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
 import { findProjectBySlug, getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
 import {
+  CASE_STUDY_PASSWORD_LOCK_ENABLED,
   SHARED_CASE_STUDY_PASSWORD,
   isProtectedCaseStudy,
   shouldRenderProtectedBody,
@@ -27,7 +28,7 @@ export function getStaticPaths() {
 
 const { caseStudy } = Astro.props;
 const requiresProtection =
-  caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug);
+  CASE_STUDY_PASSWORD_LOCK_ENABLED && (caseStudy.protected ?? isProtectedCaseStudy(caseStudy.slug));
 const projectMeta = findProjectBySlug(caseStudy.slug);
 const protectedSummary = projectMeta?.machineSummary;
 

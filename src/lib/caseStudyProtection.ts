@@ -1,5 +1,7 @@
 export const SHARED_CASE_STUDY_PASSWORD = "chetan19";
 
+export const CASE_STUDY_PASSWORD_LOCK_ENABLED = false;
+
 export const PASSWORD_REQUEST_CHANNELS = {
   linkedin: {
     label: "LinkedIn",
@@ -26,7 +28,7 @@ export const PROTECTED_CASE_STUDY_SLUGS = new Set([
 ]);
 
 export function isProtectedCaseStudy(slug: string): boolean {
-  return PROTECTED_CASE_STUDY_SLUGS.has(slug);
+  return CASE_STUDY_PASSWORD_LOCK_ENABLED && PROTECTED_CASE_STUDY_SLUGS.has(slug);
 }
 
 export function buildPasswordRequestMessage(caseStudyTitle: string): string {
@@ -76,5 +78,6 @@ export function canRevealProtectedContent(): boolean {
  * the static output.
  */
 export function shouldRenderProtectedBody(slug: string): boolean {
+  if (!CASE_STUDY_PASSWORD_LOCK_ENABLED) return true;
   return !isProtectedCaseStudy(slug) || canRevealProtectedContent();
 }

@@ -32,6 +32,28 @@
       </svg>
     </span>
   </a>
+  <a class="case-study-link-list__item" href="https://ftdesignsystem.netlify.app/docs/ai-prompts" target="_blank" rel="noopener noreferrer">
+    <span class="case-study-link-list__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 3v3"></path>
+        <path d="M12 18v3"></path>
+        <path d="M3 12h3"></path>
+        <path d="M18 12h3"></path>
+        <path d="m5.6 5.6 2.1 2.1"></path>
+        <path d="m16.3 16.3 2.1 2.1"></path>
+        <path d="m18.4 5.6-2.1 2.1"></path>
+        <path d="m7.7 16.3-2.1 2.1"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </span>
+    <span>AI Prompts</span>
+    <span class="case-study-link-list__arrow" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 17L17 7"></path>
+        <path d="M9 7h8v8"></path>
+      </svg>
+    </span>
+  </a>
   <a class="case-study-link-list__item" href="https://github.com/chetanft/components" target="_blank" rel="noopener noreferrer">
     <span class="case-study-link-list__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="currentColor">
@@ -139,7 +161,31 @@ Instead of documenting only for humans, I treated AI agents as first-class consu
 
 This ensured that AI tools received structured component information instead of scraping a human-first documentation experience.
 
-## 9. Phase 3 — Scale and Quality Infrastructure
+## 9. AI-Native Design System Infrastructure
+
+The design system became more than a component library. It became infrastructure for AI-assisted product building.
+
+The original problem was that PMs were starting to create proofs of concept with tools like Lovable, but the generated UIs rarely matched production standards. The gap was not creativity; it was system alignment. AI could generate screens quickly, but without the right constraints it introduced visual drift, inconsistent components, and implementation patterns that did not belong in the product.
+
+To solve this, I built:
+
+- a shared design system for designers and engineers
+- an npm package for reusable production components
+- a developer-facing documentation site
+- AI-ready prompts that help PMs generate production-aligned prototypes
+- machine-readable documentation so AI tools could consume the system directly
+
+Documentation: [https://ftdesignsystem.netlify.app/](https://ftdesignsystem.netlify.app/)
+
+AI prompts: [https://ftdesignsystem.netlify.app/docs/ai-prompts](https://ftdesignsystem.netlify.app/docs/ai-prompts)
+
+npm: [https://www.npmjs.com/package/ft-design-system](https://www.npmjs.com/package/ft-design-system)
+
+The outcome was not just faster design work. It changed who could build.
+
+PMs could create high-fidelity prototypes independently. Developers had a single source of truth. Designers had a stronger system to govern quality. And AI-generated experiences stayed closer to production because the system gave AI tools the right constraints.
+
+## 10. Phase 3 — Scale and Quality Infrastructure
 
 As the system scaled into the v4 era, the library grew from a small base into 100+ components. New additions included complex navigation, overlays, file-handling patterns, advanced form controls, and charts.
 
@@ -164,7 +210,7 @@ That growth forced a quality infrastructure investment.
 
 This is what made solo scaling possible without losing trust in the system.
 
-## 10. Token Architecture
+## 11. Token Architecture
 
 I built a stronger token backbone that became central to the design system:
 
@@ -180,7 +226,7 @@ One of the biggest system refactors was eliminating hardcoded values from the co
 
 This was not cosmetic cleanup. It was what made theming, consistency, and long-term maintainability actually work.
 
-## 11. Phase 4 — v5 and Architectural Evolution
+## 12. Phase 4 — v5 and Architectural Evolution
 
 The v5 phase introduced the biggest structural changes:
 
@@ -197,7 +243,7 @@ By migrating to Radix, the system gained:
 - stronger focus management
 - more durable interaction primitives across components
 
-## 12. Signature Innovation — AI Protection Layer
+## 13. Signature Innovation — AI Protection Layer
 
 The most original contribution in this project was the AI protection system.
 
@@ -223,13 +269,13 @@ Most design systems assume humans are the only consumers. This system recognizes
 
 That is not just a code utility. It is a product-level architectural decision.
 
-## 13. Figma to AI Bridge
+## 14. Figma to AI Bridge
 
 To close the designer-to-AI loop, I connected the design system to AI tools using the Figma MCP server and the Figma API. This let AI assistants read live component metadata, tokens, and variants directly from Figma while generating code — so the output stayed grounded in the actual design source of truth instead of drifting into invented components.
 
 This moved the design system beyond a static library and into a live workflow bridge between design, AI, and engineering.
 
-## 14. Technical Architecture
+## 15. Technical Architecture
 
 At a high level, the system worked like this:
 
@@ -245,7 +291,7 @@ That architecture mattered because it kept the system coherent even as outputs e
 - 6 GitHub Actions workflows
 - automated token audits and release pipelines
 
-## 15. Challenges and How I Solved Them
+## 16. Challenges and How I Solved Them
 
 ### Figma-to-code fidelity
 
@@ -267,7 +313,7 @@ I solved solo scale with automation, sync pipelines, validation gates, and relea
 
 I solved the hardcoded-value problem with a systematic refactor and CI checks that prevented regression.
 
-## 16. Outcomes
+## 17. Outcomes
 
 The system delivered:
 
@@ -276,15 +322,18 @@ The system delivered:
 - stronger design-to-code alignment
 - AI-aware documentation and consumption patterns
 - a more scalable theming and accessibility foundation
+- a workflow where PMs, designers, developers, and AI tools could operate from the same source of truth
+- production-aligned AI prototyping instead of unconstrained screen generation
 
-## 17. What I Learned
+## 18. What I Learned
 
 - accessibility primitives should be part of the foundation, not an afterthought
 - token systems should come before component sprawl
 - machine-readable documentation should be designed early
 - AI is a powerful multiplier, but architecture still requires human judgment
+- AI's highest leverage is not generating screens; it is building systems that let entire teams operate with higher quality, autonomy, and judgment
 
-## 18. What I Would Improve Next
+## 19. What I Would Improve Next
 
 If I were rebuilding this from scratch, I would:
 
@@ -292,7 +341,7 @@ If I were rebuilding this from scratch, I would:
 - define the complete token model earlier
 - build machine-mode documentation into the initial architecture instead of adding it later
 
-## 19. Closing
+## 20. Closing
 
 > A design system is not just a component library. It is an operating system for product consistency.
 

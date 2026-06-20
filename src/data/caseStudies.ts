@@ -14,9 +14,9 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "designqa",
     title: "Design QA",
-    tagline: "Automating the pixel-level checks I didn't have time to do manually",
-    role: "Designer & Builder",
-    company: "Independent",
+    tagline: "An LLM-free quality gate for design-to-code drift",
+    role: "Designer, Builder & Workflow Architect",
+    company: "Freight Tiger / Independent Build",
     timeline: "2025 - 2026",
     backHref: "/#ai",
     contentFile: "case-study-designqa.md",
@@ -88,7 +88,7 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "ft-design-system",
     title: "FT Design System",
-    tagline: "Building a 125+ component design system with AI as a force multiplier",
+    tagline: "Design infrastructure for humans, engineers, and AI agents",
     role: "Design System Architect & Sole Developer",
     company: "Freight Tiger",
     timeline: "2025 - 2026",
