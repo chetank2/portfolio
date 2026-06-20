@@ -1743,6 +1743,10 @@ html.dark {
   width: 1.5rem;
 }
 
+.case-study-back-inline {
+  margin-bottom: 1.25rem;
+}
+
 .case-study-sticky-back {
   position: fixed;
   top: 0;
