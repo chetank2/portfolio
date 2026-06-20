@@ -14,6 +14,8 @@ DesignQA is a tool that extracts design specs from Figma files, extracts impleme
 
 GitHub: [https://github.com/chetank2/designqa](https://github.com/chetank2/designqa)
 
+Mac app: [Apple Silicon DMG](https://github.com/chetank2/designqa/releases/download/v2.0.4/DesignQA-2.0.4-arm64.dmg) / [Intel DMG](https://github.com/chetank2/designqa/releases/download/v2.0.4/DesignQA-2.0.4.dmg)
+
 It compares:
 
 - color token mismatches
