@@ -1554,7 +1554,7 @@ html.dark {
     .case-study-content blockquote {
       margin-top: 32px;
       margin-bottom: 32px;
-      padding: 24px 28px;
+      padding: 16px 28px;
       font-size: 1.0625rem;
     }
     .longform-content p:has(> img:only-child),
