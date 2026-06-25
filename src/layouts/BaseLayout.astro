@@ -161,5 +161,72 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
         updateStickyBackLinks();
       })();
     </script>
+    <script is:inline>
+      (() => {
+        let lightbox;
+        let lightboxImage;
+        let previousBodyOverflow = "";
+
+        const closeLightbox = () => {
+          if (!lightbox || !lightboxImage) return;
+          lightbox.dataset.open = "false";
+          lightboxImage.removeAttribute("src");
+          lightboxImage.removeAttribute("alt");
+          document.body.style.overflow = previousBodyOverflow;
+        };
+
+        const ensureLightbox = () => {
+          if (lightbox && lightboxImage) return;
+
+          lightbox = document.createElement("div");
+          lightbox.className = "case-study-image-lightbox";
+          lightbox.dataset.open = "false";
+          lightbox.setAttribute("role", "dialog");
+          lightbox.setAttribute("aria-modal", "true");
+          lightbox.setAttribute("aria-label", "Expanded case study image");
+
+          lightboxImage = document.createElement("img");
+          lightboxImage.className = "case-study-image-lightbox__image";
+
+          const closeButton = document.createElement("button");
+          closeButton.type = "button";
+          closeButton.className = "case-study-image-lightbox__close";
+          closeButton.setAttribute("aria-label", "Close expanded image");
+          closeButton.innerHTML = `
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+          `;
+
+          lightbox.append(lightboxImage, closeButton);
+          document.body.appendChild(lightbox);
+
+          lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox || event.target === lightboxImage || event.target === closeButton) {
+              closeLightbox();
+            }
+          });
+        };
+
+        document.addEventListener("click", (event) => {
+          const image = event.target instanceof Element
+            ? event.target.closest(".case-study-content img, .longform-content img")
+            : null;
+          if (!(image instanceof HTMLImageElement) || !image.currentSrc) return;
+
+          ensureLightbox();
+          previousBodyOverflow = document.body.style.overflow;
+          lightboxImage.src = image.currentSrc;
+          lightboxImage.alt = image.alt || "Expanded case study image";
+          lightbox.dataset.open = "true";
+          document.body.style.overflow = "hidden";
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeLightbox();
+        });
+      })();
+    </script>
   </body>
 </html>

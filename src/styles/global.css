@@ -1496,6 +1496,53 @@ html.dark {
     margin: 0;
     border: 1px solid var(--color-border);
     border-radius: 4px;
+    cursor: zoom-in;
+  }
+
+  .case-study-image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: color-mix(in srgb, var(--color-bg-deep) 88%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .case-study-image-lightbox[data-open="true"] {
+    display: flex;
+  }
+
+  .case-study-image-lightbox__image {
+    max-width: min(100%, 1400px);
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-bg-surface);
+    cursor: zoom-out;
+  }
+
+  .case-study-image-lightbox__close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s ease;
+  }
+
+  .case-study-image-lightbox__close:hover {
+    color: var(--color-text-primary);
   }
 
   .longform-content :is(h2, h3, h4) + p:has(> img:only-child),
