@@ -202,8 +202,15 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
           lightbox.append(lightboxImage, closeButton);
           document.body.appendChild(lightbox);
 
+          closeButton.addEventListener("click", closeLightbox);
+
           lightbox.addEventListener("click", (event) => {
-            if (event.target === lightbox || event.target === lightboxImage || event.target === closeButton) {
+            const target = event.target;
+            if (
+              target === lightbox ||
+              target === lightboxImage ||
+              (target instanceof Node && closeButton.contains(target))
+            ) {
               closeLightbox();
             }
           });
