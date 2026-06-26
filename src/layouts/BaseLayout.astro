@@ -1,22 +1,96 @@
 ---
 import "../styles/global.css";
+import { portfolioMachineLinks } from "../data/projects";
 
 interface Props {
   title?: string;
   description?: string;
   machineMode?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
+
+const defaultDescription =
+  "Senior Product Designer at Generalmind, specializing in AI-native enterprise workflows, complex B2B systems, design systems, and building products with AI.";
 
 const {
   title = "Chetan Kummari — Product Designer",
-  description = "Senior Product Designer at Generalmind, specializing in AI-native enterprise workflows, complex B2B systems, design systems, and building products with AI.",
+  description = defaultDescription,
   machineMode = false,
+  structuredData = [],
 } = Astro.props;
 
 // Compute machine-readable alternate URL for case study pages
 const pathname = Astro.url.pathname.replace(/\/$/, "");
 const isCaseStudy = pathname.startsWith("/work/") && pathname !== "/work";
-const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
+const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
+const canonicalPath = pathname === "" ? "/" : pathname;
+const canonicalHref = `${siteHref}${canonicalPath === "/" ? "" : canonicalPath}`;
+const machineAlternateHref = isCaseStudy ? `${siteHref}/machine${pathname}` : null;
+const llmsHref = `${siteHref}/llms.txt`;
+const baseStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteHref}/#person`,
+    name: "Chetan Kummari",
+    url: siteHref,
+    jobTitle: "Senior Product Designer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Generalmind",
+    },
+    knowsAbout: [
+      "AI-native design workflows",
+      "Product design",
+      "Design systems",
+      "Enterprise UX",
+      "B2B SaaS",
+      "Logistics operations",
+      "Design QA",
+      "Generative Engine Optimization",
+    ],
+    sameAs: [
+      portfolioMachineLinks.linkedInHref,
+      portfolioMachineLinks.xHref,
+      "https://github.com/chetank2",
+    ],
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteHref}/#website`,
+    name: "Chetan Kummari Portfolio",
+    url: siteHref,
+    inLanguage: "en",
+    author: {
+      "@id": `${siteHref}/#person`,
+    },
+    description: defaultDescription,
+  },
+];
+const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
+const inferredPageStructuredData =
+  pageStructuredData.length > 0
+    ? pageStructuredData
+    : isCaseStudy
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            "@id": `${canonicalHref}#case-study`,
+            name: title.replace(" — Chetan Kummari", ""),
+            description,
+            url: canonicalHref,
+            isPartOf: {
+              "@id": `${siteHref}/#website`,
+            },
+            author: {
+              "@id": `${siteHref}/#person`,
+            },
+          },
+        ]
+      : [];
+const structuredDataJson = JSON.stringify([...baseStructuredData, ...inferredPageStructuredData]);
 ---
 
 <!doctype html>
@@ -25,12 +99,18 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="Chetan Kummari" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="generator" content="Astro" />
+    <link rel="canonical" href={canonicalHref} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={canonicalHref} />
+    <meta property="og:site_name" content="Chetan Kummari Portfolio" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -50,9 +130,10 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
     )}
 
     <!-- llms.txt — AI/LLM agent discovery (https://llmstxt.org) -->
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt — AI agent briefing" />
+    <link rel="alternate" type="text/plain" href={llmsHref} title="llms.txt — AI agent briefing" />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={structuredDataJson} />
     <script is:inline>
       (() => {
         const storageKey = "portfolio-theme";

@@ -97,9 +97,38 @@ if (revealBody) {
   }
   machinePageText = lines.join("\n");
 }
+
+const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
+const caseStudyDescription = projectMeta?.description ?? caseStudy.tagline;
+const caseStudyStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "@id": `${siteHref}/work/${caseStudy.slug}#case-study`,
+  name: caseStudy.title,
+  headline: caseStudy.tagline,
+  description: caseStudyDescription,
+  url: `${siteHref}/work/${caseStudy.slug}`,
+  isPartOf: {
+    "@id": `${siteHref}/#website`,
+  },
+  author: {
+    "@id": `${siteHref}/#person`,
+  },
+  creator: {
+    "@id": `${siteHref}/#person`,
+  },
+  workExample: projectMeta?.liveUrl,
+  sameAs: [projectMeta?.liveUrl, projectMeta?.repoUrl, projectMeta?.npmUrl].filter(Boolean),
+  keywords: projectMeta?.tags ?? [],
+  about: [caseStudy.company, caseStudy.role, ...(projectMeta?.tags ?? [])].filter(Boolean),
+};
 ---
 
-<BaseLayout title={`${caseStudy.title} — Chetan Kummari`}>
+<BaseLayout
+  title={`${caseStudy.title} — Chetan Kummari`}
+  description={caseStudyDescription}
+  structuredData={caseStudyStructuredData}
+>
   <div data-view-panel="human">
     <Navigation minimal />
   </div>

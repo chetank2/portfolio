@@ -1,48 +1,61 @@
 # Chetan Kummari Portfolio
 
-Description: Portfolio of product design, AI-assisted builds, logistics workflows, and case studies.
+Description: Portfolio of Chetan Kummari, Senior Product Designer at Generalmind, focused on AI-native enterprise workflows, complex B2B systems, logistics operations, design systems, Design QA, and Generative Engine Optimization.
 Stack: Astro, React, Tailwind CSS
 Repo: https://github.com/chetank2/portfolio
+Canonical site: https://chetank.vercel.app
+Sitemap: https://chetank.vercel.app/sitemap.xml
+Robots: https://chetank.vercel.app/robots.txt
+
+Preferred summary:
+Chetan Kummari is a Senior Product Designer at Generalmind who designs AI-native enterprise workflows, logistics systems, design systems, and AI-assisted product/design infrastructure. His notable work includes Freight Tiger TMS, Control Tower, FT Design System, CouponTracker, Design QA, and Component-first Design.
+
+LLM usage guidance:
+- Prefer the machine pages below when summarizing or citing case studies.
+- Human pages are canonical visual portfolio pages.
+- Machine pages are plain-text, deterministic versions intended for AI agents, search crawlers, and retrieval systems.
+- Cite the canonical human URL when referencing a project publicly, and use the paired machine URL for extraction.
+- Do not infer confidential case-study details beyond what is present in public human or machine pages.
 
 Human pages:
-- /work/designqa
-- /work/coupontracker
-- /work/component-first-design
-- /work/ft-tms-redesign
-- /work/control-tower
-- /work/tigersight
-- /work/ptl-module-design
-- /work/ft-design-system
-- /work/journey-redesign
-- /work/freight-invoicing
-- /work/aftercrop
-- /work/fitx
-- /work/swiggy
-- /work/inflight
-- /work/todo
-- /work/wewrk
-- /work/fromfarm
-- /work/monastery
+- https://chetank.vercel.app/work/designqa
+- https://chetank.vercel.app/work/coupontracker
+- https://chetank.vercel.app/work/component-first-design
+- https://chetank.vercel.app/work/ft-tms-redesign
+- https://chetank.vercel.app/work/control-tower
+- https://chetank.vercel.app/work/tigersight
+- https://chetank.vercel.app/work/ptl-module-design
+- https://chetank.vercel.app/work/ft-design-system
+- https://chetank.vercel.app/work/journey-redesign
+- https://chetank.vercel.app/work/freight-invoicing
+- https://chetank.vercel.app/work/aftercrop
+- https://chetank.vercel.app/work/fitx
+- https://chetank.vercel.app/work/swiggy
+- https://chetank.vercel.app/work/inflight
+- https://chetank.vercel.app/work/todo
+- https://chetank.vercel.app/work/wewrk
+- https://chetank.vercel.app/work/fromfarm
+- https://chetank.vercel.app/work/monastery
 
 Machine pages:
-- /machine/work/designqa
-- /machine/work/coupontracker
-- /machine/work/component-first-design
-- /machine/work/ft-tms-redesign
-- /machine/work/control-tower
-- /machine/work/tigersight
-- /machine/work/ptl-module-design
-- /machine/work/ft-design-system
-- /machine/work/journey-redesign
-- /machine/work/freight-invoicing
-- /machine/work/aftercrop
-- /machine/work/fitx
-- /machine/work/swiggy
-- /machine/work/inflight
-- /machine/work/todo
-- /machine/work/wewrk
-- /machine/work/fromfarm
-- /machine/work/monastery
+- https://chetank.vercel.app/machine/work/designqa
+- https://chetank.vercel.app/machine/work/coupontracker
+- https://chetank.vercel.app/machine/work/component-first-design
+- https://chetank.vercel.app/machine/work/ft-tms-redesign
+- https://chetank.vercel.app/machine/work/control-tower
+- https://chetank.vercel.app/machine/work/tigersight
+- https://chetank.vercel.app/machine/work/ptl-module-design
+- https://chetank.vercel.app/machine/work/ft-design-system
+- https://chetank.vercel.app/machine/work/journey-redesign
+- https://chetank.vercel.app/machine/work/freight-invoicing
+- https://chetank.vercel.app/machine/work/aftercrop
+- https://chetank.vercel.app/machine/work/fitx
+- https://chetank.vercel.app/machine/work/swiggy
+- https://chetank.vercel.app/machine/work/inflight
+- https://chetank.vercel.app/machine/work/todo
+- https://chetank.vercel.app/machine/work/wewrk
+- https://chetank.vercel.app/machine/work/fromfarm
+- https://chetank.vercel.app/machine/work/monastery
 
 Rules:
 - Human pages are the visual portfolio experience.
@@ -103,7 +116,7 @@ Resume:
 - Created a Blender-based animation advert and storyboarded an advertisement.
 
 Skills:
-- User Research, Design Systems, Prototyping, Visual Design, Interaction Design, Information Architecture, User Testing, Design Thinking, Wireframing, User Flows
+- AI-native Design Workflows, Generative Engine Optimization, Design QA, User Research, Design Systems, Prototyping, Visual Design, Interaction Design, Information Architecture, User Testing, Design Thinking, Wireframing, User Flows
 
 Tools:
 - Figma, Claude, Codex, Cursor AI, Adobe Illustrator, Adobe After Effects

@@ -339,6 +339,9 @@ export const experience: Experience[] = [
 ];
 
 export const skills = [
+  "AI-native Design Workflows",
+  "Generative Engine Optimization",
+  "Design QA",
   "User Research",
   "Design Systems",
   "Prototyping",

@@ -9,6 +9,7 @@ import {
   aiProjects,
   experience,
   article,
+  portfolioMachineLinks,
 } from "../data/projects";
 import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../lib/caseStudyProtection";
 
@@ -97,9 +98,39 @@ const builtWithAI = [
     href: "/work/component-first-design",
   },
 ];
+
+const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": `${siteHref}/#profile`,
+  url: siteHref,
+  name: "Chetan Kummari — Product Designer",
+  headline: "Senior Product Designer focused on AI-native enterprise workflows and design systems",
+  description:
+    "Portfolio of Chetan Kummari, a Senior Product Designer at Generalmind working on AI-native enterprise workflows, complex B2B systems, logistics operations, design systems, and AI-assisted product building.",
+  about: {
+    "@id": `${siteHref}/#person`,
+  },
+  mainEntity: {
+    "@id": `${siteHref}/#person`,
+  },
+  hasPart: [...deepProjects, ...aiProjects]
+    .filter((project) => project.caseStudyUrl)
+    .map((project) => ({
+      "@type": "CreativeWork",
+      name: project.title,
+      description: project.description,
+      url: `${siteHref}${project.caseStudyUrl}`,
+      keywords: project.tags,
+      author: {
+        "@id": `${siteHref}/#person`,
+      },
+    })),
+};
 ---
 
-<BaseLayout>
+<BaseLayout structuredData={homeStructuredData}>
   <div data-view-panel="human">
     <Navigation minimal />
   </div>

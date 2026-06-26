@@ -8,6 +8,7 @@ import {
 import { experience, skills, tools, portfolioMachineLinks } from "../src/data/projects.ts";
 
 const outputPath = new URL("../public/llms.txt", import.meta.url);
+const siteHref = portfolioMachineLinks.siteHref.replace(/\/$/, "");
 
 const contactLines = [
   `- Resume: ${portfolioMachineLinks.resumeHref}`,
@@ -26,7 +27,7 @@ async function main() {
     }))
   );
 
-  const baseDocument = serializeMachineCaseStudyCollection(caseStudiesWithContent).trimEnd();
+  const baseDocument = serializeMachineCaseStudyCollection(caseStudiesWithContent, { siteHref }).trimEnd();
   const resumeLines = experience.flatMap((exp) => [
     `### ${exp.role} — ${exp.company}`,
     `- Location: ${exp.location}`,
