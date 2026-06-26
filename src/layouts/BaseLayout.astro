@@ -246,7 +246,7 @@ const structuredDataJson = JSON.stringify([...baseStructuredData, ...inferredPag
       (() => {
         const sections = Array.from(
           document.querySelectorAll(
-            ".section-reveal, .case-study-content > :is(h2, h3, h4, p:has(> img:only-child), ul, ol, blockquote, .case-study-link-list, hr)",
+            ".section-reveal, .case-study-content > h2, .case-study-content > h3, .case-study-content > h4, .case-study-content > p, .case-study-content > ul, .case-study-content > ol, .case-study-content > blockquote, .case-study-content > .case-study-link-list, .case-study-content > hr",
           ),
         );
         if (!sections.length) return;
