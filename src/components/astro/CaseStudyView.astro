@@ -40,7 +40,7 @@ const renderInlineMarkdown = (value: string) => {
 };
 ---
 
-  <header class="mt-8 sm:mt-12 mb-12 sm:mb-16">
+  <header class="section-reveal mt-8 sm:mt-12 mb-12 sm:mb-16">
     <h1 class="min-title mb-3">
       {study.title}
     </h1>
@@ -55,7 +55,7 @@ const renderInlineMarkdown = (value: string) => {
   </header>
 
 {study.media ? (
-    <figure class="overflow-hidden rounded-lg border border-border">
+    <figure class="section-reveal overflow-hidden rounded-lg border border-border">
       <img
         src={study.media.src}
         alt={study.media.alt}
@@ -66,7 +66,7 @@ const renderInlineMarkdown = (value: string) => {
 ) : null}
 
 {study.sections.map((section, sectionIndex) => (
-    <section class:list={["mt-16 sm:mt-20", sectionIndex === study.sections.length - 1 && "mb-16"]}>
+    <section class:list={["section-reveal mt-16 sm:mt-20", sectionIndex === study.sections.length - 1 && "mb-16"]}>
       <h3 class="case-study-section-title mb-6">{section.title}</h3>
 
       {section.blocks.map((block) => (

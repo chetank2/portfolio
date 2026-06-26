@@ -163,6 +163,44 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
     </script>
     <script is:inline>
       (() => {
+        const sections = Array.from(document.querySelectorAll(".section-reveal"));
+        if (!sections.length) return;
+
+        const reveal = (section) => {
+          if (!(section instanceof HTMLElement)) return;
+          section.dataset.sectionRevealed = "true";
+        };
+
+        sections.forEach((section) => {
+          if (section instanceof HTMLElement) {
+            section.dataset.sectionRevealReady = "true";
+          }
+        });
+
+        if (!("IntersectionObserver" in window)) {
+          sections.forEach(reveal);
+          return;
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              reveal(entry.target);
+              observer.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.16,
+            rootMargin: "0px 0px -10% 0px",
+          },
+        );
+
+        sections.forEach((section) => observer.observe(section));
+      })();
+    </script>
+    <script is:inline>
+      (() => {
         let lightbox;
         let lightboxImage;
         let previousBodyOverflow = "";

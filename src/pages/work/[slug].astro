@@ -154,7 +154,7 @@ if (revealBody) {
           >
             {revealBody && (
               <>
-                <header class="mt-5 sm:mt-7 mb-12 sm:mb-16">
+                <header class="section-reveal mt-5 sm:mt-7 mb-12 sm:mb-16">
                   <h1 class="min-title mb-3">
                     {caseStudy.title}
                   </h1>
@@ -168,14 +168,14 @@ if (revealBody) {
                   </div>
                 </header>
 
-                <article class="longform-content case-study-content mb-20">
+                <article class="section-reveal longform-content case-study-content mb-20">
                   <Content />
                 </article>
 
                 <CaseStudyRelatedLinks links={relatedLinks} />
 
                 {(prevStudy || nextStudy) && (
-                  <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
+                  <nav class="section-reveal flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
                     {prevStudy ? (
                       <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
                         <span class="min-small group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
@@ -195,7 +195,7 @@ if (revealBody) {
           </ProtectedCaseStudy>
         ) : (
           <>
-            <header class="mt-5 sm:mt-7 mb-12 sm:mb-16">
+            <header class="section-reveal mt-5 sm:mt-7 mb-12 sm:mb-16">
                 <h1 class="min-title mb-3">
                   {caseStudy.title}
                 </h1>
@@ -209,14 +209,14 @@ if (revealBody) {
                 </div>
               </header>
 
-            <article class="longform-content case-study-content mb-20">
+            <article class="section-reveal longform-content case-study-content mb-20">
                 <Content />
               </article>
 
             <CaseStudyRelatedLinks links={relatedLinks} />
 
             {(prevStudy || nextStudy) && (
-              <nav class="flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
+              <nav class="section-reveal flex items-stretch justify-between gap-4 border-t border-border pt-8 mb-16">
                 {prevStudy ? (
                   <a href={`/work/${prevStudy.slug}`} class="group flex flex-col items-start gap-1 max-w-[45%]">
                     <span class="min-small group-hover:text-text-primary transition-colors duration-200">&larr; Previous</span>
