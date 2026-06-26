@@ -163,7 +163,11 @@ const machineAlternateHref = isCaseStudy ? `/machine${pathname}` : null;
     </script>
     <script is:inline>
       (() => {
-        const sections = Array.from(document.querySelectorAll(".section-reveal"));
+        const sections = Array.from(
+          document.querySelectorAll(
+            ".section-reveal, .case-study-content > :is(h2, h3, h4, p:has(> img:only-child), ul, ol, blockquote, .case-study-link-list, hr)",
+          ),
+        );
         if (!sections.length) return;
 
         const reveal = (section) => {

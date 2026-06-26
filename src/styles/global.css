@@ -1837,7 +1837,7 @@ html.dark {
   padding: 5rem 1.5rem 6rem;
 }
 
-.section-reveal[data-section-reveal-ready="true"] {
+[data-section-reveal-ready="true"] {
   opacity: 0.92;
   transform: translateY(10px);
   transition:
@@ -1846,7 +1846,7 @@ html.dark {
   will-change: opacity, transform;
 }
 
-.section-reveal[data-section-revealed="true"] {
+[data-section-revealed="true"] {
   opacity: 1;
   transform: translateY(0);
 }
@@ -1948,7 +1948,7 @@ html.dark {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .section-reveal[data-section-reveal-ready="true"] {
+  [data-section-reveal-ready="true"] {
     opacity: 1;
     transform: none;
     transition: none;
