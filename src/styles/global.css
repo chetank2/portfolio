@@ -1846,7 +1846,9 @@ html.dark {
   padding: 5rem 1.5rem 6rem;
 }
 
-.minimal-reveal {
+.minimal-reveal,
+.case-study-reveal,
+.case-study-content > * {
   opacity: 0;
   transform: translateY(10px);
   filter: blur(8px);
@@ -1858,7 +1860,9 @@ html.dark {
   will-change: opacity, transform, filter;
 }
 
-.minimal-reveal[data-revealed="true"] {
+.minimal-reveal[data-revealed="true"],
+.case-study-reveal[data-revealed="true"],
+.case-study-content > [data-revealed="true"] {
   opacity: 1;
   transform: translateY(0);
   filter: blur(0);
@@ -1961,7 +1965,9 @@ html.dark {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .minimal-reveal {
+  .minimal-reveal,
+  .case-study-reveal,
+  .case-study-content > * {
     animation: none;
     opacity: 1;
     transform: none;
