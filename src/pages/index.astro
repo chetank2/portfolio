@@ -117,27 +117,28 @@ const builtWithAI = [
     <div data-view-panel="human">
       <div class="minimal-page">
         <!-- Greeting -->
-        <p class="intro-line">
+        <p class="intro-line minimal-reveal" style="--reveal-delay: 40ms;">
           Hey, I'm Chetan.
         </p>
 
-        <hr class="editorial-rule" />
+        <hr class="editorial-rule minimal-reveal" style="--reveal-delay: 120ms;" />
 
         <!-- Bio with drop cap -->
-        <p class="drop-cap">
+        <p class="drop-cap minimal-reveal" style="--reveal-delay: 190ms;">
           I'm a product designer with six years of experience building across industries. I love to build things and learn from the making of them, and lately I've been exploring what AI means for the craft of design. Currently I design at Generalmind, where I build AI-assisted enterprise workflows and operational systems for autonomous task execution. Before that I designed logistics systems at Freight Tiger, and earlier worked with Konic Technologies, Versatile Mobitech, and others.
         </p>
 
-        <p>
+        <p class="minimal-reveal" style="--reveal-delay: 270ms;">
           I help teams build systems that scale, bring clarity to complex operations, and make enterprise software feel human. My work lives in AI-native enterprise workflows, B2B platforms, design systems, and operational tools, places where the challenge is less about visual polish and more about clarity under complexity. Those experiences shaped me to be more <em>systematic</em>, <em>collaborative</em>, and <em>empathetic</em>. Here are some projects that reflect that journey:
         </p>
 
         <!-- Design work -->
         <div class="section-gap">
-          {designWork.map((link) => (
+          {designWork.map((link, i) => (
             <a
               href={link.href}
-              class="project-link"
+              class="project-link minimal-reveal"
+              style={`--reveal-delay: ${360 + i * 70}ms;`}
             >
               <span class="project-name">{link.name}.</span> {link.tagline}{CASE_STUDY_PASSWORD_LOCK_ENABLED && link.protected ? "\u00a0↗" : ""}
             </a>
@@ -145,16 +146,17 @@ const builtWithAI = [
         </div>
 
         <!-- Built with AI -->
-        <div style="margin-top: 3rem;">
+        <div class="minimal-reveal" style="margin-top: 3rem; --reveal-delay: 690ms;">
           <p class="min-small" style="font-style: italic; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 1rem;">Built with AI</p>
           <p style="margin-bottom: 1.5rem;">
             The strongest AI work here is not screen generation. It is design workflow infrastructure: tools that automate QA, protect design-system fidelity, and help teams move from manual execution to higher-quality orchestration.
           </p>
 
-          {builtWithAI.map((link) => (
+          {builtWithAI.map((link, i) => (
             <a
               href={link.href}
-              class="project-link"
+              class="project-link minimal-reveal"
+              style={`--reveal-delay: ${780 + i * 70}ms;`}
             >
               <span class="project-name">{link.name}.</span> {link.tagline}
             </a>
@@ -162,7 +164,7 @@ const builtWithAI = [
         </div>
 
         <!-- More work -->
-        <div style="margin-top: 1.5rem;">
+        <div class="minimal-reveal" style="margin-top: 1.5rem; --reveal-delay: 1010ms;">
           <a
             href="/work"
             class="project-link"
@@ -173,7 +175,7 @@ const builtWithAI = [
         </div>
 
         <!-- Closing -->
-        <div class="closing-section">
+        <div class="closing-section minimal-reveal" style="--reveal-delay: 1090ms;">
           <p>
             Good design begins with curiosity. Outside of work, I write about <a href={article.url} target="_blank" rel="noopener noreferrer">complex table design</a>, build side projects on <a href="https://github.com/chetank2" target="_blank" rel="noopener noreferrer">GitHub</a>, and share my work on <a href="https://x.com/kchetank19" target="_blank" rel="noopener noreferrer">X</a> and <a href="https://linkedin.com/in/chetan-kumar25/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
           </p>
