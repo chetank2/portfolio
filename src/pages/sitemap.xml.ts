@@ -9,7 +9,7 @@ export const prerender = true;
 
 const SITE_URL = "https://chetank.vercel.app";
 
-const staticRoutes = ["/", "/work", "/llms.txt"];
+const staticRoutes = ["/", "/work", "/llms.txt", "/design.md"];
 
 function isPublicCaseStudy(slug: string, protectedFlag?: boolean): boolean {
   if (!CASE_STUDY_PASSWORD_LOCK_ENABLED) return true;
