@@ -1481,13 +1481,46 @@ html.dark {
   }
 
   .longform-content img,
-  .case-study-content img {
+  .case-study-content img,
+  .case-study-media img {
     width: 100%;
     height: auto;
     margin: 0;
     border: 1px solid var(--color-border);
     border-radius: 4px;
     cursor: zoom-in;
+  }
+
+  .case-study-gallery {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    margin-top: 0;
+  }
+
+  .case-study-gallery-item {
+    grid-column: 1 / -1;
+  }
+
+  .case-study-media {
+    margin: 0 0 24px 0;
+  }
+
+  .case-study-image-caption {
+    margin-top: 0.85rem;
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  .case-study-image-caption strong {
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+
+  .case-study-image-caption span {
+    display: block;
   }
 
   .case-study-image-lightbox {

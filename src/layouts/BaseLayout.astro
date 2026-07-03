@@ -341,7 +341,7 @@ const structuredDataJson = JSON.stringify([...baseStructuredData, ...inferredPag
 
         document.addEventListener("click", (event) => {
           const image = event.target instanceof Element
-            ? event.target.closest(".case-study-content img, .longform-content img")
+            ? event.target.closest(".case-study-content img, .longform-content img, .case-study-media img")
             : null;
           if (!(image instanceof HTMLImageElement) || !image.currentSrc) return;
 

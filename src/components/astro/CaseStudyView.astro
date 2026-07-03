@@ -1,5 +1,4 @@
 ---
-import ImageLightbox from "../../components/react/ImageLightbox.tsx";
 import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
 import { appProjects, getProjectLinksBySlug } from "../../data/projects";
 import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
@@ -55,7 +54,7 @@ const renderInlineMarkdown = (value: string) => {
   </header>
 
 {study.media ? (
-    <figure class="section-reveal overflow-hidden rounded-lg border border-border">
+    <figure class="case-study-media section-reveal">
       <img
         src={study.media.src}
         alt={study.media.alt}
@@ -190,58 +189,33 @@ const renderInlineMarkdown = (value: string) => {
           ) : null}
 
           {block.type === "figure" ? (
-            <ImageLightbox
-              client:visible
-              image={block.image.src}
-              title={block.image.title ?? block.image.alt}
-              description={block.image.description ?? ""}
-            >
-              <figure class:list={["mt-8", block.image.figureClass]}>
-                <img
-                  src={block.image.src}
-                  alt={block.image.alt}
-                  loading="lazy"
-                  class:list={["block max-w-full h-auto", block.image.imageClass]}
-                />
-                {block.image.title || block.image.description ? (
-                  <figcaption class="px-5 py-4 sm:px-6 sm:py-5 bg-bg-elevated/40 border-t border-border">
-                    {block.image.title ? (
-                      <div class="flex items-center justify-between gap-4 mb-2">
-                        <h4 class="case-study-subsection-title">{block.image.title}</h4>
-                        <span class="min-small">Tap to expand</span>
-                      </div>
-                    ) : null}
-                    {block.image.description ? (
-                      <p class="type-body-sm text-text-secondary">{block.image.description}</p>
-                    ) : null}
-                  </figcaption>
-                ) : null}
-              </figure>
-            </ImageLightbox>
+            <figure class:list={["case-study-media mt-8", block.image.figureClass]}>
+              <img
+                src={block.image.src}
+                alt={block.image.alt}
+                loading="lazy"
+                class:list={["block max-w-full h-auto", block.image.imageClass]}
+              />
+            </figure>
           ) : null}
 
           {block.type === "gallery" ? (
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+            <div class="case-study-gallery">
               {block.images.map((image) => (
-                <ImageLightbox client:visible image={image.src} title={image.title} description={image.description}>
-                  <figure class:list={["group overflow-hidden radius-xl border border-border bg-bg-elevated/60", image.cardClass]}>
-                    <div class="overflow-hidden bg-bg-surface/60">
-                      <img
-                        src={image.src}
-                        alt={image.title}
-                        loading="lazy"
-                        class:list={["w-full object-contain object-top transition-transform duration-500 group-hover:scale-[1.015]", image.imageClass]}
-                      />
-                    </div>
-                    <figcaption class="px-5 py-4 sm:px-6 sm:py-5">
-                      <div class="flex items-center justify-between gap-4 mb-2">
-                        <h4 class="case-study-subsection-title">{image.title}</h4>
-                        <span class="min-small">Tap to expand</span>
-                      </div>
-                      <p class="type-body-sm text-text-secondary">{image.description}</p>
+                <figure class:list={["case-study-media case-study-gallery-item", image.cardClass]}>
+                  <img
+                    src={image.src}
+                    alt={`${image.title}. ${image.description}`}
+                    loading="lazy"
+                    class="case-study-gallery-image"
+                  />
+                  {image.showCaption ? (
+                    <figcaption class="case-study-image-caption">
+                      <strong>{image.title}</strong>
+                      <span>{image.description}</span>
                     </figcaption>
-                  </figure>
-                </ImageLightbox>
+                  ) : null}
+                </figure>
               ))}
             </div>
           ) : null}
