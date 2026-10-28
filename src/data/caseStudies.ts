@@ -55,7 +55,7 @@ export const caseStudies: CaseStudyPage[] = [
   {
     slug: "control-tower",
     title: "Control Tower",
-    tagline: "Designing a Human–AI control tower for logistics operations",
+    tagline: "From Fragmented Alerts to Human–AI Exception Orchestration",
     role: "Senior Product Designer",
     company: "Freight Tiger",
     timeline: "2024 - 2025",

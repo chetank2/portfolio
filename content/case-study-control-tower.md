@@ -1,174 +1,496 @@
-## 1. The Orchestration Gap
+*Designing a unified logistics exception-management experience that helps operators prioritize, investigate, and resolve critical issues with AI assistance.*
 
-Freight Tiger's TMS manages thousands of shipments daily across multiple modules — journey tracking, invoicing, planning, PTL workflows. Each module generates its own exceptions: delayed journeys, route deviations, long stoppages, detained trucks, SLA breaches.
+**Domain:** Logistics · Enterprise SaaS · Human–AI Workflows
 
-We had alerts everywhere. No one knew which one mattered.
+## 1. Overview
 
-An operations team member had to check multiple surfaces, make manual calls, maintain spreadsheets, and hold context in their head. A delayed truck might sit unnoticed for hours because the alert was in one system and the person who could act on it was watching another.
+Freight Tiger's Transportation Management System helps enterprises manage shipments throughout their operational lifecycle, from planning and vehicle movement to delivery and invoicing.
 
-Operations teams spent most of their time discovering problems instead of solving them.
+Every day, these operations generate thousands of exceptions: long stoppages, route deviations, transit delays, detention, and SLA breaches.
 
-## 2. Foundation: What Was Already Shipped
+At peak operational scale, the platform was dealing with more than **60,000 alerts per day**.
 
-Before building Control Tower, we solved the visibility layer first through the Reporting Module.
+But detecting an exception was only part of the problem.
 
-What we built:
+Operations teams still had to determine which issues mattered, contact drivers and transporters, coordinate across systems, and ensure that each issue was resolved.
 
-- self-serve reporting
-- scheduled and on-demand reports
-- standardized templates
-- audit-ready logs
+Many of these tasks were manual, repetitive, and time-sensitive.
 
-Impact:
+**The opportunity was to evolve Control Tower from an alert-monitoring experience into a system that could prioritize exceptions and coordinate resolution between AI agents and human operators.**
 
-- less than 2 minutes report generation
-- 90%+ reduction in turnaround time
-- 138+ hours saved per month
+This case study focuses on the later evolution of Control Tower, including customer-specific triage, the redesigned alert queue, and the human–AI collaboration experience.
 
-You cannot build intelligent systems on unreliable data. The reporting layer gave us a reliable foundation. Once visibility worked, the next question was obvious: how do we move from visibility to action?
+### Foundation: Reporting automation
 
-## 3. Where Control Tower Sits
+Generating and sending reports was a daily responsibility for Freight Tiger's operations teams. Operators spent roughly **one-third of their working day** creating reports and distributing them to customers—time they could otherwise spend investigating and resolving tickets.
 
-Control Tower is not inside the TMS. It sits above it as an orchestration layer.
+We built the Reporting Module to **automate both report generation and delivery**. Scheduled reports reduced the need to prepare and send the same information manually each day, while self-serve and on-demand reporting supported additional requests. Standardized templates and audit-ready logs supported consistent reporting.
 
-It pulls exceptions from all modules — My Journeys, invoicing, planning, PTL — and presents them in two forms:
+The reporting work delivered:
 
-- **Tickets** for managed service teams who resolve issues on behalf of clients
-- **Alerts** for consignors who need visibility into what's happening with their shipments
+- **Report generation in under 2 minutes**
+- **90%+ reduction in reporting turnaround time**
+- **138+ hours saved per month**
 
-Same exceptions, different presentation based on the user's role. This distinction matters: managed service operators need a workflow-driven ticket system. Consignors need awareness and the ability to escalate.
+These were outcomes of the Reporting Module. Automating this daily work freed up more operator time for tickets. The Control Tower redesign then focused on helping operators use that time effectively: identifying the most urgent exceptions, understanding what had already happened, and moving tickets toward resolution with AI assistance.
 
-![Control Tower — Alert list with priority cards, SLA tracking, and AI/human agent assignment](/assets/control-tower/alert-list.png)
+---
 
-The alert list shows all active exceptions with priority summary cards at the top (Critical, High, Medium, Low, On Hold, Expired), a resolution progress ring, and a table showing each alert's type, vehicle, driver, transporter, assigned agent (AI or human), SLA countdown with visual progress bars, and alert duration.
+## 2. The Starting Point: Two Different Operational Experiences
 
-## 4. Human–AI Collaboration
+Before the newer Control Tower experience, Freight Tiger supported two distinct user workflows.
 
-The core principle: **AI assists. Humans control.**
+### Consignors: Visibility without enough action context
 
-AI handles:
+Consignors—the enterprises using Freight Tiger to manage their shipments—could access operational summaries through the TMS.
 
-- alert detection and classification
-- prioritization (P0 to P3)
-- automated outreach to drivers and transporters via IVR
-- monitoring and validation
-- escalation logic
+They could see counts such as:
 
-Humans handle:
+- vehicles experiencing long stoppages
+- vehicles with route deviations
+- shipments delayed in transit
+- trucks at loading or unloading locations
 
-- ambiguity and edge cases
-- final decisions
-- compliance and penalties
-- exceptions AI cannot resolve
+These summaries gave users a basic understanding of what was happening across their operations.
 
-Users can take over from AI at any point, or assign back when appropriate. Every action — whether by AI or human — is logged in a full audit trail.
+However, when they needed to investigate a particular issue, they often had to navigate to My Trips, identify the relevant vehicle, and examine its details.
 
-## 5. A Real Scenario — Long Stoppage at a Loading Plant
+The experience provided visibility but required additional effort to understand individual exceptions.
 
-A truck reaches a loading plant. Expected loading time: 1 hour. Three hours pass. The truck hasn't moved.
+![Earlier Control Tower showing pre-transit, in-transit, and post-transit summaries alongside trip-alert counts and a map](/assets/control-tower/earlier-control-tower.jpeg)
 
-![Alert Details — Long stoppage timeline with AI actions, map, risk score, and human takeover controls](/assets/control-tower/alert-details.png)
+*Earlier Control Tower experience: shipment-stage summaries and alert counts provided an operational overview. The later redesign focused on prioritizing individual exceptions and coordinating their resolution.*
 
-The alert detail view shows the full progressive story on the right — stoppage detected, AI agent assigned, monitoring in progress, driver unreachable. The left side shows the vehicle's position on the map with the stoppage location. Risk score, confidence, and impact are visible at the top. At the bottom: "Stop AI Agent" and "Take over from AI Agent" buttons — the controlled autonomy in action.
+### Freight Tiger operations teams: A manual ticket-resolution workflow
 
-**Detection.** The system sees no movement within the geofence. AI classifies it as a long stoppage. Initial priority: P2.
+Freight Tiger also had operations personnel working on behalf of customers, including teams deployed at client facilities.
 
-**Automated handling.** AI calls the driver via IVR and asks for a reason. Possible outcomes: "waiting for loading," "documentation delay," or no response.
+These operators used a separate ticketing system.
 
-**Escalation.** No response from the driver. Delay exceeds the threshold. Priority escalates from P2 to P1. AI contacts the transporter.
+When an alert occurred, a ticket was created. The operator would open it, inspect the vehicle and issue information, call the driver or transporter, record the explanation, and update or close the ticket.
 
-**Human handoff.** Still unresolved. A ticket is assigned to an ops executive. They see the full timeline — who was contacted, when, what was said, what failed. They don't start from zero.
+For example, when a truck stopped unexpectedly, an operator might call the driver to understand whether the delay was due to loading, documentation, traffic, or another reason.
 
-**Resolution.** The ops executive calls the plant, identifies a loading queue bottleneck, gets the truck prioritized.
+The problem was the volume.
 
-**Closure.** The system records the resolution reason, all timestamps, every action by AI and human. Full audit trail.
+Operators were handling large numbers of tickets, with only a few minutes available for each one.
 
-Without Control Tower, this delay gets discovered late, escalation is informal, and there's no record of what happened. With Control Tower, the issue becomes a managed workflow from the moment it's detected.
+Even routine issues required manual attention.
 
-### What the user sees
+### The underlying problem
 
-Not just an alert. They see:
+Both experiences were useful, but they solved different pieces of the same operational problem.
 
-- a timeline showing the full story of the issue
-- who acted at each step (AI agent / human agent / system / transporter)
-- current state and what needs to happen next
-- suggested actions and resolution workflows
+Consignors primarily needed awareness and escalation.
 
-Every alert is treated as a progressive story, not a static record.
+Freight Tiger operators needed efficient investigation, ownership, and resolution.
 
-## 6. Key Design Decisions
+There was no sufficiently unified experience connecting visibility, priority, assignment, and action.
 
-### Timeline-based interface
+**We had systems for showing problems and recording tickets, but the process of deciding what deserved attention and moving it toward resolution still depended heavily on people.**
 
-Every alert is an evolving operational story — what happened, who acted, what changed, what the current state means. This made the system understandable under live operational pressure.
+---
 
-### Ownership clarity at every step
+## 3. Why the Existing Approach Wasn't Enough
 
-Each step clearly identifies the acting entity — AI agent, human agent, system, or transporter. This is critical for enterprise trust and accountability.
+As the product evolved, we identified three major opportunities.
 
-### Controlled autonomy
+### Problem 1: Alert volume did not reflect alert importance
 
-Users can take over from AI or assign back when appropriate. This creates a practical balance between automation and operational control.
+A long stoppage and a route deviation could appear as separate tickets, but their operational importance depended on the customer's business.
 
-### Triage-inspired priority model
+For one customer, a route deviation might be critical because the vehicle was carrying sensitive cargo.
 
-- P0 = critical, P1 = high, P2 = medium, P3 = low
-- Escalations follow layered severity progression (L1 to L3)
+For another, a long stoppage near a loading facility might be more important because it could affect production schedules.
 
-This encodes urgency in a consistent and operationally meaningful way.
+A single universal priority model could not represent these differences without customer-specific rules.
 
-### Actionable UI
+Operators needed a way to identify which issues required immediate attention instead of treating every alert as equally important.
 
-Instead of exposing data, the interface surfaces suggested actions, next best steps, and resolution workflows. The product is useful for execution, not only observation.
+### Problem 2: Routine work consumed human capacity
 
-## 7. What Was Hard
+Operators performed repetitive tasks such as calling drivers, collecting explanations, updating tickets, and checking whether an issue was still active.
 
-**Calibrating AI autonomy.** Too aggressive and the system creates noise — every minor delay becomes an alert. Too conservative and issues slip through. Finding the right thresholds was ongoing work, not a one-time design decision.
+This reduced the time available for complex problems that genuinely required human judgment.
 
-**Enterprise trust is earned slowly.** Operations teams don't switch from spreadsheets and phone calls to an automated system overnight. The full audit trail, clear ownership labels, and the ability to override AI at any step — these were trust-building design decisions, not features. Automation must always be inspectable and controllable.
+The challenge was not to eliminate the operator's role.
 
-**Ticket vs alert distinction.** Managed service teams and consignors need fundamentally different interfaces for the same underlying data. Getting this right meant understanding two different mental models and serving both without building two separate products.
+It was to reduce unnecessary manual intervention so operators could focus on situations with greater operational impact.
 
-## 8. System Design for Scalability
+### Problem 3: Resolution context was fragmented
 
-The system was designed as a state-driven model. Each step in the alert lifecycle is driven by structured fields — event type, actor (AI / Human / System), status, and context.
+An issue might involve several actions:
 
-The UI renders each state using consistent layers:
+1. An alert is detected.
+2. A driver is contacted.
+3. The driver does not respond.
+4. A transporter is contacted.
+5. The issue escalates.
+6. Another operator takes ownership.
 
-- header
-- action summary
-- why this happened / what next
-- supporting evidence
+If each action was viewed only as an isolated ticket update, the next person might struggle to understand what had already happened.
 
-This allows consistency across alert types, scalability across workflows, and easier extension to future agents and automations.
+We needed a clearer way to communicate the complete history of an exception.
 
-## 9. How This Connects
+### The design problem
 
-Control Tower is the orchestration layer in a broader redesign of Freight Tiger's TMS:
+**How might we help operations teams prioritize thousands of exceptions, automate repetitive activities, and ensure that humans can understand and control the resolution process?**
 
-- **TigerSight** gives the bird's-eye operational view and routes users to where attention is needed
-- **My Journeys** is where deep journey-level analysis and action happens
-- **Control Tower** sits above everything, pulling exceptions from all modules and coordinating resolution through AI agents and human operators
+---
 
-While TigerSight and My Journeys are surfaces within the TMS, Control Tower operates above it — watching everything and intervening when something breaks.
+## 4. Project Evolution and My Contribution
 
-## 10. Outcome
+Control Tower was not a product that started from a blank canvas.
 
-- Structured alert system replacing scattered manual tracking
-- AI-assisted resolution reducing human workload for routine exceptions
-- Clear escalation logic so critical issues reach the right person faster
-- Full audit trail for every exception — who acted, when, why
-- Foundation for scaling automation across all TMS modules
+An earlier design direction had already established the need for operational monitoring and visibility into transportation exceptions.
 
-## 11. What I Would Improve Next
+My work came later, as the requirements expanded toward issue prioritization, AI-assisted handling, and coordinated resolution.
 
-If this evolved further, I would explore:
+The product needed to evolve from showing operational information to supporting the people and agents responsible for acting on it.
 
-- a stronger explainability layer for why AI acted the way it did
-- cost and risk impact visualization tied to each exception
-- multi-alert orchestration views for handling related issues together
-- policy simulation and what-if scenarios for threshold tuning
+My design contributions focused on:
 
-## 12. Takeaway
+- **Customer-specific alert prioritization:** Translating configurable business priorities into an understandable triage experience.
+- **Alert queue redesign:** Organizing the table around issue identity, ownership, SLA, and elapsed duration.
+- **Alert details layout:** Separating operational context from actions and resolution history.
+- **Human–AI collaboration:** Making AI activity visible and supporting human intervention.
+- **State-driven workflows:** Representing alert progression, assignment, escalation, and resolution consistently.
 
-> Enterprise users don't trust automation because it exists. They trust it when they can inspect it, control it, and understand why it acted.
+The goal was to build on the earlier foundation while addressing a new set of operational requirements.
+
+---
+
+## 5. Finding Inspiration in Healthcare Triage
+
+One of the most useful ideas came from looking outside the logistics industry.
+
+Healthcare emergency departments face a familiar problem: a large volume of incoming cases, different levels of severity, and limited resources.
+
+Patients are assessed based on urgency and directed to the appropriate level of care.
+
+We explored applying a similar principle to logistics exceptions.
+
+Instead of treating every alert as equally actionable, we wanted the system to help determine:
+
+- How serious is this issue?
+- How quickly does someone need to act?
+- Can it be monitored or handled automatically?
+- When should a human take over?
+- Has the situation become more severe?
+
+### Four priority levels
+
+We used four primary severity levels:
+
+<dl class="ct-priority-levels">
+  <div>
+    <dt>P0 — Critical</dt>
+    <dd>Highest operational urgency. Immediate human attention.</dd>
+  </div>
+  <div>
+    <dt>P1 — High</dt>
+    <dd>Significant operational risk. Prioritized human intervention.</dd>
+  </div>
+  <div>
+    <dt>P2 — Medium</dt>
+    <dd>Manageable operational risk. AI-assisted handling where permitted.</dd>
+  </div>
+  <div>
+    <dt>P3 — Low</dt>
+    <dd>Routine or lower-risk event. Automated monitoring or resolution where permitted.</dd>
+  </div>
+</dl>
+
+Two additional categories—**On Hold** and **Expired**—represent workflow states, not additional severity levels.
+
+This separation is important.
+
+An alert's priority describes its urgency, while its workflow state describes what is happening to it.
+
+### Why customer configuration matters
+
+Clients supplied their **standard operating procedures (SOPs)**, which defined how exceptions should be prioritized and handled. We used those SOPs to place alerts into the appropriate priority buckets, rather than applying one universal priority model to every customer.
+
+Priority is not determined solely by the type of alert.
+
+A customer may define route deviations as critical, while another may be more concerned about long stoppages or delays affecting specific facilities.
+
+Rules can consider the customer's operational needs, SLA thresholds, shipment context, and other available signals.
+
+**The design needed to support consistent prioritization while allowing the underlying rules to reflect different businesses.**
+
+An alert's priority could also change as its conditions changed.
+
+This meant priority was part of the alert lifecycle, not simply a permanent label assigned when the alert was created.
+
+---
+
+## 6. Designing the Unified Control Tower
+
+We designed Control Tower as an orchestration layer connected to existing Freight Tiger modules.
+
+Journey tracking, planning, invoicing, and other systems could generate operational exceptions.
+
+Control Tower brought those exceptions into a more structured management experience.
+
+The same underlying exception data could support two user needs.
+
+### Alerts for consignors
+
+Consignors needed to understand which shipments were affected, how severe the issue was, and whether follow-up or escalation was necessary.
+
+### Tickets for operations teams
+
+Freight Tiger operators needed a more action-oriented experience.
+
+They had to understand current ownership, remaining SLA time, previous actions, and what they should do next.
+
+Rather than requiring two completely unrelated systems, we designed around a shared exception lifecycle while adapting the experience to each role.
+
+**The architectural idea was shared exception information, with role-appropriate ways of consuming and acting on it.**
+
+---
+
+## 7. Key Design Decision 1: Turn the Alert List into a Prioritized Work Queue
+
+![Control Tower alert queue showing priority filters, remaining SLA time, alert duration, and journey grouping](/assets/control-tower/prioritized-queue.png)
+
+The alert-list screen became the primary starting point for operations teams.
+
+I organized the experience around three layers of information.
+
+### Layer 1: Understand overall operational health
+
+At the top of the page, summary components expose resolution progress, active issues, expired issues, and counts across the four priority levels.
+
+The purpose was to give operators a quick understanding of the current workload.
+
+Priority cards also provide a direct way to narrow the queue.
+
+Instead of manually inspecting a long list, users can start with the most urgent category.
+
+### Layer 2: Identify the correct ticket
+
+The table contains the operational information needed to identify and investigate an issue:
+
+**Issue identification**
+- Alert type and alert ID
+- Vehicle number and journey ID
+
+**Contact and operational context**
+- Driver information
+- Transporter information
+
+**Resolution management**
+- Assigned AI or human agent
+- SLA time remaining
+- Alert duration
+- Available actions
+
+This arrangement separates relatively stable information about the journey from dynamic information about the ticket's resolution.
+
+### Layer 3: Understand urgency and ownership
+
+Two fields are particularly important.
+
+**SLA of Ticket** communicates the remaining time associated with an operational commitment.
+
+**Alert Duration** communicates how long the issue has been active.
+
+These are not interchangeable.
+
+A ticket that has been open for several hours may still have time available before its SLA expires.
+
+Another ticket may have been opened recently but require immediate action because its remaining SLA is very short.
+
+Showing both allows operators to evaluate urgency with more context.
+
+The **Agent** column also communicates whether an AI agent or a human operator is currently responsible.
+
+This helps operators understand ownership before opening the ticket.
+
+### Grouping alerts by journey
+
+The interface also includes an option to group alerts by journey.
+
+This addresses situations where multiple exceptions are associated with the same transportation movement.
+
+Grouping helps preserve the relationship between issues rather than presenting them as completely disconnected records.
+
+### Design rationale
+
+**The table wasn't meant to display every available data point. It was meant to help an operator decide which ticket to investigate next.**
+
+---
+
+## 8. Key Design Decision 2: Separate Operational Context from Resolution Actions
+
+![Alert details separating map and journey context from risk, confidence, impact, and resolution actions](/assets/control-tower/operational-context.png)
+
+When users open an alert, the interface is divided into two primary areas.
+
+### Left: Operational context
+
+The left side focuses on understanding the real-world situation.
+
+It includes:
+
+- vehicle and alert information
+- current priority and state
+- map and route context
+- vehicle location
+- journey details
+- supporting alert information
+- access to the audit trail
+
+For a logistics operator, location matters.
+
+A stopped vehicle near a loading facility creates a different operational situation from a vehicle stopped on a highway.
+
+The map provides context that helps users interpret the alert rather than relying only on a text description.
+
+### Right: Actions and resolution progress
+
+The right side focuses on what has been done and what needs to happen next.
+
+It includes:
+
+- current agent assignment
+- risk, confidence, and impact indicators
+- activity history
+- AI-agent actions
+- failures or pending confirmations
+- available intervention controls
+
+### Why the split layout?
+
+I wanted users to understand the situation and act on it without continually moving between separate screens.
+
+The left side answers:
+
+**Where is the vehicle, and what is happening?**
+
+The right side answers:
+
+**Who is working on the issue, what has happened so far, and what action is required?**
+
+This division separates contextual investigation from operational execution while keeping both visible.
+
+---
+
+## 9. Key Design Decision 3: Treat Every Alert as an Evolving Story
+
+One of the most important interaction decisions was the activity timeline.
+
+A conventional ticket-details page often emphasizes the current status and a set of fields.
+
+But an exception-management workflow is inherently chronological.
+
+An issue can move through several stages, and each stage changes what the next operator needs to know.
+
+### Example: Long stoppage
+
+Imagine a vehicle has stopped longer than expected.
+
+**Step 1 — Detection**
+
+The system identifies that the vehicle has remained stationary beyond its configured threshold.
+
+**Step 2 — Assignment**
+
+An AI agent is assigned to monitor or investigate the issue.
+
+**Step 3 — Automated outreach**
+
+The agent attempts to contact the driver through an automated calling workflow.
+
+**Step 4 — Failure or uncertainty**
+
+The driver is unreachable, or the response does not provide enough information.
+
+**Step 5 — Escalation**
+
+Depending on customer rules, priority, and SLA risk, the issue may require further outreach or human intervention.
+
+**Step 6 — Human takeover**
+
+An operator receives the unresolved issue and can review previous actions before continuing.
+
+**Step 7 — Resolution**
+
+The issue is verified, its resolution is recorded, and the appropriate closure process is completed.
+
+![AI activity timeline showing assignment, monitoring, and unsuccessful driver contact with intervention controls](/assets/control-tower/ai-activity-timeline.png)
+
+### What the timeline communicates
+
+Each activity can communicate:
+
+- what happened
+- who performed the action
+- when it happened
+- whether it succeeded or failed
+- what the current state means
+- what action may be required next
+
+The timeline provides continuity across AI and human involvement.
+
+### Why this matters
+
+Without a clear history, an operator taking over might repeat an unsuccessful driver call or lose time reconstructing previous activity.
+
+With a chronological view, the operator can understand the issue's progression before acting.
+
+**The alert becomes a shared operational record rather than an isolated notification.**
+
+---
+
+## 10. Integrating AI Calling Agents into the Workflow
+
+A major new requirement was integrating AI-driven voice interactions.
+
+We worked with calling-agent capabilities using ElevenLabs so automated agents could contact drivers and gather information about operational exceptions.
+
+For example, an AI agent handling a long-stoppage alert could attempt to understand whether the driver was waiting for loading, facing a documentation issue, or experiencing another delay.
+
+The goal was to reduce repetitive work that previously required a human operator for every ticket.
+
+However, introducing AI created new design questions.
+
+How does the operator know what the agent is doing?
+
+What happens if the driver doesn't answer?
+
+What if the agent misunderstands the response?
+
+What happens when an issue becomes critical?
+
+How can a human intervene safely?
+
+These questions shaped the human–AI workflow.
+
+---
+
+## 11. Key Design Decision 4: Controlled AI Autonomy
+
+**Design principle: AI assists. Humans control.**
+
+We did not want AI automation to operate without appropriate restrictions.
+
+The approach combined **client-provided SOPs, ticket priority, and AI confidence** to decide which tickets AI agents could take.
+
+**AI agents took lower-priority tickets only when the client's SOP permitted automated handling and AI confidence was high.** Lower priority alone was not sufficient, and high confidence did not override the client's SOP.
+
+![Human operator resolving an alert with a confirmation dialog and resolution note](/assets/control-tower/human-resolution.png)
+
+### Client-provided SOPs
+
+Clients supplied the SOPs that defined which situations mattered to their operations, how alerts mapped to priority buckets, and how those alerts should be handled.
+
+These rules could account for alert category, priority, elapsed time, and SLA thresholds. They established the boundaries for automated handling and human intervention.
+
+### AI confidence
+
+Within those SOP boundaries, AI confidence determined whether an agent could take a lower-priority ticket. High-confidence, lower-priority tickets could be assigned to AI agents; tickets that did not meet those conditions required human handling.
+
+This allowed AI agents to take routine work while operators focused on higher-priority issues and situations requiring human judgment.

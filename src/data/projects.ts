@@ -33,9 +33,9 @@ export const deepProjects: Project[] = [
   {
     slug: "control-tower",
     title: "Control Tower",
-    tagline: "From visibility to exception orchestration",
+    tagline: "From Fragmented Alerts to Human–AI Exception Orchestration",
     description:
-      "Designed a Human–AI control tower that detects, prioritizes, and resolves operational issues — shifting logistics teams from reactive handling to guided action.",
+      "Designed a unified logistics exception-management experience that helps operators prioritize, investigate, and resolve critical issues with AI assistance.",
     tags: ["Operations", "Logistics", "Decision Systems"],
     type: "deep",
     protected: true,
