@@ -8,7 +8,7 @@ export interface ProjectLink {
 
 export const portfolioMachineLinks = {
   siteHref: "https://chetank.vercel.app",
-  resumeHref: "https://drive.google.com/file/d/1z_3M7pbPU2_SPSs7yqoKNkId2hXFGUCq/view?usp=sharing",
+  resumeHref: "https://drive.google.com/file/d/1MziOF5_Z-4TJYemIieFI9lmJK8n5CpCL/view?usp=sharing",
   emailHref: "mailto:mymailchetan25@gmail.com",
   xHref: "https://x.com/kchetank19",
   linkedInHref: "https://linkedin.com/in/chetan-kumar25/",
