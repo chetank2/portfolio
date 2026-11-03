@@ -2004,6 +2004,8 @@ html.dark {
   flex-direction: column;
   padding: 0;
   border: 1px solid color-mix(in srgb, var(--color-text-primary) 20%, transparent);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .minimal-page a.project-card:hover {
