@@ -60,24 +60,32 @@ const designWork = [
     tagline: "When tracking becomes the product, operations start to move right",
     href: "/work/ft-tms-redesign",
     protected: true,
+    image: "/assets/editorial-line-art/freight-tiger-tms.png",
+    imageDark: "/assets/editorial-line-art/freight-tiger-tms-dark.png",
   },
   {
     name: "Control Tower",
     tagline: "Seeing everything is not the same as controlling it, so we designed for action, not visibility",
     href: "/work/control-tower",
     protected: true,
+    image: "/assets/editorial-line-art/control-tower-charts-v3.png",
+    imageDark: "/assets/editorial-line-art/control-tower-charts-dark.png",
   },
   {
     name: "FT Design System",
     tagline: "Design infrastructure for humans, engineers, and AI agents",
     href: "/work/ft-design-system",
     protected: false,
+    image: "/assets/editorial-line-art/ft-design-system-components-v2.png",
+    imageDark: "/assets/editorial-line-art/ft-design-system-components-dark.png",
   },
   {
     name: "AfterCrop",
     tagline: "Designed for the warehouse floor, not the office, where speed and clarity actually matter",
     href: "/work/aftercrop",
     protected: false,
+    image: "/assets/editorial-line-art/aftercrop-manager.png",
+    imageDark: "/assets/editorial-line-art/aftercrop-manager-dark.png",
   },
 ];
 
@@ -166,13 +174,20 @@ const homeStructuredData = {
         </section>
 
         <!-- Design work -->
-        <section class="section-gap section-reveal">
+        <section class="section-gap project-grid" aria-label="Design work">
           {designWork.map((link) => (
             <a
               href={link.href}
-              class="project-link"
+              class="project-link project-card"
             >
-              <span class="project-name">{link.name}.</span> {link.tagline}{CASE_STUDY_PASSWORD_LOCK_ENABLED && link.protected ? "\u00a0↗" : ""}
+              <span class="project-card-art">
+                <img class="project-card-image--light" src={link.image} alt="" loading="lazy" />
+                <img class="project-card-image--dark" src={link.imageDark} alt="" loading="lazy" />
+              </span>
+              <span class="project-card-copy">
+                <span class="project-name">{link.name}.{CASE_STUDY_PASSWORD_LOCK_ENABLED && link.protected ? "\u00a0↗" : ""}</span>
+                <span class="project-card-description">{link.tagline}</span>
+              </span>
             </a>
           ))}
         </section>
