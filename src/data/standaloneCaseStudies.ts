@@ -493,7 +493,32 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         blocks: [
           paragraphs(
             "At Freight Tiger, I designed the workflow that turns completed transport journeys into invoices. Transporters needed to bill for the work they had done. Consignors, the companies paying for that transport, needed to verify what was delivered, how the freight was calculated, and whether extra charges were justified.",
-            "Clients differed in what they billed together, what evidence they needed, and when they reconciled differences. I mapped those decisions across the billing lifecycle and used them to design a single product flow that could support different client policies.",
+            "Clients differed in what they billed together, what evidence they needed, and when they reconciled differences. I designed a workflow that could support those policies while keeping each amount traceable to the trip that produced it.",
+          ),
+        ],
+      },
+      {
+        title: "Problem Statements",
+        blocks: [
+          subsections(
+            {
+              title: "Business · Keep the invoice traceable to the work",
+              paragraphs: [
+                "One invoice can cover several vehicles, each with multiple journeys and charges. When an amount is questioned, both companies need to trace it back to the trip, contracted rate, and delivery evidence. If that connection is lost in the cycle total, a single disputed charge can hold up approval of the entire invoice.",
+              ],
+            },
+            {
+              title: "Users · Give each reviewer a clear decision",
+              paragraphs: [
+                "Transporter and consignor executives need to find missing evidence, verify amounts, and flag exceptions. Their managers need to see the results of those checks and decide whether to approve or return the bill. At each handoff, the next person needs to know who owns the issue, which charge is affected, and what still needs to happen.",
+              ],
+            },
+            {
+              title: "Variable billing · Support different client rules",
+              paragraphs: [
+                "One client may bundle a month of trips into one pro-forma and reconcile before issuing an invoice. Another may process invoices in batches of 100 and reconcile after issuance. The product needs to support those differences in grouping, readiness checks, and timing while keeping each adjustment tied to the right charge and document.",
+              ],
+            },
           ),
         ],
       },
@@ -596,27 +621,11 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         ],
       },
       {
-        title: "Problem Statements",
+        title: "What Workflow Mapping Revealed",
         blocks: [
-          subsections(
-            {
-              title: "Business · Keep the invoice traceable to the work",
-              paragraphs: [
-                "One invoice can cover several vehicles, each with multiple journeys and charges. When an amount is questioned, both companies need to trace it back to the trip, contracted rate, and delivery evidence. If that connection is lost in the cycle total, a single disputed charge can hold up approval of the entire invoice.",
-              ],
-            },
-            {
-              title: "Users · Give each reviewer a clear decision",
-              paragraphs: [
-                "Transporter and consignor executives need to find missing evidence, verify amounts, and flag exceptions. Their managers need to see the results of those checks and decide whether to approve or return the bill. At each handoff, the next person needs to know who owns the issue, which charge is affected, and what still needs to happen.",
-              ],
-            },
-            {
-              title: "Variable billing · Support different client rules",
-              paragraphs: [
-                "One client may bundle a month of trips into one pro-forma and reconcile before issuing an invoice. Another may process invoices in batches of 100 and reconcile after issuance. The product needs to support those differences in grouping, readiness checks, and timing while keeping each adjustment tied to the right charge and document.",
-              ],
-            },
+          paragraphs(
+            "I mapped the handoffs between transporters and consignors from delivery checks through billing and payment. At each step, I tracked what the next person needed to see and what could send the work back.",
+            "A trip could be marked delivered and still be unbillable. Delivery proof might be awaiting approval, or the actual distance could differ from the distance used to calculate freight. The maps also showed that the same charge disagreement could surface at different points. One setup checked charges before a trip entered a pro-forma. In another, both parties reviewed trip charges on a scheduled pro-forma. A rejection could return a specific charge for correction, with the reason carrying into the next review.",
           ),
         ],
       },
@@ -685,6 +694,31 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
               ],
             },
           },
+        ],
+      },
+      {
+        title: "Key Design Trade-offs",
+        blocks: [
+          subsections(
+            {
+              title: "When to reconcile",
+              paragraphs: [
+                "Reviewing before invoice issuance lets both parties settle differences while the bill is still a draft. Some clients need to issue the invoice first. I supported both sequences, using a credit or debit note to document an agreed change against the issued invoice.",
+              ],
+            },
+            {
+              title: "What to approve",
+              paragraphs: [
+                "A single approval for the bill is quick when all amounts agree. When only an add-on is disputed, the reviewer needs a way to accept base freight and challenge that line separately. I kept those decisions on individual charges and showed their status when the bill went back for review.",
+              ],
+            },
+            {
+              title: "What to block",
+              paragraphs: [
+                "I blocked submission when a required check failed and showed the specific reason. Keeping the charge breakdown and other checks visible let the transporter continue reviewing the bill while the responsible party corrected the missing value or delivery proof.",
+              ],
+            },
+          ),
         ],
       },
       {
@@ -823,9 +857,15 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
         blocks: [
           paragraphs(
             "I separated delivery status, billing readiness, and approval. An executive could see why a completed journey was still blocked and fix the underlying input. A manager needed the bill total, the exceptions, and the evidence behind each decision before approving it. The pending-approval queue shows which side needs to act, and the bill detail shows what that action is about.",
-            "I put contracted and submitted amounts alongside the variance on each charge row. A reviewer could accept base freight and still question a detention charge. I kept earlier decisions visible when evidence or freight inputs changed, so the next reviewer could see what had been agreed and what still needed attention.",
           ),
           subsections(
+            {
+              title: "Why tables and summaries",
+              paragraphs: [
+                "I used tables for decisions that depend on exact amounts. Aligning the contracted rate, submitted amount, and variance lets a reviewer compare them at a glance and approve or reject that charge from the same row. It also makes it possible to scan several journeys for exceptions before opening one.",
+                "Summary cards answer a different question. The approved total and journey count show what has rolled into a pro-forma. The settlement summary puts the amount paid next to what is still due. In both views, the underlying rows remain available when a reviewer needs to explain the total.",
+              ],
+            },
             {
               title: "Charge row variants",
               paragraphs: [
@@ -881,7 +921,20 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
           paragraphs(
             "The design needed to make ownership as clear as status. A charge marked Pending Approval still leaves work for someone. Showing which party needs to respond, the evidence they should check, and what they can do next gives that status a purpose.",
             "The LEGO-like structure works because each block passes the same trip and charge records to the next step. One client can reconcile charges on a pro-forma before raising the invoice. Another can raise the invoice first and record an agreed adjustment through a credit or debit note. In both cases, a reviewer can follow the amount back to the original charge and delivery evidence.",
-            "In a pilot, I’d compare clients that reconcile before and after invoicing. I’d track time from completed trip to invoice, how often bills are returned for missing information, and how long disputes stay open. I’d also watch whether reviewers can trace a disputed amount back to the original charge without asking the other team to find it for them.",
+          ),
+          subsections(
+            {
+              title: "Proposed success metrics",
+              paragraphs: [
+                "In a pilot, I’d compare these measures against each client’s baseline and group the results by whether reconciliation happens before or after invoice issuance.",
+              ],
+              bullets: [
+                "Median time from trip completion to invoice issuance.",
+                "Share of submitted bills returned for missing information.",
+                "Median time from dispute creation to resolution.",
+                "Share of review tasks where a reviewer can trace the amount to the original charge without asking the other team.",
+              ],
+            },
           ),
         ],
       },
