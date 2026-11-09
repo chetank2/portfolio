@@ -1,0 +1,112 @@
+---
+import type { FlowSketch } from "../../data/standaloneCaseStudies";
+
+interface Props {
+  sketch: FlowSketch;
+}
+
+const { sketch } = Astro.props;
+const isPerson = sketch === "prepare" || sketch === "approve" || sketch === "inspect" || sketch === "settle";
+---
+
+<svg
+  viewBox="0 0 96 70"
+  width="96"
+  height="70"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.45"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M13 61c18 1 46 1 69-1 M24 65l4-3m4 3 5-3m26 2 5-3m4 3 5-3" opacity=".45" />
+
+  {sketch === "trucks" && (
+    <>
+      <path d="M15 41h29V22l-29 1zm29-13h12l8 8v12H17v-7m35-10v7h10m-43-11 21-1m-21 5 21-1m-21 5 21-1" />
+      <circle cx="25" cy="49" r="4.5" />
+      <circle cx="55" cy="49" r="4.5" />
+      <path d="M53 46h20v-9h7l6 8v10H50v-5m24-10v6h11m-29 3 13-1" />
+      <circle cx="59" cy="55" r="4" />
+      <circle cx="79" cy="55" r="4" />
+      <path d="M8 32h4m-7 5h6m56-15 3-5m1 9 6-2" />
+    </>
+  )}
+
+  {sketch === "pro-forma" && (
+    <>
+      <path d="M35 14 65 11l5 41-33 4-1-8m-4-29-7 1 4 37 29-3" />
+      <path d="m34 18 24-1 9 9 2 25-33 2zM58 17l1 9h8m-25 4 11-1m-11 7 18-1m-18 6 18-1m-16 5 8-1" />
+      <path d="M20 29l-5-2m8-4-4-5m55 23 6-1m-5 5 4 2" />
+    </>
+  )}
+
+  {sketch === "invoice" && (
+    <>
+      <path d="M29 15c10-2 25-2 37-1l2 42-39 1zM37 22l14-1m-14 7 22-1m-22 8 22-1m-22 7 11-1m-11 8 10-1" />
+      <path d="M58 44c-4-4-9 0-8 4 1 5 9 7 13 2 3-4-1-9-5-6zm-5 4 3 2 4-4M24 22l-5-4m3 10-6-1m57-7 5-4m-4 12 7-2" />
+      <path d="M32 51l3 3m-3-8 7 7m20-37 5 4" opacity=".5" />
+    </>
+  )}
+
+  {isPerson && (
+    <>
+      <path d="M23 58c0-11 6-18 15-21m12 0c11 3 14 10 15 20M33 40l9 10 10-10m-18 9-3 9m24-8 3 8" />
+      <path d="M35 17c2-6 13-7 18 0l-1 12c-1 6-4 9-9 9-6-1-9-6-9-11z" />
+      {sketch === "prepare" && <path d="M34 23c-3-4-2-11 2-12 4-4 13-3 17 2 1 2 1 5 0 8-2-1-4-5-6-6-4 5-7 6-13 6z" />}
+      {sketch === "approve" && <path d="M33 24c-4-6-1-14 4-15 6-3 14-1 17 3l-5 1 4 7c-6 0-9-3-11-6-2 4-5 6-9 7" />}
+      {sketch === "inspect" && <path d="M34 27c-5 0-7-4-6-9 0-7 6-12 12-12 8-2 15 5 15 11l-6-3c-3 4-9 7-15 8m17 10c6 1 8 7 4 10" />}
+      {sketch === "settle" && <path d="M34 24c-5-1-4-12 1-13-1-4 8-6 10-3 5-2 12 3 10 8l-5 4-4-5c-4 2-8 2-12 1" />}
+      <path d="M38 24h1m8 0h1m-6 1-1 3 2 1m-3 3c2 2 5 2 7 0" />
+      {sketch === "prepare" && (
+        <path d="m52 43 20-3 3 16-20 3zM58 42l1-4 7-1 2 4m-11 7 11-2m-10 6 8-1m-32 2c8 5 12 6 19 0" />
+      )}
+      {sketch === "approve" && (
+        <path d="M36 23c1-2 5-2 6 0v3h-5zm8 0c1-2 5-2 6 0l-1 3h-4zm-2 1h2m10 33h25l-1-5H55zm8-6 1-4c-5-4 2-10 5-6 1 2 0 4-1 6l2 4m5-13 2-3m1 7 5-1" />
+      )}
+      {sketch === "inspect" && (
+        <>
+          <circle cx="66" cy="41" r="8" />
+          <path d="M62 39c0-2 2-3 4-3m6 11 8 8-3 3-8-9m-32 3c5 4 11 4 18 0m21-21 4-3m-1 8 5-1" />
+        </>
+      )}
+      {sketch === "settle" && (
+        <path d="M55 44h23v14H55zm5-2v-5h13v7m-14 7 4 4 9-9m7-10 4-4m-2 8 6-1" />
+      )}
+      <path d="m24 54 5-5m-5 9 5-5m12-40 4-3m2 3 3-2" opacity=".45" />
+    </>
+  )}
+
+  {sketch === "delivery" && (
+    <>
+      <path d="M17 46h37V24H17zm37-16h11l10 11v10H18v-5m42-12v8h13M22 30h26m-26 5h19m-19 5h14" />
+      <circle cx="27" cy="53" r="5" />
+      <circle cx="64" cy="53" r="5" />
+      <path d="M66 25c3-4 11-5 15-1 3 5-1 11-6 11-5 1-10-4-9-10zm4 3 3 3 6-6M9 36h4m-6 5h6" />
+    </>
+  )}
+
+  {sketch === "checklist" && (
+    <>
+      <path d="m27 17 37-2 3 43-38 1zM37 17l1-6 14-1 3 6-1 4-16 1z" />
+      <path d="M35 29l3 3 5-6m-7 12 3 3 5-6m-7 12 3 3 5-6m3-15h9m-8 9h9m-8 9h9m13-29 4-3m-2 8 5-1" />
+      <path d="m26 22-4 1 3 34m32-3 5-5m-3 5 3-3" opacity=".5" />
+    </>
+  )}
+
+  {sketch === "barrier" && (
+    <>
+      <path d="M23 53v-9m48 10v-9m-54 9h12m36 0h12M16 33l64-2 1 13-65 1zm8 11 8-11m4 11 8-11m4 10 8-11m4 11 8-11m4 11 7-10" />
+      <path d="M41 16c2-5 11-5 14 0s1 11-5 12c-7 2-12-6-9-12zm7 0v5m0 3h.1m-12-7-5-3m30 2 5-3" />
+    </>
+  )}
+
+  {sketch === "repair" && (
+    <>
+      <path d="M27 19l28-1 10 10v30H27zm28-1v10h10M34 28h13m-13 8h10m-10 8h8m-8 8h10" />
+      <path d="M51 49l16-16c-3-7 2-13 9-12l-4 5 2 4 4 1 5-5c2 7-4 13-11 12L56 54c-4 4-9-1-5-5zM20 27l-4-3m3 9h-5" />
+    </>
+  )}
+</svg>

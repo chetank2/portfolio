@@ -90,15 +90,15 @@ export const supportingProjects: Project[] = [
   {
     slug: "freight-invoicing",
     title: "Freight Invoicing & Reconciliation System",
-    tagline: "Shifting billing validation before invoice creation",
+    tagline: "Configurable billing cycles and reconciliation for freight",
     description:
-      "Redesigned freight billing by introducing a pre-invoice reconciliation layer that reduced disputes, improved auditability, and made billing decisions clearer for logistics and finance teams.",
+      "Designed freight billing around each client's billing cycle and reconciliation policy, from journey-level charges to invoices, adjustments, and settlement.",
     tags: ["System Design", "B2B SaaS", "Freight Tiger"],
     type: "supporting",
     protected: true,
     caseStudyUrl: "/work/freight-invoicing",
     machineSummary:
-      "Introduced a pre-invoice reconciliation layer that moves billing validation upstream of invoice creation. Reduced disputes, improved auditability, and clarified ownership between logistics and finance teams.",
+      "Designed time- and count-based billing cycles with charge-level reconciliation before or after invoice issuance. The system connects journeys and vehicles to pro-formas, invoices, credit and debit notes, settlement, and dispute management.",
   },
   {
     slug: "ptl-module-design",

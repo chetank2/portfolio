@@ -9,6 +9,7 @@ import {
   aiProjects,
   experience,
   article,
+  findProjectBySlug,
   portfolioMachineLinks,
 } from "../data/projects";
 import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../lib/caseStudyProtection";
@@ -25,12 +26,19 @@ function formatProjectLine(project: (typeof deepProjects)[number] | (typeof aiPr
   return `- ${project.title} — ${project.tagline} (${href})`;
 }
 
+const freightInvoicing = findProjectBySlug("freight-invoicing");
+const homeProjects = deepProjects.flatMap((project) =>
+  project.slug === "ft-design-system" && freightInvoicing
+    ? [project, freightInvoicing]
+    : [project],
+);
+
 const homeMachineText = [
   "# Chetan Kummari",
   "> Senior Product Designer at Generalmind focused on AI-native enterprise workflows, complex B2B systems, design systems, and AI-assisted product building.",
   "",
   "## Work",
-  ...deepProjects.map(formatProjectLine),
+  ...homeProjects.map(formatProjectLine),
   "",
   "## Built with AI",
   ...aiProjects.map(formatProjectLine),
@@ -80,6 +88,14 @@ const designWork = [
     imageDark: "/assets/editorial-line-art/ft-design-system-components-dark.png",
   },
   {
+    name: "Freight Invoicing & Reconciliation",
+    tagline: "Configurable billing cycles and reconciliation for freight",
+    href: "/work/freight-invoicing",
+    protected: true,
+    image: "/assets/editorial-line-art/freight-invoicing.jpg",
+    imageDark: "/assets/editorial-line-art/freight-invoicing-dark.jpg",
+  },
+  {
     name: "AfterCrop",
     tagline: "Designed for the warehouse floor, not the office, where speed and clarity actually matter",
     href: "/work/aftercrop",
@@ -123,7 +139,7 @@ const homeStructuredData = {
   mainEntity: {
     "@id": `${siteHref}/#person`,
   },
-  hasPart: [...deepProjects, ...aiProjects]
+  hasPart: [...homeProjects, ...aiProjects]
     .filter((project) => project.caseStudyUrl)
     .map((project) => ({
       "@type": "CreativeWork",

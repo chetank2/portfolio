@@ -16,6 +16,12 @@ export interface StandaloneGalleryImage {
   cardClass?: string;
   imageClass?: string;
   showCaption?: boolean;
+  callouts?: Array<{
+    // Left, top, width, and height as percentages of the source image.
+    area: [number, number, number, number];
+    block: string;
+    detail: string;
+  }>;
 }
 
 export interface StandaloneFigureImage {
@@ -60,15 +66,45 @@ export interface StandaloneSpotlightItem {
   imagePosition?: "left" | "right";
 }
 
+export type FlowSketch =
+  | "trucks"
+  | "pro-forma"
+  | "invoice"
+  | "prepare"
+  | "approve"
+  | "inspect"
+  | "settle"
+  | "delivery"
+  | "checklist"
+  | "barrier"
+  | "repair";
+
+export interface StandaloneFlowDiagram {
+  title: string;
+  paths: Array<{
+    label?: string;
+    steps: Array<{ title: string; sketch: FlowSketch; label?: string; detail?: string }>;
+  }>;
+  note?: string;
+}
+
+export interface StandaloneBillingScenario {
+  label: string;
+  steps: string[];
+  description: string;
+}
+
 export type StandaloneContentBlock =
   | { type: "paragraphs"; paragraphs: string[] }
   | { type: "quote"; text: string }
   | { type: "bullets"; items: Array<string | StandaloneListItem>; ordered?: boolean }
   | { type: "chips"; rows: string[][] }
+  | { type: "flow"; diagram: StandaloneFlowDiagram }
+  | { type: "billing-demo"; scenarios: StandaloneBillingScenario[] }
   | { type: "subsections"; items: StandaloneSubsection[] }
   | { type: "cards"; items: StandaloneCardLink[] }
   | { type: "figure"; image: StandaloneFigureImage }
-  | { type: "gallery"; images: StandaloneGalleryImage[] }
+  | { type: "gallery"; images: StandaloneGalleryImage[]; paired?: boolean }
   | { type: "spotlights"; items: StandaloneSpotlightItem[] };
 
 export interface StandaloneCaseStudySection {
@@ -172,6 +208,29 @@ function serializeBlock(block: StandaloneContentBlock): string[] {
         ...block.rows.map((row) => `- ${row.join(" -> ")}`),
         "",
       ];
+    case "flow":
+      return [
+        `### ${block.diagram.title}`,
+        "",
+        ...block.diagram.paths.flatMap((path) => [
+          ...(path.label ? [path.label, ""] : []),
+          ...path.steps.map((step, index) =>
+            `${index + 1}. ${step.label ? `${step.label} — ` : ""}${step.title}${step.detail ? `. ${step.detail}` : ""}`,
+          ),
+          "",
+        ]),
+        ...(block.diagram.note ? [block.diagram.note, ""] : []),
+      ];
+    case "billing-demo":
+      return [
+        "### Assemble a billing flow",
+        "",
+        ...block.scenarios.flatMap((scenario) => [
+          `- ${scenario.label}: ${scenario.steps.join(" → ")}`,
+          `  ${scenario.description}`,
+        ]),
+        "",
+      ];
     case "subsections":
       return block.items.flatMap((item) => [
         `### ${item.title}`,
@@ -194,7 +253,12 @@ function serializeBlock(block: StandaloneContentBlock): string[] {
       ];
     case "gallery":
       return [
-        ...block.images.map((image) => `- ${image.title}: ${image.description}`),
+        ...block.images.flatMap((image) => [
+          `- ${image.title}: ${image.description}`,
+          ...(image.callouts ?? []).map((callout, index) =>
+            `  ${index + 1}. ${callout.block} — ${callout.detail}`,
+          ),
+        ]),
         "",
       ];
     case "spotlights":
@@ -415,205 +479,410 @@ export const standaloneCaseStudies: Record<string, StandaloneCaseStudy> = {
   "freight-invoicing": {
     slug: "freight-invoicing",
     title: "Freight Invoicing & Reconciliation System",
-    tagline: "Shifting billing validation before invoice creation",
+    tagline: "Configurable billing cycles and reconciliation for freight",
     backHref: "/#work",
     protected: true,
     meta: [
       { label: "Role", value: "Senior Product Designer" },
       { label: "Company", value: "Freight Tiger" },
-      { label: "Timeline", value: "2024" },
+      { label: "Timeline", value: "2025–26" },
     ],
     sections: [
       {
         title: "Overview",
         blocks: [
           paragraphs(
-            "Freight billing in logistics usually looks like a finance workflow on the surface, but the real problem sits deeper in the operational model. In the existing flow, invoices were often generated first and validated later. That meant the system treated invoicing as the start of truth instead of the outcome of validation.",
-            "This caused a predictable cycle: invoice generation, mismatch discovery, dispute creation, manual correction, delay, and frustration. My role was to redesign that workflow so billing became more reliable, operationally grounded, and easier to trust.",
+            "At Freight Tiger, I designed the workflow that turns completed transport journeys into invoices. Transporters needed to bill for the work they had done. Consignors, the companies paying for that transport, needed to verify what was delivered, how the freight was calculated, and whether extra charges were justified.",
+            "Clients differed in what they billed together, what evidence they needed, and when they reconciled differences. I mapped those decisions across the billing lifecycle and used them to design a single product flow that could support different client policies.",
           ),
         ],
       },
       {
-        title: "What Made This Hard",
-        blocks: [
-          paragraphs(
-            "This was not a simple invoicing UI problem. The complexity came from the fact that billing relied on multiple upstream inputs that were not always synchronized or equally reliable. Rate cards, vehicle types, route data, additional charges, and ePOD status all influenced whether a bill was actually correct.",
-            "The hard part was designing a system that supported real-world exceptions without making the workflow so flexible that it became financially unsafe.",
-          ),
-        ],
-      },
-      {
-        title: "Problem",
-        blocks: [
-          paragraphs("The earlier flow generated invoices before teams had a chance to validate the underlying freight logic. As a result:"),
-          bullets([
-            "Invoices became the place where problems were discovered",
-            "Finance and operations were forced into reactive correction loops",
-            "Disputes increased because the system had no trusted pre-check stage",
-            "Users had to reverse-engineer why a number was wrong instead of reviewing it before the document existed",
-          ]),
-          paragraphs("From a product perspective, the system was encouraging users to make errors expensive."),
-        ],
-      },
-      {
-        title: "Users and Their Needs",
+        title: "How Freight Billing Works",
         blocks: [
           bullets([
             {
-              title: "Operations teams",
-              text: "Needed clarity on whether a journey was financially ready for billing and where mismatches existed",
+              title: "Complete the journey and confirm delivery",
+              text: "The transporter finishes the trip and submits electronic proof of delivery (ePOD). Operations checks that the trip is complete and that the delivery proof has been received and accepted where the client requires it.",
             },
             {
-              title: "Finance teams",
-              text: "Needed a workflow that reduced downstream disputes and produced a more defensible invoice trail",
+              title: "Work out what the trip cost",
+              text: "The contract sets the base freight using inputs such as route, distance, vehicle type, or weight. The transporter adds charges that arose on the trip, such as detention for waiting to load or unload, and provides supporting evidence. Those charges can differ from what the consignor expects to pay.",
             },
             {
-              title: "Transport partners",
-              text: "Needed transparency into what was accepted, under review, and being challenged",
+              title: "Group the work into a billing cycle",
+              text: "A time-based cycle can run monthly or every 15 days. A count-based rule can collect the first 100 invoices into a batch. In a consolidated setup, a month of eligible freight can become one pro-forma and then one invoice. That pro-forma can cover several vehicles, each with several journeys and their own charges.",
             },
-          ]),
+            {
+              title: "Issue the invoice and track payment",
+              text: "The transporter raises the invoice from the pro-forma when the client uses one. The consignor records partial or full settlement, and both parties can see what has been paid and what remains due. Reconciliation can happen before or after issuance, depending on the client.",
+            },
+          ], true),
+          {
+            type: "flow",
+            diagram: {
+              title: "How one monthly invoice comes together",
+              paths: [{
+                steps: [
+                  { label: "Trip-level charges", title: "Journeys across vehicles", sketch: "trucks", detail: "Vehicle A · 3 journeys\nVehicle B · 2 journeys" },
+                  { label: "Cycle rollup", title: "Monthly pro-forma", sketch: "pro-forma", detail: "Five eligible journeys in one reviewable total" },
+                  { label: "Issued document", title: "One freight invoice", sketch: "invoice", detail: "Each amount links back to its journey and charge" },
+                ],
+              }],
+            },
+          },
         ],
       },
       {
-        title: "Approach",
+        title: "Who Checks and Who Approves",
         blocks: [
           paragraphs(
-            "I started by mapping the current billing lifecycle end to end. Rather than focusing only on screens, I focused on where truth was established, where ambiguity entered the process, and where users were forced into reactive behavior.",
-            "The design direction became clear: billing needed a reconciliation stage before invoice creation.",
+            "The transporter bills for the freight service, and the consignor verifies what it owes. Both sides have an executive who checks the bill or invoice and a manager who approves it. I mapped both handoffs so each person could see what had been checked, what still needed a decision, and whose action would move the bill forward.",
           ),
-          quote("An invoice should be the output of agreement, not the place where disagreement begins."),
-          paragraphs(
-            "That meant the product needed to separate these moments: operational completion, commercial validation, invoice generation, and dispute adjustment if exceptions still remained.",
+          {
+            type: "flow",
+            diagram: {
+              title: "The invoice review handoff",
+              paths: [{
+                steps: [
+                  { label: "Transporter executive", title: "Prepare and check", sketch: "prepare", detail: "Verify trips, ePOD, rates, and add-ons." },
+                  { label: "Transporter manager", title: "Approve for submission", sketch: "approve", detail: "Review exceptions and authorize sending." },
+                  { label: "Consignor executive", title: "Verify the invoice", sketch: "inspect", detail: "Compare charges against the contract and delivery evidence." },
+                  { label: "Consignor manager", title: "Approve the invoice", sketch: "settle", detail: "Review the checks and approve it for settlement." },
+                ],
+              }],
+              note: "If a manager needs a correction, the bill goes back to review with the reason and affected charges in context.",
+            },
+          },
+        ],
+      },
+      {
+        title: "How Billing Can Vary by Industry",
+        blocks: [
+          paragraphs("These examples illustrate possible client configurations. The freight contract and operating process determine which checks and billing rules apply."),
+          subsections(
+            {
+              title: "Cement · One invoice for a monthly cycle",
+              paragraphs: [
+                "A cement plant can send multiple truckloads to depots and dealers. If freight is priced by delivered tonne and route, the consignor can check the delivered weight and flag detention separately. The client could consolidate eligible trips into a monthly pro-forma, reconcile the exceptions there, and issue one invoice for the cycle.",
+              ],
+            },
+            {
+              title: "Quick commerce · Billing in high-volume batches",
+              paragraphs: [
+                "A transporter can run repeated replenishment trips from a hub to dark stores. A client could check completed trips against store receipts, process issued invoices in batches of 100, and reconcile exceptions such as a missing stop or an extra trip against the affected invoice.",
+              ],
+            },
+            {
+              title: "Vehicle spare parts · Separate routine and urgent charges",
+              paragraphs: [
+                "A parts distributor can send routine stock and urgent replacement parts to the same dealer network. A 15-day cycle could group both kinds of trips while keeping expedited surcharges on separate charge lines. If a dealer receipt is missing or a surcharge is questioned, the teams can trace it to the trip and review it on the pro-forma.",
+              ],
+            },
+            {
+              title: "Steel · Adjustments after invoice issuance",
+              paragraphs: [
+                "A steel mill can dispatch coils on heavy vehicles and use the recorded weight and vehicle type to check freight. A client could issue the invoice after trip completion and accepted ePOD, then reconcile a later weighment discrepancy or detention claim. An agreed difference would be recorded against the issued invoice through a credit or debit note.",
+              ],
+            },
+            {
+              title: "Liquor distribution · Reconcile on the pro-forma",
+              paragraphs: [
+                "A liquor distributor can require approved ePODs before trips enter a scheduled pro-forma. The commercial team returns mismatched evidence to the transporter with remarks. Both sides review freight and trip charges on the pro-forma, and disputed trips can return for review under a new reference.",
+                "Once the charges are agreed, the transporter submits a signed freight invoice. The workflow checks the accounting entries in SAP, processes payment through NewGen, and returns the payment status to Freight Tiger.",
+              ],
+            },
           ),
         ],
       },
       {
-        title: "Key Decisions",
+        title: "Problem Statements",
         blocks: [
           subsections(
             {
-              title: "1. Move validation before invoice generation",
+              title: "Business · Keep the invoice traceable to the work",
               paragraphs: [
-                "Instead of allowing invoice creation to happen first, I introduced a structured review layer where charges and billing conditions could be validated before formal billing documents were generated. This reduced the cost of mistakes, shifted the workflow from reactive to preventive, and gave users a clear stage for agreement.",
+                "One invoice can cover several vehicles, each with multiple journeys and charges. When an amount is questioned, both companies need to trace it back to the trip, contracted rate, and delivery evidence. If that connection is lost in the cycle total, a single disputed charge can hold up approval of the entire invoice.",
               ],
             },
             {
-              title: "2. Review at the charge level, not only the invoice level",
+              title: "Users · Give each reviewer a clear decision",
               paragraphs: [
-                "Users did not reason about billing as abstract invoice lines. They reasoned in terms of freight charges, accessorials, and specific financial components. The system needed to surface validation at the level users actually understood — aligning the product model with user mental models and making partial disagreements easier to handle.",
+                "Transporter and consignor executives need to find missing evidence, verify amounts, and flag exceptions. Their managers need to see the results of those checks and decide whether to approve or return the bill. At each handoff, the next person needs to know who owns the issue, which charge is affected, and what still needs to happen.",
               ],
             },
             {
-              title: "3. Support controlled reversals",
+              title: "Variable billing · Support different client rules",
               paragraphs: [
-                "Many enterprise systems become fragile because they assume upstream events are permanent. In reality, delivery confirmation and supporting documents can change, be corrected, or be challenged. Supporting controlled reversals preserved operational realism and prevented brittle logic.",
-              ],
-            },
-            {
-              title: "4. Preserve traceability",
-              paragraphs: [
-                "Any financial correction needed a clear trail. Even when the system supported exceptions, it had to do so without collapsing trust. This made decisions defensible, reduced ambiguity between teams, and created a stronger basis for accountability.",
+                "One client may bundle a month of trips into one pro-forma and reconcile before issuing an invoice. Another may process invoices in batches of 100 and reconcile after issuance. The product needs to support those differences in grouping, readiness checks, and timing while keeping each adjustment tied to the right charge and document.",
               ],
             },
           ),
         ],
       },
       {
-        title: "Solution",
-        blocks: [
-          paragraphs("I designed a pre-invoice reconciliation workflow that sat between operational completion and invoice generation. The solution included:"),
-          bullets([
-            "A reconciliation stage before invoice creation",
-            "Visibility into mismatched charges and validation status",
-            "Charge-level review and approval behavior",
-            "Structured support for exceptions and financial adjustments",
-            "A clearer decision path for when billing could proceed",
-          ]),
-          paragraphs("This changed the product from a dispute-triggering system into a validation-first system."),
-        ],
-      },
-      {
-        title: "Edge Cases",
-        blocks: [
-          paragraphs("The strongest systems are usually defined by how they handle exceptions, not happy paths. Important edge cases included:"),
-          bullets([
-            "ePOD approved and later reversed",
-            "Transporter submission before all required billing inputs were finalized",
-            "Partial mismatch affecting only one charge category",
-            "Contracted freight differing from actual operational reality",
-            "Situations where the invoice should be blocked without stopping the whole operational lifecycle",
-          ]),
-        ],
-      },
-      {
-        title: "Product Gallery",
+        title: "How I Turned Different Workflows Into One Product",
         blocks: [
           paragraphs(
-            "Key screens from the freight invoicing and reconciliation system showing the billing workflow from consignor journey listing through charge-level validation and approval.",
+            "I broke the workflow into reusable blocks, like LEGO pieces. Each block had a job and a clear point at which work could move forward. A client could change the billing cycle, require a delivery check, or place reconciliation at a different point while keeping the same journey, charge, and document records.",
+          ),
+          figure({
+            src: "/assets/freight-invoicing/workflow-building-blocks.jpg",
+            alt: "Seven LEGO-style bricks representing trip checks and ePOD, billing cycles, pro-forma, reconciliation, invoice generation, credit and debit notes, and dispute management.",
+            title: "Freight billing building blocks",
+            description: "The same seven blocks can be combined according to a client's billing and reconciliation rules.",
+            imageClass: "case-study-ink-art",
+          }),
+          {
+            type: "billing-demo",
+            scenarios: [
+              {
+                label: "Cement · Monthly billing",
+                steps: ["Trip checks and ePOD", "Monthly cycle", "Pro-forma", "Reconcile", "Raise invoice"],
+                description: "Group eligible trips into a monthly pro-forma. Reconcile weight or detention differences there, then raise one invoice with the agreed charges.",
+              },
+              {
+                label: "Quick commerce · Batches of 100",
+                steps: ["Trip checks and ePOD", "Raise invoice", "Batch 100 invoices", "Reconcile", "Credit or debit note"],
+                description: "Check replenishment trips against store receipts and group issued invoices for review. Record an agreed change against the affected invoice through a credit or debit note.",
+              },
+              {
+                label: "Steel · Disputed charge",
+                steps: ["Trip checks and ePOD", "Raise invoice", "Reconcile", "Dispute management"],
+                description: "If the parties still disagree on a weight or detention charge after invoicing, send that charge, its reason, and the delivery evidence to dispute review.",
+              },
+            ],
+          },
+          bullets([
+            { title: "Trip completion and ePOD", text: "Confirm that the trip ended, then track whether delivery proof was received, accepted, or rejected." },
+            { title: "Billing cycle", text: "Group eligible journeys or invoices according to the client's time or count rule, with links back to vehicles and charges." },
+            { title: "Pro-forma", text: "Roll up the proposed charges so both parties can see what would be billed and drill into individual journeys." },
+            { title: "Reconciliation", text: "Compare contracted and submitted amounts, show the variance, and record a decision on each charge." },
+            { title: "Invoice generation", text: "Issue the invoice from the eligible charges and retain the links to the underlying journeys and pro-forma where used." },
+            { title: "Credit and debit notes", text: "Record agreed decreases or increases against an issued invoice and preserve the original invoice." },
+            { title: "Dispute management", text: "Route unresolved differences for follow-up with the charge, reason, and supporting evidence attached." },
+          ]),
+          {
+            type: "flow",
+            diagram: {
+              title: "When a completed trip becomes billable",
+              paths: [
+                {
+                  label: "When the required checks pass",
+                  steps: [
+                    { title: "Trip completed", sketch: "delivery", detail: "Delivery is recorded." },
+                    { title: "Billing checks pass", sketch: "checklist", detail: "ePOD is received and accepted, required freight inputs are present, and configured approvals are complete." },
+                    { title: "Ready for billing", sketch: "invoice", detail: "Add to a pro-forma or generate an invoice, depending on the client setup." },
+                  ],
+                },
+                {
+                  label: "When a required check fails",
+                  steps: [
+                    { title: "Hold the journey", sketch: "barrier", detail: "Show the blocker, such as a rejected ePOD or a missing rate." },
+                    { title: "Fix and recheck", sketch: "repair", detail: "The responsible team supplies the evidence or corrects the input." },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        title: "Example Flow for One Client",
+        blocks: [
+          paragraphs(
+            "This Figma walkthrough follows one client setup. Shakthi Logistics prepares journey bills, MDC Labs reviews the charges, and approved journeys can roll into a pro-forma. The frames use sample amounts to show different billing states.",
+          ),
+          subsections(
+            {
+              title: "Journey checks and charge preparation",
+              paragraphs: [
+                "I gave delivery proof and billing readiness separate places in the queue. A trip can be delivered and still need an accepted ePOD or a missing freight value before submission. On the bill, Details identifies the journey, Checks shows what passed, and Pro-forma Details shows whether the journey has been grouped for billing. The transporter can fix a charge in the breakdown while those checks stay in view.",
+              ],
+            },
           ),
           gallery(
             {
               src: "/assets/freight-invoicing/consignor-billing.png",
-              title: "Consignor Journey Billing",
-              description: "The transporter-facing journey listing with delivery, pending approval, approved, and disputed amounts — the starting point for billing submission.",
-              imageClass: "h-64 sm:h-72 md:h-80",
+              title: "1. Find journeys ready for billing",
+              description: "Separate ePOD and billing status columns show what is ready to submit and what still needs attention.",
               showCaption: true,
-            },
-            {
-              src: "/assets/freight-invoicing/consignor-pending-approval.png",
-              title: "Pending Approval View",
-              description: "The consignor billing view filtered to pending approvals, showing ePOD status, charges, transporter amounts, and variance at the journey level.",
-              imageClass: "h-56 sm:h-60 md:h-72",
-              showCaption: true,
+              callouts: [
+                { area: [49, 45.5, 14, 30], block: "Trip checks and ePOD", detail: "The ePOD column shows whether delivery proof was accepted, rejected, or still needs review." },
+                { area: [82.5, 45.5, 10.5, 30], block: "Billing readiness", detail: "The status column shows whether the trip can be submitted and gives the reason when it cannot." },
+              ],
             },
             {
               src: "/assets/freight-invoicing/bill-details.png",
-              title: "Bill Details — Ready to Submit",
-              description: "Journey-level bill details showing freight cost breakdown, charge checks (route, distance, vehicle type, weight, ePOD), and pro-forma status.",
-              imageClass: "h-56 sm:h-60 md:h-72",
+              title: "2. Check what blocks submission",
+              description: "Route, distance, vehicle type, and weight match. Pending ePOD keeps the Submit Journey action disabled, and Pro-forma Details shows that no pro-forma has been created.",
               showCaption: true,
+              callouts: [
+                { area: [34, 19, 32, 29], block: "Trip checks and ePOD", detail: "The Checks panel keeps the matched freight inputs and pending delivery proof in one view." },
+                { area: [67, 19, 32, 29], block: "Pro-forma", detail: "This panel shows whether the journey belongs to a billing group." },
+                { area: [89, 94.5, 10, 4.5], block: "Submission gate", detail: "The disabled Submit Journey button reflects the pending ePOD." },
+              ],
             },
             {
               src: "/assets/freight-invoicing/bill-details-edit.png",
-              title: "Bill Details — Charge Editing",
-              description: "Charge-level editing view with contracted vs. actual charges, variance indicators, and inline save actions for granular billing adjustments.",
-              imageClass: "h-56 sm:h-60 md:h-72",
+              title: "3. Edit individual charges",
+              description: "The transporter updates an add-on charge and can compare the entered amount with the contracted rate.",
               showCaption: true,
+              callouts: [
+                { area: [41, 83.4, 22, 5.2], block: "Charge preparation", detail: "The transporter can edit a single add-on in its row." },
+                { area: [77, 79.5, 10.5, 13], block: "Reconciliation", detail: "The variance and row-level save action stay next to the edited charge." },
+              ],
+            },
+          ),
+          subsections(
+            {
+              title: "Reconcile charges at the point of review",
+              paragraphs: [
+                "The consignor starts in a queue that shows which side needs to act, then opens the bill to compare contracted and submitted amounts. I separated base freight from add-ons and put the variance and approval action on the same row. The reviewer can accept one charge and question another. A rejection records the reason and moves the bill to Dispute in this setup. The audit trail keeps the original amount, the reason, and subsequent changes available to the next reviewer.",
+              ],
+            },
+          ),
+          gallery(
+            {
+              src: "/assets/freight-invoicing/consignor-pending-approval.png",
+              title: "4. Find bills awaiting review",
+              description: "MDC Labs can see journey-level variances and filter by which party needs to act.",
+              showCaption: true,
+              callouts: [
+                { area: [7.4, 34.8, 29, 4.3], block: "Review handoff", detail: "The queue filters show which party needs to act next." },
+                { area: [88.6, 45.5, 5.5, 30], block: "Reconciliation", detail: "The variance column helps the consignor find journeys that need closer review." },
+              ],
             },
             {
-              src: "/assets/freight-invoicing/bill-review.png",
-              title: "Bill Review — Approval Flow",
-              description: "The review stage showing contracted vs. transporter amounts with charge-level reject and approve actions for pre-invoice validation.",
-              imageClass: "h-56 sm:h-60 md:h-72",
+              src: "/assets/freight-invoicing/reject-charge-dialog.png",
+              title: "5. Reject a charge and move the bill to Dispute",
+              description: "The consignor records why a charge was rejected before sending the journey bill to Dispute for further review.",
               showCaption: true,
+              callouts: [
+                { area: [31.9, 49.7, 36.2, 16.6], block: "Rejection reason", detail: "The reviewer records why the charge is being rejected, so the other party can address the issue." },
+                { area: [54.7, 68.6, 13.3, 4.2], block: "Reject & Move to Dispute", detail: "Confirming the action moves the journey bill to Dispute for further review." },
+              ],
             },
             {
               src: "/assets/freight-invoicing/bill-review-actions.png",
-              title: "Bill Review — Partial Approval",
-              description: "Demonstrating partial approval state where some charges are approved and others rejected, with variance highlighting and undo capability.",
-              imageClass: "h-60 sm:h-64 md:h-72",
+              title: "6. Review a bill with mixed charge decisions",
+              description: "Approved charges remain visible while two add-ons with variances still need a decision. The reviewer can undo a charge approval before submitting the bill.",
               showCaption: true,
+              callouts: [
+                { area: [67, 51.5, 32, 7], block: "Reconciliation", detail: "The variance card summarizes the amount in question for the journey." },
+                { area: [77.5, 74.2, 21.4, 16], block: "Charge decisions", detail: "Approved rows and unresolved add-ons stay visible together so the reviewer can pick up where they left off." },
+              ],
+            },
+          ),
+          subsections(
+            {
+              title: "Carry the journey detail into each billing document",
+              paragraphs: [
+                "The pro-forma changes the level of detail from one trip to a billing group. I put the approved total above the journey list so the transporter can check the rollup and still open a contributing bill. The invoice draft keeps those journeys in a table, with invoice details, discounts, taxes, and totals in their own sections. Once the invoice is issued, settlement adds the paid and due amounts alongside the invoice details, with the original journeys still visible below.",
+              ],
+            },
+          ),
+          gallery(
+            {
+              src: "/assets/freight-invoicing/pro-forma-journeys.png",
+              title: "7. Open the pro-forma and review its journeys",
+              description: "The summary shows the approved value. The rows below retain journey and vehicle references, ePOD, base freight, and add-ons.",
+              showCaption: true,
+              callouts: [
+                { area: [1, 17.7, 98, 10], block: "Billing cycle and pro-forma", detail: "The summary rolls the journey count and approved value up to the pro-forma." },
+                { area: [1, 34, 98, 23.5], block: "Journey traceability", detail: "The table keeps each contributing journey and its freight breakdown available beneath the summary." },
+              ],
+            },
+            {
+              src: "/assets/freight-invoicing/invoice-draft.png",
+              title: "8. Build the invoice from the pro-forma",
+              description: "The draft keeps the underlying journeys and vehicle numbers visible. Separate sections show where the transporter enters invoice details, adds discounts or taxes, and reviews the total before raising the invoice.",
+              showCaption: true,
+              callouts: [
+                { area: [67, 9, 32, 14], block: "Invoice generation", detail: "The Invoice Details panel holds document-level fields for the draft." },
+                { area: [1, 31.5, 98, 15], block: "Pro-forma to invoice", detail: "The journey table carries forward the source trips, vehicle numbers, and charges." },
+                { area: [1, 47, 98, 34], block: "Draft invoice totals", detail: "Discounts, taxes, and deductions are shown separately from the journey charges before the invoice is raised." },
+              ],
+            },
+            {
+              src: "/assets/freight-invoicing/invoice-settlement.png",
+              title: "9. Track settlement against the issued invoice",
+              description: "A partially settled invoice shows the amount paid, the balance due, and the next settlement action. The invoice parties and journey table remain in view.",
+              showCaption: true,
+              callouts: [
+                { area: [1, 19.7, 98, 7.5], block: "Settlement action", detail: "The banner surfaces the remaining balance and the next action." },
+                { area: [67, 48.5, 32, 12.5], block: "Settlement details", detail: "Paid and due amounts sit inside the issued invoice details." },
+                { area: [1, 77.2, 98, 17], block: "Journey traceability", detail: "The journeys that make up the invoice remain available during settlement." },
+              ],
             },
           ),
         ],
       },
       {
-        title: "Outcome",
+        title: "How I Designed the Review Experience",
         blocks: [
           paragraphs(
-            "The redesigned workflow improved the quality of billing decisions before invoice creation. Fewer preventable disputes entered formal billing, collaboration between operations and finance became clearer, the audit trail became more reliable, and user confidence in billing status and readiness improved.",
+            "I separated delivery status, billing readiness, and approval. An executive could see why a completed journey was still blocked and fix the underlying input. A manager needed the bill total, the exceptions, and the evidence behind each decision before approving it. The pending-approval queue shows which side needs to act, and the bill detail shows what that action is about.",
+            "I put contracted and submitted amounts alongside the variance on each charge row. A reviewer could accept base freight and still question a detention charge. I kept earlier decisions visible when evidence or freight inputs changed, so the next reviewer could see what had been agreed and what still needed attention.",
           ),
+          subsections(
+            {
+              title: "Charge row variants",
+              paragraphs: [
+                "The same row can represent a load charge or a journey charge, and either party can add one. The action cell changes with the state. It can show who needs to respond, offer Approve and Reject, or retain an approval with an Undo action where allowed. Provisional and missing amounts also have their own states.",
+              ],
+            },
+          ),
+          gallery(
+            {
+              src: "/assets/freight-invoicing/component-charge-pending.png",
+              title: "Waiting on the consignor",
+              description: "The table names the party that needs to respond and shows when its amount is still missing.",
+              showCaption: true,
+            },
+            {
+              src: "/assets/freight-invoicing/component-charge-mixed.png",
+              title: "Different decisions on the same bill",
+              description: "Approved base freight, add-ons available for review, and a charge waiting on the transporter share the same table.",
+              showCaption: true,
+            },
+          ),
+          subsections(
+            {
+              title: "Pro-forma card states",
+              paragraphs: [
+                "The card gives the pro-forma a consistent place on the bill. Before grouping, it explains that no pro-forma exists. Once open, it shows the reference and cycle. Closing the pro-forma adds the closed date in the same panel.",
+              ],
+            },
+          ),
+          {
+            type: "gallery",
+            paired: true,
+            images: [
+              {
+                src: "/assets/freight-invoicing/component-pro-forma-open.png",
+                title: "Open",
+                description: "Name, created date, and billing cycle.",
+                showCaption: true,
+              },
+              {
+                src: "/assets/freight-invoicing/component-pro-forma-closed.png",
+                title: "Closed",
+                description: "The same fields, plus the closed date.",
+                showCaption: true,
+              },
+            ],
+          },
         ],
       },
       {
-        title: "Learnings",
+        title: "What I’d Take Forward",
         blocks: [
-          bullets([
-            "Validation timing matters as much as validation logic",
-            "Enterprise workflows fail when products encode the wrong moment of truth",
-            "Real trust comes from balancing structure and flexibility",
-            "Financial UX is not about making screens simple, but about making decisions safer and clearer",
-          ]),
+          paragraphs(
+            "The design needed to make ownership as clear as status. A charge marked Pending Approval still leaves work for someone. Showing which party needs to respond, the evidence they should check, and what they can do next gives that status a purpose.",
+            "The LEGO-like structure works because each block passes the same trip and charge records to the next step. One client can reconcile charges on a pro-forma before raising the invoice. Another can raise the invoice first and record an agreed adjustment through a credit or debit note. In both cases, a reviewer can follow the amount back to the original charge and delivery evidence.",
+            "In a pilot, I’d compare clients that reconcile before and after invoicing. I’d track time from completed trip to invoice, how often bills are returned for missing information, and how long disputes stay open. I’d also watch whether reviewers can trace a disputed amount back to the original charge without asking the other team to find it for them.",
+          ),
         ],
       },
     ],

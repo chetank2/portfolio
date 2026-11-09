@@ -2,6 +2,8 @@
 import type { StandaloneCaseStudy, StandaloneListItem } from "../../data/standaloneCaseStudies";
 import { appProjects, getProjectLinksBySlug } from "../../data/projects";
 import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
+import CaseStudyFlow from "./CaseStudyFlow.astro";
+import CaseStudyBillingDemo from "./CaseStudyBillingDemo.astro";
 
 interface Props {
   study: StandaloneCaseStudy;
@@ -65,7 +67,11 @@ const renderInlineMarkdown = (value: string) => {
 ) : null}
 
 {study.sections.map((section, sectionIndex) => (
-    <section class:list={["section-reveal mt-16 sm:mt-20", sectionIndex === study.sections.length - 1 && "mb-16"]}>
+    <section class:list={[
+      "mt-16 sm:mt-20",
+      !section.blocks.some((block) => block.type === "gallery" && block.images.some((image) => image.callouts?.length)) && "section-reveal",
+      sectionIndex === study.sections.length - 1 && "mb-16",
+    ]}>
       <h3 class="case-study-section-title mb-6">{section.title}</h3>
 
       {section.blocks.map((block) => (
@@ -123,6 +129,9 @@ const renderInlineMarkdown = (value: string) => {
               ))}
             </div>
           ) : null}
+
+          {block.type === "flow" ? <CaseStudyFlow diagram={block.diagram} /> : null}
+          {block.type === "billing-demo" ? <CaseStudyBillingDemo scenarios={block.scenarios} /> : null}
 
           {block.type === "subsections" ? (
             <>
@@ -200,19 +209,44 @@ const renderInlineMarkdown = (value: string) => {
           ) : null}
 
           {block.type === "gallery" ? (
-            <div class="case-study-gallery">
+            <div class:list={["case-study-gallery", block.paired && "case-study-gallery--paired"]}>
               {block.images.map((image) => (
                 <figure class:list={["case-study-media case-study-gallery-item", image.cardClass]}>
-                  <img
-                    src={image.src}
-                    alt={`${image.title}. ${image.description}`}
-                    loading="lazy"
-                    class="case-study-gallery-image"
-                  />
-                  {image.showCaption ? (
+                  <div class="relative">
+                    <img
+                      src={image.src}
+                      alt={`${image.title}. ${image.description}`}
+                      loading="lazy"
+                      class="case-study-gallery-image"
+                    />
+                    {image.callouts?.map(({ area: [left, top, width, height] }, index) => (
+                      <div
+                        class="screenshot-callout"
+                        style={{ left: `${left}%`, top: `${top}%`, width: `${width}%`, height: `${height}%` }}
+                        aria-hidden="true"
+                      >
+                        <span class="callout-number">{index + 1}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {image.showCaption || image.callouts?.length ? (
                     <figcaption class="case-study-image-caption">
-                      <strong>{image.title}</strong>
-                      <span>{image.description}</span>
+                      {image.showCaption && (
+                        <>
+                          <strong>{image.title}</strong>
+                          <span>{image.description}</span>
+                        </>
+                      )}
+                      {image.callouts?.length ? (
+                        <ol class="callout-key" role="list">
+                          {image.callouts.map((callout, index) => (
+                            <li>
+                              <span class="callout-number" aria-hidden="true">{index + 1}</span>
+                              <p><strong>{callout.block}.</strong> {callout.detail}</p>
+                            </li>
+                          ))}
+                        </ol>
+                      ) : null}
                     </figcaption>
                   ) : null}
                 </figure>
@@ -274,3 +308,61 @@ const renderInlineMarkdown = (value: string) => {
     ) : <div />}
   </nav>
 ) : null}
+
+<style>
+  @media (min-width: 640px) {
+    .case-study-gallery--paired {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .case-study-gallery--paired > .case-study-gallery-item {
+      grid-column: auto;
+    }
+  }
+
+  .screenshot-callout {
+    position: absolute;
+    pointer-events: none;
+    border: 1.5px solid #222;
+    border-radius: 3px;
+    box-shadow: 0 0 0 1px #fff;
+  }
+
+  .callout-number {
+    display: grid;
+    place-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    font: 600 0.75rem / 1 var(--font-display);
+  }
+
+  .screenshot-callout .callout-number {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%);
+    color: #fff;
+    background: #222;
+    box-shadow: 0 0 0 1px #fff;
+  }
+
+  .callout-key {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.65rem;
+  }
+
+  .callout-key li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .callout-key .callout-number {
+    color: var(--color-bg-deep);
+    background: var(--color-text-primary);
+  }
+</style>

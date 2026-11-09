@@ -1,0 +1,160 @@
+---
+import type { StandaloneBillingScenario } from "../../data/standaloneCaseStudies";
+
+interface Props {
+  scenarios: StandaloneBillingScenario[];
+}
+
+const { scenarios } = Astro.props;
+---
+
+<figure class="billing-demo" data-billing-demo>
+  <figcaption class="case-study-subsection-title">Assemble a billing flow</figcaption>
+  <label class="billing-choice" hidden>
+    <span>Choose a business scenario</span>
+    <select>
+      {scenarios.map((scenario) => <option>{scenario.label}</option>)}
+    </select>
+  </label>
+  <div aria-live="polite">
+    {scenarios.map((scenario) => (
+      <div class="billing-scenario" data-billing-scenario>
+        <p class="scenario-label">{scenario.label}</p>
+        <ol class="brick-row" role="list" aria-label={scenario.label} tabindex="0">
+          {scenario.steps.map((step, index) => (
+            <li style={{ "--brick-order": index }}>{step}</li>
+          ))}
+        </ol>
+        <p class="billing-description">{scenario.description}</p>
+      </div>
+    ))}
+  </div>
+</figure>
+
+<script>
+  for (const demo of document.querySelectorAll("[data-billing-demo]")) {
+    const label = demo.querySelector("label");
+    const select = label?.querySelector("select");
+    if (!label || !select) continue;
+
+    const scenarios = demo.querySelectorAll<HTMLElement>("[data-billing-scenario]");
+    const showScenario = () => {
+      scenarios.forEach((scenario, index) => {
+        scenario.hidden = index !== select.selectedIndex;
+      });
+    };
+
+    showScenario();
+    demo.setAttribute("data-enhanced", "");
+    label.hidden = false;
+    select.addEventListener("change", showScenario);
+  }
+</script>
+
+<style>
+  .billing-demo {
+    margin-block: 1.75rem 2rem;
+    padding: clamp(0.85rem, 3vw, 1.25rem);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+  }
+
+  .billing-choice:not([hidden]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+    margin-block: 0.75rem 1.25rem;
+    font: 0.75rem / 1.4 var(--font-display);
+  }
+
+  .billing-choice select {
+    max-width: 100%;
+    padding: 0.4rem;
+    border: 1px solid var(--color-border-hover);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-deep);
+    color: var(--color-text-primary);
+  }
+
+  .billing-choice select:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .scenario-label {
+    margin-block: 1rem;
+    font: 0.85rem / 1.4 var(--font-display);
+  }
+
+  [data-enhanced] .scenario-label {
+    display: none;
+  }
+
+  .brick-row {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(6rem, 1fr);
+    margin-bottom: 0.3rem;
+    padding-block: 0.5rem;
+    overflow-x: auto;
+    list-style: none;
+  }
+
+  .brick-row:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .brick-row li {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 3rem;
+    padding: 0.32rem 0.65rem;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    background: var(--color-bg-deep);
+    box-shadow: inset 0 -3px 0 var(--color-bg-hover);
+    font: 600 1rem / 1.15 var(--font-body);
+    text-align: center;
+  }
+
+  .brick-row li + li {
+    margin-left: -1px;
+  }
+
+  .brick-row li:not(:last-child)::after {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: calc(100% - 1px);
+    width: 0.5rem;
+    height: 0.75rem;
+    border: 1px solid currentColor;
+    border-left: 0;
+    border-radius: 0 4px 4px 0;
+    background: var(--color-bg-deep);
+    transform: translateY(-50%);
+    content: "";
+  }
+
+  .billing-description {
+    color: var(--color-text-secondary);
+    font: 1rem / 1.45 var(--font-body);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-enhanced] .billing-scenario:not([hidden]) .brick-row li {
+      animation: brick-snap 240ms ease-out backwards;
+      animation-delay: calc(var(--brick-order) * 45ms);
+    }
+  }
+
+  @keyframes brick-snap {
+    from { transform: translateY(-0.5rem); opacity: 0.4; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>

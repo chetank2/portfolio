@@ -1506,6 +1506,17 @@ html.dark {
     margin: 0 0 24px 0;
   }
 
+  .case-study-media img.case-study-ink-art {
+    border: 0;
+    border-radius: 0;
+    mix-blend-mode: multiply;
+  }
+
+  :is(html.theme-dark, html.dark) .case-study-ink-art {
+    filter: invert(1);
+    mix-blend-mode: screen;
+  }
+
   .case-study-image-caption {
     margin-top: 0.85rem;
     color: var(--color-text-secondary);
