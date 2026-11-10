@@ -2076,8 +2076,51 @@ html.dark .project-card-art .project-card-image--dark {
   }
 }
 
+.minimal-page .writing-section,
 .minimal-page .closing-section {
   margin-top: 3rem;
+}
+
+.writing-section h2 {
+  margin-bottom: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.writing-card .project-card-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: auto;
+  padding: 0.5rem;
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary);
+}
+
+.writing-card svg {
+  width: 100%;
+  max-width: 320px;
+}
+
+.writing-card-link {
+  font-size: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .minimal-page a.writing-card {
+    display: grid;
+    grid-template-columns: 46% minmax(0, 1fr);
+  }
+
+  .writing-card .project-card-copy {
+    justify-content: center;
+    border-top: 0;
+    border-left: 1px solid var(--color-border);
+    padding: 1rem;
+  }
 }
 
 .minimal-page .closing-section p {
