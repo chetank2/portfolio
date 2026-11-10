@@ -2010,6 +2010,10 @@ html.dark {
   width: max-content;
 }
 
+.project-card--full-width {
+  grid-column: 1 / -1;
+}
+
 .minimal-page a.project-card {
   display: flex;
   flex-direction: column;
@@ -2069,6 +2073,22 @@ html.dark .project-card-art .project-card-image--dark {
   line-height: 1.5;
 }
 
+@media (min-width: 640px) {
+  .minimal-page .project-grid {
+    grid-auto-rows: 1fr;
+  }
+
+  .project-card--full-width .project-card-art {
+    display: grid;
+    place-items: center;
+    aspect-ratio: auto;
+  }
+
+  .project-card--full-width .project-card-art img {
+    height: auto;
+  }
+}
+
 @media (max-width: 639px) {
   .minimal-page .project-grid {
     grid-template-columns: minmax(0, min(100%, 300px));
@@ -2110,11 +2130,20 @@ html.dark .project-card-art .project-card-image--dark {
 }
 
 @media (min-width: 640px) {
+  .minimal-page a.project-card--full-width,
   .minimal-page a.writing-card {
     display: grid;
+  }
+
+  .minimal-page a.project-card--full-width {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .minimal-page a.writing-card {
     grid-template-columns: 46% minmax(0, 1fr);
   }
 
+  .project-card--full-width .project-card-copy,
   .writing-card .project-card-copy {
     justify-content: center;
     border-top: 0;

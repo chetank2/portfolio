@@ -102,6 +102,7 @@ const designWork = [
     tagline: "Designed for the warehouse floor, not the office, where speed and clarity actually matter",
     href: "/work/aftercrop",
     protected: false,
+    fullWidth: true,
     image: "/assets/editorial-line-art/aftercrop-manager.png",
     imageDark: "/assets/editorial-line-art/aftercrop-manager-dark.png",
   },
@@ -197,7 +198,7 @@ const homeStructuredData = {
           {designWork.map((link) => (
             <a
               href={link.href}
-              class="project-link project-card"
+              class:list={["project-link project-card", { "project-card--full-width": link.fullWidth }]}
             >
               <span class="project-card-art">
                 <img class="project-card-image--light" src={link.image} alt="" loading="lazy" />
