@@ -7,12 +7,14 @@ import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import { supportingProjects, appProjects, websiteProjects } from "../../data/projects";
 import { CASE_STUDY_PASSWORD_LOCK_ENABLED } from "../../lib/caseStudyProtection";
 
+const archivedCaseStudies = supportingProjects.filter((project) => project.slug !== "freight-invoicing");
+
 const workMachineText = [
   "# Work",
   "> Extended archive of systems work, app designs, and web projects.",
   "",
   "## Systems",
-  ...supportingProjects.map((project) => {
+  ...archivedCaseStudies.map((project) => {
     const summary = project.machineSummary ?? project.tagline;
     const status = CASE_STUDY_PASSWORD_LOCK_ENABLED && project.protected ? " (protected)" : "";
     return `- ${project.title}${status} — ${summary} (${project.caseStudyUrl})`;
@@ -43,7 +45,7 @@ const workMachineText = [
 
         <!-- Case Studies section -->
         <h2 class="min-subsection-title mb-2">Case Studies</h2>
-        {supportingProjects.map((project) => (
+        {archivedCaseStudies.map((project) => (
           <a href={project.caseStudyUrl || "#"} class="project-link">
             {project.title} — {project.tagline}{CASE_STUDY_PASSWORD_LOCK_ENABLED && project.protected ? " ↗" : ""}
           </a>
