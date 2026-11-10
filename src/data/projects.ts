@@ -368,7 +368,7 @@ export const article: Article = {
   date: "February 2026",
   categories: ["UX", "Product Design", "Design Systems"],
   summary:
-    "Examines table design in complex logistics products. A complete redesign of data tables across six logistics products with a five-part design framework.",
+    "Six design decisions behind the redesign of data tables across six logistics products.",
   url: "https://medium.com/@chetank19/designing-tables-in-complex-logistics-products-fa003ebaca56",
 };
 

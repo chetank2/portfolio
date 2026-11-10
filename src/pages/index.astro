@@ -43,6 +43,8 @@ const homeMachineText = [
   "## Built with AI",
   ...aiProjects.map(formatProjectLine),
   "",
+  "[More work](/work) — A collection of smaller systems, experiments, and ideas that shipped.",
+  "",
   "## Experience",
   ...experience.flatMap((exp) => [
     `### ${exp.role} — ${exp.company}`,
@@ -165,6 +167,7 @@ const homeStructuredData = {
         title="Chetan Kummari"
         pageHref="/"
         pageLabel="portfolio page"
+        extraLinks={[{ label: "More work", href: "/work" }]}
         text={homeMachineText}
       />
     </div>
