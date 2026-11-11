@@ -1945,8 +1945,9 @@ html.dark {
   }
 }
 
-/* Drop cap on the first real paragraph */
-.minimal-page .drop-cap::first-letter {
+/* Skip image-only paragraphs, standalone subtitles, and metadata in Markdown case studies. */
+.drop-cap::first-letter,
+.case-study-content > :nth-child(1 of p:not(:has(> img:only-child, > em:only-child, > strong:first-child)))::first-letter {
   font-family: var(--font-display);
   float: left;
   font-size: 3.8rem;

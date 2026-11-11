@@ -5,6 +5,7 @@ import Footer from "../../components/astro/Footer.astro";
 import MachinePageShell from "../../components/astro/MachinePageShell.astro";
 import ViewModeToggle from "../../components/astro/ViewModeToggle.astro";
 import CaseStudyRelatedLinks from "../../components/astro/CaseStudyRelatedLinks.astro";
+import CaseStudyContents from "../../components/astro/CaseStudyContents.astro";
 import ProtectedCaseStudy from "../../components/react/ProtectedCaseStudy.tsx";
 import { caseStudies } from "../../data/caseStudies";
 import { findProjectBySlug, getProjectLinksBySlug, portfolioMachineLinks } from "../../data/projects";
@@ -17,7 +18,7 @@ import {
 import { loadMachineCaseStudyContent } from "../../lib/machine/content.js";
 import { serializeMachineCaseStudy } from "../../lib/machine/serialize.js";
 
-const contentModules = import.meta.glob("../../../content/case-study-*.md");
+const contentModules = import.meta.glob<import("astro").MarkdownInstance<Record<string, unknown>>>("../../../content/case-study-*.md");
 
 export function getStaticPaths() {
   return caseStudies.map((caseStudy) => ({
@@ -38,6 +39,7 @@ const protectedSummary = projectMeta?.machineSummary;
 const revealBody = shouldRenderProtectedBody(caseStudy.slug);
 
 let Content: any = null;
+let headings: { slug: string; text: string }[] = [];
 let machinePageText = "";
 let relatedLinks: ReturnType<typeof getProjectLinksBySlug> = [];
 let prevStudy: (typeof caseStudies)[number] | null = null;
@@ -51,6 +53,7 @@ if (revealBody) {
   }
   const contentModule = await contentLoader();
   Content = contentModule.default;
+  headings = contentModule.getHeadings().filter((heading) => heading.depth === 2);
 
   const machineText = await loadMachineCaseStudyContent(caseStudy).then((content) =>
     serializeMachineCaseStudy({ ...caseStudy, origin: "markdown" }, content),
@@ -197,6 +200,7 @@ const caseStudyStructuredData = {
                   </div>
                 </header>
 
+                <CaseStudyContents headings={headings} />
                 <article class="longform-content case-study-content mb-20">
                   <Content />
                 </article>
@@ -238,6 +242,7 @@ const caseStudyStructuredData = {
                 </div>
               </header>
 
+            <CaseStudyContents headings={headings} />
             <article class="longform-content case-study-content mb-20">
                 <Content />
               </article>

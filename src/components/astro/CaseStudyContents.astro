@@ -1,0 +1,133 @@
+---
+interface Props {
+  headings: { slug: string; text: string }[];
+}
+
+const { headings } = Astro.props;
+---
+
+{headings.length > 1 && (
+  <case-study-contents>
+    <nav aria-label="Case study sections">
+      <ol style={`--section-count: ${headings.length}`}>
+        {headings.map(({ slug, text }) => (
+          <li><a href={`#${slug}`}><span>{text}</span></a></li>
+        ))}
+      </ol>
+    </nav>
+  </case-study-contents>
+)}
+
+<script>
+  class CaseStudyContents extends HTMLElement {
+    private listeners?: AbortController;
+
+    connectedCallback() {
+      const links = Array.from(this.querySelectorAll("a"));
+      const sections = links.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))));
+      const listeners = new AbortController();
+      this.listeners = listeners;
+      const options = { signal: listeners.signal };
+
+      sections.forEach((section) => section?.setAttribute("tabindex", "-1"));
+
+      let current = -1;
+      const updateCurrent = () => {
+        const readingLine = Math.max(128, Math.min(180, window.innerHeight / 4));
+        const index = Math.max(0, sections.findLastIndex(
+          (section) => section && section.getBoundingClientRect().top <= readingLine,
+        ));
+        if (index === current) return;
+        links[current]?.removeAttribute("aria-current");
+        links[index].setAttribute("aria-current", "location");
+        current = index;
+      };
+      window.addEventListener("scroll", updateCurrent, { ...options, passive: true });
+      window.addEventListener("resize", updateCurrent, options);
+      updateCurrent();
+    }
+
+    disconnectedCallback() {
+      this.listeners?.abort();
+    }
+  }
+
+  customElements.define("case-study-contents", CaseStudyContents);
+</script>
+
+<style>
+  :global(.case-study-content > h2[id]),
+  :global(.case-study-section-title[id]) {
+    scroll-margin-top: 7rem;
+  }
+
+  case-study-contents {
+    display: none;
+  }
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (min-width: 760px) and (min-height: 480px) {
+    case-study-contents {
+      display: block;
+      position: fixed;
+      top: 50%;
+      left: 1rem;
+      z-index: 30;
+      transform: translateY(-50%);
+      font-family: var(--font-body);
+    }
+
+    a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 44px;
+      height: clamp(16px, calc(65dvh / var(--section-count)), 26px);
+      padding: 0 4px;
+      border-radius: 4px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--color-text-primary);
+      outline-offset: -2px;
+    }
+
+    a::before {
+      content: "";
+      width: 10px;
+      height: 2px;
+      background: var(--color-text-secondary);
+    }
+
+    a:is(:hover, :focus-visible)::before {
+      width: 20px;
+    }
+
+    a[aria-current]::before {
+      width: 32px;
+      background: var(--color-text-primary);
+    }
+
+    a span {
+      position: absolute;
+      left: 100%;
+      width: max-content;
+      max-width: 16rem;
+      padding: 0.4rem 0.65rem;
+      opacity: 0;
+      pointer-events: none;
+      background: var(--color-bg-elevated);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+    }
+
+    a:is(:hover, :focus-visible) span {
+      opacity: 1;
+    }
+  }
+</style>

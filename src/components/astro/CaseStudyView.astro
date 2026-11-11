@@ -4,12 +4,17 @@ import { appProjects, getProjectLinksBySlug } from "../../data/projects";
 import CaseStudyRelatedLinks from "./CaseStudyRelatedLinks.astro";
 import CaseStudyFlow from "./CaseStudyFlow.astro";
 import CaseStudyBillingDemo from "./CaseStudyBillingDemo.astro";
+import CaseStudyContents from "./CaseStudyContents.astro";
 
 interface Props {
   study: StandaloneCaseStudy;
 }
 
 const { study } = Astro.props as Props;
+const headings = study.sections.map((section, index) => ({
+  slug: `section-${index + 1}`,
+  text: section.title,
+}));
 const relatedLinks = getProjectLinksBySlug(study.slug);
 const appStudySlugs = appProjects.map((project) => project.slug);
 const currentAppStudyIndex = appStudySlugs.indexOf(study.slug);
@@ -55,6 +60,8 @@ const renderInlineMarkdown = (value: string) => {
     </div>
   </header>
 
+<CaseStudyContents headings={headings} />
+
 {study.media ? (
     <figure class="case-study-media section-reveal">
       <img
@@ -72,13 +79,17 @@ const renderInlineMarkdown = (value: string) => {
       !section.blocks.some((block) => block.type === "gallery" && block.images.some((image) => image.callouts?.length)) && "section-reveal",
       sectionIndex === study.sections.length - 1 && "mb-16",
     ]}>
-      <h3 class="case-study-section-title mb-6">{section.title}</h3>
+      <h3 id={headings[sectionIndex].slug} class="case-study-section-title mb-6">{section.title}</h3>
 
-      {section.blocks.map((block) => (
+      {section.blocks.map((block, blockIndex) => (
         <>
           {block.type === "paragraphs" ? (
             block.paragraphs.map((paragraph, paragraphIndex) => (
-              <p class:list={["min-body", paragraphIndex < block.paragraphs.length - 1 ? "mb-5" : ""]}>
+              <p class:list={[
+                "min-body",
+                paragraphIndex < block.paragraphs.length - 1 && "mb-5",
+                sectionIndex === 0 && blockIndex === 0 && paragraphIndex === 0 && "drop-cap",
+              ]}>
                 {paragraph}
               </p>
             ))
